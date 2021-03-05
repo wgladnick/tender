@@ -67,6 +67,8 @@ public class UserSqlDAO implements UserDAO {
         boolean userCreated = false;
 
         // create user
+        //check if user exists
+        //add first/last name
         String insertUser = "insert into users (username,password_hash,role) values(?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = "ROLE_" + role.toUpperCase();
