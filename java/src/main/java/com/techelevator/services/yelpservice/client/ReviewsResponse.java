@@ -4,6 +4,7 @@
 package com.techelevator.services.yelpservice.client;
 
 import com.techelevator.services.yelpservice.reviews.Review;
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class ReviewsResponse extends Response {
         return new ReviewsResponse(jsonResponse);
     }
 
-    public List<Review> reviews() {
+    public List<Review> reviews() throws JSONException {
         return parser.reviews(jsonResponse);
     }
 

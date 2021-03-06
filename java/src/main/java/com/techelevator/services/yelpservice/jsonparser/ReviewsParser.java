@@ -6,6 +6,7 @@ package com.techelevator.services.yelpservice.jsonparser;
 import com.techelevator.services.yelpservice.reviews.Review;
 import com.techelevator.services.yelpservice.reviews.User;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ReviewsParser {
-    static List<Review> parseFrom(JSONObject reviewsResult) {
+    static List<Review> parseFrom(JSONObject reviewsResult) throws JSONException {
         JSONArray jsonReviews = reviewsResult.getJSONArray("reviews");
         List<Review> reviews = new ArrayList<>();
 
@@ -27,7 +28,7 @@ class ReviewsParser {
         return reviews;
     }
 
-    private static Review parseReview(JSONObject jsonReview) {
+    private static Review parseReview(JSONObject jsonReview) throws JSONException {
         JSONObject jsonUser = jsonReview.getJSONObject("user");
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

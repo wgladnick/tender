@@ -6,6 +6,7 @@ package com.techelevator.services.yelpservice.jsonparser;
 import com.techelevator.services.yelpservice.search.SearchCategories;
 import com.techelevator.services.yelpservice.search.SearchCategory;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -22,12 +23,12 @@ import java.util.Scanner;
 public class SearchCategoryParser {
     private static final SearchCategories categories = new SearchCategories();
 
-    public static SearchCategories all() {
+    public static SearchCategories all() throws JSONException {
         if (categories.isEmpty()) populate();
         return categories;
     }
 
-    private static void populate() {
+    private static void populate() throws JSONException {
         JSONArray jsonCategories = new JSONArray(readCategories());
         for (int i = 0; i < jsonCategories.length(); i++)
             categories.add(parseSearchCategory(jsonCategories.getJSONObject(i)));
@@ -40,7 +41,7 @@ public class SearchCategoryParser {
         return scanner.hasNext() ? scanner.next() : "";
     }
 
-    private static SearchCategory parseSearchCategory(JSONObject category) {
+    private static SearchCategory parseSearchCategory(JSONObject category) throws JSONException {
         List<String> whitelist = null;
         List<String> blacklist = null;
         List<String> parents = extract(category.getJSONArray("parents"));
@@ -59,7 +60,7 @@ public class SearchCategoryParser {
         );
     }
 
-    private static List<String> extract(JSONArray jsonArray) {
+    private static List<String> extract(JSONArray jsonArray) throws JSONException  {
         List<String> items = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) items.add(jsonArray.getString(i));
         return items;

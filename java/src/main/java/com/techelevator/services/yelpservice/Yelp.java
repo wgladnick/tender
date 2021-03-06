@@ -9,6 +9,7 @@ import com.techelevator.services.yelpservice.jsonparser.JSONParser;
 import com.techelevator.services.yelpservice.parser.Parser;
 import com.techelevator.services.yelpservice.search.SearchCriteria;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONException;
 
 public class Yelp {
     private final Credentials credentials;
@@ -33,28 +34,28 @@ public class Yelp {
         this.parser = parser;
     }
 
-    public SearchResponse search(SearchCriteria criteria) {
+    public SearchResponse search(SearchCriteria criteria) throws JSONException  {
         yelpClient.allBusinessesMatching(criteria, token().accessToken());
         return SearchResponse.fromOriginalResponse(yelpClient.responseBody());
     }
 
-    public BusinessResponse searchById(String id) {
+    public BusinessResponse searchById(String id) throws JSONException {
         yelpClient.businessWith(id, token().accessToken());
         return BusinessResponse.fromOriginalResponse(yelpClient.responseBody());
     }
 
-    public ReviewsResponse reviews(String id) {
+    public ReviewsResponse reviews(String id) throws JSONException {
         yelpClient.allReviewsFor(id, token().accessToken());
         return ReviewsResponse.fromOriginalResponse(yelpClient.responseBody());
     }
 
-    public AccessToken token() {
+    public AccessToken token() throws JSONException {
         if (credentials.isTokenExpired()) authenticate();
 
         return credentials.token();
     }
 
-    private void authenticate() {
+    private void authenticate() throws JSONException {
         yelpClient.authenticate(credentials.toMap());
         credentials.updateToken(parser.token(yelpClient.responseBody()));
     }

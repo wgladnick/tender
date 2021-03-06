@@ -3,6 +3,7 @@
  */
 package com.techelevator.services.yelpservice.parser;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ParsingFailure extends RuntimeException {
@@ -11,7 +12,7 @@ public class ParsingFailure extends RuntimeException {
         super(format, e);
     }
 
-    public static ParsingFailure producedBy(JSONObject information, Exception exception) {
+    public static ParsingFailure producedBy(JSONObject information, Exception exception) throws JSONException {
         return new ParsingFailure(
             String.format("Cannot parse object%n%s", information.toString(2)),
             exception

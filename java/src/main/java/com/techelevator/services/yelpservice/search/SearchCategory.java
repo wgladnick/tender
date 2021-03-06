@@ -3,7 +3,7 @@
  */
 package com.techelevator.services.yelpservice.search;
 
-import com.montealegreluis.yelpv3.businesses.Category;
+import com.techelevator.services.yelpservice.businesses.Category;
 
 import java.util.List;
 

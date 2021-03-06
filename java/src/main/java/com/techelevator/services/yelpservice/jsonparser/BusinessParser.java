@@ -30,7 +30,7 @@ import com.techelevator.services.yelpservice.businesses.distance.Distance;
 import com.techelevator.services.yelpservice.parser.ParsingFailure;
 
 class BusinessParser {
-    static BusinessDetails detailsFrom(JSONObject information) {
+    static BusinessDetails detailsFrom(JSONObject information) throws JSONException {
         try {
             return new BusinessDetails(
                 information.getDouble("rating"),
@@ -56,7 +56,7 @@ class BusinessParser {
         }
     }
 
-    static Business businessFrom(JSONObject information) {
+    static Business businessFrom(JSONObject information) throws JSONException {
         try {
             return new Business(
                 information.getDouble("rating"),
@@ -79,21 +79,21 @@ class BusinessParser {
         }
     }
 
-    private static Categories buildCategories(JSONArray businessCategories) {
+    private static Categories buildCategories(JSONArray businessCategories) throws JSONException {
         List<Category> categories = new ArrayList<>();
         for (int i = 0; i < businessCategories.length(); i++)
             categories.add(CategoryParser.from(businessCategories.getJSONObject(i)));
         return new Categories(categories);
     }
 
-    private static List<Transaction> buildTransactions(JSONArray registeredTransactions) {
+    private static List<Transaction> buildTransactions(JSONArray registeredTransactions) throws JSONException {
         List<Transaction> transactions = new ArrayList<>();
         for (int i = 0; i < registeredTransactions.length(); i++)
             transactions.add(new Transaction(registeredTransactions.getString(i)));
         return transactions;
     }
 
-    private static List<URL> buildPhotos(JSONArray businessPhotos) throws MalformedURLException {
+    private static List<URL> buildPhotos(JSONArray businessPhotos) throws MalformedURLException, JSONException {
         List<URL> photos = new ArrayList<>();
 
         for (int i = 0; i < businessPhotos.length(); i++)
@@ -104,7 +104,7 @@ class BusinessParser {
 }
 
 class CategoryParser {
-    static Category from(JSONObject category) {
+    static Category from(JSONObject category) throws JSONException {
         return new Category(
             category.getString("alias"),
             category.getString("title")
@@ -113,7 +113,7 @@ class CategoryParser {
 }
 
 class CoordinatesParser {
-    static Coordinates from(JSONObject coordinates) {
+    static Coordinates from(JSONObject coordinates) throws JSONException {
         return new Coordinates(
             !coordinates.isNull("latitude") ? coordinates.getDouble("latitude") : 0,
             !coordinates.isNull("longitude") ? coordinates.getDouble("longitude") : 0
@@ -122,7 +122,7 @@ class CoordinatesParser {
 }
 
 class LocationParser {
-    static Location from(JSONObject location) {
+    static Location from(JSONObject location) throws JSONException {
         return new Location(
             !location.isNull("address1") ? location.getString("address1") : null,
             !location.isNull("address2") ? location.getString("address2") : null,
@@ -136,7 +136,7 @@ class LocationParser {
         );
     }
 
-    private static List<String> setDisplayAddress(JSONArray businessDisplayAddress) {
+    private static List<String> setDisplayAddress(JSONArray businessDisplayAddress) throws JSONException {
         List<String> displayAddress = new ArrayList<>();
 
         for (int i = 0; i < businessDisplayAddress.length(); i++)
@@ -147,7 +147,7 @@ class LocationParser {
 }
 
 class ScheduleParser {
-    static Schedule from(JSONArray hours) {
+    static Schedule from(JSONArray hours) throws JSONException {
         JSONObject weekSchedule = hours.getJSONObject(0);
 
         return new Schedule(
@@ -156,7 +156,7 @@ class ScheduleParser {
         );
     }
 
-    private static Map<DayOfWeek, List<Hours>> buildHours(JSONArray businessHours) {
+    private static Map<DayOfWeek, List<Hours>> buildHours(JSONArray businessHours) throws JSONException {
         Map<DayOfWeek, List<Hours>> hours = new LinkedHashMap<>();
         List<Hours> allDayHours;
 
@@ -175,7 +175,7 @@ class ScheduleParser {
 }
 
 class HoursParser {
-    static Hours from(JSONObject hours) {
+    static Hours from(JSONObject hours) throws JSONException {
         return new Hours(
             DayOfWeek.of(hours.getInt("day") + 1),
             createTimeFrom(hours.getString("start")),

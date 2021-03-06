@@ -4,6 +4,7 @@
 package com.techelevator.services.yelpservice.client;
 
 import com.techelevator.services.yelpservice.businesses.SearchResult;
+import org.json.JSONException;
 
 /**
  * Response sent by Yelp's Search API
@@ -15,7 +16,7 @@ public class SearchResponse extends Response {
         return new SearchResponse(jsonResponse);
     }
 
-    public SearchResult searchResult() {
+    public SearchResult searchResult() throws JSONException {
         return parser.searchResult(jsonResponse);
     }
 

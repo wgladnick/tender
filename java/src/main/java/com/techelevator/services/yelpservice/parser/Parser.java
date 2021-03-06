@@ -7,15 +7,16 @@ import com.techelevator.services.yelpservice.businesses.BusinessDetails;
 import com.techelevator.services.yelpservice.businesses.SearchResult;
 import com.techelevator.services.yelpservice.client.AccessToken;
 import com.techelevator.services.yelpservice.reviews.Review;
+import org.json.JSONException;
 
 import java.util.List;
 
 public interface Parser {
-    BusinessDetails business(String response);
+    BusinessDetails business(String response) throws JSONException;
 
-    SearchResult searchResult(String response);
+    SearchResult searchResult(String response) throws JSONException ;
 
-    List<Review> reviews(String response);
+    List<Review> reviews(String response) throws JSONException ;
 
-    AccessToken token(String response);
+    AccessToken token(String response) throws JSONException ;
 }

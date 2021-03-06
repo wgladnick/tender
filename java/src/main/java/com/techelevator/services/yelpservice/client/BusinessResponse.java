@@ -4,6 +4,7 @@
 package com.techelevator.services.yelpservice.client;
 
 import com.techelevator.services.yelpservice.businesses.BusinessDetails;
+import org.json.JSONException;
 
 /**
  * Response sent by Yelp's Business API
@@ -15,7 +16,7 @@ public class BusinessResponse extends Response {
         return new BusinessResponse(jsonResponse);
     }
 
-    public BusinessDetails business() {
+    public BusinessDetails business() throws JSONException {
         return parser.business(jsonResponse);
     }
 

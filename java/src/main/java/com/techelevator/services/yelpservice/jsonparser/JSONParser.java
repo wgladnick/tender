@@ -8,28 +8,29 @@ import com.techelevator.services.yelpservice.businesses.SearchResult;
 import com.techelevator.services.yelpservice.client.AccessToken;
 import com.techelevator.services.yelpservice.parser.Parser;
 import com.techelevator.services.yelpservice.reviews.Review;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
 public class JSONParser implements Parser {
     @Override
-    public BusinessDetails business(String response) {
+    public BusinessDetails business(String response) throws JSONException {
         return BusinessParser.detailsFrom(new JSONObject(response));
     }
 
     @Override
-    public SearchResult searchResult(String response) {
+    public SearchResult searchResult(String response) throws JSONException  {
         return SearchResultParser.parseFrom(new JSONObject(response));
     }
 
     @Override
-    public List<Review> reviews(String response) {
+    public List<Review> reviews(String response) throws JSONException {
         return ReviewsParser.parseFrom(new JSONObject(response));
     }
 
     @Override
-    public AccessToken token(String response) {
+    public AccessToken token(String response) throws JSONException {
         JSONObject token = new JSONObject(response);
 
         return AccessToken.fromYELP(

@@ -7,13 +7,14 @@ import com.techelevator.services.yelpservice.businesses.Businesses;
 import com.techelevator.services.yelpservice.businesses.Region;
 import com.techelevator.services.yelpservice.businesses.SearchResult;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class SearchResultParser {
-    static SearchResult parseFrom(JSONObject result) {
+    static SearchResult parseFrom(JSONObject result) throws JSONException  {
         return new SearchResult(
             result.getInt("total"),
             parseBusinesses(result.getJSONArray("businesses")),
@@ -23,7 +24,7 @@ class SearchResultParser {
         );
     }
 
-    private static Businesses parseBusinesses(JSONArray businessResults) {
+    private static Businesses parseBusinesses(JSONArray businessResults) throws JSONException {
         List<Business> businesses = new ArrayList<>();
         for (int i = 0; i < businessResults.length(); i++)
             businesses.add(BusinessParser.businessFrom(businessResults.getJSONObject(i)));
