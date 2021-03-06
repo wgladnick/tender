@@ -1,11 +1,23 @@
 <template>
+
+<!-- Container -->
   <div id="register" class="text-center">
+
+    <!-- Register Form -->
     <form class="form-register" @submit.prevent="register">
+
+        <!-- Header -->
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+
+        <!-- Alert message for registration errors -->
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
+
+      <!-- Label for username -->
       <label for="username" class="sr-only">Username</label>
+      
+      <!--Username Input -->
       <input
         type="text"
         id="username"
@@ -15,7 +27,11 @@
         required
         autofocus
       />
+
+      <!-- Label for Password -->
       <label for="password" class="sr-only">Password</label>
+      
+      <!-- Password Input -->
       <input
         type="password"
         id="password"
@@ -24,6 +40,8 @@
         v-model="user.password"
         required
       />
+
+      <!-- Password Confirmation Input -->
       <input
         type="password"
         id="confirmPassword"
@@ -32,10 +50,15 @@
         v-model="user.confirmPassword"
         required
       />
+
+      <!-- Have an account link, links back to login page -->
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
+     
+      <!-- submit button - Create Account -->
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
+
     </form>
   </div>
 </template>
@@ -59,10 +82,13 @@ export default {
   },
   methods: {
     register() {
+      //Checks is passwords match
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
+        
+        // if registration comes back successful
         authService
           .register(this.user)
           .then((response) => {
@@ -73,6 +99,8 @@ export default {
               });
             }
           })
+
+          //catches error
           .catch((error) => {
             const response = error.response;
             this.registrationErrors = true;
@@ -82,6 +110,8 @@ export default {
           });
       }
     },
+
+    //When is this used?
     clearErrors() {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
