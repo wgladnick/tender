@@ -66,6 +66,12 @@ public class UserSqlDAO implements UserDAO {
     public boolean create(String username, String password, String role) {
         boolean userCreated = false;
 
+        // Checks if the password contains at least 1 upper, 1 lower and 1 digit as well as a
+        // minimum length of 8 characters.
+        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d+)[a-zA-Z\\d+]{8,}$")) {
+            return userCreated;
+        }
+        
         // create user
         //check if user exists
         //add first/last name

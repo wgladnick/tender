@@ -20,6 +20,7 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserAlreadyExistsException;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @CrossOrigin
@@ -59,7 +60,12 @@ public class AuthenticationController {
             User user = userDAO.findByUsername(newUser.getUsername());
             throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
-            userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
+            //added boolean to get is user was created or not.
+             boolean userCreated = userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
+             // added if statement to catch the return and throw an error if the user was not created.
+             if (!userCreated) {
+                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password does not meet requirements");
+             }
         }
     }
 
