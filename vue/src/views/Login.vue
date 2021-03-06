@@ -1,18 +1,30 @@
 <template>
+<!-- Container -->
   <div id="login" class="text-center">
+
+    <!-- Login Form -->
     <form class="form-signin" @submit.prevent="login">
+      <!--Heading -->
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+
+        <!-- Danger Alert when credentials are invalid -->
       <div
         class="alert alert-danger"
         role="alert"
         v-if="invalidCredentials"
       >Invalid username and password!</div>
+
+        <!-- Success Alert when registration in successful -->
       <div
         class="alert alert-success"
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
+
+      <!-- Label for username input -->
       <label for="username" class="sr-only">Username</label>
+
+      <!-- Username input -->
       <input
         type="text"
         id="username"
@@ -20,9 +32,12 @@
         placeholder="Username"
         v-model="user.username"
         required
-        autofocus
       />
+
+      <!-- Label for password input -->
       <label for="password" class="sr-only">Password</label>
+
+      <!-- Password input -->
       <input
         type="password"
         id="password"
@@ -30,11 +45,17 @@
         placeholder="Password"
         v-model="user.password"
         required
+        autofocus
+
       />
+      <!-- Links the Need an account button to the registration page -->
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
+
+      <!-- Submit button -->
       <button type="submit">Sign in</button>
     </form>
   </div>
+
 </template>
 
 <script>
@@ -58,6 +79,8 @@ export default {
         .login(this.user)
         .then(response => {
           if (response.status == 200) {
+            
+            // sets token and user info
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
             this.$router.push("/");
@@ -74,3 +97,4 @@ export default {
   }
 };
 </script>
+
