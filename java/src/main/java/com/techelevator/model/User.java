@@ -17,17 +17,29 @@ public class User {
 	private Set<Authority> authorities = new HashSet<>();
 	private String firstName;
 	private String lastName;
+	private String email;
+	
+	
+	
 
 	public User() {
 	}
 
-	public User(Long id, String username, String password, String authorities, String firstName, String lastName) {
+	public User(Long id, String username, String password, String authorities, String firstName, String lastName, String email) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.activated = true;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
+	}
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getFirstName() {
@@ -103,17 +115,17 @@ public class User {
 		User user = (User) o;
 		return id == user.id && activated == user.activated && Objects.equals(username, user.username)
 				&& Objects.equals(password, user.password) && Objects.equals(authorities, user.authorities) 
-				&& Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName);
+				&& Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, username, password, activated, authorities, firstName, lastName);
+		return Objects.hash(id, username, password, activated, authorities, firstName, lastName, email);
 	}
 
 	@Override
 	public String toString() {
 		return "User{" + "id=" + id + ", username='" + username + '\'' + ", activated=" + activated + ", authorities="
-				+ authorities + ", firstname=" + firstName + ", lastname=" + lastName + '}';
+				+ authorities + ", firstname=" + firstName + ", lastname=" + lastName + ", email=" + email +'}';
 	}
 }

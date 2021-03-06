@@ -63,7 +63,7 @@ public class UserSqlDAO implements UserDAO {
 	}
 
 	@Override
-	public boolean create(String username, String password, String role, String firstName, String lastName) {
+	public boolean create(String username, String password, String role, String firstName, String lastName, String email) {
 		boolean userCreated = false;
 
 		// Checks if the password contains at least 1 upper, 1 lower and 1 digit as well
@@ -76,7 +76,7 @@ public class UserSqlDAO implements UserDAO {
 		// create user
 		// check if user exists
 		// add first/last name
-		String insertUser = "insert into users (username,password_hash,role, first_name, last_name) values(?,?,?,?,?)";
+		String insertUser = "insert into users (username,password_hash,role, first_name, last_name, email) values(?,?,?,?,?,?)";
 		String password_hash = new BCryptPasswordEncoder().encode(password);
 		String ssRole = "ROLE_" + role.toUpperCase();
 
@@ -89,6 +89,7 @@ public class UserSqlDAO implements UserDAO {
 			ps.setString(3, ssRole);
 			ps.setString(4, firstName);
 			ps.setString(5, lastName);
+			ps.setString(6, email);
 			return ps;
 		}, keyHolder) == 1;
 		int newUserId = (int) keyHolder.getKeys().get(id_column);
@@ -105,6 +106,7 @@ public class UserSqlDAO implements UserDAO {
 		user.setActivated(true);
 		user.setFirstName(rs.getString("first_name"));
 		user.setLastName(rs.getString("last_name"));
+		user.setEmail(rs.getString("email"));
 		return user;
 	}
 }
