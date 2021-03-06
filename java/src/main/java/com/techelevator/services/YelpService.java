@@ -1,8 +1,8 @@
 package com.techelevator.services;
 
-import com.techelevator.services.yelpservice.Yelp;
-import com.techelevator.services.yelpservice.client.AccessToken;
-import com.techelevator.services.yelpservice.client.Credentials;
+import com.techelevator.services.yelpservicev3.Yelp;
+import com.techelevator.services.yelpservicev3.client.AccessToken;
+import com.techelevator.services.yelpservicev3.client.Credentials;
 import org.json.JSONException;
 
 public class YelpService  {
