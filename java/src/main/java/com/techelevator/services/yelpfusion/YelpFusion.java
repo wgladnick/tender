@@ -1,13 +1,9 @@
 package com.techelevator.services.yelpfusion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.Gson;
+import com.techelevator.services.yelpfusion.models.business.APIWrapper;
 import com.techelevator.services.yelpfusion.models.business.Business;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class YelpFusion {
@@ -23,21 +19,22 @@ public class YelpFusion {
     }
 
     public Business[] getBusinessesByAddress(String address, int radius) {
-
-        Business[] businesses = null;
+        APIWrapper resultList = null;
         if (radius == 0) {
             radius = 5000;
         }
 
-        String endpointURL = "https://api.yelp.com/v3/businesses/search?categories=restaurants&location=\"" + address + "\"&radius=" + radius;
+        String endpointURL = "https://api.yelp.com/v3/businesses/search?categories=restaurants&location=\""
+                            + address + "\"&radius=" + radius;
 
-        businesses = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), Business[].class).getBody();
+        resultList = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), APIWrapper.class).getBody();
 
-        return businesses;
+        return resultList.getBusinesses();
+
     }
 
     public Business getBusinessById(String Id) {
-        String endpointURL = "https://api.yelp.com/v3/businesses/ifEkf8JxP3RCBeszcIGLww";
+        String endpointURL = "https://api.yelp.com/v3/businesses/" + Id;
 
         Business business = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), Business.class).getBody();
 

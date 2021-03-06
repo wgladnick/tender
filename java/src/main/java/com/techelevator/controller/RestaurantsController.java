@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.services.yelpfusion.YelpFusion;
+import com.techelevator.services.yelpfusion.models.business.APIWrapper;
 import com.techelevator.services.yelpfusion.models.business.Business;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

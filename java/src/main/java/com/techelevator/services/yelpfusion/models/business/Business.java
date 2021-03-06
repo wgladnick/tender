@@ -1,37 +1,22 @@
 package com.techelevator.services.yelpfusion.models.business;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Business {
 
     private String id;
-
     private String alias;
-
     private String name;
-
     private String image_url;
-
     private String is_closed;
-
     private String url;
-
     private int review_count;
-
-
-
+    private Categories[] categories;
     private float rating;
-
-
-
+    private Location location;
+    private Transactions[] transactions;
     private String price;
-
-
-
+    private Coordinates coordinates;
     private String phone;
-
     private String display_phone;
-
     private double distance;
 
     public Business() {
@@ -93,9 +78,13 @@ public class Business {
         this.review_count = review_count;
     }
 
+    public Categories[] getCategories() {
+        return categories;
+    }
 
-
-
+    public void setCategories(Categories[] categories) {
+        this.categories = categories;
+    }
 
     public float getRating() {
         return rating;
@@ -105,7 +94,21 @@ public class Business {
         this.rating = rating;
     }
 
+    public Location getLocation() {
+        return location;
+    }
 
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Transactions[] getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Transactions[] transactions) {
+        this.transactions = transactions;
+    }
 
     public String getPrice() {
         return price;
@@ -115,7 +118,13 @@ public class Business {
         this.price = price;
     }
 
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
 
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
 
     public String getPhone() {
         return phone;
