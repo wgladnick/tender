@@ -61,7 +61,7 @@ public class AuthenticationController {
             throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
             //added boolean to get is user was created or not.
-             boolean userCreated = userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole(),newUser.getFirstName(), newUser.getLastName());
+             boolean userCreated = userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole(),newUser.getFirstName(), newUser.getLastName(), newUser.getEmail());
              // added if statement to catch the return and throw an error if the user was not created.
              if (!userCreated) {
                  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password does not meet requirements");
