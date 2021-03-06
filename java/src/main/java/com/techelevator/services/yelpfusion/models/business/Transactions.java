@@ -1,5 +1,7 @@
 package com.techelevator.services.yelpfusion.models.business;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 
 public class Transactions {

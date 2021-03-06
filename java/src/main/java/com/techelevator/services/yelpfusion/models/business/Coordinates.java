@@ -1,7 +1,11 @@
 package com.techelevator.services.yelpfusion.models.business;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Coordinates {
+    @JsonProperty("latitude")
     private double latitude;
+    @JsonProperty("longitude")
     private double longitude;
 
     public Coordinates() {

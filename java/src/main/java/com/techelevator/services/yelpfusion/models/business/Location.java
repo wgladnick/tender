@@ -1,14 +1,22 @@
 package com.techelevator.services.yelpfusion.models.business;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Collections;
 import java.util.List;
 
 public class Location {
+    @JsonProperty("address1")
     private String address1;
+    @JsonProperty("address2")
     private String address2;
+    @JsonProperty("address3")
     private String address3;
+    @JsonProperty("city")
     private String city;
+    @JsonProperty("state")
     private String state;
+    @JsonProperty("display_address")
     private List<String> display_Address;
 
     public Location() {
