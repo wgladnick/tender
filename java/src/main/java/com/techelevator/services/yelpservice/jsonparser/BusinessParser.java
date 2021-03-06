@@ -3,13 +3,6 @@
  */
 package com.techelevator.services.yelpservice.jsonparser;
 
-import com.techelevator.services.yelpservice.businesses.*;
-import com.techelevator.services.yelpservice.businesses.distance.Distance;
-import com.techelevator.services.yelpservice.parser.ParsingFailure;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.DayOfWeek;
@@ -18,6 +11,23 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.techelevator.services.yelpservice.businesses.Business;
+import com.techelevator.services.yelpservice.businesses.BusinessDetails;
+import com.techelevator.services.yelpservice.businesses.Categories;
+import com.techelevator.services.yelpservice.businesses.Category;
+import com.techelevator.services.yelpservice.businesses.Coordinates;
+import com.techelevator.services.yelpservice.businesses.Hours;
+import com.techelevator.services.yelpservice.businesses.Location;
+import com.techelevator.services.yelpservice.businesses.PricingLevel;
+import com.techelevator.services.yelpservice.businesses.Schedule;
+import com.techelevator.services.yelpservice.businesses.Transaction;
+import com.techelevator.services.yelpservice.businesses.distance.Distance;
+import com.techelevator.services.yelpservice.parser.ParsingFailure;
 
 class BusinessParser {
     static BusinessDetails detailsFrom(JSONObject information) {

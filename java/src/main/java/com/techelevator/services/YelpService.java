@@ -14,7 +14,7 @@ public class YelpService {
 
     public void initializeYelpService() {
 
-        credentials.updateToken(clientSecret);
+        
 
         System.out.printf("Access token:%s%n", token.accessToken());
         System.out.printf("Token type:%s%n", token.tokenType());

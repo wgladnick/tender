@@ -1,12 +1,12 @@
 /*
  * This source file is subject to the license that is bundled with this package in the file LICENSE.
  */
-package com.montealegreluis.yelpv3.apacheclient;
+package com.techelevator.services.yelpservice.apacheclient;
 
-import com.montealegreluis.yelpv3.client.ErrorResponse;
-import com.montealegreluis.yelpv3.client.YelpClient;
-import com.montealegreluis.yelpv3.client.YelpURIs;
-import com.montealegreluis.yelpv3.search.SearchCriteria;
+import com.techelevator.services.yelpservice.client.ErrorResponse;
+import com.techelevator.services.yelpservice.client.YelpClient;
+import com.techelevator.services.yelpservice.client.YelpURIs;
+import com.techelevator.services.yelpservice.search.SearchCriteria;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;

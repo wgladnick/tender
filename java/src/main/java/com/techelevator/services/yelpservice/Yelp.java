@@ -3,7 +3,7 @@
  */
 package com.techelevator.services.yelpservice;
 
-import com.montealegreluis.yelpv3.apacheclient.ApacheHttpClient;
+import com.techelevator.services.yelpservice.apacheclient.ApacheHttpClient;
 import com.techelevator.services.yelpservice.client.*;
 import com.techelevator.services.yelpservice.jsonparser.JSONParser;
 import com.techelevator.services.yelpservice.parser.Parser;
