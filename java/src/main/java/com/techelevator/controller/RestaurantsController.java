@@ -14,23 +14,20 @@ public class RestaurantsController {
 
     private YelpFusion yelpFusion = new YelpFusion();
 
-    @PreAuthorize("permitAll")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Businesses[] getListRestaurants() {
-        String address = "1836 N Lincoln St wilmington de 19806";
-        int radius = 500;
-        return yelpFusion.getBusinessesByAddress(address, radius);
+    @RequestMapping(method = RequestMethod.GET)
+    public Businesses[] getBusinessesByAddressAndRadius(@RequestParam(defaultValue = "") String address,
+                                                        @RequestParam(defaultValue = "5000") int radius) {
+        return yelpFusion.getBusinessesByAddressAndRadius(address, radius);
 
     }
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public BusinessDetails getListRestaurants(@PathVariable String id) {
+    public BusinessDetails getBusinessById(@PathVariable String id) {
 
         return yelpFusion.getBusinessById(id);
 
     }
-
 
 
 }

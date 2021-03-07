@@ -11,15 +11,13 @@ public class YelpFusion {
     private static final String ACCESS_TOKEN =
             "BSlG5RWR1DJPC4Zf4vabLNFi0YS5-qS2iXkrxpCSY-i02RQWrXuc9CBJtvkeW_EbgUPJ_8oNLscX_yvmu67cQ2HNLxxR6CwFGFoTiUlPsIsDEz-GRtHV88D7dBFBYHYx";
 
-
-
     private RestTemplate restTemplate = new RestTemplate();
 
     public YelpFusion() {
 
     }
 
-    public Businesses[] getBusinessesByAddress(String address, int radius) {
+    public Businesses[] getBusinessesByAddressAndRadius(String address, int radius) {
         APIWrapper resultList = null;
         if (radius == 0) {
             radius = 5000;
@@ -42,8 +40,6 @@ public class YelpFusion {
         return business;
 
     }
-
-
 
     private HttpEntity makeAuthEntity() {
         HttpHeaders headers = new HttpHeaders();
