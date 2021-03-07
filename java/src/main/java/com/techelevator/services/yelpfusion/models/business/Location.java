@@ -16,6 +16,7 @@ public class Location {
     private String city;
     @JsonProperty("state")
     private String state;
+    private int zip_code;
     @JsonProperty("display_address")
     private List<String> display_Address;
 
@@ -68,5 +69,13 @@ public class Location {
 
     public void setDisplay_Address(List<String> display_Address) {
         this.display_Address = Collections.unmodifiableList(display_Address);
+    }
+
+    public int getZip_code() {
+        return zip_code;
+    }
+
+    public void setZip_code(int zip_code) {
+        this.zip_code = zip_code;
     }
 }
