@@ -1,16 +1,16 @@
 package com.techelevator.services.yelpfusion.models.business;
 
 public class APIWrapper {
-    private Business[] businesses;
+    private Businesses[] businesses;
 
     public APIWrapper() {
     }
 
-    public Business[] getBusinesses() {
+    public Businesses[] getBusinesses() {
         return businesses;
     }
 
-    public void setBusinesses(Business[] businesses) {
+    public void setBusinesses(Businesses[] businesses) {
         this.businesses = businesses;
     }
 }

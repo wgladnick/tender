@@ -1,7 +1,8 @@
 package com.techelevator.services.yelpfusion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.techelevator.services.yelpfusion.models.business.APIWrapper;
-import com.techelevator.services.yelpfusion.models.business.Business;
+import com.techelevator.services.yelpfusion.models.business.Businesses;
+import com.techelevator.services.yelpfusion.models.business.BusinessDetails;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +19,7 @@ public class YelpFusion {
 
     }
 
-    public Business[] getBusinessesByAddress(String address, int radius) {
+    public Businesses[] getBusinessesByAddress(String address, int radius) {
         APIWrapper resultList = null;
         if (radius == 0) {
             radius = 5000;
@@ -33,10 +34,10 @@ public class YelpFusion {
 
     }
 
-    public Business getBusinessById(String Id) {
+    public BusinessDetails getBusinessById(String Id) {
         String endpointURL = "https://api.yelp.com/v3/businesses/" + Id;
 
-        Business business = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), Business.class).getBody();
+        BusinessDetails business = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody();
 
         return business;
 
