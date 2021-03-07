@@ -1,6 +1,6 @@
 package com.techelevator.services.yelpfusion.models.business;
 
-public class Business {
+public class Businesses {
 
     private String id;
     private String alias;
@@ -19,7 +19,7 @@ public class Business {
     private String display_phone;
     private double distance;
 
-    public Business() {
+    public Businesses() {
     }
 
     public String getId() {
