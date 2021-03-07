@@ -33,4 +33,7 @@ CREATE TABLE IF NOT EXISTS invitation_votes (
                 );
                       
               
-COMMIT;             
+COMMIT;   
+
+
+     
