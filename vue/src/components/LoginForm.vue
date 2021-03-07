@@ -43,7 +43,7 @@
       <router-link :to="{ name: 'register' }" id="need-account">Need an account?</router-link>
 
       <!-- Submit button -->
-       <b-button type="submit" focused>Sign In</b-button>
+       <b-button type="submit" v-on:click="login" focused>Sign In</b-button>
      
     </form>
   </div>

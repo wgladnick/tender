@@ -14,24 +14,54 @@
         {{ registrationErrorMsg }}
       </div>
 
-      <!-- Label for username -->
-      <label for="username" class="sr-only">Username</label>
-      
-      <!--Username Input -->
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      />
+      <!-- First Name -->
+       <b-field label="Name">
+            <b-input v-model="user.firstName"></b-input>
+        </b-field>
 
-      <!-- Label for Password -->
-      <label for="password" class="sr-only">Password</label>
+               <b-field label="Last Name">
+            <b-input v-model="user.lastName"></b-input>
+        </b-field>
+
+
+<!-- Email Address -->
+        <b-field>
+            <b-input placeholder="Email"
+                type="email"
+                icon-pack="fas"
+                icon="envelope"
+                
+                v-model="user.emailAddress">
+                <i class="fas fa-envelope"></i>
+
+
+            </b-input>
+        </b-field>
+
+  
+
+
+
+      <!--Username Input -->
+       <b-field label="Username"
+            type="is-success"
+            message="This username is available">
+            <b-input maxlength="15" 
+            v-model="user.username" 
+            required 
+            autofocus></b-input>
+        </b-field>
+     
+
+      
       
       <!-- Password Input -->
+      <b-field>
+            <b-input type="password"
+                placeholder="Password reveal input"
+                password-reveal>
+            </b-input>
+        </b-field>
       <input
         type="password"
         id="password"
@@ -71,6 +101,8 @@ export default {
   data() {
     return {
       user: {
+        firstName:'',
+        lastName:'',
         username: '',
         password: '',
         confirmPassword: '',
