@@ -129,7 +129,7 @@
 			"response": []
 		},
 		{
-			"name": "API Yelp Fusion - Get List of Restaurnts by location",
+			"name": "API YelpFusion - Get List of Restaurnts by location",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -249,6 +249,48 @@
 						{
 							"key": "categories",
 							"value": "restaurants"
+						},
+						{
+							"key": "location",
+							"value": "\"1836 N Lincoln St wilmington de 19806\""
+						},
+						{
+							"key": "radius",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Yelp Direct - Get List of Restaurants by Location AND Category",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer BSlG5RWR1DJPC4Zf4vabLNFi0YS5-qS2iXkrxpCSY-i02RQWrXuc9CBJtvkeW_EbgUPJ_8oNLscX_yvmu67cQ2HNLxxR6CwFGFoTiUlPsIsDEz-GRtHV88D7dBFBYHYx",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?categories=chinese,mexican&location=\"1836 N Lincoln St wilmington de 19806\"&radius=500",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "categories",
+							"value": "chinese,mexican"
 						},
 						{
 							"key": "location",
