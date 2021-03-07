@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS invitee_details (
                 last_name VARCHAR NOT NULL,
                 email VARCHAR NOT NULL,
                 has_voted BOOLEAN,
-                is_attending BOOLEAN DEFAULT FALSE,
+                is_attending VARCHAR DEFAULT 'Pending',
                 
                  CONSTRAINT fk_invite FOREIGN KEY(invite_id) REFERENCES invitation (invite_id)
                 
