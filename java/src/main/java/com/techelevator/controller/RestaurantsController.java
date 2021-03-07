@@ -16,9 +16,9 @@ public class RestaurantsController {
     private YelpFusion yelpFusion = new YelpFusion();
 
     @RequestMapping(method = RequestMethod.GET)
-    public Businesses[] getBusinessesByAddressAndRadius(@RequestParam(defaultValue = "") String address,
+    public Businesses[] getBusinessesByLocation(@RequestParam(defaultValue = "") String address,
                                                         @RequestParam(defaultValue = "5000") int radius) {
-        return yelpFusion.getBusinessesByAddressAndRadius(address, radius);
+        return yelpFusion.getBusinessesByLocation(address, radius);
 
     }
 
@@ -37,5 +37,14 @@ public class RestaurantsController {
         return yelpFusion.getReviewsByBusinessById(id);
 
     }
+    
+    @RequestMapping(value = "/category", method = RequestMethod.GET)
+    public Businesses[] getBusinessesByCategory(@RequestParam(defaultValue = "") String address,
+                                                        @RequestParam(defaultValue = "5000") int radius,
+                                                        @RequestParam(defaultValue="restaurants") String category) {
+        return yelpFusion.getBusinessesByCategory(address, radius, category);
+
+    }
+    
 
 }

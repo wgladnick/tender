@@ -19,7 +19,7 @@ public class YelpFusion {
 
     }
 
-    public Businesses[] getBusinessesByAddressAndRadius(String address, int radius) {
+    public Businesses[] getBusinessesByLocation(String address, int radius) {
         BusinessesWrapper resultList = null;
         if (radius == 0) {
             radius = 5000;
@@ -52,6 +52,23 @@ public class YelpFusion {
         return reviews.getReviews();
 
     }
+    
+    public Businesses[] getBusinessesByCategory(String address, int radius, String category) {
+        BusinessesWrapper resultList = null;
+        if (radius == 0) {
+            radius = 5000;
+        }
+
+        String endpointURL = "https://api.yelp.com/v3/businesses/search?categories=" + category + "&location=\""
+                            + address + "\"&radius=" + radius;
+
+        resultList = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessesWrapper.class).getBody();
+
+        return resultList.getBusinesses();
+
+    }
+    
+    
 
     private HttpEntity makeAuthEntity() {
         HttpHeaders headers = new HttpHeaders();
