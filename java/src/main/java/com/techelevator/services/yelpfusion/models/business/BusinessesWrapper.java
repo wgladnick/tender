@@ -1,9 +1,9 @@
 package com.techelevator.services.yelpfusion.models.business;
 
-public class APIWrapper {
+public class BusinessesWrapper {
     private Businesses[] businesses;
 
-    public APIWrapper() {
+    public BusinessesWrapper() {
     }
 
     public Businesses[] getBusinesses() {

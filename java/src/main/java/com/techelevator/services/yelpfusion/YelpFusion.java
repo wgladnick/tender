@@ -1,8 +1,10 @@
 package com.techelevator.services.yelpfusion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.techelevator.services.yelpfusion.models.business.APIWrapper;
+import com.techelevator.services.yelpfusion.models.business.BusinessesWrapper;
 import com.techelevator.services.yelpfusion.models.business.Businesses;
 import com.techelevator.services.yelpfusion.models.business.BusinessDetails;
+import com.techelevator.services.yelpfusion.models.review.Review;
+import com.techelevator.services.yelpfusion.models.review.ReviewWrapper;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +20,7 @@ public class YelpFusion {
     }
 
     public Businesses[] getBusinessesByAddressAndRadius(String address, int radius) {
-        APIWrapper resultList = null;
+        BusinessesWrapper resultList = null;
         if (radius == 0) {
             radius = 5000;
         }
@@ -26,7 +28,7 @@ public class YelpFusion {
         String endpointURL = "https://api.yelp.com/v3/businesses/search?categories=restaurants&location=\""
                             + address + "\"&radius=" + radius;
 
-        resultList = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), APIWrapper.class).getBody();
+        resultList = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessesWrapper.class).getBody();
 
         return resultList.getBusinesses();
 
@@ -38,6 +40,16 @@ public class YelpFusion {
         BusinessDetails business = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody();
 
         return business;
+
+    }
+
+    public Review[] getReviewsByBusinessById(String Id) {
+        ReviewWrapper reviews;
+        String endpointURL = "https://api.yelp.com/v3/businesses/" + Id +"/reviews";
+
+        reviews = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), ReviewWrapper.class).getBody();
+
+        return reviews.getReviews();
 
     }
 

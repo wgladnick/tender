@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.services.yelpfusion.YelpFusion;
 import com.techelevator.services.yelpfusion.models.business.Businesses;
 import com.techelevator.services.yelpfusion.models.business.BusinessDetails;
+import com.techelevator.services.yelpfusion.models.review.Review;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,5 +30,12 @@ public class RestaurantsController {
 
     }
 
+
+    @RequestMapping(value = "/{id}/reviews", method = RequestMethod.GET)
+    public Review[] getReviewsByBusinessById(@PathVariable String id) {
+
+        return yelpFusion.getReviewsByBusinessById(id);
+
+    }
 
 }

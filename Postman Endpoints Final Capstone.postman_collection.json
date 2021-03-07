@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "5b28bece-ab76-4e46-b617-a625399a205d",
+		"name": "Final Capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register Valid User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"username\": \"test\",\n        \"password\": \"TechElevator1\",\n        \"confirmPassword\": \"TechElevator1\",\n        \"role\": \"user\",\n        \"firstName\": \"test\",\n        \"lastName\": \"test\",\n        \"email\": \"test@testuser.com\"\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User Invalid Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"username\": \"test1\",\n        \"password\": \"TechElevator\",\n        \"confirmPassword\": \"TechElevator\",\n        \"role\": \"user\",\n        \"firstName\": \"test\",\n        \"lastName\": \"test\",\n        \"email\": \"test@testuser.com\"\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User Duplicate Username",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"username\": \"user\",\n        \"password\": \"TechElevator\",\n        \"confirmPassword\": \"TechElevator\",\n        \"role\": \"user\",\n        \"firstName\": \"test\",\n        \"lastName\": \"test\",\n        \"email\": \"test@testuser.com\"\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API YelpFusion - Get Restaurant by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/restaurant/ifEkf8JxP3RCBeszcIGLww",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"restaurant",
+						"ifEkf8JxP3RCBeszcIGLww"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API YelpFusion - Get Reviews by Restaurant ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/restaurant/ifEkf8JxP3RCBeszcIGLww/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"restaurant",
+						"ifEkf8JxP3RCBeszcIGLww",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Yelp Fusion - Get List of Restaurnts by location",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 1d437b3e-b72b-4865-83b5-c9e53cec207a",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/restaurant/?address=\"1836 N Lincoln St wilmington de 19806\"&radius=500",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"restaurant",
+						""
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "\"1836 N Lincoln St wilmington de 19806\""
+						},
+						{
+							"key": "radius",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Yelp Direct - Get Restaurant Reviews",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer BSlG5RWR1DJPC4Zf4vabLNFi0YS5-qS2iXkrxpCSY-i02RQWrXuc9CBJtvkeW_EbgUPJ_8oNLscX_yvmu67cQ2HNLxxR6CwFGFoTiUlPsIsDEz-GRtHV88D7dBFBYHYx",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/ifEkf8JxP3RCBeszcIGLww/reviews",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"ifEkf8JxP3RCBeszcIGLww",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Yelp Direct - Get Restaurant Details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer BSlG5RWR1DJPC4Zf4vabLNFi0YS5-qS2iXkrxpCSY-i02RQWrXuc9CBJtvkeW_EbgUPJ_8oNLscX_yvmu67cQ2HNLxxR6CwFGFoTiUlPsIsDEz-GRtHV88D7dBFBYHYx",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/ifEkf8JxP3RCBeszcIGLww",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"ifEkf8JxP3RCBeszcIGLww"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Yelp Direct - Get List of Restaurants by Location",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer BSlG5RWR1DJPC4Zf4vabLNFi0YS5-qS2iXkrxpCSY-i02RQWrXuc9CBJtvkeW_EbgUPJ_8oNLscX_yvmu67cQ2HNLxxR6CwFGFoTiUlPsIsDEz-GRtHV88D7dBFBYHYx",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.yelp.com/v3/businesses/search?categories=restaurants&location=\"1836 N Lincoln St wilmington de 19806\"&radius=500",
+					"protocol": "https",
+					"host": [
+						"api",
+						"yelp",
+						"com"
+					],
+					"path": [
+						"v3",
+						"businesses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "categories",
+							"value": "restaurants"
+						},
+						{
+							"key": "location",
+							"value": "\"1836 N Lincoln St wilmington de 19806\""
+						},
+						{
+							"key": "radius",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
