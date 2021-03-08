@@ -3,8 +3,10 @@
     <div id="location-container" class="text-center">
       <form class="location-search" v-on:submit.prevent="searchByLocation">
         <h1 class="h3 mb-3 font-weight-normal">Where are we partying?</h1>
+        <div class="alert alert-danger" role="alert" v-if="invalidLocation">
+            Invalid location parameters, search with address or zip code </div>
         <b-field label="Location">
-          <b-input type="text" class="seachbox" v-model="location" />
+          <b-input type="text" class="seachbox" v-model="restaurants.location"/>
         </b-field>
         <b-button type="submit" v-on:click="searchByLocation()" focused>
           Search
@@ -31,6 +33,7 @@ export default {
       restaurants: [],
       isLoading: true,
       location: "",
+      invalidLocation: false,
     };
   },
   methods: {
@@ -40,6 +43,14 @@ export default {
     searchByLocation() {
       RestaurantService.getRestaurants(this.location).then((response) => {
         this.restaurants = response.data;
+        this.$router.push("/")
+      })
+      .catch((error) => {
+          const response = error.response;
+
+          if (response.status === 401) {
+              this.invalidLocation = true;
+          }
       });
       console.log(this.restaurants);
       this.isLoading = false;

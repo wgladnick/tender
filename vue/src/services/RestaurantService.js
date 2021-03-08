@@ -9,8 +9,8 @@ export default {
     list() {
         return http.get(`/restaurants`)
     },
-    getRestaurants(zip) {
-        return http.get(`/restaurants/${zip}`);
+    getRestaurants(location) {
+        return http.get(`/restaurants/${location}`);
     },
     getTheRestaurant(id) {
         return http.get(`/restaurants/${id}`);
