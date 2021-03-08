@@ -1,70 +1,84 @@
 <template>
-<section id="main">
+  <section id="main">
+    <div id="left-panel">
+      <div id="login-container">
+      
+        
+      <div class="left-header">
+        <h1>Dinner with friends just got yummy</h1>
+        <p>mmm.. food.</p>
+      </div>
 
+      <login-form />
+    </div>
+    </div>
 
-<div id ="left-panel">
-
-  <div class="left-header">
-  <h1>Mmmmm.. food</h1>
-  <p>Because food is delicious</p>
-  </div>
-
-<login-form/>
-
-</div>
-
-<div id ="right-panel">
-  <h1> Discover New Food </h1>
-  <img/>
-</div>
-
-</section>
-
+    
+  </section>
 </template>
 
 <script>
-
-import LoginForm from '../components/LoginForm.vue';
+import LoginForm from "../components/LoginForm.vue";
 
 export default {
   name: "login",
-  components: {LoginForm},
+  components: { LoginForm },
   data() {
     
   },
-  methods: {
-   
-    }
-  }
-
+  methods: {},
+};
 </script>
 <style scoped>
-#main{
-  display:flex;
-}
-#left-panel, #right-panel{
-  width:50%;
-}
 
-#right-panel{
-  background-color:#EB6D6A;
-  height:100vh;
+h1{
+  font-size:25px;
+  font-family: sans-serif;
+  font-weight: bold;
 }
-
-#left-panel{
-  display:flex;
-  flex-direction:column;
+#main {
+  display: flex;
+  background-image: url("../assets/tinderbackground.png");
+  height:90vh;
   justify-content:center;
 }
 
-.left-header{
-display:flex;
- flex-direction:column;
- align-items:center;
+
+#left-panel
+{
+  width: 50%;
+ 
 }
 
 
 
+.img {
+  width: 50px;
+}
+
+#left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  background-color:white;
+  height:65vh;
+  align-self:center;
+  padding-top:75px;
+  
+}
+
+
+.left-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#right-panel {
+  
+  background-size: cover;
+  height:100vh;
+}
 </style>
 
 
