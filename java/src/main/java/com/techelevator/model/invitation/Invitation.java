@@ -2,11 +2,17 @@ package com.techelevator.model.invitation;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+
+
 public class Invitation {
 	private Long inviteId;
 	private String location;
 	private int radius;
 	private int creatorId;
+	@JsonSerialize(as = Timestamp.class)
 	private Timestamp deadline;
 	private String reservationDate;
 	private Invitee[] invitees;
@@ -40,7 +46,7 @@ public class Invitation {
 		this.radius = radius;
 	}
 
-	public Integer getCreatorId() {
+	public int getCreatorId() {
 		return creatorId;
 	}
 
@@ -79,6 +85,8 @@ public class Invitation {
 	public void setRestaurantChoices(InviteRestaurants[] restaurantChoices) {
 		this.restaurantChoices = restaurantChoices;
 	}
+
+	
 	
 	
 	

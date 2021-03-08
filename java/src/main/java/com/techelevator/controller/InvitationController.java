@@ -2,8 +2,10 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,12 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.techelevator.dao.invitation.InvitationDAO;
 import com.techelevator.model.invitation.Invitation;
 
-@CrossOrigin 
 @RestController
+@ComponentScan({"com.techelevator.dao"})
+@CrossOrigin 
 @RequestMapping(value = "/invitation")
 public class InvitationController {
 	
-	private InvitationDAO invitationDAO;
+	private final InvitationDAO invitationDAO;
 	
 	public InvitationController(InvitationDAO invitationDAO) {
 		this.invitationDAO = invitationDAO;
@@ -36,7 +39,8 @@ public class InvitationController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Invitation create(@PathVariable Invitation invitation) {
+	public Invitation create(@RequestBody Invitation invitation) {
+		Invitation invitation2 = invitation;
 		return invitationDAO.create(invitation);
 	}
 	

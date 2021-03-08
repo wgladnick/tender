@@ -1,13 +1,13 @@
 <template>
-    
+  <div></div>
 </template>
+
 <script>
 export default {
-    setup() {
-        
-    },
-}
+name: "restaurant-detail"
+};
 </script>
-<style scoped>
+
+<style>
 
 </style>
