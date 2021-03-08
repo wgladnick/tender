@@ -1,5 +1,5 @@
 <template>
-  <restaurant-list/>
+  <restaurant-finder/>
 </template>
 
 <script>
@@ -11,6 +11,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.searchbox{
+    display: flex
+}
 </style>
