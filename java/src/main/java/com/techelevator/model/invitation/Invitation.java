@@ -3,7 +3,6 @@ package com.techelevator.model.invitation;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 
@@ -12,7 +11,7 @@ public class Invitation {
 	private String location;
 	private int radius;
 	private int creatorId;
-	@JsonSerialize(as = Timestamp.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private Timestamp deadline;
 	private String reservationDate;
 	private Invitee[] invitees;
