@@ -28,7 +28,7 @@
           type="email"
           icon-pack="fas"
           icon="envelope"
-          v-model="user.emailAddress"
+          v-model="user.email"
         >
           <i class="fas fa-envelope"></i>
         </b-input>
@@ -98,6 +98,7 @@ export default {
       user: {
         firstName: "",
         lastName: "",
+        email:"",
         username: "",
         password: "",
         confirmPassword: "",
@@ -115,7 +116,7 @@ export default {
   methods: {
     checkPassword() {
       this.password_length = this.user.password.length;
-      const format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+      
 
       if (this.password_length > 7) {
         this.contains_eight_characters = true;
@@ -137,9 +138,13 @@ export default {
       }
     },
     register() {
-      
+
+      if(this.valid_password === false){
+         this.registrationErrors = true;
+        this.registrationErrorMsg = "Your password does not meet the requirements";
+      }
       //Checks is passwords match
-      if (this.user.password != this.user.confirmPassword) {
+     else if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = "Password & Confirm Password do not match.";
       } else {
