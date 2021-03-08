@@ -1,30 +1,36 @@
 <template>
-    <div v-for="restaurant in restaurants" v-bind:key="restaurant.id" class="restaurant">
-    router-link v-bind:to="name: 'Restaurant'"
-    </div>
+  <div>
+    <restaurant-card
+      v-for="restaurant in restaurants"
+      v-bind:key="restaurant.id"
+      v-bind:restaurant="restaurant"
+    />
+  </div>
 </template>
 <script>
 import RestaurantService from "../services/RestaurantService";
+import RestaurantCard from "../components/RestaurantCard";
 export default {
-    name: 'restaurant-finder',
-    data() {
-        return {
-        restaurants: [],
-        isLoading: true
-        }
+  name: "restaurant-finder",
+  components: { RestaurantCard },
+  data() {
+    return {
+      restaurants: [],
+      isLoading: true,
+    };
+  },
+  methods: {
+    viewRestaurant(id) {
+      this.$router.push(`/${id}`);
     },
-    methods: {
-        viewRestaurant(id) {
-            this.$router.push(`/${id}`);
-        }
-    },
-    created() {
-        RestaurantService.list().then((response) => {
-            this.restaurants = response.data;
-        })
-    }
-}
+  },
+  created() {
+    RestaurantService.list().then((response) => {
+      this.restaurants = response.data;
+    });
+    console.log(this.restaurants);
+  },
+};
 </script>
 <style scoped>
-
 </style>
