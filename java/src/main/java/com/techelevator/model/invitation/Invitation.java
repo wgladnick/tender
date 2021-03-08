@@ -1,6 +1,6 @@
 package com.techelevator.model.invitation;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Invitation {
 	private Long inviteId;

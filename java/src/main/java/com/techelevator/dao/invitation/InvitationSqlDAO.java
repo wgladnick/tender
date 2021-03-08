@@ -1,5 +1,6 @@
 package com.techelevator.dao.invitation;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -38,12 +39,17 @@ public class InvitationSqlDAO  implements InvitationDAO{
 	}
 
 	private Invitation mapRowToInvitation(SqlRowSet rs) {
+		
 		Invitation invite = new Invitation();
+		
 		invite.setInviteId(rs.getLong("invite_id"));
 		invite.setLocation(rs.getString("location"));
 		invite.setRadius(rs.getInt("radius"));
 		invite.setCreatorId(rs.getInt("creator_user_id"));
-		//invite.setDeadline(rs.getTimestamp("deadline"));
+		Timestamp deadline = rs.getTimestamp("deadline");
+		if (deadline != null) {
+		    invite.setDeadline(deadline);
+		}
 		invite.setReservationDate(rs.getString("reservation_date_time"));
 		return invite;
 		
