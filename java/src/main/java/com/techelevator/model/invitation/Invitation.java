@@ -40,7 +40,7 @@ public class Invitation {
 		this.radius = radius;
 	}
 
-	public Integer getCreatorId() {
+	public int getCreatorId() {
 		return creatorId;
 	}
 
@@ -79,6 +79,8 @@ public class Invitation {
 	public void setRestaurantChoices(InviteRestaurants[] restaurantChoices) {
 		this.restaurantChoices = restaurantChoices;
 	}
+
+	
 	
 	
 	
