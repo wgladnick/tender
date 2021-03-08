@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { get } from 'core-js/core/dict';
+
 
 const http = axios.create({
-    baseURL: "http//localhost:3000"
+    baseURL: "http//localhost:8080"
 });
 
 export default {
