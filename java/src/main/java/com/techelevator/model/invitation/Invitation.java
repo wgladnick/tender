@@ -1,10 +1,7 @@
 package com.techelevator.model.invitation;
 
 import java.sql.Timestamp;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-
 
 public class Invitation {
 	private Long inviteId;

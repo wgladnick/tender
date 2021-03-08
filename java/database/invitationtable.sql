@@ -1,43 +1,99 @@
 START TRANSACTION;
-DROP TABLE invitation_votes;
-DROP TABLE invitee_details;
-DROP TABLE invitation;
+
+DROP TABLE IF EXISTS user_details;
+DROP TABLE IF EXISTS user_categories;
+DROP TABLE IF EXISTS food_categories;
+DROP TABLE IF EXISTS invitation_votes;
+DROP TABLE IF EXISTS invitee_details;
+DROP TABLE IF EXISTS invitation;
+DROP TABLE IF EXISTS users;
+DROP SEQUENCE IF EXISTS seq_user_id;
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username varchar(50) NOT NULL,
+    password_hash varchar(200) NOT NULL,
+    role varchar(50) NOT NULL,
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL
+);
+
+INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER','user','name','user@user.com');
+INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN','admin','istrator','admin@user.com');
+
+
+SELECT * FROM users;
+
+CREATE TABLE IF NOT EXISTS user_details (
+    user_id INTEGER PRIMARY KEY,
+    address VARCHAR,
+    city VARCHAR,
+    state VARCHAR,
+    zip VARCHAR,
+    default_radius INTEGER DEFAULT 16100,
+    CONSTRAINT fk_userid FOREIGN KEY(user_id) REFERENCES users (user_id)
+    );
+    
+INSERT INTO user_details (user_id, address, city, state, zip, default_radius) VALUES (1,'413 N Market St', 'Wilmington', 'DE', '19801', 16100);
+INSERT INTO user_details (user_id, address, city, state, zip, default_radius) VALUES (2,'1836 N Lincoln St', 'Wilmington', 'DE', '19806',16100);
+
+
+CREATE TABLE IF NOT EXISTS user_categories (
+    user_id INTEGER,
+    category_id INTEGER
+);
+
+
+CREATE TABLE IF NOT EXISTS food_categories (
+    category_id SERIAL PRIMARY KEY,
+    display_name VARCHAR,
+    search_name VARCHAR
+);
+
+INSERT INTO food_categories (display_name, search_name) VALUES
+('American','newamerican,tradamerican'),
+('Asian','asianfusion, polynesian,malaysian,korean,filipino,taiwanese,hkcafe'),
+('Bars/Pubs','bars,beergarden,beerhall,gastropubs'),
+('Breakfast/Brunch','breakfast_brunch'),('BBQ','bbq'),('Burgers','burgers'),
+('Chicken','chickenshop,chicken_wings'),('Chinese','chinese'),
+('Comfort Food','comfortfood'),('Delis','delis'),('Greek','greek'),
+('Healthy','salad,wraps'),('Indian','indpak'),('Italian','italian'),
+('Japanese','japanese'),('Mexican','mexican,tex-mex,newmexican'),('Pizza','pizza'),
+('Sandwiches','sandwiches,cheesesteaks'),('Seafood','seafood'),('Soup','soup'),('Steakhouse','steak'),
+('Sushi','sushi'),('Vegetarian/Vegan','vegetarian,vegan');
+
 CREATE TABLE IF NOT EXISTS invitation (
-                invite_id SERIAL PRIMARY KEY,
-                location VARCHAR,
-                radius INTEGER,
-                creator_user_id INTEGER,
-                deadline TIMESTAMPTZ,
-                reservation_date_time VARCHAR
-                );
+    invite_id SERIAL PRIMARY KEY,
+    location VARCHAR,
+    radius INTEGER,
+    creator_user_id INTEGER,
+    deadline TIMESTAMPTZ,
+    reservation_date_time VARCHAR
+);
               
 CREATE TABLE IF NOT EXISTS invitee_details (
-                invite_id INTEGER,
-                unique_id VARCHAR NOT NULL,
-                user_id INTEGER NOT NULL,
-                first_name VARCHAR NOT NULL,
-                last_name VARCHAR NOT NULL,
-                email VARCHAR NOT NULL,
-                has_voted BOOLEAN,
-                is_attending VARCHAR DEFAULT 'Pending',
+    invite_id INTEGER,
+    unique_id VARCHAR NOT NULL,
+    user_id INTEGER NOT NULL,
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    has_voted BOOLEAN,
+    is_attending VARCHAR DEFAULT 'Pending',
                 
-                 CONSTRAINT fk_invite FOREIGN KEY(invite_id) REFERENCES invitation (invite_id)
-                
-                );
+    CONSTRAINT fk_invite FOREIGN KEY(invite_id) REFERENCES invitation (invite_id)
+);
                 
 CREATE TABLE IF NOT EXISTS invitation_votes (
-                invite_id INTEGER,
-                yelp_id VARCHAR NOT NULL,
-                thumbs_up INTEGER,
-                thumbs_down INTEGER,
-                
-                 CONSTRAINT fk_invite FOREIGN KEY(invite_id) REFERENCES invitation (invite_id)
-                );
-                      
-              
-COMMIT;   
+     invite_id INTEGER,
+     yelp_id VARCHAR NOT NULL,
+     thumbs_up INTEGER,
+     thumbs_down INTEGER,
+               
+     CONSTRAINT fk_invite FOREIGN KEY(invite_id) REFERENCES invitation (invite_id)
+);
 
-INSERT INTO invitation (location, radius, creator_user_id, deadline, reservation_date_time) VALUES ('Charlotte', 5000, 1, '2021-03-07 16:00', 'March 14th, 2021 7pm' ) RETURNING invite_id;
 GRANT ALL
 ON ALL TABLES IN SCHEMA public
 TO final_capstone_owner;
@@ -51,6 +107,4 @@ GRANT USAGE, SELECT
 ON ALL SEQUENCES IN SCHEMA public
 TO final_capstone_appuser;
 
-
-
-     
+COMMIT; 
