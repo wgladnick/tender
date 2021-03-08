@@ -1,7 +1,9 @@
 package com.techelevator.dao.invitation;
 
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -23,19 +25,29 @@ public class InvitationSqlDAO  implements InvitationDAO{
 
 	
 	@Override
-	public Invitation[] findInviteByUserId(int creatorId) {
+	public List<Invitation> findInviteByUserId(int creatorId) {
+		List<Invitation> inviteList = new ArrayList<>();
 		String sql = "SELECT * FROM invitation WHERE creator_user_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, creatorId);
-		
-		return null;
+		while (results.next()) {
+			Invitation invite = mapRowToInvitation(results);
+			inviteList.add(invite);
+		}
+		return inviteList;
 			
 		}
 	
 
 	@Override
 	public Invitation create(Invitation invitation) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String sql = "INSERT INTO invitation (invite_id, location, radius, creator_user_id, deadline, reservation_date_time) VALUES (?,?,?,?,?,?)";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, invitation);
+		if (results.next()) {
+			return mapRowToInvitation(results);
+		} else {
+			throw new RuntimeException("Unable to create your invitation");
+		}
 	}
 
 	private Invitation mapRowToInvitation(SqlRowSet rs) {
