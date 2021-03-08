@@ -1,13 +1,18 @@
 import axios from 'axios';
+import { get } from 'core-js/core/dict';
 
 const http = axios.create({
     baseURL: "http//localhost:3000"
 });
 
-const RESTAURANT_PATH = "/restaurants";
-
 export default {
-    getRestaurants() {
-        return http.get(RESTAURANT_PATH);
+    list() {
+        return http.get(`/restaurants`)
+    },
+    getRestaurants(zip) {
+        return http.get(`/restaurants/${zip}`);
+    },
+    getTheRestaurant(id) {
+        return http.get(`/restaurants/${id}`);
     }
 }
