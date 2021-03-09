@@ -4,10 +4,12 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserDetails;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserDetailsSqlDAO implements UserDetailsDAO {
     private JdbcTemplate jdbcTemplate;
 
@@ -17,8 +19,8 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
     @Override
     public UserDetails getDetails(long userId) {
-        String sql = "SELECT user_id, address, city, state, zip, default_radius" +
-                "FROM user_details" +
+        String sql = "SELECT user_id, address, city, state, zip, default_radius " +
+                "FROM user_details " +
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         if (results.next()) {
@@ -50,13 +52,13 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         return userDetails;
 
     }
-
+    
     private String getUserDetailsSearchCategories(long userId) {
         List<String> searchCategories = new ArrayList<>();
         String searchCategoryString = "";
         int counter = 0;
 
-        String sql = "SELECT search_name FROM food_categories" +
+        String sql = "SELECT search_name FROM food_categories " +
                 "JOIN user_categories ON food_categories.category_id = user_categories.category_id" +
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);

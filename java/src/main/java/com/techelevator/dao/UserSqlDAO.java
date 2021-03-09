@@ -12,14 +12,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.techelevator.model.User;
+import com.techelevator.model.UserDetails;
+import com.techelevator.dao.UserDetailsDAO;
 
 @Service
 public class UserSqlDAO implements UserDAO {
 
 	private JdbcTemplate jdbcTemplate;
-
-	public UserSqlDAO(JdbcTemplate jdbcTemplate) {
+	private UserDetailsDAO userDetailsDAO;
+	
+	public UserSqlDAO(JdbcTemplate jdbcTemplate, UserDetailsDAO userDetailsDAO) {
 		this.jdbcTemplate = jdbcTemplate;
+		this.userDetailsDAO = userDetailsDAO;
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class UserSqlDAO implements UserDAO {
 	}
 
 	@Override
-	public boolean create(String username, String password, String role, String firstName, String lastName, String email) {
+	public boolean create(String username, String password, String role, String firstName, String lastName, String email, UserDetails userDetails) {
 		boolean userCreated = false;
 
 		// Checks if the password contains at least 1 upper, 1 lower and 1 digit as well
@@ -93,7 +97,10 @@ public class UserSqlDAO implements UserDAO {
 			return ps;
 		}, keyHolder) == 1;
 		int newUserId = (int) keyHolder.getKeys().get(id_column);
-
+		
+		if(userDetails !=null) {
+				userDetailsDAO.updateDetails(userDetails);
+		}
 		return userCreated;
 	}
 
@@ -107,6 +114,8 @@ public class UserSqlDAO implements UserDAO {
 		user.setFirstName(rs.getString("first_name"));
 		user.setLastName(rs.getString("last_name"));
 		user.setEmail(rs.getString("email"));
+		UserDetails userdetails = userDetailsDAO.getDetails(user.getId());
+		user.setUserDetails(userdetails);
 		return user;
 	}
 }
