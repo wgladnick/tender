@@ -68,7 +68,6 @@ public class YelpFusion {
 
     }
     
-    
 
     private HttpEntity makeAuthEntity() {
         HttpHeaders headers = new HttpHeaders();

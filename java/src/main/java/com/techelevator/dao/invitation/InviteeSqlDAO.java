@@ -4,9 +4,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.invitation.Invitee;
+import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
+@Component
 public class InviteeSqlDAO implements InviteeDAO{
 	
 	private JdbcTemplate jdbcTemplate;
@@ -33,9 +35,14 @@ public class InviteeSqlDAO implements InviteeDAO{
 		String uniqueId = generateUniqueId();
 		invitee.setUniqueId(uniqueId);
 
-		String sql = "INSERT INTO invitee_details (invite_id,unique_id, user_id, first_name, last_name, email) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO invitee_details (invite_id,unique_id, invitee_user_id, first_name, last_name, email) VALUES (?,?,?,?,?,?) RETURNING has_voted, is_attending";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql,invitee.getInviteId(),invitee.getUniqueId(),invitee.getUserId(),
 				invitee.getFirstName(), invitee.getLastName(),invitee.getEmail());
+
+		while (results.next()) {
+			invitee.setHasVoted(results.getBoolean("has_voted"));
+			invitee.setIsAttending(results.getString("is_attending"));
+		}
 
 		return invitee;
 	}
@@ -45,7 +52,7 @@ public class InviteeSqlDAO implements InviteeDAO{
 
 		String sql = "UPDATE invitee_details SET has_voted = ?, is_attending = ? WHERE unique_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql,invitee.getHasVoted(), invitee.getIsAttending(), invitee.getUniqueId());
-		
+
 		return invitee;
 	}
 	
@@ -76,8 +83,6 @@ public class InviteeSqlDAO implements InviteeDAO{
 				.limit(targetStringLength)
 				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 				.toString();
-
-
 	}
 
 }

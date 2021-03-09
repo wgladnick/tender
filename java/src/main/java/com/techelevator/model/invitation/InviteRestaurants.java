@@ -1,7 +1,7 @@
 package com.techelevator.model.invitation;
 
 public class InviteRestaurants {
-	private int inviteId;
+	private long inviteId;
 	private String yelpId;
 	private int thumbsUp;
 	private int thumbsDown;
@@ -10,11 +10,11 @@ public InviteRestaurants() {
 	
 }
 
-public int getInviteId() {
+public long getInviteId() {
 	return inviteId;
 }
 
-public void setInviteId(int inviteId) {
+public void setInviteId(long inviteId) {
 	this.inviteId = inviteId;
 }
 

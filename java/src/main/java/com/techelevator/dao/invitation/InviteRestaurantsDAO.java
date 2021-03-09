@@ -1,6 +1,5 @@
 package com.techelevator.dao.invitation;
 
-
 import com.techelevator.model.invitation.InviteRestaurants;
 
 public interface InviteRestaurantsDAO {

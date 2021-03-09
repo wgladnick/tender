@@ -1,6 +1,8 @@
 package com.techelevator.model.invitation;
 
 import java.sql.Timestamp;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Invitation {
@@ -11,8 +13,8 @@ public class Invitation {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private Timestamp deadline;
 	private String reservationDate;
-	private Invitee[] invitees;
-	private InviteRestaurants[] restaurantChoices;
+	private List<Invitee> invitees;
+	private List<InviteRestaurants> restaurantChoices;
 	
 	public Invitation() {
 		
@@ -66,19 +68,19 @@ public class Invitation {
 		this.reservationDate = reservationDate;
 	}
 
-	public Invitee[] getInvitees() {
+	public List<Invitee> getInvitees() {
 		return invitees;
 	}
 
-	public void setInvitees(Invitee[] invitees) {
+	public void setInvitees(List<Invitee> invitees) {
 		this.invitees = invitees;
 	}
 
-	public InviteRestaurants[] getRestaurantChoices() {
+	public List<InviteRestaurants> getRestaurantChoices() {
 		return restaurantChoices;
 	}
 
-	public void setRestaurantChoices(InviteRestaurants[] restaurantChoices) {
+	public void setRestaurantChoices(List<InviteRestaurants> restaurantChoices) {
 		this.restaurantChoices = restaurantChoices;
 	}
 
