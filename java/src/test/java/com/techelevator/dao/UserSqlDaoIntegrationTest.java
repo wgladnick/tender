@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.User;
+import com.techelevator.model.UserDetails;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,6 @@ public class UserSqlDaoIntegrationTest extends DAOIntegrationTest {
     public void setup() {
         DataSource dataSource = this.getDataSource();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        userSqlDAO = new UserSqlDAO(jdbcTemplate);
     }
 
     @Test

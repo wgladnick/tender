@@ -21,6 +21,7 @@ CREATE TABLE users (
 
 INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER','user','name','user@user.com');
 INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN','admin','istrator','admin@user.com');
+INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('test','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN','admin','istrator','admin@user.com');
 
 
 SELECT * FROM users;

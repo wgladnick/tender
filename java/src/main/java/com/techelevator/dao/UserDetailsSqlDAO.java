@@ -45,7 +45,7 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
 
     private UserDetails mapRowToUserDetails(SqlRowSet results) {
-        UserDetails userDetails = null;
+        UserDetails userDetails = new UserDetails();
 
         userDetails.setAddress(results.getString("address"));
         userDetails.setCity(results.getString("city"));
@@ -54,6 +54,7 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         userDetails.setDefault_radius(results.getInt("default_radius"));
 
         long userId = results.getLong("user_id");
+
         userDetails.setSearchCategories(getUserDetailsSearchCategories(userId));
 
         return userDetails;
@@ -66,7 +67,7 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         int counter = 0;
 
         String sql = "SELECT search_name FROM food_categories " +
-                "JOIN user_categories ON food_categories.category_id = user_categories.category_id" +
+                "JOIN user_categories ON food_categories.category_id = user_categories.category_id " +
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 
@@ -77,7 +78,7 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         if (searchCategories.size() > 0) {
             for(String searchItem : searchCategories) {
                 searchCategoryString += searchItem;
-                if (counter < searchCategories.size()) {
+                if (counter < searchCategories.size() - 1) {
                     searchCategoryString += ",";
                     counter++;
                 }

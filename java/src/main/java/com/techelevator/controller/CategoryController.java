@@ -1,6 +1,8 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.UserDetailsDAO;
 import com.techelevator.dao.invitation.CategoryDAO;
+import com.techelevator.model.UserDetails;
 import com.techelevator.services.yelpfusion.models.business.FoodCategories;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,4 +23,5 @@ public class CategoryController {
     public List<FoodCategories> getListOfCategories() {
         return categoryDAO.getFilteredCategory();
     }
+
 }

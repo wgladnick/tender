@@ -19,10 +19,12 @@ import com.techelevator.dao.UserDetailsDAO;
 public class UserSqlDAO implements UserDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	private UserDetailsDAO userDetailsDAO;
 
 
-	public UserSqlDAO(JdbcTemplate jdbcTemplate) {
+	public UserSqlDAO(JdbcTemplate jdbcTemplate, UserDetailsDAO userDetailsDAO) {
 		this.jdbcTemplate = jdbcTemplate;
+		this.userDetailsDAO = userDetailsDAO;
 
 	}
 
@@ -102,6 +104,7 @@ public class UserSqlDAO implements UserDAO {
 	}
 
 	private User mapRowToUser(SqlRowSet rs) {
+		long userId = rs.getLong("user_id");
 		User user = new User();
 		user.setId(rs.getLong("user_id"));
 		user.setUsername(rs.getString("username"));
@@ -111,7 +114,11 @@ public class UserSqlDAO implements UserDAO {
 		user.setFirstName(rs.getString("first_name"));
 		user.setLastName(rs.getString("last_name"));
 		user.setEmail(rs.getString("email"));
-
+		UserDetails userDetails = new UserDetails();
+		userDetails = userDetailsDAO.getDetails(userId);
+		if (userDetails != null) {
+			user.setUserDetails(userDetails);
+		}
 		return user;
 	}
 }
