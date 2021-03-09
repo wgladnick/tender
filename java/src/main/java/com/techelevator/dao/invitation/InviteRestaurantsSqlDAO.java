@@ -1,5 +1,8 @@
 package com.techelevator.dao.invitation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.techelevator.model.invitation.InviteRestaurants;
@@ -16,15 +19,16 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 	}
 
 	@Override
-	public InviteRestaurants getInviteRestaurantById(Long inviteId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public InviteRestaurants findInviteRestaurantByUserId(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<InviteRestaurants> getInviteRestaurantById(Long inviteId) {
+		List<InviteRestaurants> inviterestaurants = new ArrayList<>();
+		String sql = "SELECT * FROM invitation_restaurant WHERE invite_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, inviteId);
+		
+		while(results.next()) {
+			InviteRestaurants invrest = mapRowToInviteRestaurant(results);
+			inviterestaurants.add(invrest);
+		}
+		return inviterestaurants;
 	}
 
 	@Override
@@ -40,6 +44,35 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 		}
 
 		return listOfChoices;
+	}
+	
+	public InviteRestaurants mapRowToInviteRestaurant(SqlRowSet rs) {
+		InviteRestaurants ir = new InviteRestaurants();
+		
+		ir.setInviteId(rs.getInt("invite_id"));
+		ir.setYelpId(rs.getString("yelp_id"));
+		ir.setThumbsUp(rs.getInt("thumbs_up"));
+		ir.setThumbsDown(rs.getInt("thumbs_down"));
+		
+		return ir;
+		
+	}
+	
+	public InviteRestaurants voteCount(InviteRestaurants inviterestaurants) {
+		
+		String sql = "UPDATE invitation_restaurant " + 
+				"SET thumbs_up = thumbs_up + 1 " + 
+				"WHERE yelp_id = ? AND invite_id = ?";
+		jdbcTemplate.update(sql, inviterestaurants.getYelpId(), inviterestaurants.getInviteId());
+		
+		String sql2 = "SELECT * FROM invitation_restaurant WHERE yelp_id = ? AND invite_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, inviterestaurants.getYelpId(), inviterestaurants.getInviteId());
+		
+		while(results.next()) {
+			inviterestaurants = mapRowToInviteRestaurant(results);
+		}
+		return inviterestaurants;		
+
 	}
 
 }
