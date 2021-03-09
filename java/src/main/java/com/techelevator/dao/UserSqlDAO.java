@@ -19,11 +19,11 @@ import com.techelevator.dao.UserDetailsDAO;
 public class UserSqlDAO implements UserDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private UserDetailsDAO userDetailsDAO;
 	
-	public UserSqlDAO(JdbcTemplate jdbcTemplate, UserDetailsDAO userDetailsDAO) {
+	
+	public UserSqlDAO(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
-		this.userDetailsDAO = userDetailsDAO;
+		
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class UserSqlDAO implements UserDAO {
 	}
 
 	@Override
-	public boolean create(String username, String password, String role, String firstName, String lastName, String email, UserDetails userDetails) {
+	public boolean create(String username, String password, String role, String firstName, String lastName, String email) {
 		boolean userCreated = false;
 
 		// Checks if the password contains at least 1 upper, 1 lower and 1 digit as well
@@ -98,9 +98,6 @@ public class UserSqlDAO implements UserDAO {
 		}, keyHolder) == 1;
 		int newUserId = (int) keyHolder.getKeys().get(id_column);
 		
-		if(userDetails !=null) {
-				userDetailsDAO.updateDetails(userDetails);
-		}
 		return userCreated;
 	}
 
@@ -114,8 +111,7 @@ public class UserSqlDAO implements UserDAO {
 		user.setFirstName(rs.getString("first_name"));
 		user.setLastName(rs.getString("last_name"));
 		user.setEmail(rs.getString("email"));
-		UserDetails userdetails = userDetailsDAO.getDetails(user.getId());
-		user.setUserDetails(userdetails);
+		
 		return user;
 	}
 }

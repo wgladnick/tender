@@ -32,7 +32,14 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
     @Override
     public UserDetails updateDetails(UserDetails userDetails) {
-        return null;
+    	UserDetails userdetails = new UserDetails();
+    	userdetails.setAddress("address");
+    	userdetails.setCity("city");
+    	userdetails.setDefault_radius(7);
+    	userdetails.setSearchCategories("mexican");
+    	userdetails.setState("DE");
+    	userdetails.setZip(19806);
+        return userdetails;
     }
 
 
