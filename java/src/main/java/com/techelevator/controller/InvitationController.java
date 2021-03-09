@@ -56,11 +56,6 @@ public class InvitationController {
 		return inviteeDAO.getInviteeById(inviteId);
 	}
 	
-	@RequestMapping(value = "/invitee", method = RequestMethod.POST)
-	public Invitee createInvitee(@RequestBody Invitee invitee) {
-		return inviteeDAO.createInvitee(invitee);
-	}
-	
 	
 	@RequestMapping(value = "/invitee", method = RequestMethod.PUT)
 	public Invitee updateInviteeStatus(@RequestBody Invitee invitee) {
@@ -72,6 +67,19 @@ public class InvitationController {
 	public List<InviteRestaurants> getInviteRestaurantById(@PathVariable Long inviteId) {
 		return inviteRestaurantsDAO.getInviteRestaurantById(inviteId);
 	}
+	
+	
+	@RequestMapping(value = "/thumbsup", method = RequestMethod.PUT)
+	public InviteRestaurants voteThumbsUp(@PathVariable InviteRestaurants inviterestaurants) {
+		return inviteRestaurantsDAO.voteThumbsUp(inviterestaurants);
+	}
+	
+	
+	@RequestMapping(value = "/thumbsdown", method = RequestMethod.PUT)
+	public InviteRestaurants voteThumbsDown(@PathVariable InviteRestaurants inviterestaurants) {
+		return inviteRestaurantsDAO.voteThumbsDown(inviterestaurants);
+	}
+	
 	
 	
 }

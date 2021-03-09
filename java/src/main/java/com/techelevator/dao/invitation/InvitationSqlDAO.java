@@ -28,7 +28,15 @@ public class InvitationSqlDAO implements InvitationDAO {
 
 	@Override
 	public Invitation getInviteById(Long inviteId) {
-		return jdbcTemplate.queryForObject("select * from invitation where invite_id = ?", Invitation.class, inviteId);
+		
+		SqlRowSet results = jdbcTemplate.queryForRowSet("SELECT * FROM invitation where invite_id = ?", inviteId);
+		while (results.next()) {
+			Invitation invite = mapRowToInvitation(results);
+			invite.setInvitees(inviteeDAO.getInviteeById(inviteId));
+			invite.setRestaurantChoices(inviteRestaurantsDAO.getInviteRestaurantById(inviteId));
+			return invite;
+		}
+		return null;
 	}
 
 	@Override
@@ -38,6 +46,8 @@ public class InvitationSqlDAO implements InvitationDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, creatorId);
 		while (results.next()) {
 			Invitation invite = mapRowToInvitation(results);
+			invite.setInvitees(inviteeDAO.getInviteeById(invite.getInviteId()));
+			invite.setRestaurantChoices(inviteRestaurantsDAO.getInviteRestaurantById(invite.getInviteId()));
 			inviteList.add(invite);
 		}
 		return inviteList;
