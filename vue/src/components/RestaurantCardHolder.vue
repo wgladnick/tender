@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import RestaurantService from
+import RestaurantService from "../services/RestaurantService";
 export default {
 
 }
