@@ -88,8 +88,8 @@ CREATE TABLE IF NOT EXISTS invitee_details (
 CREATE TABLE IF NOT EXISTS invitation_restaurant (
      invite_id INTEGER,
      yelp_id VARCHAR NOT NULL,
-     thumbs_up INTEGER,
-     thumbs_down INTEGER
+     thumbs_up INTEGER DEFAULT 0,
+     thumbs_down INTEGER DEFAULT 0
 );
 
 GRANT ALL

@@ -1,9 +1,11 @@
 package com.techelevator.dao.invitation;
 
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.invitation.InviteRestaurants;
 import com.techelevator.model.invitation.Invitee;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -16,10 +18,12 @@ public class InvitationSqlDAO implements InvitationDAO {
 
 	private JdbcTemplate jdbcTemplate;
 	private InviteeDAO inviteeDAO;
+	private InviteRestaurantsDAO inviteRestaurantsDAO;
 
-	public InvitationSqlDAO(JdbcTemplate jdbcTemplate, InviteeDAO inviteeDAO) {
+	public InvitationSqlDAO(JdbcTemplate jdbcTemplate, InviteeDAO inviteeDAO, InviteRestaurantsDAO inviteRestaurantsDAO) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.inviteeDAO = inviteeDAO;
+		this.inviteRestaurantsDAO = inviteRestaurantsDAO;
 	}
 
 	@Override
@@ -49,7 +53,8 @@ public class InvitationSqlDAO implements InvitationDAO {
 		if (results.next()) {
 			Long invite_id = results.getLong("invite_id");
 			invitation.setInviteId(invite_id);
-			invitation = makeInviteeList(invitation);
+			invitation = makeInviteeList(invitation,invite_id);
+			invitation = makeInvitationRestaurants(invitation, invite_id);
 			return invitation;
 		} else {
 			throw new RuntimeException("Unable to create your invitation");
@@ -76,17 +81,30 @@ public class InvitationSqlDAO implements InvitationDAO {
 
 	}
 
-	private Invitation makeInviteeList(Invitation invitation) {
-		long inviteId = invitation.getInviteId();
+	private Invitation makeInviteeList(Invitation invitation, long inviteId) {
 		List<Invitee> suppliedInvitees = invitation.getInvitees();
 		List<Invitee> invitees = new ArrayList<>();
 
 		for (Invitee invitee : suppliedInvitees) {
+			invitee.setInviteId(inviteId);
 			Invitee newInvitee = inviteeDAO.createInvitee(invitee);
-			newInvitee.setInviteId(inviteId);
 			invitees.add(newInvitee);
 		}
 		invitation.setInvitees(invitees);
+		return invitation;
+	}
+
+	private Invitation makeInvitationRestaurants(Invitation invitation, long inviteId) {
+		List<InviteRestaurants> suppliedRestaurants = invitation.getRestaurantChoices();
+		List<InviteRestaurants> updatedRestaurantList = new ArrayList<>();
+
+		for(InviteRestaurants restaurant : suppliedRestaurants) {
+			restaurant.setInviteId(inviteId);
+			InviteRestaurants newRestaurant = inviteRestaurantsDAO.create(restaurant);
+			updatedRestaurantList.add(newRestaurant);
+		}
+		invitation.setRestaurantChoices(updatedRestaurantList);
+
 		return invitation;
 	}
 }

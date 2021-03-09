@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "8da6ba84-c9da-41ce-88b6-3630dc9a9613",
-		"name": "Final Capstone Copy",
+		"_postman_id": "5b28bece-ab76-4e46-b617-a625399a205d",
+		"name": "Final Capstone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -165,6 +165,47 @@
 			"response": []
 		},
 		{
+			"name": "API YelpFusion - Get List of Restaurnts by category",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 1d437b3e-b72b-4865-83b5-c9e53cec207a",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/restaurant/category/?address=\"1836 N Lincoln St wilmington de 19806\"&radius=5000&category=mexican,chinese",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"restaurant",
+						"category",
+						""
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "\"1836 N Lincoln St wilmington de 19806\""
+						},
+						{
+							"key": "radius",
+							"value": "5000"
+						},
+						{
+							"key": "category",
+							"value": "mexican,chinese"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Yelp Direct - Get Restaurant Reviews",
 			"request": {
 				"method": "GET",
@@ -306,41 +347,46 @@
 			"response": []
 		},
 		{
-			"name": "API YelpFusion - Get List of Restaurants by category",
+			"name": "Create Invitation",
 			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer 1d437b3e-b72b-4865-83b5-c9e53cec207a",
-						"type": "text",
-						"disabled": true
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"location\": \"Charlotte\",\n        \"radius\": \"5000\",\n        \"creatorId\": \"1\",\n        \"deadline\": \"2021-03-07 16:00\",\n        \"reservationDate\": \"03/13/2021 6:00pm\",\n        \"invitees\": [{\n            \"userId\": 1,\n            \"firstName\": \"Will\",\n            \"lastName\": \"Gladnick\",\n            \"email\": \"bigwillystyle@aol.com\"\n        },{\n            \"firstName\": \"Mike\",\n            \"lastName\": \"Uhlman\",\n            \"email\": \"Mikeistheman@gmail.com\"\n        },{\n            \"firstName\": \"Emily\",\n            \"lastName\": \"Charleson\",\n            \"email\": \"emily@yahoo.com\"\n        }\n        ],\n        \"restaurantChoices\": [{\n            \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\"\n\n        },\n        {\n            \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\"\n        }\n        ]\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
 					}
-				],
+				},
 				"url": {
-					"raw": "localhost:8080/restaurant/category/?address=\"1836 N Lincoln St wilmington de 19806\"&radius=5000&category=thai,american",
+					"raw": "http://localhost:8080/invitation",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"restaurant",
-						"category",
-						""
+						"invitation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Categories - Get list of categories to search by",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/categories",
+					"host": [
+						"localhost"
 					],
-					"query": [
-						{
-							"key": "address",
-							"value": "\"1836 N Lincoln St wilmington de 19806\""
-						},
-						{
-							"key": "radius",
-							"value": "5000"
-						},
-						{
-							"key": "category",
-							"value": "thai,american"
-						}
+					"port": "8080",
+					"path": [
+						"categories"
 					]
 				}
 			},

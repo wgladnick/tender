@@ -14,7 +14,7 @@ public class Invitation {
 	private Timestamp deadline;
 	private String reservationDate;
 	private List<Invitee> invitees;
-	private InviteRestaurants[] restaurantChoices;
+	private List<InviteRestaurants> restaurantChoices;
 	
 	public Invitation() {
 		
@@ -76,11 +76,11 @@ public class Invitation {
 		this.invitees = invitees;
 	}
 
-	public InviteRestaurants[] getRestaurantChoices() {
+	public List<InviteRestaurants> getRestaurantChoices() {
 		return restaurantChoices;
 	}
 
-	public void setRestaurantChoices(InviteRestaurants[] restaurantChoices) {
+	public void setRestaurantChoices(List<InviteRestaurants> restaurantChoices) {
 		this.restaurantChoices = restaurantChoices;
 	}
 
