@@ -13,16 +13,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.techelevator.model.User;
+import com.techelevator.model.UserDetails;
+import com.techelevator.dao.UserDetailsDAO;
 
 @Service
 public class UserSqlDAO implements UserDAO {
 
 	private JdbcTemplate jdbcTemplate;
+<<<<<<< HEAD
 	private UserDetailsDAO userDetailsDAO;
 
 	public UserSqlDAO(JdbcTemplate jdbcTemplate, UserDetailsDAO userDetailsDAO) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.userDetailsDAO = userDetailsDAO;
+=======
+	
+	
+	public UserSqlDAO(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+		
+>>>>>>> 6cc36afbe23d69996632273196e9b1b1fce4cd90
 	}
 
 	@Override
@@ -96,7 +106,7 @@ public class UserSqlDAO implements UserDAO {
 			return ps;
 		}, keyHolder) == 1;
 		int newUserId = (int) keyHolder.getKeys().get(id_column);
-
+		
 		return userCreated;
 	}
 
@@ -110,9 +120,13 @@ public class UserSqlDAO implements UserDAO {
 		user.setFirstName(rs.getString("first_name"));
 		user.setLastName(rs.getString("last_name"));
 		user.setEmail(rs.getString("email"));
+<<<<<<< HEAD
 		UserDetails userDetails = new UserDetails();
 		userDetails = userDetailsDAO.getDetails(user.getId());
 		user.setUserDetails(userDetails);
+=======
+		
+>>>>>>> 6cc36afbe23d69996632273196e9b1b1fce4cd90
 		return user;
 	}
 }

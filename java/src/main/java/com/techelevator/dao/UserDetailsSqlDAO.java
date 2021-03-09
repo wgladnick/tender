@@ -19,8 +19,8 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
     @Override
     public UserDetails getDetails(long userId) {
-        String sql = "SELECT user_id, address, city, state, zip, default_radius" +
-                "FROM user_details" +
+        String sql = "SELECT user_id, address, city, state, zip, default_radius " +
+                "FROM user_details " +
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         if (results.next()) {
@@ -32,7 +32,14 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
     @Override
     public UserDetails updateDetails(UserDetails userDetails) {
-        return null;
+    	UserDetails userdetails = new UserDetails();
+    	userdetails.setAddress("address");
+    	userdetails.setCity("city");
+    	userdetails.setDefault_radius(7);
+    	userdetails.setSearchCategories("mexican");
+    	userdetails.setState("DE");
+    	userdetails.setZip(19806);
+        return userdetails;
     }
 
 
@@ -52,13 +59,13 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         return userDetails;
 
     }
-
+    
     private String getUserDetailsSearchCategories(long userId) {
         List<String> searchCategories = new ArrayList<>();
         String searchCategoryString = "";
         int counter = 0;
 
-        String sql = "SELECT search_name FROM food_categories" +
+        String sql = "SELECT search_name FROM food_categories " +
                 "JOIN user_categories ON food_categories.category_id = user_categories.category_id" +
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);

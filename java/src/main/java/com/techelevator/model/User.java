@@ -23,7 +23,7 @@ public class User {
 	public User() {
 	}
 
-	public User(Long id, String username, String password, String authorities, String firstName, String lastName, String email) {
+	public User(Long id, String username, String password, String authorities, String firstName, String lastName, String email, UserDetails userDetails) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -31,6 +31,7 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.userDetails = userDetails;
 	}
 	public String getEmail() {
 		return email;
@@ -121,17 +122,18 @@ public class User {
 		User user = (User) o;
 		return id == user.id && activated == user.activated && Objects.equals(username, user.username)
 				&& Objects.equals(password, user.password) && Objects.equals(authorities, user.authorities) 
-				&& Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email);
+				&& Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) 
+				&& Objects.equals(email, user.email) && Objects.equals(userDetails, user.userDetails);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, username, password, activated, authorities, firstName, lastName, email);
+		return Objects.hash(id, username, password, activated, authorities, firstName, lastName, email, userDetails);
 	}
 
 	@Override
 	public String toString() {
 		return "User{" + "id=" + id + ", username='" + username + '\'' + ", activated=" + activated + ", authorities="
-				+ authorities + ", firstname=" + firstName + ", lastname=" + lastName + ", email=" + email +'}';
+				+ authorities + ", firstname=" + firstName + ", lastname=" + lastName + ", email=" + email +", userdetails=" + '}';
 	}
 }

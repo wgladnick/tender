@@ -18,6 +18,7 @@ public class RegisterUserDTO {
     private String lastName;
     @NotEmpty
     private String email;
+    private UserDetails  userDetails;
 
     public String getEmail() {
 		return email;
@@ -74,4 +75,13 @@ public class RegisterUserDTO {
     public void setRole(String role) {
         this.role = role;
     }
+
+	public UserDetails getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
+	}
+    
 }
