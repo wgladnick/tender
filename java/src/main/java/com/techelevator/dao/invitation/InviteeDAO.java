@@ -13,5 +13,7 @@ public interface InviteeDAO {
 
     Invitee updateInviteeStatus(Invitee invitee);
 
+    String getPreferredCategories();
+
 
 }
