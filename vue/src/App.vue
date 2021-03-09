@@ -4,7 +4,7 @@
   <div class ="header">
 
       <div class = "logo">
-        <img src="..\src\assets\tender.png"/>
+        <img src="../src/assets/tender.png"/>
         </div>
 
           <div id="nav">
@@ -12,7 +12,7 @@
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
     </div>
       </div>
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
        
         </div>
 

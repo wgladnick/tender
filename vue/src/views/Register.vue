@@ -6,7 +6,6 @@
       <!-- Header -->
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
 
-    
       <!-- Alert message for registration errors -->
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
@@ -14,7 +13,7 @@
 
       <!-- First Name -->
       <b-field label="First Name">
-        <b-input v-model="user.firstName" required></b-input>
+        <b-input v-model="user.firstName" required autofocus></b-input>
       </b-field>
 
       <b-field label="Last Name">
@@ -35,34 +34,28 @@
       </b-field>
 
       <!--Username Input -->
-      <b-field
-        label="Username"
-      
-      >
-        <b-input
-          maxlength="15"
-          v-model="user.username"
-          required
-          autofocus
-        ></b-input>
+      <b-field label="Username">
+        <b-input maxlength="15" v-model="user.username" required></b-input>
       </b-field>
 
       <div id="app" class="container"></div>
       <!-- Password Input -->
 
-      <b-field label="Password"
-      message="minimum requirements: 8 characters, 1 uppercase letter, 1 lowercase letter">
+      <b-field
+        label="Password"
+        message="minimum requirements: 8 characters, 1 uppercase letter, 1 lowercase letter"
+      >
         <b-input
           type="password"
           placeholder="password"
           v-model="user.password"
+          v-on:blur="checkPassword"
           password-reveal
           required
         >
         </b-input>
       </b-field>
       <!-- Password Validator -->
-     
 
       <!-- Password Confirmation -->
       <b-field label="Confirm Password">
@@ -70,7 +63,6 @@
           type="password"
           placeholder="Password reveal input"
           v-model="user.confirmPassword"
-          v-on:focus="checkPassword"
           password-reveal
           required
         >
@@ -98,7 +90,7 @@ export default {
       user: {
         firstName: "",
         lastName: "",
-        email:"",
+        email: "",
         username: "",
         password: "",
         confirmPassword: "",
@@ -116,7 +108,6 @@ export default {
   methods: {
     checkPassword() {
       this.password_length = this.user.password.length;
-      
 
       if (this.password_length > 7) {
         this.contains_eight_characters = true;
@@ -138,13 +129,13 @@ export default {
       }
     },
     register() {
-
-      if(this.valid_password === false){
-         this.registrationErrors = true;
-        this.registrationErrorMsg = "Your password does not meet the requirements";
+      if (this.valid_password === false) {
+        this.registrationErrors = true;
+        this.registrationErrorMsg =
+          "Your password does not meet the requirements";
       }
       //Checks is passwords match
-     else if (this.user.password != this.user.confirmPassword) {
+      else if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = "Password & Confirm Password do not match.";
       } else {
@@ -181,80 +172,4 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-li {
-  margin-bottom: 8px;
-  color: #525f7f;
-  position: relative;
-}
-
-li:before {
-  content: "";
-  width: 0%;
-  height: 2px;
-  background: #2ecc71;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  display: block;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#register-container {
-  width: 50%;
-}
-.is_valid {
-  color: rgba(136, 152, 170, 0.8);
-}
-.is_valid:before {
-  width: 100%;
-}
-
-.checkmark_container {
-  border-radius: 50%;
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background: #2ecc71;
-  width: 50px;
-  height: 50px;
-  visibility: hidden;
-  opacity: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.4s ease;
-}
-
-.show_checkmark {
-  visibility: visible;
-  opacity: 1;
-}
-
-.checkmark {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: white;
-  stroke-width: 15;
-  stroke-linecap: round;
-  stroke-dasharray: 180;
-  stroke-dashoffset: 180;
-}
-
-.checked {
-  animation: draw 0.5s ease forwards;
-}
-
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 </style>
