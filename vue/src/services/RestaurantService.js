@@ -1,18 +1,23 @@
 import axios from 'axios';
 
 
-const http = axios.create({
-    baseURL: "http//localhost:8080"
-});
+
 
 export default {
     list() {
-        return http.get(`/restaurants`)
+        return axios.get('/restaurant');
     },
     getRestaurants(location) {
-        return http.get(`/restaurants/${location}`);
+        return axios.get('/restaurant/', {
+            params: {
+                address: location,
+                radius: 1000
+            }
+        });
     },
+
+    
     getTheRestaurant(id) {
-        return http.get(`/restaurants/${id}`);
+        return axios.get(`/restaurant/${id}`);
     }
 }

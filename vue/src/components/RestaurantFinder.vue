@@ -6,7 +6,7 @@
         <div class="alert alert-danger" role="alert" v-if="invalidLocation">
             Invalid location parameters, search with address or zip code </div>
         <b-field label="Location">
-          <b-input type="text" class="seachbox" v-model="restaurants.location"/>
+          <b-input type="text" class="seachbox" v-model="location"/>
         </b-field>
         <b-button type="submit" v-on:click="searchByLocation()" focused>
           Search
@@ -30,6 +30,7 @@ export default {
   components: { RestaurantCard },
   data() {
     return {
+     
       restaurants: [],
       isLoading: true,
       location: "",
@@ -43,7 +44,7 @@ export default {
     searchByLocation() {
       RestaurantService.getRestaurants(this.location).then((response) => {
         this.restaurants = response.data;
-        this.$router.push("/")
+        //this.$router.push("/") This is where we populate restaurant cards
       })
       .catch((error) => {
           const response = error.response;
