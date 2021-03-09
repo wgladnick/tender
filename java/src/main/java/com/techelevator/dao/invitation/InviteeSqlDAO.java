@@ -60,7 +60,7 @@ public class InviteeSqlDAO implements InviteeDAO{
 		return invitee;
 	}
 	
-	public Invitee mapRowToInvitee(SqlRowSet rs) {
+	private Invitee mapRowToInvitee(SqlRowSet rs) {
 		Invitee invitee = new Invitee();
 		
 		invitee.setInviteId(rs.getInt("invite_id"));
@@ -76,7 +76,7 @@ public class InviteeSqlDAO implements InviteeDAO{
 	}
 
 
-	public String generateUniqueId() {
+	private String generateUniqueId() {
 		int leftLimit = 48; // numeral '0'
 		int rightLimit = 122; // letter 'z'
 		int targetStringLength = 15;
