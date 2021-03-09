@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.UserDetails;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -17,9 +18,11 @@ import com.techelevator.model.User;
 public class UserSqlDAO implements UserDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	private UserDetailsDAO userDetailsDAO;
 
-	public UserSqlDAO(JdbcTemplate jdbcTemplate) {
+	public UserSqlDAO(JdbcTemplate jdbcTemplate, UserDetailsDAO userDetailsDAO) {
 		this.jdbcTemplate = jdbcTemplate;
+		this.userDetailsDAO = userDetailsDAO;
 	}
 
 	@Override
@@ -107,6 +110,8 @@ public class UserSqlDAO implements UserDAO {
 		user.setFirstName(rs.getString("first_name"));
 		user.setLastName(rs.getString("last_name"));
 		user.setEmail(rs.getString("email"));
+		UserDetails userDetails = new UserDetails();
+		userDetails =
 		return user;
 	}
 }
