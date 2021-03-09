@@ -5,6 +5,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.invitation.Invitee;
 
+import java.util.Random;
+
 public class InviteeSqlDAO implements InviteeDAO{
 	
 	private JdbcTemplate jdbcTemplate;
@@ -27,6 +29,10 @@ public class InviteeSqlDAO implements InviteeDAO{
 
 	@Override
 	public Invitee createInvitee(Invitee invitee) {
+		// Generates the unique ID we will use on the front end to track the users.
+		String uniqueId = generateUniqueId();
+
+
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,6 +50,22 @@ public class InviteeSqlDAO implements InviteeDAO{
 		invitee.setIsAttending(rs.getString("is_attending"));
 		
 		return invitee;
+	}
+
+
+	public String generateUniqueId() {
+		int leftLimit = 48; // numeral '0'
+		int rightLimit = 122; // letter 'z'
+		int targetStringLength = 15;
+		Random random = new Random();
+
+		return random.ints(leftLimit, rightLimit + 1)
+				.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+				.limit(targetStringLength)
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+				.toString();
+
+
 	}
 
 }
