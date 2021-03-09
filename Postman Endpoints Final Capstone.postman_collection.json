@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5b28bece-ab76-4e46-b617-a625399a205d",
+		"_postman_id": "3fb43d4a-7aac-485e-b7bb-cf1584cf360f",
 		"name": "Final Capstone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -387,6 +387,100 @@
 					"port": "8080",
 					"path": [
 						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invitation by invitation ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"location\": \"Charlotte\",\n        \"radius\": \"5000\",\n        \"creatorId\": \"1\",\n        \"deadline\": \"2021-03-07 16:00\",\n        \"reservationDate\": \"03/13/2021 6:00pm\",\n        \"invitees\": [{\n            \"userId\": 1,\n            \"firstName\": \"Will\",\n            \"lastName\": \"Gladnick\",\n            \"email\": \"bigwillystyle@aol.com\"\n        },{\n            \"firstName\": \"Mike\",\n            \"lastName\": \"Uhlman\",\n            \"email\": \"Mikeistheman@gmail.com\"\n        },{\n            \"firstName\": \"Emily\",\n            \"lastName\": \"Charleson\",\n            \"email\": \"emily@yahoo.com\"\n        }\n        ],\n        \"restaurantChoices\": [{\n            \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\"\n\n        },\n        {\n            \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\"\n        }\n        ]\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/invitation/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invitation",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invitation by user ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"location\": \"Charlotte\",\n        \"radius\": \"5000\",\n        \"creatorId\": \"1\",\n        \"deadline\": \"2021-03-07 16:00\",\n        \"reservationDate\": \"03/13/2021 6:00pm\",\n        \"invitees\": [{\n            \"userId\": 1,\n            \"firstName\": \"Will\",\n            \"lastName\": \"Gladnick\",\n            \"email\": \"bigwillystyle@aol.com\"\n        },{\n            \"firstName\": \"Mike\",\n            \"lastName\": \"Uhlman\",\n            \"email\": \"Mikeistheman@gmail.com\"\n        },{\n            \"firstName\": \"Emily\",\n            \"lastName\": \"Charleson\",\n            \"email\": \"emily@yahoo.com\"\n        }\n        ],\n        \"restaurantChoices\": [{\n            \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\"\n\n        },\n        {\n            \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\"\n        }\n        ]\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/invitation/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invitation",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invitee by invitation ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"location\": \"Charlotte\",\n        \"radius\": \"5000\",\n        \"creatorId\": \"1\",\n        \"deadline\": \"2021-03-07 16:00\",\n        \"reservationDate\": \"03/13/2021 6:00pm\",\n        \"invitees\": [{\n            \"userId\": 1,\n            \"firstName\": \"Will\",\n            \"lastName\": \"Gladnick\",\n            \"email\": \"bigwillystyle@aol.com\"\n        },{\n            \"firstName\": \"Mike\",\n            \"lastName\": \"Uhlman\",\n            \"email\": \"Mikeistheman@gmail.com\"\n        },{\n            \"firstName\": \"Emily\",\n            \"lastName\": \"Charleson\",\n            \"email\": \"emily@yahoo.com\"\n        }\n        ],\n        \"restaurantChoices\": [{\n            \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\"\n\n        },\n        {\n            \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\"\n        }\n        ]\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/invitation/invitee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invitation",
+						"invitee"
 					]
 				}
 			},
