@@ -27,7 +27,11 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    byLocationBoard: [],
+    restaurantCard: {
+      
+    }
   },
   mutations: {
     //sets the auth token
