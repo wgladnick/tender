@@ -37,7 +37,7 @@
 
         <b-field
           label="Password"
-          message="minimum requirements: 8 characters, 1 uppercase letter, 1 lowercase letter"
+          message="minimum requirements: 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number"
         >
           <b-input
             type="password"
