@@ -31,10 +31,22 @@ public class InviteeSqlDAO implements InviteeDAO{
 	public Invitee createInvitee(Invitee invitee) {
 		// Generates the unique ID we will use on the front end to track the users.
 		String uniqueId = generateUniqueId();
+		invitee.setUniqueId(uniqueId);
 
+		String sql = "INSERT INTO invitee_details (invite_id,unique_id, user_id, first_name, last_name, email) VALUES (?,?,?,?,?,?)";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql,invitee.getInviteId(),invitee.getUniqueId(),invitee.getUserId(),
+				invitee.getFirstName(), invitee.getLastName(),invitee.getEmail());
 
-		// TODO Auto-generated method stub
-		return null;
+		return invitee;
+	}
+
+	@Override
+	public Invitee updateInviteeStatus(Invitee invitee) {
+
+		String sql = "UPDATE invitee_details SET has_voted = ?, is_attending = ? WHERE unique_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql,invitee.getHasVoted(), invitee.getIsAttending(), invitee.getUniqueId());
+		
+		return invitee;
 	}
 	
 	public Invitee mapRowToInvitee(SqlRowSet rs) {
@@ -42,7 +54,7 @@ public class InviteeSqlDAO implements InviteeDAO{
 		
 		invitee.setInviteId(rs.getInt("invite_id"));
 		invitee.setUniqueId(rs.getString("unique_id"));
-		invitee.setUserId(rs.getInt("user_id"));
+		invitee.setUserId(rs.getInt("invitee_user_id"));
 		invitee.setFirstName(rs.getString("first_name"));
 		invitee.setLastName(rs.getString("last_name"));
 		invitee.setEmail(rs.getString("email"));

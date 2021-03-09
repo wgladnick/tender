@@ -77,17 +77,17 @@ CREATE TABLE IF NOT EXISTS invitation (
 CREATE TABLE IF NOT EXISTS invitee_details (
     invite_id INTEGER,
     unique_id VARCHAR NOT NULL,
-    user_id INTEGER NOT NULL,
+    invitee_user_id INTEGER,
     first_name VARCHAR NOT NULL,
     last_name VARCHAR NOT NULL,
     email VARCHAR NOT NULL,
-    has_voted BOOLEAN,
+    has_voted BOOLEAN DEFAULT false,
     is_attending VARCHAR DEFAULT 'Pending',
                 
     CONSTRAINT fk_invite FOREIGN KEY(invite_id) REFERENCES invitation (invite_id)
 );
                 
-CREATE TABLE IF NOT EXISTS invitation_votes (
+CREATE TABLE IF NOT EXISTS invitation_restaurant (
      invite_id INTEGER,
      yelp_id VARCHAR NOT NULL,
      thumbs_up INTEGER,
