@@ -111,7 +111,8 @@ public class UserSqlDAO implements UserDAO {
 		user.setLastName(rs.getString("last_name"));
 		user.setEmail(rs.getString("email"));
 		UserDetails userDetails = new UserDetails();
-		userDetails =
+		userDetails = userDetailsDAO.getDetails(user.getId());
+		user.setUserDetails(userDetails);
 		return user;
 	}
 }
