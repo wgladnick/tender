@@ -6,6 +6,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import com.techelevator.model.invitation.Invitee;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -18,15 +20,17 @@ public class InviteeSqlDAO implements InviteeDAO{
 	}
 
 	@Override
-	public Invitee getInviteeById(Long inviteId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Invitee> getInviteeById(Long inviteId) {
+		List<Invitee> invitees = new ArrayList<>();
+	 String sql = "SELECT * FROM invitee_details WHERE invite_id = ?";
+	
+	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, inviteId);
+	
+	while(results.next()) {
+		Invitee invitee = mapRowToInvitee(results);
+		invitees.add(invitee);
 	}
-
-	@Override
-	public Invitee[] findInviteeByUserId(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	return invitees;
 	}
 
 	@Override
