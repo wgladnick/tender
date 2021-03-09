@@ -1,8 +1,10 @@
 START TRANSACTION;
 
+
 DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS user_categories;
 DROP TABLE IF EXISTS food_categories;
+DROP TABLE IF EXISTS invitation_votes;
 DROP TABLE IF EXISTS invitation_restaurant;
 DROP TABLE IF EXISTS invitee_details;
 DROP TABLE IF EXISTS invitation;
