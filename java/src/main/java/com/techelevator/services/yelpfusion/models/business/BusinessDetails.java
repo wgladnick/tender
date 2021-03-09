@@ -1,5 +1,6 @@
 package com.techelevator.services.yelpfusion.models.business;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BusinessDetails {
@@ -168,5 +169,29 @@ public class BusinessDetails {
 
     public void setHours(Hours[] hours) {
         this.hours = hours;
+    }
+
+    @Override
+    public String toString() {
+        return "BusinessDetails{" +
+                "id='" + id + '\'' +
+                ", alias='" + alias + '\'' +
+                ", name='" + name + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", is_closed='" + is_closed + '\'' +
+                ", url='" + url + '\'' +
+                ", review_count=" + review_count +
+                ", categories=" + Arrays.toString(categories) +
+                ", rating=" + rating +
+                ", location=" + location +
+                ", transactions=" + Arrays.toString(transactions) +
+                ", price='" + price + '\'' +
+                ", coordinates=" + coordinates +
+                ", phone='" + phone + '\'' +
+                ", display_phone='" + display_phone + '\'' +
+                ", distance=" + distance +
+                ", photos=" + photos +
+                ", hours=" + Arrays.toString(hours) +
+                '}';
     }
 }
