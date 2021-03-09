@@ -1,7 +1,7 @@
 package com.techelevator.model.invitation;
 
 public class Invitee {
-	private int inviteId;
+	private long inviteId;
 	private String uniqueId;
 	private int userId;
 	private String firstName;
@@ -14,11 +14,11 @@ public class Invitee {
 		
 	}
 
-	public int getInviteId() {
+	public long getInviteId() {
 		return inviteId;
 	}
 
-	public void setInviteId(int inviteId) {
+	public void setInviteId(long inviteId) {
 		this.inviteId = inviteId;
 	}
 

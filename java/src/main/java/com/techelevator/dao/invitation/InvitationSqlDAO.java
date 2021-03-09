@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.invitation.Invitee;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -14,9 +15,11 @@ import com.techelevator.model.invitation.Invitation;
 public class InvitationSqlDAO implements InvitationDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	private InviteeDAO inviteeDAO;
 
-	public InvitationSqlDAO(JdbcTemplate jdbcTemplate) {
+	public InvitationSqlDAO(JdbcTemplate jdbcTemplate, InviteeDAO inviteeDAO) {
 		this.jdbcTemplate = jdbcTemplate;
+		this.inviteeDAO = inviteeDAO;
 	}
 
 	@Override
@@ -46,6 +49,7 @@ public class InvitationSqlDAO implements InvitationDAO {
 		if (results.next()) {
 			Long invite_id = results.getLong("invite_id");
 			invitation.setInviteId(invite_id);
+			invitation = makeInviteeList(invitation);
 			return invitation;
 		} else {
 			throw new RuntimeException("Unable to create your invitation");
@@ -65,7 +69,24 @@ public class InvitationSqlDAO implements InvitationDAO {
 			invite.setDeadline(deadline);
 		}
 		invite.setReservationDate(rs.getString("reservation_date_time"));
+
+
+		//todo call invitee and restaurant daos to get what we need to build a full invite list.
 		return invite;
 
+	}
+
+	private Invitation makeInviteeList(Invitation invitation) {
+		long inviteId = invitation.getInviteId();
+		List<Invitee> suppliedInvitees = invitation.getInvitees();
+		List<Invitee> invitees = new ArrayList<>();
+
+		for (Invitee invitee : suppliedInvitees) {
+			Invitee newInvitee = inviteeDAO.createInvitee(invitee);
+			newInvitee.setInviteId(inviteId);
+			invitees.add(newInvitee);
+		}
+		invitation.setInvitees(invitees);
+		return invitation;
 	}
 }
