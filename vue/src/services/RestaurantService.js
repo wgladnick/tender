@@ -15,9 +15,16 @@ export default {
             }
         });
     },
-
-    
     getTheRestaurant(id) {
         return axios.get(`/restaurant/${id}`);
+    },
+    getRestaurantByCategory(category) {
+        return axios.get('/category', {
+            params: {
+                address: location,
+                radius: 1000,
+                category: category
+            }
+        })
     }
 }

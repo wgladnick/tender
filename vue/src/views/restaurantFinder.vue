@@ -1,12 +1,12 @@
 <template>
-  <restaurant-finder/>
+  <restaurant-search/>
 </template>
 
 <script>
-import RestaurantFinder from '../components/RestaurantFinder';
+import RestaurantSearch from '../components/RestaurantSearch';
 export default {
     components: {
-        RestaurantFinder
+        RestaurantSearch
     }
 };
 </script>
