@@ -14,7 +14,10 @@
 
       <!-- First Name -->
       <b-field label="First Name">
-        <b-input v-model="user.firstName" required></b-input>
+        <b-input v-model="user.firstName" 
+        required
+        autofocus></b-input>
+          
       </b-field>
 
       <b-field label="Last Name">
@@ -43,7 +46,6 @@
           maxlength="15"
           v-model="user.username"
           required
-          autofocus
         ></b-input>
       </b-field>
 
@@ -56,6 +58,7 @@
           type="password"
           placeholder="password"
           v-model="user.password"
+          v-on:blur="checkPassword"
           password-reveal
           required
         >
@@ -70,7 +73,7 @@
           type="password"
           placeholder="Password reveal input"
           v-model="user.confirmPassword"
-          v-on:focus="checkPassword"
+          
           password-reveal
           required
         >
