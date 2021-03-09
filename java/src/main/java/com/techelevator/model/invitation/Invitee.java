@@ -9,8 +9,7 @@ public class Invitee {
 	private String email;
 	private Boolean hasVoted;
 	private String isAttending;
-	private String preferenceCategories;
-	
+
 	public Invitee() {
 		
 	}
@@ -78,12 +77,5 @@ public class Invitee {
 	public void setIsAttending(String isAttending) {
 		this.isAttending = isAttending;
 	}
-
-	public String getPreferenceCategories() {
-		return preferenceCategories;
-	}
-
-	public void setPreferenceCategories(String preferenceCategories) {
-		this.preferenceCategories = preferenceCategories;
-	}
+	
 }

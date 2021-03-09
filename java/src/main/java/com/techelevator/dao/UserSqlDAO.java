@@ -100,6 +100,7 @@ public class UserSqlDAO implements UserDAO {
 		}, keyHolder) == 1;
 		int newUserId = (int) keyHolder.getKeys().get(id_column);
 
+		userDetailsDAO.create(newUserId);
 		return userCreated;
 	}
 

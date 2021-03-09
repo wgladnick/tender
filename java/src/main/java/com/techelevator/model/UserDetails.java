@@ -3,14 +3,25 @@ package com.techelevator.model;
 import java.util.List;
 
 public class UserDetails {
+    private long userId;
     private String address;
     private String city;
     private String state;
     private int zip;
     private int default_radius;
+    private List<Integer> removeCategoryId;
+    private List<Integer> activeCategoryId;
     private String searchCategories;
 
     public UserDetails() {
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getAddress() {
@@ -53,6 +64,22 @@ public class UserDetails {
         this.default_radius = default_radius;
     }
 
+    public List<Integer> getRemoveCategoryId() {
+        return removeCategoryId;
+    }
+
+    public void setRemoveCategoryId(List<Integer> removeCategoryId) {
+        this.removeCategoryId = removeCategoryId;
+    }
+
+    public List<Integer> getActiveCategoryId() {
+        return activeCategoryId;
+    }
+
+    public void setActiveCategoryId(List<Integer> activeCategoryId) {
+        this.activeCategoryId = activeCategoryId;
+    }
+
     public String getSearchCategories() {
         return searchCategories;
     }
@@ -60,4 +87,5 @@ public class UserDetails {
     public void setSearchCategories(String searchCategories) {
         this.searchCategories = searchCategories;
     }
+
 }

@@ -26,27 +26,78 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         if (results.next()) {
             return mapRowToUserDetails(results);
         } else {
-            throw new RuntimeException("userId " + userId + " was not found.");
+            return new UserDetails();
         }
     }
 
     @Override
-    public UserDetails updateDetails(UserDetails userDetails) {
-    	UserDetails userdetails = new UserDetails();
-    	userdetails.setAddress("address");
-    	userdetails.setCity("city");
-    	userdetails.setDefault_radius(7);
-    	userdetails.setSearchCategories("mexican");
-    	userdetails.setState("DE");
-    	userdetails.setZip(19806);
-        return userdetails;
+    public UserDetails updateDetails(UserDetails uD) {
+        String sql = "UPDATE users_details SET " +
+                "SET address = ?, city = ?, state = ?, zip = ?, default_radius = ?" +
+                "WHERE user_id = ?";
+        jdbcTemplate.update(sql, uD.getAddress(), uD.getCity(),
+                uD.getState(),uD.getZip(), uD.getDefault_radius(), uD.getUserId());
+
+        uD = this.removeCategories(uD);
+        uD = this.addCategories(uD);
+        uD = this.setActiveCategories(uD);
+
+        return uD;
     }
 
+    @Override
+    public void create(long userId) {
+        String sql = "INSERT INTO user_details (user_id) " +
+                "VALUES (?) RETURNING user_id";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+    }
+
+    @Override
+    public UserDetails addCategories(UserDetails userDetails) {
+        String sql = "INSERT INTO user_categories (user_id, category_id) VALUES (?,?)";
+        List<Integer> newCategories = userDetails.getActiveCategoryId();
+        for (int categoryId : newCategories) {
+            jdbcTemplate.update(sql, userDetails.getUserId(), categoryId);
+        }
+
+        return userDetails;
+    }
+
+    @Override
+    public UserDetails removeCategories(UserDetails userDetails) {
+
+        String sql = "DELETE FROM user_categories WHERE user_id = ?";
+        List<Integer> newCategories = userDetails.getRemoveCategoryId();
+        for (int categoryId : newCategories) {
+            jdbcTemplate.update(sql, userDetails.getUserId(), categoryId);
+        }
+
+        userDetails.setRemoveCategoryId(null);
+        return userDetails;
+    }
+
+    @Override
+    public UserDetails setActiveCategories(UserDetails userDetails) {
+        List<Integer> activeCategories = new ArrayList<>();
+        String sql = "SELECT category_id FROM food_categories " +
+                "JOIN user_categories ON food_categories.category_id = user_categories.category_id " +
+                "WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userDetails.getUserId());
+
+        while (results.next()) {
+            activeCategories.add(results.getInt("category_id"));
+        }
+
+        userDetails.setActiveCategoryId(activeCategories);
+
+        return userDetails;
+    }
 
 
     private UserDetails mapRowToUserDetails(SqlRowSet results) {
         UserDetails userDetails = new UserDetails();
-
+        userDetails.setUserId(results.getLong("user_id"));
         userDetails.setAddress(results.getString("address"));
         userDetails.setCity(results.getString("city"));
         userDetails.setState(results.getString("state"));
