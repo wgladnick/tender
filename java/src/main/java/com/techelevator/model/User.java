@@ -18,9 +18,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	
-	
-	
+	private UserDetails userDetails;
 
 	public User() {
 	}
@@ -104,6 +102,14 @@ public class User {
 			String authority = role.contains("ROLE_") ? role : "ROLE_" + role;
 			this.authorities.add(new Authority(authority));
 		}
+	}
+
+	public UserDetails getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 
 	@Override

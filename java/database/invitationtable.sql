@@ -44,6 +44,8 @@ CREATE TABLE IF NOT EXISTS user_categories (
     category_id INTEGER
 );
 
+INSERT INTO user_categories (user_id, category_id) VALUES
+(1,1),(1,5),(1,8),(1,21);
 
 CREATE TABLE IF NOT EXISTS food_categories (
     category_id SERIAL PRIMARY KEY,
