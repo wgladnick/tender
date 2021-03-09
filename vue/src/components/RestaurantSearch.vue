@@ -1,5 +1,6 @@
 <template>
   <div class ="search-container">
+    
     <div class="loading-gif" v-if="isLoading">
       <img src="../assets/loading.gif" />
     </div>
