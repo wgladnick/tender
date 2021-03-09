@@ -1,17 +1,16 @@
 <template>
   <section id="main">
-    <div id="left-panel">
+   
       <div id="login-container">
-      
-        
-      <div class="left-header">
-        <h1>Dinner with friends just got yummy</h1>
+
+      <div class="headingText">
+        <h1>Food with friends just got yummy</h1>
         <p>mmm.. food.</p>
       </div>
 
       <login-form />
     </div>
-    </div>
+  
 
     
   </section>
@@ -38,47 +37,38 @@ h1{
 }
 #main {
   display: flex;
-  background-image: url("../assets/tinderbackground.png");
+  background-image: url("../assets/tinderbackground.jpg");
+  background-size:cover;
   height:90vh;
   justify-content:center;
 }
-
-
-#left-panel
-{
-  width: 50%;
- 
-}
-
 
 
 .img {
   width: 50px;
 }
 
-#left-panel {
+#login-container {
   display: flex;
   flex-direction: column;
   justify-self: center;
-  background-color:white;
-  height:65vh;
+  height:70vh;
   align-self:center;
-  padding-top:75px;
+  background-color:white;
+  padding: 75px;
+  
   
 }
 
 
-.left-header {
+.headingText {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom:50px;
 }
 
-#right-panel {
-  
-  background-size: cover;
-  height:100vh;
-}
+
 </style>
 
 

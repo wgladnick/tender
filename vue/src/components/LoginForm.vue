@@ -1,14 +1,14 @@
 <template>
   <!-- Container -->
-  <div id="login-container" class="text-center">
+  <div>
     <!-- Login Form -->
     <form class="form-signin" v-on:submit.prevent="login">
       <!--Heading -->
-      <h1 class="h3 mb-3 font-weight-normal">LOGIN</h1>
+      <h1 class="h3 mb-3 font-weight-normal">SIGN IN</h1>
 
       <!-- Danger Alert when credentials are invalid -->
-      <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
-        Invalid username and password!
+      <div class="alert" role="alert" v-if="invalidCredentials">
+        Invalid username and password
       </div>
 
       <!-- Success Alert when registration in successful -->
@@ -51,7 +51,7 @@
       >
 
       <!-- Submit button -->
-      <b-button type="submit" v-on:click="login" focused>Sign In</b-button>
+      <button type="submit">SIGN IN</button>
     </form>
   </div>
 </template>
@@ -99,6 +99,31 @@ export default {
 };
 </script>
 <style scoped>
+
+.alert {
+  color: red;
+  padding-bottom: 10px;
+  font-weight: 500;
+}
+h1 {
+  font-weight: 700;
+  font-size: 1em;
+}
+button {
+  background-color: #dc6b67;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 30px;
+}
 #login-container {
   display: flex;
   justify-content: center;
@@ -107,9 +132,6 @@ export default {
 .form-signin {
   display: flex;
   flex-direction: column;
-  align-self: center;
-  width:75%;
-  
 }
 
 #need-account {
