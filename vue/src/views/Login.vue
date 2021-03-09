@@ -23,7 +23,7 @@ export default {
   name: "login",
   components: { LoginForm },
   data() {
-    
+   return{} 
   },
   methods: {},
 };
