@@ -37,7 +37,7 @@
       read-only="true"
       increment="0.01"
       :show-rating="false"
-    ></star-rating>
+    />
     {{restaurant.review_count}} reviews
 </div>
 
