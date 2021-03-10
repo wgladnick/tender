@@ -27,7 +27,7 @@
     <b-button size="is-small"
       rounded
       v-for="transaction in restaurant.transactions"
-      v-bind:key="transaction.title"
+      v-bind:key="transaction.label"
       >{{ transaction.label }}</b-button
     >
 

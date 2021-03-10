@@ -7,15 +7,22 @@
         read-only="true"
         increment="0.01"
         :show-rating="false"
+        :inline="true"
       />
       {{ restaurant.review_count }} reviews
     </div>
-    <b-button size="is-small"
-      rounded
-    v-for="ctg in restaurant.categories" 
-    v-bind:key="ctg.title" >
-      {{ ctg.title }}
-    </b-button>
+    <div>
+      <span>{{ restaurant.price }} </span>
+      <b-button
+        size="is-small"
+        rounded
+        v-for="ctg in restaurant.categories"
+        v-bind:key="ctg.title"
+      >
+
+        {{ ctg.title }}
+      </b-button>
+    </div>
     <p
       v-for="ln in restaurant.location.display_address"
       v-bind:key="ln.display_address"
