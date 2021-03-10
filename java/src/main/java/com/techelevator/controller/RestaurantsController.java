@@ -44,7 +44,7 @@ public class RestaurantsController {
     
     @RequestMapping(value = "/category", method = RequestMethod.GET)
     public Businesses[] getBusinessesByCategory(@RequestParam(defaultValue = "") String address,
-                                                        @RequestParam(defaultValue = "5000") int radius,
+                                                        @RequestParam(defaultValue = "16100") int radius,
                                                         @RequestParam(defaultValue="restaurants") String category) {
         return yelpFusion.getBusinessesByCategory(address, radius, category);
 

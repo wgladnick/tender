@@ -82,8 +82,10 @@ public class YelpFusion {
 
     public Businesses[] filterBusinessByCategory(String address, int radius, int[] categoryList) {
         BusinessesWrapper resultList = null;
-
-        String yelpSearchCategory= this.getYelpCategories(categoryList);
+        String yelpSearchCategory = "";
+        if (categoryList.length == 0) {
+            yelpSearchCategory = this.getYelpCategories(categoryList);
+        }
 
         String endpointURL = "https://api.yelp.com/v3/businesses/search?categories=restaurants&location=\""
                 + address + "\"&radius=" + radius;
