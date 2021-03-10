@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/restaurant")
 public class RestaurantsController {
 
-    private YelpFusion yelpFusion = new YelpFusion();
+    private YelpFusion yelpFusion;
+
+    public RestaurantsController(YelpFusion yelpFusion) {
+        this.yelpFusion = yelpFusion;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public Businesses[] getBusinessesByLocation(@RequestParam(defaultValue = "") String address,
@@ -43,6 +47,14 @@ public class RestaurantsController {
                                                         @RequestParam(defaultValue = "5000") int radius,
                                                         @RequestParam(defaultValue="restaurants") String category) {
         return yelpFusion.getBusinessesByCategory(address, radius, category);
+
+    }
+
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public Businesses[] filterBusinessByCategory(@RequestParam(defaultValue = "") String address,
+                                                @RequestParam(defaultValue = "16100") int radius,
+                                                @RequestParam(defaultValue="") int[] categories) {
+        return yelpFusion.filterBusinessByCategory(address, radius, categories);
 
     }
     

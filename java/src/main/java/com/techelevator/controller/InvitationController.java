@@ -70,13 +70,13 @@ public class InvitationController {
 	
 	
 	@RequestMapping(value = "/thumbsup", method = RequestMethod.PUT)
-	public InviteRestaurants voteThumbsUp(@PathVariable InviteRestaurants inviterestaurants) {
+	public InviteRestaurants voteThumbsUp(@RequestBody InviteRestaurants inviterestaurants) {
 		return inviteRestaurantsDAO.voteThumbsUp(inviterestaurants);
 	}
 	
 	
 	@RequestMapping(value = "/thumbsdown", method = RequestMethod.PUT)
-	public InviteRestaurants voteThumbsDown(@PathVariable InviteRestaurants inviterestaurants) {
+	public InviteRestaurants voteThumbsDown(@RequestBody InviteRestaurants inviterestaurants) {
 		return inviteRestaurantsDAO.voteThumbsDown(inviterestaurants);
 	}
 	
