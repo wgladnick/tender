@@ -83,7 +83,7 @@ public class YelpFusion {
     public Businesses[] filterBusinessByCategory(String address, int radius, int[] categoryList) {
         BusinessesWrapper resultList = null;
         String yelpSearchCategory = "";
-        if (categoryList.length == 0) {
+        if (categoryList.length > 0) {
             yelpSearchCategory = this.getYelpCategories(categoryList);
         }
 
