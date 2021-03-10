@@ -1,23 +1,26 @@
 <template>
   <div class="app">
-    <div class="header">
-      <div class="logo">
-        <img src="../src/assets/tender.png" />
-      </div>
-
-      <div id="nav">
-        <router-link v-bind:to="{ name: 'restaurantFinder' }">Home</router-link
-        >&nbsp;|&nbsp;
-        <router-link
-          v-bind:to="{ name: 'logout' }"
-          v-if="$store.state.token != ''"
-          >Logout</router-link
-        >
-      </div>
-    </div>
+    
+    <top-nav 
+    v-if="$route.name!=='login' && $route.name!=='register'"
+    />
+    
     <router-view />
   </div>
 </template>
+
+<script>
+
+import TopNav from './components/TopNav.vue'
+
+export default {
+
+components: {
+  TopNav
+},
+}
+</script>
+
 
 <style>
 
