@@ -42,11 +42,21 @@ export default {
     },
     searchByLocation() {
       this.restaurants = [];
+      this.isLoading = true;
       RestaurantService.getRestaurants(this.location)
         .then((response) => {
           this.restaurants = response.data;
-          //this.$router.push("/") This is where we populate restaurant cards
+
+         // this controls loading gif 
+          if (this.restaurants.length === 0) {
+            this.isLoading = true;
+          } else {
+            this.isLoading = false;
+          }
+
+          
         })
+
         .catch((error) => {
           const response = error.response;
 
@@ -55,12 +65,7 @@ export default {
           }
         });
       console.log(this.restaurants);
-
-      if (this.restaurants.length === 0) {
-        this.isLoading = true;
-      } else {
-        this.isLoading = false;
-      }
+      //Display a message if no restaurants are returned
     },
   },
 };
@@ -69,6 +74,4 @@ export default {
 .search-bar {
   background-color: #fdf2f2;
 }
-
-
 </style>

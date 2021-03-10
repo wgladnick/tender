@@ -1,73 +1,61 @@
  <template>
-     <section>   
+  <section>
     <div class="loading-gif" v-if="isLoading">
       <img src="../assets/loading.gif" />
     </div>
 
-      <div v-if="!isLoading" class ="result-list">
-        <restaurant-card
-          v-for="restaurant in restaurants"
-          v-bind:key="restaurant.id"
-          v-bind:restaurant="restaurant"
-          class="card"
-        />
-      </div>
-      </section>
-  
+    <div v-if="!isLoading" class="result-list">
+      <restaurant-card
+        v-for="restaurant in restaurants"
+        v-bind:key="restaurant.id"
+        v-bind:restaurant="restaurant"
+        class="card"
+      />
+    </div>
+  </section>
 </template>
 <script>
 import RestaurantCard from "../components/RestaurantCard";
 export default {
   name: "restaurant-list",
-  components: { RestaurantCard},
+  components: { RestaurantCard },
 
-  props:["location","restaurants","isLoading"],
+  props: ["restaurants", "isLoading"],
 
   data() {
-    return {
-      
-     
-      isResultLoaded: false,
-      
-      
-    };
+    return {};
   },
   computed: {},
-  methods: {
-  }
+  methods: {},
 };
 </script>
 <style scoped>
-
-
-
+section {
+  height: 100%;
+}
 
 .loading-gif {
-  display:flex;
-  justify-content:center;
-  height:100vh;
-
-}
-
-.loading-gif img{
-  width:400px;
-  height:400px;
-  object-fit: contain;
-
-}
-
-.result-list{
-  display:flex;
-  flex-direction:column;
+  display: flex;
   justify-content: center;
-  align-items:center;
-}
-.card{
-  width:60%;
-  margin-top:25px;
-  margin-bottom:25px;
-  padding:50px;
+  height: 80vh;
 }
 
+.loading-gif img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+}
 
+.result-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  width: 60%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 50px;
+}
 </style>
