@@ -18,6 +18,9 @@ public class Businesses {
     private String phone;
     private String display_phone;
     private double distance;
+    private boolean pickup;
+    private boolean delivery;
+    private boolean takesReservations;
 
     public Businesses() {
     }
@@ -150,5 +153,46 @@ public class Businesses {
         this.distance = distance;
     }
 
+    public boolean isPickup() {
+        return pickup;
+    }
 
+    public void setPickup(boolean pickup) {
+        for (Transactions transaction : transactions) {
+            if(transaction.getType() == "pickup") {
+                this.pickup = true;
+            } else {
+                this.pickup = false;
+            }
+        }
+
+    }
+
+    public boolean isDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(boolean delivery) {
+        for (Transactions transaction : transactions) {
+            if(transaction.getType() == "delivery") {
+                this.delivery = true;
+            } else {
+                this.delivery = false;
+            }
+        }
+    }
+
+    public boolean isTakesReservations() {
+        return takesReservations;
+    }
+
+    public void setTakesReservations(boolean takesReservations) {
+        for (Transactions transaction : transactions) {
+            if(transaction.getType() == "restaurant_reservation") {
+                this.takesReservations = true;
+            } else {
+                this.takesReservations = false;
+            }
+        }
+    }
 }

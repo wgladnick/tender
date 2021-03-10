@@ -10,6 +10,7 @@ public class Transactions {
     private String label;
 
     public Transactions(String transactions) {
+
         this.type = transactions;
         this.label = createLabel(this.type);
     }
@@ -19,6 +20,7 @@ public class Transactions {
     }
 
     public void setType(String type) {
+
         this.type = type;
     }
 
@@ -37,7 +39,4 @@ public class Transactions {
                 .trim();
 
     }
-
-
-
 }

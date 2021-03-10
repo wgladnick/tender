@@ -15,6 +15,8 @@
       <span v-else>Currently Open</span>
     </b-button>
     </p>
+
+    
     <br />
     <b-button
     size="is-small"
@@ -30,7 +32,24 @@
       v-bind:key="transaction.label"
       >{{ transaction.label }}</b-button
     >
-
+      <b-button size="is-small"
+      >
+      <i class="fas fa-check"
+      v-if="restaurant.transactions[0].transactions.toString().includes('pickup')"></i>
+      <i class="fas fa-times"
+      v-if="restaurant.transactions[0].transactions.toString().includes('pickup')"></i>
+      Takeout</b-button
+    >
+     <b-button size="is-small"
+      >
+       <i class="fas fa-check"
+      v-if="restaurant.transactions[1].transactions.toString().includes('delivery')"></i>
+      <i class="fas fa-times"
+      v-if="restaurant.transactions[1].transactions.toString().includes('delivery')"></i>
+      Delivery</b-button
+    >
+   
+{{ restaurant.transactions[0].transactions }}
 <div>
     <star-rating
       :rating="restaurant.rating"
@@ -49,12 +68,19 @@
         {{ line }}
         <br />
       </span>
+      <a :href="`https://www.google.com/maps/dir/19801/${ restaurant.location.display_address.toString().split(' ').join('+')}/`" target="_blank">
+      <b-button rounded size="is-small">
+          <i class="fas fa-route"></i>
+Get Directions</b-button>
+      </a>
       <p>{{ restaurant.display_phone }}</p>
       <a :href="`tel:${restaurant.phone}`">
       <b-button rounded size="is-small">
           <i class="fas fa-phone-alt"></i>
 Call to order</b-button>
       </a>
+
+
       <p>Hours:</p>
       <p v-for="hours in restaurant.hours"
       v-bind:key="hours.hours_type">
@@ -87,6 +113,7 @@ export default {
     return {
       restaurant: {},
       isLoading: true,
+      directionsAddress: [],
     };
   },
   created() {
@@ -96,6 +123,8 @@ export default {
         this.isLoading = false;
       }
     );
+
+
   },
 };
 </script>
