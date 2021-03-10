@@ -50,7 +50,7 @@ public class RestaurantsController {
 
     } **/
 
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Businesses[] filterBusinessByCategory(@RequestParam(defaultValue = "") String address,
                                                 @RequestParam(defaultValue = "16100") int radius,
                                                 @RequestParam(defaultValue="") int[] categories) {
