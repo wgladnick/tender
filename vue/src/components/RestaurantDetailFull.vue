@@ -1,10 +1,11 @@
 <template>
   <div>
     <h1>{{ restaurant.name }}</h1>
-    {{restaurant.hours.is_open_now}}
+    <p>Price: {{restaurant.price}}</p>
+
     <p v-for="hours in restaurant.hours"
       v-bind:key="hours.hours_type">
-    <b-button
+    <b-button 
       v-bind:type="{
         'is-danger': !hours.is_open_now,
         'is-success': hours.is_open_now
@@ -16,26 +17,30 @@
     </p>
     <br />
     <b-button
+    size="is-small"
       rounded
       v-for="category in restaurant.categories"
       v-bind:key="category.title"
       >{{ category.title }}</b-button
     >
     <br>
-    <b-button
+    <b-button size="is-small"
       rounded
       v-for="transaction in restaurant.transactions"
       v-bind:key="transaction.title"
       >{{ transaction.label }}</b-button
     >
 
-
+<div>
     <star-rating
       :rating="restaurant.rating"
       read-only="true"
       increment="0.01"
-      show-rating="false"
+      :show-rating="false"
     ></star-rating>
+    {{restaurant.review_count}} reviews
+</div>
+
     <div>
       <span
         v-for="line in restaurant.location.display_address"
@@ -46,7 +51,9 @@
       </span>
       <p>{{ restaurant.display_phone }}</p>
       <a :href="`tel:${restaurant.phone}`">
-      <b-button rounded>Call to order</b-button>
+      <b-button rounded size="is-small">
+          <i class="fas fa-phone-alt"></i>
+Call to order</b-button>
       </a>
       <p>Hours:</p>
       <p v-for="hours in restaurant.hours"
