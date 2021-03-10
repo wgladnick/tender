@@ -1,38 +1,46 @@
 <template>
   <div>
-
-     <h1>{{restaurant.name}}</h1>
-     <star-rating  />
-     <p v-for="ctg in restaurant.categories" 
-        v-bind:key="ctg.title">{{ctg.title}}</p>
-     <p v-for="ln in restaurant.location.display_address" v-bind:key="ln.display_address">
-       {{ln}}
-       </p>
-     <img :src="restaurant.image_url" class="yelp-image" />
-     
+    <h1>{{ restaurant.name }}</h1>
+    <div>
+      <star-rating
+        :rating="restaurant.rating"
+        read-only="true"
+        increment="0.01"
+        :show-rating="false"
+      />
+      {{ restaurant.review_count }} reviews
+    </div>
+    <b-button size="is-small"
+      rounded
+    v-for="ctg in restaurant.categories" 
+    v-bind:key="ctg.title" >
+      {{ ctg.title }}
+    </b-button>
+    <p
+      v-for="ln in restaurant.location.display_address"
+      v-bind:key="ln.display_address"
+    >
+      {{ ln }}
+    </p>
+    <img :src="restaurant.image_url" class="yelp-image" />
   </div>
 </template>
 
 <script>
 import StarRating from "vue-star-rating";
 export default {
-
- name: 'restaurant-card',
+  name: "restaurant-card",
   components: {
-    StarRating
+    StarRating,
   },
-  props: ["restaurant"]
-
-
-}
+  props: ["restaurant"],
+};
 </script>
 
 <style>
-
 .yelp-image {
-  width:300px;
-  height:300px;
-  object-fit:cover;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
 }
-
 </style>
