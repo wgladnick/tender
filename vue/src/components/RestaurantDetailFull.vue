@@ -40,11 +40,22 @@
         {{ line }}
         <br />
       </span>
-      
-      <br />
+      <p>{{ restaurant.display_phone }}</p>
       <a :href="`tel:${restaurant.phone}`">
       <b-button rounded>Call to order</b-button>
       </a>
+      <p>Hours:</p>
+      <p v-for="open in restaurant.hours.open"
+      v-bind:key="open.day">
+      <span v-if="open.day === 6">Sunday: {{open.start}} - {{open.end}}</span> 
+      <span v-if="open.day === 0">Monday: {{open.start}} - {{open.end}}</span> 
+      <span v-if="open.day === 1">Tuesday: {{open.start}} - {{open.end}}</span> 
+      <span v-if="open.day === 2">Wednesday: {{open.start}} - {{open.end}}</span> 
+      <span v-if="open.day === 3">Thursday: {{open.start}} - {{open.end}}</span> 
+      <span v-if="open.day === 4">Friday: {{open.start}} - {{open.end}}</span> 
+      <span v-if="open.day === 5">Saturday: {{open.start}} - {{open.end}}</span> 
+      
+      </p>
     </div>
     <img v-bind:src="restaurant.image_url" width="150px" />
   </div>
