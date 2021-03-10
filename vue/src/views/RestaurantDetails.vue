@@ -1,13 +1,13 @@
 <template>
 <div>
-  <restaurant-detail-full />
+  <restaurant-detail />
   </div>
 </template>
 
 <script>
-import RestaurantDetailFull from '../components/RestaurantDetailFull.vue'
+import RestaurantDetail from '../components/RestaurantDetail.vue'
 export default {
-  components: { RestaurantDetailFull },
+  components: { RestaurantDetail },
 
 }
 </script>
