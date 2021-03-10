@@ -15,15 +15,17 @@
         >
       </div>
     </div>
-    <router-view v-bind:key="$route.fullPath" />
+    <router-view />
   </div>
 </template>
 
-<style scoped>
+<style>
+
 .header {
   display: flex;
   justify-content: space-between;
   padding: 15px;
+  background-color:white;
 }
 #nav {
   padding-right: 200px;
@@ -31,5 +33,9 @@
 .logo {
   padding-left: 50px;
 }
+  .app {
+    background-color:#fdf2f2;
+    height:100%;
+  }
 </style>
 
