@@ -1,7 +1,7 @@
 <template>
 <main class="main">
   <restaurant-search/>
-  <restaurant-list/>
+  <restaurant-list/> -->
   </main>
 
 </template>
@@ -14,7 +14,7 @@ export default {
     name:"restaurant-finder",
     components: {
         RestaurantSearch,
-        RestaurantList
+       RestaurantList
         
     }
 };
