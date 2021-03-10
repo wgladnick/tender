@@ -7,11 +7,12 @@ export default {
     list() {
         return axios.get('/restaurant');
     },
-    getRestaurants(location) {
+    getRestaurants(location,radius,categories) {
         return axios.get('/restaurant/', {
             params: {
                 address: location,
-                radius: 1000
+                radius: radius,
+                categories: categories 
             }
         });
     },
@@ -26,5 +27,9 @@ export default {
                 category: category
             }
         })
+    },
+
+    getAvailableCategories(){
+        return axios.get('/categories');
     }
 }

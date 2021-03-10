@@ -13,6 +13,8 @@
 
       <b-button v-on:click="searchByLocation()" focused> Search </b-button>
 
+
+
       <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
       <restaurant-list v-bind:restaurants="restaurants" />
       <restaurant-list v-bind:isLoading="isLoading" />
@@ -22,6 +24,7 @@
 <script>
 import RestaurantService from "../services/RestaurantService";
 import RestaurantList from "./RestaurantList.vue";
+
 
 export default {
   name: "restaurant-search",
@@ -33,10 +36,22 @@ export default {
       location: "",
       invalidLocation: false,
       isLoading: true,
+      availCategories: []
     };
   },
-  computed: {},
+ created() {
+    this.getCategories();
+   },
+
+
   methods: {
+    getCategories(){
+      RestaurantService.getAvailableCategories()
+      .then((response) => {
+        this.availCategories = response.data;
+      });
+    },
+
     viewRestaurant(id) {
       this.$router.push(`restaurants/${id}`);
     },
