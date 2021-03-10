@@ -2,15 +2,18 @@
   <div>
     <h1>{{ restaurant.name }}</h1>
     {{restaurant.hours.is_open_now}}
+    <p v-for="hours in restaurant.hours"
+      v-bind:key="hours.hours_type">
     <b-button
       v-bind:type="{
-        'is-danger': !restaurant.hours.is_open_now,
-        'is-success': !restaurant.hours.is_open_now,
+        'is-danger': !hours.is_open_now,
+        'is-success': hours.is_open_now
       }"
     >
-      <span v-if="!restaurant.hours.is_open_now">Currently Closed</span>
+      <span v-if="!hours.is_open_now">Currently Closed</span>
       <span v-else>Currently Open</span>
     </b-button>
+    </p>
     <br />
     <b-button
       rounded

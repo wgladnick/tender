@@ -3,8 +3,8 @@ package com.techelevator.services.yelpfusion.models.business;
 public class HoursOpen {
 
     private boolean is_overnight;
-    private int start;
-    private int end;
+    private String start;
+    private String end;
     private int day;
 
     public HoursOpen() {
@@ -18,20 +18,48 @@ public class HoursOpen {
         this.is_overnight = is_overnight;
     }
 
-    public int getStart() {
+    public String getStart() {
         return start;
     }
 
     public void setStart(int start) {
-        this.start = start;
+        String openTime = "";
+
+        if (start >= 1300) {
+            openTime = String.valueOf(start - 1200)  + " PM";
+        } else {
+            openTime = String.valueOf(start) + " AM";
+        }
+
+        if (openTime.length() == 7) {
+           openTime = openTime.substring(0,2) + ":" + openTime.substring(2);
+        } else {
+            openTime = openTime.substring(0,1) + ":" + openTime.substring(1);
+        }
+
+        this.start = openTime;
     }
 
-    public int getEnd() {
+    public String getEnd() {
         return end;
     }
 
     public void setEnd(int end) {
-        this.end = end;
+        String endTime = "";
+
+        if (end >= 1300) {
+            endTime = String.valueOf(end - 1200) + " PM";
+        } else {
+            endTime = String.valueOf(end) + " AM";
+        }
+
+        if (endTime.length() == 7) {
+            endTime = endTime.substring(0,2) + ":" + endTime.substring(2);
+        } else {
+            endTime = endTime.substring(0,1) + ":" + endTime.substring(1);
+        }
+
+        this.end = endTime;
     }
 
     public int getDay() {
