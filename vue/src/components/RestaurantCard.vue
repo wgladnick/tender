@@ -16,21 +16,16 @@
 <script>
 import StarRating from "vue-star-rating";
 export default {
-<<<<<<< HEAD
 
+props: ["restaurant"],
 
-=======
-<<<<<<< HEAD
-props: ["restaurant"]
-=======
->>>>>>> 9106e953230c21d44ae144a4ab973d89a48c4b5e
   name: 'restaurant-card',
   components: {
     StarRating
   },
   props: ["restaurant"]
 
->>>>>>> 2db012ccd682e33a2b727c68809001e958d4d796
+
 }
 </script>
 
