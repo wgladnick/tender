@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>{{ restaurant.name }}</h1>
+    {{restaurant.hours.is_open_now}}
     <b-button
       v-bind:type="{
         'is-danger': !restaurant.hours.is_open_now,
@@ -45,16 +46,18 @@
       <b-button rounded>Call to order</b-button>
       </a>
       <p>Hours:</p>
-      <p v-for="open in restaurant.hours.open"
+      <p v-for="hours in restaurant.hours"
+      v-bind:key="hours.hours_type">
+      <span v-for="open in hours.open"
       v-bind:key="open.day">
-      <span v-if="open.day === 6">Sunday: {{open.start}} - {{open.end}}</span> 
-      <span v-if="open.day === 0">Monday: {{open.start}} - {{open.end}}</span> 
-      <span v-if="open.day === 1">Tuesday: {{open.start}} - {{open.end}}</span> 
-      <span v-if="open.day === 2">Wednesday: {{open.start}} - {{open.end}}</span> 
-      <span v-if="open.day === 3">Thursday: {{open.start}} - {{open.end}}</span> 
-      <span v-if="open.day === 4">Friday: {{open.start}} - {{open.end}}</span> 
-      <span v-if="open.day === 5">Saturday: {{open.start}} - {{open.end}}</span> 
-      
+      <span v-if="open.day === 6">Sunday: {{open.start}} - {{open.end}}<br></span> 
+      <span v-if="open.day === 0">Monday: {{open.start}} - {{open.end}}<br></span> 
+      <span v-if="open.day === 1">Tuesday: {{open.start}} - {{open.end}}<br></span> 
+      <span v-if="open.day === 2">Wednesday: {{open.start}} - {{open.end}}<br></span> 
+      <span v-if="open.day === 3">Thursday: {{open.start}} - {{open.end}}<br></span> 
+      <span v-if="open.day === 4">Friday: {{open.start}} - {{open.end}}<br></span> 
+      <span v-if="open.day === 5">Saturday: {{open.start}} - {{open.end}}<br></span> 
+      </span>
       </p>
     </div>
     <img v-bind:src="restaurant.image_url" width="150px" />

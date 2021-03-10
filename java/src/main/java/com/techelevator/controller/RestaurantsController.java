@@ -18,14 +18,14 @@ public class RestaurantsController {
     public RestaurantsController(YelpFusion yelpFusion) {
         this.yelpFusion = yelpFusion;
     }
-
+/**
     @RequestMapping(method = RequestMethod.GET)
     public Businesses[] getBusinessesByLocation(@RequestParam(defaultValue = "") String address,
                                                         @RequestParam(defaultValue = "16100") int radius) {
         return yelpFusion.getBusinessesByLocation(address, radius);
 
     }
-
+**/
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public BusinessDetails getBusinessById(@PathVariable String id) {
@@ -41,14 +41,14 @@ public class RestaurantsController {
         return yelpFusion.getReviewsByBusinessById(id);
 
     }
-    
+    /**
     @RequestMapping(value = "/category", method = RequestMethod.GET)
     public Businesses[] getBusinessesByCategory(@RequestParam(defaultValue = "") String address,
                                                         @RequestParam(defaultValue = "16100") int radius,
                                                         @RequestParam(defaultValue="restaurants") String category) {
         return yelpFusion.getBusinessesByCategory(address, radius, category);
 
-    }
+    } **/
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
     public Businesses[] filterBusinessByCategory(@RequestParam(defaultValue = "") String address,
