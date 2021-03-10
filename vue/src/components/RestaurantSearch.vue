@@ -35,12 +35,8 @@ export default {
       restaurants: [],
       location: "",
       invalidLocation: false,
-<<<<<<< HEAD
-      isLoading: true
-=======
       isLoading: true,
       availCategories: []
->>>>>>> 3b87dd5cbd3f8232fa805273220436589a644d19
     };
   },
  created() {
