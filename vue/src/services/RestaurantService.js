@@ -7,7 +7,7 @@ export default {
     list() {
         return axios.get('/restaurant');
     },
-    getRestaurants(location) {
+    getRestaurants(location, categories) {
         return axios.get('/restaurant/', {
             params: {
                 address: location,
@@ -17,14 +17,5 @@ export default {
     },
     getTheRestaurant(id) {
         return axios.get(`/restaurant/${id}`);
-    },
-    getRestaurantByCategory(category) {
-        return axios.get('/category', {
-            params: {
-                address: location,
-                radius: 1000,
-                category: category
-            }
-        })
     }
 }

@@ -32,7 +32,7 @@ export default {
       restaurants: [],
       location: "",
       invalidLocation: false,
-      isLoading: true,
+      isLoading: true
     };
   },
   computed: {},
