@@ -17,9 +17,7 @@
 import StarRating from "vue-star-rating";
 export default {
 
-props: ["restaurant"],
-
-  name: 'restaurant-card',
+ name: 'restaurant-card',
   components: {
     StarRating
   },
