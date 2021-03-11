@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.invitation.Invitee;
+import com.techelevator.services.yelpfusion.YelpFusion;
+
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,11 +17,12 @@ import java.util.Random;
 public class InviteeSqlDAO implements InviteeDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private InviteRestaurantsDAO inviteRestaurantsDAO;
+    private YelpFusion yelpFusion;
 
-    public InviteeSqlDAO(JdbcTemplate jdbcTemplate, InviteRestaurantsDAO inviteRestaurantsDAO) {
+    public InviteeSqlDAO(JdbcTemplate jdbcTemplate, YelpFusion yelpFusion) {
         this.jdbcTemplate = jdbcTemplate;
-        this.inviteRestaurantsDAO = inviteRestaurantsDAO;
+        this.yelpFusion = yelpFusion;
+        
     }
 
     @Override
@@ -47,8 +50,14 @@ public class InviteeSqlDAO implements InviteeDAO {
             invitee = mapRowToInvitee(results);
         }
 
-        invitee.setInviteRestaurants(inviteRestaurantsDAO.getInviteRestaurantById(inviteId));
+        String sql2 = "SELECT yelp_id FROM invitation_restaurant WHERE invite_id = ?";
 
+        SqlRowSet results2 = jdbcTemplate.queryForRowSet(sql2, inviteId);
+        List<String> yelpId = new ArrayList<>();
+        while (results2.next()) {
+            yelpId.add(results2.getString("yelp_id"));
+        }
+        invitee.setBusinessDetails(yelpFusion.getBusinessDetailsById(yelpId));
         return invitee;
     }
 

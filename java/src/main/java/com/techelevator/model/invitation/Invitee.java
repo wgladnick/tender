@@ -2,6 +2,8 @@ package com.techelevator.model.invitation;
 
 import java.util.List;
 
+import com.techelevator.services.yelpfusion.models.business.BusinessDetails;
+
 public class Invitee {
 	private long inviteId;
 	private String uniqueId;
@@ -11,7 +13,7 @@ public class Invitee {
 	private String email;
 	private Boolean hasVoted;
 	private String isAttending;
-	private List<InviteRestaurants> inviteRestaurants;
+	private List<BusinessDetails> businessDetails;
 
 	public Invitee() {
 		
@@ -81,11 +83,12 @@ public class Invitee {
 		this.isAttending = isAttending;
 	}
 
-	public List<InviteRestaurants> getInviteRestaurants() {
-		return inviteRestaurants;
+	public List<BusinessDetails> getBusinessDetails() {
+		return businessDetails;
 	}
 
-	public void setInviteRestaurants(List<InviteRestaurants> inviteRestaurants) {
-		this.inviteRestaurants = inviteRestaurants;
+	public void setBusinessDetails(List<BusinessDetails> businessDetails) {
+		this.businessDetails = businessDetails;
 	}
+	
 }

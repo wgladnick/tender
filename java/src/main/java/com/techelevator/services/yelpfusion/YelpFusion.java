@@ -54,6 +54,15 @@ public class YelpFusion {
         return business;
 
     }
+    public List<BusinessDetails> getBusinessDetailsById(List<String> yelpId) {
+        List<BusinessDetails> businessDetails= new ArrayList<>();
+    	for(String id : yelpId) {
+    	String endpointURL = "https://api.yelp.com/v3/businesses/" + id;
+    	
+        businessDetails.add(restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody());
+    	}
+        return businessDetails;
+    }
 
     public Review[] getReviewsByBusinessById(String Id) {
         ReviewWrapper reviews;
