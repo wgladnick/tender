@@ -9,6 +9,34 @@
       </div>
       <div class="right-panel">
         <h1 class="title">{{ restaurant.name }}</h1>
+        <span
+            v-for="ln in restaurant.location.display_address"
+            v-bind:key="ln.display_address"
+          >
+            {{ ln }}
+          </span>
+          <a
+            :href="`https://www.google.com/maps/dir/19801/${restaurant.location.display_address
+              .toString()
+              .split(' ')
+              .join('+')}/`"
+            target="_blank"
+          >
+            <b-button rounded size="is-small">
+              <i class="fas fa-route"></i>
+              Get Directions</b-button
+            >
+          </a>
+          <br />
+          <span>{{ restaurant.display_phone }} </span>
+          <span>
+            <a :href="`tel:${restaurant.phone}`">
+              <b-button type="is-primary" rounded size="is-small">
+                <i class="fas fa-phone-alt"></i>
+                Call to order</b-button
+              >
+            </a>
+          </span>
 
         <p class="price">Price: {{ restaurant.price }}</p>
 
@@ -76,38 +104,10 @@
             :increment="0.5"
             :show-rating="false"
           />
-          {{ restaurant.review_count }} reviews
         </div>
 
         <div>
-          <span
-            v-for="ln in restaurant.location.display_address"
-            v-bind:key="ln.display_address"
-          >
-            {{ ln }}
-          </span>
-          <a
-            :href="`https://www.google.com/maps/dir/19801/${restaurant.location.display_address
-              .toString()
-              .split(' ')
-              .join('+')}/`"
-            target="_blank"
-          >
-            <b-button rounded size="is-small">
-              <i class="fas fa-route"></i>
-              Get Directions</b-button
-            >
-          </a>
-          <br />
-          <span>{{ restaurant.display_phone }} </span>
-          <span>
-            <a :href="`tel:${restaurant.phone}`">
-              <b-button type="is-primary" rounded size="is-small">
-                <i class="fas fa-phone-alt"></i>
-                Call to order</b-button
-              >
-            </a>
-          </span>
+          
 
           <p>Hours:</p>
           <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
@@ -179,6 +179,7 @@ export default {
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: center;
 }
 .yelp-image {
   width: 300px;
