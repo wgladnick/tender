@@ -27,8 +27,8 @@
     <div>
       <star-rating
         :rating="restaurant.rating"
-        read-only="true"
-        increment="0.01"
+        :read-only="true"
+        :increment="0.01"
         :show-rating="false"
         :inline="true"
       /> 
@@ -46,13 +46,31 @@
     </div>
     
     <div>
-      <b-button
-        size="is-small"
-        rounded
-        v-for="transaction in restaurant.transactions"
-        v-bind:key="transaction.label"
-        >{{ transaction.label }}</b-button
+       <b-button size="is-small"
       >
+      <i class="fas fa-check has-text-success"
+      v-if="transactionTypes.includes('pickup')"></i>
+      <i class="fas fa-times has-text-danger"
+      v-if="!transactionTypes.includes('pickup')"></i>
+      Takeout</b-button
+    >
+     <b-button size="is-small"
+      >
+       <i class="fas fa-check has-text-success"
+      v-if="transactionTypes.includes('delivery')"></i>
+      <i class="fas fa-times has-text-danger"
+      v-if="!transactionTypes.includes('delivery')"></i>
+      Delivery</b-button
+    >
+     <b-button size="is-small"
+      >
+       <i class="fas fa-check has-text-success"
+      v-if="transactionTypes.includes('restaurant_reservation')"></i>
+      <i class="fas fa-times has-text-danger"
+      v-if="!transactionTypes.includes('restaurant_reservation')"></i>
+      Reservations</b-button
+    >
+    <br>
     </div>
     
     
@@ -70,6 +88,17 @@ export default {
     StarRating,
   },
   props: ["restaurant"],
+  data() {
+    return {
+      transactionTypes: ''
+    };
+  },
+  created() {
+            for (let i = 0; i < this.restaurant.transactions.length; i++) {
+          this.transactionTypes += this.restaurant.transactions[i].transactions + " ";
+            }
+      }
+
 };
 </script>
 

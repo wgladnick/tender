@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="!isLoading">
     <h1>{{ restaurant.name }}</h1>
     <p>Price: {{restaurant.price}}</p>
 
@@ -63,7 +63,7 @@
 
     <div>
       <span
-        v-for="line in restaurant.location.display_address"
+        v-for="line in this.restaurant.location.display_address"
         v-bind:key="line"
       >
         {{ line }}
@@ -127,7 +127,6 @@ export default {
         for (let i = 0; i < this.restaurant.transactions.length; i++) {
           this.transactionTypes += this.restaurant.transactions[i].transactions + " ";
         }
-       
       }
     );
   },
