@@ -9,6 +9,13 @@
       </div>
       <div class="right-panel">
         <h1 class="title">{{ restaurant.name }}</h1>
+        <b-button
+          size="is-small"
+          rounded
+          v-for="category in restaurant.categories"
+          v-bind:key="category.title"
+          >{{ category.title }}</b-button
+        >
         <div>
           <star-rating class="stars"
             :rating="restaurant.rating"
@@ -17,6 +24,7 @@
             :show-rating="false"
             :star-size=25
           />
+          <a :href="restaurant.url" target="_blank"> See Yelp Reviews Here </a>
         </div>
         <span
             v-for="ln in restaurant.location.display_address"
@@ -62,14 +70,7 @@
           </b-button>
         </p>
 
-        <br />
-        <b-button
-          size="is-small"
-          rounded
-          v-for="category in restaurant.categories"
-          v-bind:key="category.title"
-          >{{ category.title }}</b-button
-        >
+        
         <br />
         <div class="transactions">
           <b-button size="is-small">
