@@ -91,7 +91,7 @@ export default {
             this.invalidLocation = true;
           }
         });
-      console.log(this.restaurants);
+      
       //Display a message if no restaurants are returned
     },
   },
