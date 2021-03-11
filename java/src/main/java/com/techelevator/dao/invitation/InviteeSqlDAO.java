@@ -40,11 +40,11 @@ public class InviteeSqlDAO implements InviteeDAO {
     }
 
     @Override
-    public Invitee getInviteeByUniqueId(Long inviteId, String uniqueId) {
+    public Invitee getInviteeByUniqueId(String uniqueId) {
         Invitee invitee = new Invitee();
-        String sql = "SELECT * FROM invitee_details WHERE invite_id = ?";
+        String sql = "SELECT * FROM invitee_details WHERE unique_id = ?";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, inviteId);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, uniqueId);
 
         while (results.next()) {
             invitee = mapRowToInvitee(results);
@@ -52,7 +52,7 @@ public class InviteeSqlDAO implements InviteeDAO {
 
         String sql2 = "SELECT yelp_id FROM invitation_restaurant WHERE invite_id = ?";
 
-        SqlRowSet results2 = jdbcTemplate.queryForRowSet(sql2, inviteId);
+        SqlRowSet results2 = jdbcTemplate.queryForRowSet(sql2, invitee.getInviteId());
         List<String> yelpId = new ArrayList<>();
         while (results2.next()) {
             yelpId.add(results2.getString("yelp_id"));

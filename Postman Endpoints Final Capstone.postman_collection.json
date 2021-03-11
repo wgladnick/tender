@@ -264,7 +264,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/invitation/invitee/1",
+							"raw": "http://localhost:8080/invitation/invite/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -272,7 +272,7 @@
 							"port": "8080",
 							"path": [
 								"invitation",
-								"invitee",
+								"invite",
 								"1"
 							]
 						}
@@ -394,6 +394,39 @@
 							"path": [
 								"invitation",
 								"thumbsup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Invitee by Unique ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"location\": \"Charlotte\",\n        \"radius\": \"5000\",\n        \"creatorId\": \"1\",\n        \"deadline\": \"2021-03-07 16:00\",\n        \"reservationDate\": \"03/13/2021 6:00pm\",\n        \"invitees\": [{\n            \"userId\": 1,\n            \"firstName\": \"Will\",\n            \"lastName\": \"Gladnick\",\n            \"email\": \"bigwillystyle@aol.com\"\n        },{\n            \"firstName\": \"Mike\",\n            \"lastName\": \"Uhlman\",\n            \"email\": \"Mikeistheman@gmail.com\"\n        },{\n            \"firstName\": \"Emily\",\n            \"lastName\": \"Charleson\",\n            \"email\": \"emily@yahoo.com\"\n        }\n        ],\n        \"restaurantChoices\": [{\n            \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\"\n\n        },\n        {\n            \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\"\n        }\n        ]\n      }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/invitation/invitee/1SEHs0WYopWtYSn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"invitation",
+								"invitee",
+								"1SEHs0WYopWtYSn"
 							]
 						}
 					},

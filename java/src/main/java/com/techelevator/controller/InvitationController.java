@@ -44,7 +44,7 @@ public class InvitationController {
 		return invitationDAO.create(invitation);
 	}
 	
-	@RequestMapping(value = "/invitee/{inviteId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/invite/{inviteId}", method = RequestMethod.GET)
 	public List<Invitee> getInviteeById(@PathVariable Long inviteId) {
 		return inviteeDAO.getInviteeById(inviteId);
 	}
@@ -59,9 +59,9 @@ public class InvitationController {
 		return inviteRestaurantsDAO.getInviteRestaurantById(inviteId);
 	}
 
-	@RequestMapping(value = "/invitee/{inviteId}/{uniqueId}", method = RequestMethod.GET)
-	public Invitee getInviteeByUniqueId(@PathVariable Long inviteId, @PathVariable String uniqueId) {
-		return inviteeDAO.getInviteeByUniqueId(inviteId, uniqueId);
+	@RequestMapping(value = "/invitee/{uniqueId}", method = RequestMethod.GET)
+	public Invitee getInviteeByUniqueId(@PathVariable String uniqueId) {
+		return inviteeDAO.getInviteeByUniqueId(uniqueId);
 	}
 
 	@RequestMapping(value = "/thumbsup", method = RequestMethod.PUT)

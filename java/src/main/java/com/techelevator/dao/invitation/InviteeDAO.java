@@ -13,7 +13,7 @@ public interface InviteeDAO {
 
     Invitee updateInviteeStatus(Invitee invitee);
 
-    Invitee getInviteeByUniqueId(Long inviteId, String uniqueId);
+    Invitee getInviteeByUniqueId(String uniqueId);
 
     
 }
