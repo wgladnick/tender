@@ -23,7 +23,6 @@ export default {
         return axios.get('/category', {
             params: {
                 address: location,
-                radius: 1000,
                 category: category
             }
         })

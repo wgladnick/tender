@@ -49,7 +49,7 @@ export default {
       isLoading: true,
       availCategories: [],
       categoriesSelected: [],
-      radius:1000
+      radius:"",
    
     };
   },
