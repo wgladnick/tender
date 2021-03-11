@@ -9,6 +9,15 @@
       </div>
       <div class="right-panel">
         <h1 class="title">{{ restaurant.name }}</h1>
+        <div>
+          <star-rating class="stars"
+            :rating="restaurant.rating"
+            :read-only="true"
+            :increment="0.01"
+            :show-rating="false"
+            :star-size=25
+          />
+        </div>
         <span
             v-for="ln in restaurant.location.display_address"
             v-bind:key="ln.display_address"
@@ -28,7 +37,7 @@
             >
           </a>
           <br />
-          <span>{{ restaurant.display_phone }} </span>
+          
           <span>
             <a :href="`tel:${restaurant.phone}`">
               <b-button type="is-primary" rounded size="is-small">
@@ -37,6 +46,7 @@
               >
             </a>
           </span>
+          <span>{{ restaurant.display_phone }} </span>
 
         <p class="price">Price: {{ restaurant.price }}</p>
 
@@ -97,18 +107,8 @@
           >
         </div>
         <br />
-        <div>
-          <star-rating
-            :rating="restaurant.rating"
-            :read-only="true"
-            :increment="0.5"
-            :show-rating="false"
-          />
-        </div>
-
-        <div>
-          
-
+      </div>
+      <div class="far-right-panel">
           <p>Hours:</p>
           <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
             <span v-for="open in hours.open" v-bind:key="open.day">
@@ -136,7 +136,6 @@
             </span>
           </p>
         </div>
-      </div>
     </div>
   </main>
 </template>
@@ -180,15 +179,18 @@ export default {
   flex-direction: row;
   width: 100%;
   justify-content: center;
+  align-items: center;
 }
 .yelp-image {
   width: 300px;
   height: 300px;
   object-fit: cover;
+  
 }
 .left-panel {
   padding: 20px;
   margin-right: 25px;
+  
 }
 .right-panel {
   padding: 20px;
@@ -199,6 +201,7 @@ export default {
   padding-left: calc(1em + 0.25em);
   margin-right: 10px;
   padding-right: calc(1em + 0.25em);
+  padding: 10px;
 }
 .price {
   font-weight: 550;
@@ -206,5 +209,9 @@ export default {
 
 .transactions > button.is-small {
   border: none;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px;
 }
+
 </style>
