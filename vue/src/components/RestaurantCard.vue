@@ -12,19 +12,19 @@
     >
       {{ ln }}
     </span>
-    <p>{{ restaurant.display_phone }}</p>
-    <span>{{ restaurant.price }} </span>
+    <br>
+    <span>{{ restaurant.display_phone }} </span>
     <span>
       <a :href="`tel:${restaurant.phone}`">
-        <b-button rounded size="is-small">
+        <b-button type="is-primary" rounded size="is-small">
           <i class="fas fa-phone-alt"></i>
-          Call to order</b-button
-        >
+          Call to order</b-button>
       </a>
     </span>
+    <p class="price"> Price: {{ restaurant.price }} </p>
     
     </div>
-    <div>
+    <div class="star-rating">
       <star-rating
         :rating="restaurant.rating"
         :read-only="true"
@@ -33,8 +33,8 @@
         :inline="true"
       /> 
     </div>
-    <div>
-    <b-button class="categories"
+    <div class="categories">
+    <b-button 
         size="is-small"
         rounded
         v-for="ctg in restaurant.categories"
@@ -45,7 +45,7 @@
       
     </div>
     
-    <div>
+    <div class="transactions">
        <b-button size="is-small"
       >
       <i class="fas fa-check has-text-success"
@@ -120,10 +120,31 @@ main {
 .right-panel {
   padding: 20px;
 }
+.button.is-primary {
+
+  background-color: #dc6b67;
+}
 .button.is-rounded {
     border-radius: 290486px;
     padding-left: calc(1em + 0.25em);
     margin-right: 10px;
     padding-right: calc(1em + 0.25em);
+}
+.transactions > button.is-small {
+  border: none;
+}
+.price {
+  font-weight: 550;
+}
+.star-rating {
+  padding: 5px 0px;
+  
+}
+.categories {
+  padding: 10px 0px 0px 0px;
+}
+
+.transactions {
+  padding: 5px 0px 0px 0px;
 }
 </style>
