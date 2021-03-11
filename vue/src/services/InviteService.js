@@ -1,13 +1,10 @@
 import axios from 'axios';
 
-
-const INVITE_PATH = "/invite"
-
 export default {
     getInvites() {
-        return axios.get(INVITE_PATH)
+        return axios.get("/invitation")
     },
     getInvitee(userID) {
-        return axios.get(`INVITE_PATH/${userID}`);
+        return axios.get(`/invitation/${userID}`);
     }
 }
