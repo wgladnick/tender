@@ -59,6 +59,11 @@ public class InvitationController {
 		return inviteRestaurantsDAO.getInviteRestaurantById(inviteId);
 	}
 
+	@RequestMapping(value = "/invitee/{inviteId}/{uniqueId}", method = RequestMethod.GET)
+	public Invitee getInviteeByUniqueId(@PathVariable Long inviteId, @PathVariable String uniqueId) {
+		return inviteeDAO.getInviteeByUniqueId(inviteId, uniqueId);
+	}
+
 	@RequestMapping(value = "/thumbsup", method = RequestMethod.PUT)
 	public InviteRestaurants voteThumbsUp(@RequestBody InviteRestaurants inviterestaurants) {
 		return inviteRestaurantsDAO.voteThumbsUp(inviterestaurants);

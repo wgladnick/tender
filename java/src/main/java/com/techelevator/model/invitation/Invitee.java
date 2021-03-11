@@ -1,5 +1,7 @@
 package com.techelevator.model.invitation;
 
+import java.util.List;
+
 public class Invitee {
 	private long inviteId;
 	private String uniqueId;
@@ -9,6 +11,7 @@ public class Invitee {
 	private String email;
 	private Boolean hasVoted;
 	private String isAttending;
+	private List<InviteRestaurants> inviteRestaurants;
 
 	public Invitee() {
 		
@@ -77,5 +80,12 @@ public class Invitee {
 	public void setIsAttending(String isAttending) {
 		this.isAttending = isAttending;
 	}
-	
+
+	public List<InviteRestaurants> getInviteRestaurants() {
+		return inviteRestaurants;
+	}
+
+	public void setInviteRestaurants(List<InviteRestaurants> inviteRestaurants) {
+		this.inviteRestaurants = inviteRestaurants;
+	}
 }
