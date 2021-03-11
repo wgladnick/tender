@@ -32,7 +32,9 @@ export default new Vuex.Store({
     byLocationBoard: [],
     restaurantCard: {
       
-    }
+    },
+    searchLocation: '',
+    searchDirections: '',
   },
   mutations: {
     //sets the auth token
@@ -55,6 +57,11 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+
+    SET_SEARCH_LOCATION(state, location) {
+      state.searchLocation = location;
+      state.searchDirections = location.split(' '.join('+'));
     }
   }
 })
