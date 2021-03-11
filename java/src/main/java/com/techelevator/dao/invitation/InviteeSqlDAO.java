@@ -1,5 +1,6 @@
 package com.techelevator.dao.invitation;
 
+import com.techelevator.model.invitation.InviteRestaurants;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -14,9 +15,11 @@ import java.util.Random;
 public class InviteeSqlDAO implements InviteeDAO {
 
     private JdbcTemplate jdbcTemplate;
+    private InviteRestaurantsDAO inviteRestaurantsDAO;
 
-    public InviteeSqlDAO(JdbcTemplate jdbcTemplate) {
+    public InviteeSqlDAO(JdbcTemplate jdbcTemplate, InviteRestaurantsDAO inviteRestaurantsDAO) {
         this.jdbcTemplate = jdbcTemplate;
+        this.inviteRestaurantsDAO = inviteRestaurantsDAO;
     }
 
     @Override
@@ -31,6 +34,22 @@ public class InviteeSqlDAO implements InviteeDAO {
             invitees.add(invitee);
         }
         return invitees;
+    }
+
+    @Override
+    public Invitee getInviteeByUniqueId(Long inviteId, String uniqueId) {
+        Invitee invitee = new Invitee();
+        String sql = "SELECT * FROM invitee_details WHERE invite_id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, inviteId);
+
+        while (results.next()) {
+            invitee = mapRowToInvitee(results);
+        }
+
+        invitee.setInviteRestaurants(inviteRestaurantsDAO.getInviteRestaurantById(inviteId));
+
+        return invitee;
     }
 
     @Override
