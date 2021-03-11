@@ -1,55 +1,100 @@
 <template>
-  <div id="search-bar" class="text-center">
-
-    <form class="location-search" v-on:submit.prevent="searchByLocation">
+<main>
+ <section class ="left">
+   <!-- Search Bar -->
+    <div class="search-banner">
       <h1 class="h3 mb-3 font-weight-normal">Where are we partying?</h1>
+  <form class="location-search" v-on:submit.prevent>
 
-      <div class="alert alert-danger" role="alert" v-if="invalidLocation">
-        Invalid location parameters, search with address or zip code
-      </div>
+    <div>
+  <label for="fname">Location</label><br>
+  <input v-model="location" type="text" id="fname" name="fname" placeholder="Enter a Zipcode or Location"><br>
+  </div>
 
-      <b-field label="Location">
-        <b-input type="text" class="searchbox" v-model="location" />
-      </b-field>
+  <div>
+  <label for="lname">Radius</label><br>
+  <select name="radius" id="radius">
+    <option value="5">5 miles </option>
+    <option value="10">25 miles </option>
+    <option value="15">15 miles </option>
+    <option value="25">25 miles </option>
+    </select>
+    </div>
+      <button v-on:click="searchByLocation()" focused> Find Food </button>
+</form>
+</div>
 
-      <b-button v-on:click="searchByLocation()" focused> Search </b-button>
-
-        <ul class="items">
-    <li v-for="category in availCategories" v-bind:key="category.categoryId" ><input type="checkbox"
-              v-bind:id="category.categoryId"
+   
+  <section>
+  <!-- Categories -->
+  <div class="cat-filter">
+  <label class="container" v-for="category in availCategories" 
+  v-bind:key="category.categoryId">{{category.displayName}}
+  <input type="checkbox" checked="checked"
+   v-bind:id="category.categoryId"
               v-bind:value="category.categoryId"
-              v-model.number="categoriesSelected"/>{{category.displayName}}</li>
+              v-model.number="categoriesSelected"
+             />
+  <span class="checkmark"></span>
+</label>
+  </div>
 
-  </ul>
+  </section>
+  </section>
+
+  <section class="right">
+ <div class="restaurant-list">
+    <div class="loading-gif" v-if="isLoading">
+      <img src="../assets/loading.gif" />
+    </div>
+
+    <div v-if="!isLoading" class="result-list">
+      <restaurant-card
+        v-for="restaurant in restaurants"
+        v-bind:key="restaurant.id"
+        v-bind:restaurant="restaurant"
+        class="card"
+      />
+    </div>
+    </div>
+
+    </section>
+
+
+   </main>
+
+
+
 
       <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
-      <restaurant-list v-bind:restaurants="restaurants" />
-      <restaurant-list v-bind:isLoading="isLoading" />
-    </form>
+     
+   
 
 
 <!-- Category Dropdown -->
 
-</div>
+
 
 </template>
 <script>
 import RestaurantService from "../services/RestaurantService";
-import RestaurantList from "./RestaurantList.vue";
+import RestaurantCard from "../components/RestaurantCard"
+
 
 export default {
   name: "restaurant-search",
-  components: { RestaurantList },
+  components: { RestaurantCard},
 
   data() {
-    return {
+
+   return {
       restaurants: [],
       location: "",
       invalidLocation: false,
       isLoading: true,
       availCategories: [],
-      categoriesSelected: [],
       radius:"",
+      categoriesSelected:[]
    
     };
   },
@@ -98,59 +143,145 @@ export default {
 };
 </script>
 <style scoped>
+
+main{
+  display:flex;
+  margin-top:3em;
+}
+
+.left{
+  display:flex;
+  flex-direction:column;
+    padding-left:4em;
+}
+.right{
+  display:flex;
+  width:80vw;
+
+}
+
+section{
+  display:flex;
+}
+
+.container {
+  display: flex;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight:bold;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+  .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox ------------------- */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-style: solid;
+  border-width: .1em;
+  border-color:#1e1e32;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #dc6b67;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.cat-filter{
+  padding-top:4em;
+
+  display: inline-block;
+  }
+
+.location-search{
+  display:flex;
+  flex-direction:column;
+}
 .search-bar {
   background-color: #fdf2f2;
 }
 
-.dropdown-check-list {
-  display: inline-block;
+
+
+
+
+/*  rest list */
+
+.loading-gif {
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+ 
 }
 
-.dropdown-check-list .anchor {
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  padding: 5px 50px 5px 10px;
-  border: 1px solid #ccc;
+.loading-gif img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+   align-self: center;
+
+}
+.restaurant-list{
+  width:70vw;
+}
+.result-list {
+  padding-left:10em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  width:75vw;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 1em;
 }
 
-.dropdown-check-list .anchor:after {
-  position: absolute;
-  content: "";
-  border-left: 2px solid black;
-  border-top: 2px solid black;
-  padding: 5px;
-  right: 10px;
-  top: 20%;
-  -moz-transform: rotate(-135deg);
-  -ms-transform: rotate(-135deg);
-  -o-transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
-  transform: rotate(-135deg);
-}
-
-.dropdown-check-list .anchor:active:after {
-  right: 8px;
-  top: 21%;
-}
-
-.dropdown-check-list ul.items {
-  padding: 2px;
-  display: none;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-
-.dropdown-check-list ul.items li {
-  list-style: none;
-}
-
-.dropdown-check-list.visible .anchor {
-  color: #0094ff;
-}
-
-.dropdown-check-list.visible .items {
-  display: block;
-}
 </style>

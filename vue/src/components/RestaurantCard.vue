@@ -107,6 +107,7 @@ main {
   display: flex;
   flex-direction: row;
   width: 75%;
+  
 }
 .yelp-image {
   width: 300px;
@@ -116,6 +117,7 @@ main {
 .left-panel {
   padding: 20px;
   margin-right: 25px;
+  
 }
 .right-panel {
   padding: 20px;

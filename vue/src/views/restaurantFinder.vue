@@ -1,7 +1,8 @@
 <template>
 <main class="main">
   <restaurant-search/>
-  <restaurant-list/> -->
+
+
   </main>
 
 </template>
@@ -10,18 +11,18 @@
 import RestaurantSearch from '../components/RestaurantSearch';
 import RestaurantList from '../components/RestaurantList'
 
+
 export default {
     name:"restaurant-finder",
     components: {
         RestaurantSearch,
-       RestaurantList
+       RestaurantList,
+    
         
     }
 };
 </script>
 
 <style scoped>
-.searchbox{
-    display: flex
-}
+
 </style>
