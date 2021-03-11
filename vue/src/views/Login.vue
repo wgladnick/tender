@@ -4,6 +4,9 @@
       <div id="login-container">
 
       <div class="headingText">
+        <div>
+        <img src="../assets/tender.png" />
+      </div>
         <h1>Food with friends just got yummy</h1>
         <p>mmm.. food.</p>
       </div>
@@ -37,7 +40,7 @@ h1{
   display: flex;
   background-image: url("../assets/tinderbackground.jpg");
   background-size:cover;
-  height:90vh;
+  height:100vh;
   justify-content:center;
 }
 

@@ -4,7 +4,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import RestaurantFinder from '../views/restaurantFinder'
+import RestaurantFinder from '../views/RestaurantFinder'
 import RestaurantDetails from '../views/RestaurantDetails'
 
 Vue.use(Router)
