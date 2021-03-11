@@ -9,6 +9,7 @@ import com.techelevator.services.yelpfusion.YelpFusion;
 
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -42,12 +43,19 @@ public class InviteeSqlDAO implements InviteeDAO {
     @Override
     public Invitee getInviteeByUniqueId(String uniqueId) {
         Invitee invitee = new Invitee();
-        String sql = "SELECT * FROM invitee_details WHERE unique_id = ?";
+        String sql = "SELECT id.invitee_user_id AS \"invitee_user_id\",id.invite_id AS \"invite_id\", id.unique_id AS \"unique_id\", id.first_name AS \"first_name\", id.last_name AS \"last_name\", " +
+                "id.email AS \"email\", id.has_voted AS \"has_voted\", id.is_attending AS \"is_attending\", inv.deadline AS \"deadline\", inv.reservation_date_time AS \"reservation_date_time\" " +
+                "FROM invitee_details AS id  JOIN invitation AS inv ON id.invite_id = inv.invite_id WHERE id.unique_id = ?";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, uniqueId);
 
         while (results.next()) {
             invitee = mapRowToInvitee(results);
+            Timestamp deadline = results.getTimestamp("deadline");
+            if (deadline != null) {
+                invitee.setDeadline(deadline);
+            }
+            invitee.setReservationDate(results.getString("reservation_date_time"));
         }
 
         String sql2 = "SELECT yelp_id FROM invitation_restaurant WHERE invite_id = ?";

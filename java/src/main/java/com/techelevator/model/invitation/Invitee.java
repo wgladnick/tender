@@ -1,5 +1,6 @@
 package com.techelevator.model.invitation;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.techelevator.services.yelpfusion.models.business.BusinessDetails;
@@ -14,6 +15,8 @@ public class Invitee {
 	private Boolean hasVoted;
 	private String isAttending;
 	private List<BusinessDetails> businessDetails;
+	private Timestamp deadline;
+	private String reservationDate;
 
 	public Invitee() {
 		
@@ -83,6 +86,22 @@ public class Invitee {
 		this.isAttending = isAttending;
 	}
 
+	public Timestamp getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Timestamp deadline) {
+		this.deadline = deadline;
+	}
+
+	public String getReservationDate() {
+		return reservationDate;
+	}
+
+	public void setReservationDate(String reservationDate) {
+		this.reservationDate = reservationDate;
+	}
+
 	public List<BusinessDetails> getBusinessDetails() {
 		return businessDetails;
 	}
@@ -90,5 +109,4 @@ public class Invitee {
 	public void setBusinessDetails(List<BusinessDetails> businessDetails) {
 		this.businessDetails = businessDetails;
 	}
-	
 }
