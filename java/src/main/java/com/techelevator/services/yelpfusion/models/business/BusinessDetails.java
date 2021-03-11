@@ -1,5 +1,7 @@
 package com.techelevator.services.yelpfusion.models.business;
 
+import com.techelevator.services.yelpfusion.models.review.Review;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class BusinessDetails {
     private double distance;
     private List<Photos> photos;
     private Hours[] hours;
+    private Review[] reviews;
 
     public BusinessDetails() {
     }
@@ -169,6 +172,14 @@ public class BusinessDetails {
 
     public void setHours(Hours[] hours) {
         this.hours = hours;
+    }
+
+    public Review[] getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Review[] reviews) {
+        this.reviews = reviews;
     }
 
     @Override

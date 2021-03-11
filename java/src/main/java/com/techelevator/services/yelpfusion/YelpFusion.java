@@ -50,6 +50,7 @@ public class YelpFusion {
         String endpointURL = "https://api.yelp.com/v3/businesses/" + Id;
 
         BusinessDetails business = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody();
+        business.setReviews(this.getReviewsByBusinessById(business.getId()));
 
         return business;
 
@@ -58,10 +59,10 @@ public class YelpFusion {
         List<BusinessDetails> businessDetails= new ArrayList<>();
     	for(String id : yelpId) {
     	String endpointURL = "https://api.yelp.com/v3/businesses/" + id;
-    	
         businessDetails.add(restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody());
     	}
-        return businessDetails;
+
+    	return businessDetails;
     }
 
     public Review[] getReviewsByBusinessById(String Id) {
