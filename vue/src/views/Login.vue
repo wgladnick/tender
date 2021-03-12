@@ -5,6 +5,7 @@
 
       <div class="headingText">
         <div>
+          <img class="flame" style="padding-right: 10px;" src="../assets/TenderFlame.png"/>
         <img src="../assets/tender.png" />
       </div>
         <h1>Food with friends just got yummy</h1>

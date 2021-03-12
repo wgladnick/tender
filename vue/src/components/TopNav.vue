@@ -1,7 +1,8 @@
 <template>
 <div class="header" >
       <div class="logo">
-         <router-link  class="nav" v-bind:to="{ name: 'restaurantFinder' }"><img class="flame" style="padding-right: 10px;" src="../assets/TenderFlame.png"/><img src="../assets/tender.png" /></router-link>
+         <router-link  class="nav" v-bind:to="{ name: 'restaurantFinder' }"><img class="flame" style="padding-right: 10px;" src="../assets/TenderFlame.png"/>
+         <img class="tender-text" src="../assets/TenderTextNoStroke.png" /></router-link>
       </div>
 
       <div id="nav-container">
@@ -26,8 +27,15 @@ export default {
 </script>
 
 <style scoped>
+.logo{
+  display: flex;
+}
 .flame{
   height: 70px;
+}
+.tender-text{
+  height: 100px;
+  align-items: flex-end;
 }
 
 #nav-container{
