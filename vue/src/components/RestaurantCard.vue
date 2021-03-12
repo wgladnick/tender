@@ -4,6 +4,16 @@
       <router-link :to="{ name: 'details', params: { id: restaurant.id }}" ><img :src="restaurant.image_url" class="yelp-image" /></router-link>
     </div>
     <div class="right-panel">
+         <div class="categories">
+ 
+        <span class="categories-tag"
+        v-for="ctg in restaurant.categories"
+        v-bind:key="ctg.title"
+      >
+        {{ ctg.title }}
+      </span>
+      
+    </div>
     <router-link :to="{ name: 'details', params: { id: restaurant.id }}" ><h1 class="title">{{ restaurant.name }}</h1> </router-link>
     <div>
     <span
@@ -13,17 +23,7 @@
       {{ ln }}
     </span>
     <br>
-    <span>{{ restaurant.display_phone }} </span>
-    <span>
-      <a :href="`tel:${restaurant.phone}`">
-        <b-button type="is-primary" rounded size="is-small">
-          <i class="fas fa-phone-alt"></i>
-          Call to order</b-button>
-      </a>
-    </span>
-    <p class="price"> Price: {{ restaurant.price }} </p>
-    
-    </div>
+
     <div class="star-rating">
       <star-rating
         :rating="restaurant.rating"
@@ -34,17 +34,22 @@
         :star-size=25
       /> 
     </div>
-    <div class="categories">
-    <b-button 
-        size="is-small"
-        rounded
-        v-for="ctg in restaurant.categories"
-        v-bind:key="ctg.title"
-      >
-        {{ ctg.title }}
-      </b-button>
-      
+    <br>
+    <span>{{ restaurant.display_phone }} </span>
+    
+   
+    <p class="price"> Price: {{ restaurant.price }} </p>
+    
     </div>
+    
+ 
+     <span class="call-to-order">
+      <a :href="`tel:${restaurant.phone}`">
+        <b-button type="is-primary" rounded size="is-small">
+          <i class="fas fa-phone-alt"></i>
+          Call to order</b-button>
+      </a>
+    </span>
     
     <div class="transactions">
        <b-button size="is-small"
@@ -98,6 +103,26 @@ export default {
             for (let i = 0; i < this.restaurant.transactions.length; i++) {
           this.transactionTypes += this.restaurant.transactions[i].transactions + " ";
             }
+
+                RestaurantService.getTheRestaurant(this.$route.params.id).then(
+      (response) => {
+        this.restaurant = response.data;
+        this.isLoading = false;
+
+        for (let i = 0; i < this.restaurant.transactions.length; i++) {
+          this.transactionTypes +=
+            this.restaurant.transactions[i].transactions + " ";
+        }
+        for (let j = 0; j < this.restaurant.categories.length; j++) {
+          this.category = this.restaurant.categories[j].title;
+          if (j < this.restaurant.categories.length - 1) {
+            this.categories.push(this.category + " | ");
+          } else {
+            this.categories.push(this.category);
+          }
+        }
+      }
+    );
       }
 
 };
@@ -117,11 +142,17 @@ main {
 }
 .left-panel {
   padding: 20px;
-  margin-right: 25px;
+  margin-right:10px;
   
 }
 .right-panel {
-  padding: 20px;
+  padding: 20px 20px 20px 0px;
+ 
+}
+
+.call-to-order{
+  margin-top:2em;
+  display:block;
 }
 .button.is-primary {
 
@@ -135,19 +166,31 @@ main {
 }
 .transactions > button.is-small {
   border: none;
+  font-size:.8em;
+  font-weight:bold;
 }
 .price {
   font-weight: 550;
 }
 .star-rating {
   padding: 5px 0px;
+  display:inline-block;
+  width:.2em;
+  
   
 }
+
 .categories {
   padding: 10px 0px 0px 0px;
 }
+.categories-tag{
+  color:rgb(179, 179, 179)
 
-.transactions {
-  padding: 5px 0px 0px 0px;
+}
+
+.transactions {  
+margin-top:25px;
+margin-left:-.5em;
+
 }
 </style>
