@@ -7,12 +7,12 @@
   <form class="location-search" v-on:submit.prevent>
 
     <div>
-  <label for="searchLocate">Location</label><br>
+  <label for="searchLocate">Location:</label><br>
   <input id="searchLocate" v-model="location" type="text"  placeholder="Enter a Zipcode or Location"><br>
   </div>
 
   <div class="radius">
-  <label for="selectRadius">Radius</label><br>
+  <label for="selectRadius">Radius:</label><br>
   <select name="selectRadius" id="selectRadius" v-model="radius">
     <option value="8050">5 miles </option>
     <option value="16100">10 miles </option>
@@ -31,6 +31,7 @@
   <div class="cat-filter">
     <h1 class="search-heading">Filter Categories</h1>
     <p>(Choose your cravings)</p>
+    <button class ="find-food" v-on:click="searchByLocation()" focused> Update My Search </button>
   <label class="container" v-for="category in availCategories" 
   v-bind:key="category.categoryId">{{category.displayName}}
   <input type="checkbox" checked="checked"
@@ -40,6 +41,7 @@
              />
   <span class="checkmark"></span>
 </label>
+
   </div>
 
   </section>
@@ -170,6 +172,8 @@ main{
   display:flex;
   flex-direction:column;
     padding-left:4em;
+    border-right:2px;
+    border-color:black;
 }
 .right{
   display:flex;
@@ -208,17 +212,26 @@ select {
   width:100%;
   height:40px;
   border-radius:3px;
+  font-size:1em;
+  padding-left:.5em;
+  font-weight:600;
 }
 
 input {
   width:100%;
   height:40px;
-   border-radius:3px;
+  border-radius:3px;
+  padding-left:.5em;
+  font-size:1em;
+  font-weight:600;
 }
 
-
+.cat-filter .find-food{
+  margin-bottom:2em;
+  background-color:#81974e;
+}
 .find-food{
-   background-color: #dc6b67;
+  background-color: #dc6b67;
   border: none;
   color: white;
    padding:10px;
@@ -231,7 +244,17 @@ input {
   border-radius: 5px;
   width: 100%;
   margin-top: 30px;
+  margin-top:2em;
+  font-weight:bold;
 
+}
+
+.find-food:hover{
+  background-color:#f7a09d ;
+}
+
+.cat-filter .find-food:hover{
+  background-color:#a5c064;
 }
 
 /*  Check boxes start here -----------------------------*/
@@ -244,7 +267,7 @@ input {
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: .8em;
+  font-size: 1em;
   font-weight:bold;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -253,6 +276,7 @@ input {
 }
 
   .container input {
+
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -312,10 +336,14 @@ input {
   display: inline-block;
   }
 
+  
+
+
   .cat-filter p{
     margin-top:-1.5em;
     font-weight:500;
-    padding-bottom:2em;
+    margin-bottom:-1em;
+    
   }
 
 
@@ -342,6 +370,7 @@ input {
 }
 .restaurant-list{
   width:70vw;
+  margin-left:2em;
 }
 .result-list {
   padding-left:10em;
@@ -357,8 +386,7 @@ input {
   padding: 1em;
 }
 
-.find-food{
-  margin-top:2em;
-}
+
+
 
 </style>
