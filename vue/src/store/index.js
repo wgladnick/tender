@@ -70,7 +70,6 @@ export default new Vuex.Store({
     },
 
     SET_SEARCH_RADIUS(state, radius) {
-      console.log(radius);
       state.radius = radius;
 
     }

@@ -49,7 +49,7 @@
 
   <section class="right">
         <div v-if="location === ''">
-      <h1 class="loading-text">Let's Find You Some Grub <br> < Enter a Location</h1>
+      <h1 class="loading-text">Let's Find You Some Grub <br> Enter a Location</h1>
       </div>
  <div class="restaurant-list">
     <div class="loading-gif" v-if="isLoading">
@@ -117,7 +117,6 @@ export default {
        this.location = this.$store.state.searchLocation;
        this.radius = this.$store.state.radius;
        this.isLoading = false;
-       console.log(this.radius)
 
      }
   },
@@ -145,6 +144,10 @@ export default {
         .then((response) => {
           this.restaurants = response.data;
           this.$store.commit('SET_RESTAURANT_LIST', this.restaurants);
+
+          this.restaurants.sort(function(a, b) {
+    return a.distance - b.distance;
+});
          
           // this controls loading gif
           if (this.restaurants.length === 0) {
@@ -163,7 +166,6 @@ export default {
           }
         });
          
-        console.log(this.$store.state.radius);
       //Display a message if no restaurants are returned
     },
   },

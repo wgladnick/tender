@@ -44,7 +44,6 @@
           
           
     
-          </a>
         </div>
         <div>
           <span class="location-number"
@@ -182,12 +181,10 @@ export default {
             this.restaurant.transactions[i].transactions + " ";
         }
         for (let j = 0; j < this.restaurant.categories.length; j++) {
-          this.category = this.restaurant.categories[j].title;
+          this.categories.push(this.restaurant.categories[j].title);
           if (j < this.restaurant.categories.length - 1) {
-            this.categories.push(this.category + " | ");
-          } else {
-            this.categories.push(this.category);
-          }
+            this.categories[j] += " | ";
+          } 
         }
       }
     );
