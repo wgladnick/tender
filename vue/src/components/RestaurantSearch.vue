@@ -7,17 +7,17 @@
   <form class="location-search" v-on:submit.prevent>
 
     <div>
-  <label for="fname">Location</label><br>
-  <input v-model="location" type="text" id="fname" name="fname" placeholder="Enter a Zipcode or Location"><br>
+  <label for="searchLocate">Location</label><br>
+  <input id="searchLocate" v-model="location" type="text"  placeholder="Enter a Zipcode or Location"><br>
   </div>
 
   <div>
-  <label for="lname">Radius</label><br>
-  <select name="radius" id="radius">
-    <option value="5">5 miles </option>
-    <option value="10">25 miles </option>
-    <option value="15">15 miles </option>
-    <option value="25">25 miles </option>
+  <label for="selectRadius">Radius</label><br>
+  <select name="selectRadius" id="selectRadius" v-model="radius">
+    <option value="8050">5 miles </option>
+    <option value="16100">10 miles </option>
+    <option value="24200">15 miles </option>
+    <option value="40000">25 miles </option>
     </select>
     </div>
       <button v-on:click="searchByLocation()" focused> Find Food </button>
@@ -89,17 +89,25 @@ export default {
 
    return {
       restaurants: [],
-      location: "",
+      location: '',
       invalidLocation: false,
       isLoading: true,
       availCategories: [],
-      radius:"",
+      radius:'8050',
       categoriesSelected:[]
    
     };
   },
   created() {
     this.getCategories();
+     if(this.$store.state.restaurants.length !== 0){
+       this.restaurants = this.$store.state.restaurants;
+       this.location = this.$store.state.searchLocation;
+       this.radius = this.$store.state.radius;
+       this.isLoading = false;
+       console.log(this.radius)
+
+     }
   },
 
   methods: {
@@ -117,10 +125,15 @@ export default {
     searchByLocation() {
       this.restaurants = [];
       this.isLoading = true;
+     this.$store.commit('SET_SEARCH_LOCATION', this.location);
+     this.$store.commit('SET_SEARCH_RADIUS', this.radius);
+    
+     
       RestaurantService.getRestaurants(this.location,this.radius,this.categoriesSelected.toString())
         .then((response) => {
           this.restaurants = response.data;
-
+          this.$store.commit('SET_RESTAURANT_LIST', this.restaurants);
+         
           // this controls loading gif
           if (this.restaurants.length === 0) {
             this.isLoading = true;
@@ -136,7 +149,8 @@ export default {
             this.invalidLocation = true;
           }
         });
-      
+         
+        console.log(this.$store.state.radius);
       //Display a message if no restaurants are returned
     },
   },
@@ -170,7 +184,7 @@ section{
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: .8em;
   font-weight:bold;
   -webkit-user-select: none;
   -moz-user-select: none;

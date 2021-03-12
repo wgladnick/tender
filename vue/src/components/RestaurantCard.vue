@@ -1,10 +1,10 @@
 <template>
   <main>
     <div class="left-panel">
-      <img :src="restaurant.image_url" class="yelp-image" />
+      <router-link :to="{ name: 'details', params: { id: restaurant.id }}" ><img :src="restaurant.image_url" class="yelp-image" /></router-link>
     </div>
     <div class="right-panel">
-    <h1 class="title">{{ restaurant.name }}</h1>
+    <router-link :to="{ name: 'details', params: { id: restaurant.id }}" ><h1 class="title">{{ restaurant.name }}</h1> </router-link>
     <div>
     <span
       v-for="ln in restaurant.location.display_address"

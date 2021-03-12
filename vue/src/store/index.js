@@ -35,8 +35,13 @@ export default new Vuex.Store({
     },
     searchLocation: '',
     searchDirections: '',
+    radius: '',
+    restaurants: []
   },
   mutations: {
+    SET_RESTAURANT_LIST(state, restaurants){
+      state.restaurants = restaurants;
+    },
     //sets the auth token
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
@@ -61,7 +66,13 @@ export default new Vuex.Store({
 
     SET_SEARCH_LOCATION(state, location) {
       state.searchLocation = location;
-      state.searchDirections = location.split(' '.join('+'));
+      
+    },
+
+    SET_SEARCH_RADIUS(state, radius) {
+      console.log(radius);
+      state.radius = radius;
+
     }
   }
 })

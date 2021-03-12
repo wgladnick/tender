@@ -8,6 +8,7 @@ export default {
         return axios.get('/restaurant');
     },
     getRestaurants(location,radius,categories) {
+        console.log("API Call" + radius);
         return axios.get('/restaurant/', {
             params: {
                 address: location,
