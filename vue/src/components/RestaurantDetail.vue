@@ -37,21 +37,13 @@
             :show-rating="false"
             :star-size="25"
           />
-          <a :href="restaurant.url" target="_blank"> See Yelp Reviews Here</a>
+          <a :href="restaurant.url" target="_blank"> View reviews on <img height="12px" width="12px" src="../assets/yelp.png">Yelp</a>
         </div>
 
         <div>
-          <a
-            :href="`https://www.google.com/maps/dir/${
-              this.$store.state.searchDirections
-            }/${restaurant.location.display_address
-              .toString()
-              .split(' ')
-              .join('+')}/`"
-            target="_blank"
-          >
           
-            >
+          
+    
           </a>
         </div>
         <div>
@@ -61,11 +53,9 @@
           >
             {{ ln }}
           </span>
+          <br>
         </div>
         
-        <div>
-         
-        </div>
         <div>
           <span class="location-number">{{ restaurant.display_phone }} </span>
         </div>
@@ -112,9 +102,19 @@
                 Call to order</b-button
               >
             </a>
+            <a
+            :href="`https://www.google.com/maps/dir/${
+              this.$store.state.searchDirections
+            }/${restaurant.location.display_address
+              .toString()
+              .split(' ')
+              .join('+')}/`"
+            target="_blank"
+          >
               <b-button rounded size="is-small">
               <i class="fas fa-route"></i>
               Get Directions</b-button>
+              </a>
           </div>
         <br />
       

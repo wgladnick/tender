@@ -190,7 +190,7 @@ margin-left:-.5em;
 .zoom {
   padding: 50px;
 
-  transition: transform .7s;
+  transition: transform .5s;
 
 
   margin: 0 auto;
