@@ -2,32 +2,34 @@
   <main>
     <div class="main-div" v-if="!isLoading">
       <div class="left-panel">
-        <img
-          class="yelp-image"
-          v-bind:src="restaurant.image_url"
-        />
+        <img class="yelp-image" v-bind:src="restaurant.image_url" />
       </div>
       <div class="right-panel">
         <h1 class="title">{{ restaurant.name }}</h1>
-        <span
-          v-for="category in restaurant.categories"
-          v-bind:key="category.title"
-          >{{ category.title }} </span
-        >
+        <p> <span class="bold-class">Price: <span class="has-text-success" >{{ restaurant.price }} </span> </span>
+        <span class="detail-cats"
+          v-for="category in this.categories"
+          v-bind:key="category"
+          >{{ category }}
+        </span>
+        </p>
         <div>
-          <star-rating class="stars"
+          <star-rating
+            class="stars"
             :rating="restaurant.rating"
             :read-only="true"
             :increment="0.01"
             :show-rating="false"
-            :star-size=25
+            :star-size="25"
           />
           <a :href="restaurant.url" target="_blank"> See Yelp Reviews Here </a>
         </div>
-        
+
         <div>
           <a
-            :href="`https://www.google.com/maps/dir/${this.$store.state.searchDirections}/${restaurant.location.display_address
+            :href="`https://www.google.com/maps/dir/${
+              this.$store.state.searchDirections
+            }/${restaurant.location.display_address
               .toString()
               .split(' ')
               .join('+')}/`"
@@ -38,17 +40,17 @@
               Get Directions</b-button
             >
           </a>
-          </div>
-          <div>
-        <span
+        </div>
+        <div>
+          <span
             v-for="ln in restaurant.location.display_address"
             v-bind:key="ln.display_address"
           >
             {{ ln }}
           </span>
         </div>
-          <br />
-          <div>
+        <br />
+        <div>
           <span>
             <a :href="`tel:${restaurant.phone}`">
               <b-button type="is-primary" rounded size="is-small">
@@ -57,11 +59,10 @@
               >
             </a>
           </span>
-          </div>
-          <div>
+        </div>
+        <div>
           <span>{{ restaurant.display_phone }} </span>
-          </div>
-        <p class="price">Price: {{ restaurant.price }}</p>
+        </div>
 
         <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
           <b-button
@@ -75,7 +76,6 @@
           </b-button>
         </p>
 
-        
         <br />
         <div class="transactions">
           <b-button size="is-small">
@@ -115,33 +115,33 @@
         <br />
       </div>
       <div class="far-right-panel">
-          <p>Hours:</p>
-          <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
-            <span v-for="open in hours.open" v-bind:key="open.day">
-              <span v-if="open.day === 6"
-                >Sunday: {{ open.start }} - {{ open.end }}<br
-              /></span>
-              <span v-if="open.day === 0"
-                >Monday: {{ open.start }} - {{ open.end }}<br
-              /></span>
-              <span v-if="open.day === 1"
-                >Tuesday: {{ open.start }} - {{ open.end }}<br
-              /></span>
-              <span v-if="open.day === 2"
-                >Wednesday: {{ open.start }} - {{ open.end }}<br
-              /></span>
-              <span v-if="open.day === 3"
-                >Thursday: {{ open.start }} - {{ open.end }}<br
-              /></span>
-              <span v-if="open.day === 4"
-                >Friday: {{ open.start }} - {{ open.end }}<br
-              /></span>
-              <span v-if="open.day === 5"
-                >Saturday: {{ open.start }} - {{ open.end }}<br
-              /></span>
-            </span>
-          </p>
-        </div>
+        <p>Hours:</p>
+        <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
+          <span v-for="open in hours.open" v-bind:key="open.day">
+            <span v-if="open.day === 6"
+              >Sunday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 0"
+              >Monday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 1"
+              >Tuesday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 2"
+              >Wednesday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 3"
+              >Thursday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 4"
+              >Friday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 5"
+              >Saturday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+          </span>
+        </p>
+      </div>
     </div>
   </main>
 </template>
@@ -161,6 +161,8 @@ export default {
       isLoading: true,
       directionsAddress: [],
       transactionTypes: "",
+      categories: [],
+      category: ''
     };
   },
   created() {
@@ -172,6 +174,14 @@ export default {
         for (let i = 0; i < this.restaurant.transactions.length; i++) {
           this.transactionTypes +=
             this.restaurant.transactions[i].transactions + " ";
+        }
+        for (let j = 0; j < this.restaurant.categories.length; j++) {
+          this.category = this.restaurant.categories[j].title;
+          if (j < this.restaurant.categories.length - 1) {
+            this.categories.push(this.category + " | ");
+          } else {
+            this.categories.push(this.category);
+          }
         }
       }
     );
@@ -191,16 +201,13 @@ export default {
   width: 300px;
   height: 300px;
   object-fit: cover;
-  
 }
 .left-panel {
   padding: 20px;
   margin-right: 25px;
-  
 }
 .right-panel {
   padding: 20px;
- 
 }
 .button.is-rounded {
   border-radius: 290486px;
@@ -209,9 +216,6 @@ export default {
   padding-right: calc(1em + 0.25em);
   padding: 10px;
 }
-.price {
-  font-weight: 550;
-}
 
 .transactions > button.is-small {
   border: none;
@@ -219,5 +223,7 @@ export default {
   margin-left: 10px;
   padding: 10px;
 }
-
+.bold-class{
+  font-weight: bold;
+}
 </style>
