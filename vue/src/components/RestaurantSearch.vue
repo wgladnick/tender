@@ -29,6 +29,8 @@
   <section>
   <!-- Categories -->
   <div class="cat-filter">
+    <h1 class="search-heading">Filter Categories</h1>
+    <p>(Choose your cravings)</p>
   <label class="container" v-for="category in availCategories" 
   v-bind:key="category.categoryId">{{category.displayName}}
   <input type="checkbox" checked="checked"
@@ -307,8 +309,13 @@ input {
 
 .cat-filter{
   padding-top:4em;
-
   display: inline-block;
+  }
+
+  .cat-filter p{
+    margin-top:-1.5em;
+    font-weight:500;
+    padding-bottom:2em;
   }
 
 
