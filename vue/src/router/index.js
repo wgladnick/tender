@@ -6,7 +6,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import RestaurantFinder from '../views/restaurantFinder'
 import RestaurantDetails from '../views/RestaurantDetails'
-import Invite from '../views/Invite.vue'
+import InviteeView from '../views/InviteeView.vue'
 
 Vue.use(Router)
 
@@ -65,12 +65,12 @@ const router = new Router({
     },
     {
       path: "/invite/:uniqueId/",
-      name: "inviteedetails",
-      component: Invite,
+      name: "inviteeView",
+      component: InviteeView,
       meta: {
         requiresAuth: false
       }
-    },
+    }
 
     
   ]

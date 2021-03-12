@@ -79,6 +79,8 @@
             v-bind:restaurant="restaurant"
             class="card"
           />
+
+          <Invitation-card />
         </div>
       </div>
     </section>
@@ -91,10 +93,14 @@
 <script>
 import RestaurantService from "../services/RestaurantService";
 import RestaurantCard from "../components/RestaurantCard";
+import InvitationCard from "../components/InvitationCard";
 
 export default {
   name: "restaurant-search",
-  components: { RestaurantCard },
+  components: { 
+    RestaurantCard,
+    InvitationCard 
+  },
 
   data() {
     return {
