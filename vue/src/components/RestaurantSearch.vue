@@ -31,6 +31,7 @@
   <div class="cat-filter">
     <h1 class="search-heading">Filter Categories</h1>
     <p>(Choose your cravings)</p>
+    <button class ="find-food" v-on:click="searchByLocation()" focused> Update My Search </button>
   <label class="container" v-for="category in availCategories" 
   v-bind:key="category.categoryId">{{category.displayName}}
   <input type="checkbox" checked="checked"
@@ -40,6 +41,7 @@
              />
   <span class="checkmark"></span>
 </label>
+
   </div>
 
   </section>
@@ -170,6 +172,8 @@ main{
   display:flex;
   flex-direction:column;
     padding-left:4em;
+    border-right:2px;
+    border-color:black;
 }
 .right{
   display:flex;
@@ -216,9 +220,12 @@ input {
    border-radius:3px;
 }
 
-
+.cat-filter .find-food{
+  margin-bottom:2em;
+  background-color:#81974e;
+}
 .find-food{
-   background-color: #dc6b67;
+  background-color: #dc6b67;
   border: none;
   color: white;
    padding:10px;
@@ -231,6 +238,8 @@ input {
   border-radius: 5px;
   width: 100%;
   margin-top: 30px;
+  margin-top:2em;
+  font-weight:bold;
 
 }
 
@@ -312,10 +321,14 @@ input {
   display: inline-block;
   }
 
+  
+
+
   .cat-filter p{
     margin-top:-1.5em;
     font-weight:500;
-    padding-bottom:2em;
+    margin-bottom:-1em;
+    
   }
 
 
@@ -342,6 +355,7 @@ input {
 }
 .restaurant-list{
   width:70vw;
+  margin-left:2em;
 }
 .result-list {
   padding-left:10em;
@@ -357,8 +371,7 @@ input {
   padding: 1em;
 }
 
-.find-food{
-  margin-top:2em;
-}
+
+
 
 </style>
