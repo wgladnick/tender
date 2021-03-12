@@ -1,7 +1,7 @@
 <template>
 <div class="header" >
       <div class="logo">
-        <img src="../assets/tender.png" />
+        <img class="flame" style="padding-right: 10px;" src="../assets/TenderFlame.png"/><img src="../assets/tender.png" />
       </div>
 
       <div id="nav">
@@ -24,6 +24,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.flame{
+  height: 70px;
+}
 </style>
