@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="zoom">
     <div class="left-panel">
       <router-link :to="{ name: 'details', params: { id: restaurant.id }}" ><img :src="restaurant.image_url" class="yelp-image" /></router-link>
     </div>
@@ -10,21 +10,12 @@
         v-for="ctg in restaurant.categories"
         v-bind:key="ctg.title"
       >
-        {{ ctg.title }}
+{{ ctg.title }}
       </span>
       
     </div>
     <router-link :to="{ name: 'details', params: { id: restaurant.id }}" ><h1 class="title">{{ restaurant.name }}</h1> </router-link>
-    <div>
-    <span
-      v-for="ln in restaurant.location.display_address"
-      v-bind:key="ln.display_address"
-    >
-      {{ ln }}
-    </span>
-    <br>
-
-    <div class="star-rating">
+      <div class="star-rating">
       <star-rating
         :rating="restaurant.rating"
         :read-only="true"
@@ -34,6 +25,16 @@
         :star-size=25
       /> 
     </div>
+    <div class=location-phone>
+    <span
+      v-for="ln in restaurant.location.display_address"
+      v-bind:key="ln.display_address"
+    >
+      {{ ln }}
+    </span>
+    
+
+  
     <br>
     <span>{{ restaurant.display_phone }} </span>
     
@@ -104,25 +105,8 @@ export default {
           this.transactionTypes += this.restaurant.transactions[i].transactions + " ";
             }
 
-                RestaurantService.getTheRestaurant(this.$route.params.id).then(
-      (response) => {
-        this.restaurant = response.data;
-        this.isLoading = false;
-
-        for (let i = 0; i < this.restaurant.transactions.length; i++) {
-          this.transactionTypes +=
-            this.restaurant.transactions[i].transactions + " ";
-        }
-        for (let j = 0; j < this.restaurant.categories.length; j++) {
-          this.category = this.restaurant.categories[j].title;
-          if (j < this.restaurant.categories.length - 1) {
-            this.categories.push(this.category + " | ");
-          } else {
-            this.categories.push(this.category);
-          }
-        }
-      }
-    );
+      
+  
       }
 
 };
@@ -136,13 +120,15 @@ main {
   
 }
 .yelp-image {
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   object-fit: cover;
 }
+
+
 .left-panel {
   padding: 20px;
-  margin-right:10px;
+  margin-right:35px;
   
 }
 .right-panel {
@@ -163,11 +149,14 @@ main {
     padding-left: calc(1em + 0.25em);
     margin-right: 10px;
     padding-right: calc(1em + 0.25em);
+    font-size:1em;
+    width:15em;
 }
 .transactions > button.is-small {
   border: none;
-  font-size:.8em;
+  font-size:em;
   font-weight:bold;
+ 
 }
 .price {
   font-weight: 550;
@@ -178,6 +167,10 @@ main {
   width:.2em;
   
   
+}
+
+.location-phone{
+  padding-top:1em;
 }
 
 .categories {
@@ -193,4 +186,27 @@ margin-top:25px;
 margin-left:-.5em;
 
 }
+
+.zoom {
+  padding: 50px;
+
+  transition: transform .7s;
+
+
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
+
+.title:hover{
+  color:#dc6b67;
+}
+
+
+
+
 </style>

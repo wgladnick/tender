@@ -53,7 +53,7 @@ h1{
   display: flex;
   flex-direction: column;
   justify-self: center;
-  height:70vh;
+  height:80vh;
   align-self:center;
   background-color:white;
   padding: 75px;

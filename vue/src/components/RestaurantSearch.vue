@@ -8,7 +8,7 @@
 
     <div>
   <label for="searchLocate">Location:</label><br>
-  <input id="searchLocate" v-model="location" type="text"  placeholder="Enter a Zipcode or Location"><br>
+  <input id="searchLocate" v-model.lazy="location" type="text"  placeholder="Enter a Zipcode or Location"><br>
   </div>
 
   <div class="radius">
@@ -48,12 +48,18 @@
   </section>
 
   <section class="right">
+        <div v-if="location === ''">
+      <h1 class="loading-text">Let's Find You Some Grub <br> < Enter a Location</h1>
+      </div>
  <div class="restaurant-list">
     <div class="loading-gif" v-if="isLoading">
       <img src="../assets/loading.gif" />
     </div>
 
+      
     <div v-if="!isLoading" class="result-list">
+      <h1 class="title"> Here are the restaurants we found near {{location}} </h1>
+     
       <restaurant-card
         v-for="restaurant in restaurants"
         v-bind:key="restaurant.id"
@@ -99,7 +105,8 @@ export default {
       isLoading: true,
       availCategories: [],
       radius:'8050',
-      categoriesSelected:[]
+      categoriesSelected:[],
+      noneFound:false
    
     };
   },
@@ -141,6 +148,7 @@ export default {
          
           // this controls loading gif
           if (this.restaurants.length === 0) {
+            this.noneFound = true;
             this.isLoading = true;
           } else {
             this.isLoading = false;
@@ -149,9 +157,9 @@ export default {
 
         .catch((error) => {
           const response = error.response;
-
-          if (response.status === 401) {
-            this.invalidLocation = true;
+          
+          if (response.status === 401 && response.status === 500 ) {
+            this.noneFound = true;
           }
         });
          
@@ -176,8 +184,10 @@ main{
     border-color:black;
 }
 .right{
+  margin-top:2em;
   display:flex;
   width:80vw;
+  flex-direction: column;
 
 }
 
@@ -198,6 +208,16 @@ label {
   font-weight:bold;
   font-size:1.5em;
   margin-bottom:1em;
+}
+
+.loading-text{
+    font-weight:bold;
+  font-size:1.5em;
+ padding-top:5em;
+  text-align:center;
+  margin-bottom:-100em;
+
+
 }
 .search-bar {
   background-color: #fdf2f2;
@@ -358,6 +378,9 @@ input {
   display: flex;
   justify-content: center;
   height: 80vh;
+  margin-top:-1em;
+  margin-left:7em;
+
  
 }
 
