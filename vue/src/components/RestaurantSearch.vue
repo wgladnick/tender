@@ -7,12 +7,12 @@
   <form class="location-search" v-on:submit.prevent>
 
     <div>
-  <label for="searchLocate">Location</label><br>
+  <label for="searchLocate">Location:</label><br>
   <input id="searchLocate" v-model="location" type="text"  placeholder="Enter a Zipcode or Location"><br>
   </div>
 
   <div class="radius">
-  <label for="selectRadius">Radius</label><br>
+  <label for="selectRadius">Radius:</label><br>
   <select name="selectRadius" id="selectRadius" v-model="radius">
     <option value="8050">5 miles </option>
     <option value="16100">10 miles </option>
@@ -212,12 +212,18 @@ select {
   width:100%;
   height:40px;
   border-radius:3px;
+  font-size:1em;
+  padding-left:.5em;
+  font-weight:600;
 }
 
 input {
   width:100%;
   height:40px;
-   border-radius:3px;
+  border-radius:3px;
+  padding-left:.5em;
+  font-size:1em;
+  font-weight:600;
 }
 
 .cat-filter .find-food{
@@ -243,6 +249,14 @@ input {
 
 }
 
+.find-food:hover{
+  background-color:#f7a09d ;
+}
+
+.cat-filter .find-food:hover{
+  background-color:#a5c064;
+}
+
 /*  Check boxes start here -----------------------------*/
 
 
@@ -253,7 +267,7 @@ input {
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: .8em;
+  font-size: 1em;
   font-weight:bold;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -262,6 +276,7 @@ input {
 }
 
   .container input {
+
   position: absolute;
   opacity: 0;
   cursor: pointer;
