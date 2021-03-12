@@ -26,7 +26,7 @@ public class HoursOpen {
         String openTime = "";
 
         if (start >= 1300) {
-            openTime = String.valueOf(start - 1200)  + " PM";
+            openTime = String.valueOf(start - 1200) + " PM";
         } else {
             openTime = String.valueOf(start) + " AM";
         }
@@ -49,6 +49,8 @@ public class HoursOpen {
 
         if (end >= 1300) {
             endTime = String.valueOf(end - 1200) + " PM";
+        } else if(end == 0000) {
+            endTime = "1200 AM";
         } else {
             endTime = String.valueOf(end) + " AM";
         }

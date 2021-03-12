@@ -2,6 +2,8 @@ package com.techelevator.services.yelpfusion.models.business;
 
 import com.techelevator.services.yelpfusion.models.review.Review;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,8 +28,10 @@ public class BusinessDetails {
     private List<Photos> photos;
     private Hours[] hours;
     private Review[] reviews;
+    private int day;
 
     public BusinessDetails() {
+        setDay();
     }
 
     public String getId() {
@@ -180,6 +184,17 @@ public class BusinessDetails {
 
     public void setReviews(Review[] reviews) {
         this.reviews = reviews;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay() {
+        LocalDate date = LocalDate.now();
+        DayOfWeek day = date.getDayOfWeek();
+
+        this.day = day.getValue() - 1;
     }
 
     @Override
