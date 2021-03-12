@@ -152,6 +152,10 @@ export default {
           this.restaurants.sort(function (a, b) {
             return a.distance - b.distance;
           });
+          this.restaurants = this.restaurants.filter( restaurant => { 
+            if(this.radius >= restaurant.distance) {return restaurant}
+          } );
+
 
           // this controls loading gif
           if (this.restaurants.length === 0) {

@@ -1,5 +1,4 @@
-START TRANSACTION;
-
+createdb -U postgres $DATABASE
 
 DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS user_categories;
@@ -25,7 +24,6 @@ INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUE
 INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN','admin','istrator','admin@user.com');
 INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('test','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN','admin','istrator','admin@user.com');
 
-
 SELECT * FROM users;
 
 CREATE TABLE IF NOT EXISTS user_details (
@@ -40,7 +38,6 @@ CREATE TABLE IF NOT EXISTS user_details (
     
 INSERT INTO user_details (user_id, address, city, state, zip, default_radius) VALUES (1,'413 N Market St', 'Wilmington', 'DE', '19801', 16100);
 INSERT INTO user_details (user_id, address, city, state, zip, default_radius) VALUES (2,'1836 N Lincoln St', 'Wilmington', 'DE', '19806',16100);
-
 
 CREATE TABLE IF NOT EXISTS user_categories (
     user_id INTEGER,
@@ -95,17 +92,24 @@ CREATE TABLE IF NOT EXISTS invitation_restaurant (
      thumbs_down INTEGER DEFAULT 0
 );
 
+CREATE USER final_capstone_owner
+WITH PASSWORD 'finalcapstone';
+
 GRANT ALL
 ON ALL TABLES IN SCHEMA public
 TO final_capstone_owner;
+
 GRANT ALL
 ON ALL SEQUENCES IN SCHEMA public
 TO final_capstone_owner;
+
+CREATE USER final_capstone_appuser
+WITH PASSWORD 'finalcapstone';
+
 GRANT SELECT, INSERT, UPDATE, DELETE
 ON ALL TABLES IN SCHEMA public
 TO final_capstone_appuser;
+
 GRANT USAGE, SELECT
 ON ALL SEQUENCES IN SCHEMA public
 TO final_capstone_appuser;
-
-COMMIT;
