@@ -3,7 +3,7 @@
  <section class ="left">
    <!-- Search Bar -->
     <div class="search-banner">
-      <h1 class="h3 mb-3 font-weight-normal">Where are we partying?</h1>
+      <h1 class="search-heading">Where are we partying?</h1>
   <form class="location-search" v-on:submit.prevent>
 
     <div>
@@ -11,7 +11,7 @@
   <input id="searchLocate" v-model="location" type="text"  placeholder="Enter a Zipcode or Location"><br>
   </div>
 
-  <div>
+  <div class="radius">
   <label for="selectRadius">Radius</label><br>
   <select name="selectRadius" id="selectRadius" v-model="radius">
     <option value="8050">5 miles </option>
@@ -19,8 +19,9 @@
     <option value="24200">15 miles </option>
     <option value="40000">25 miles </option>
     </select>
+
     </div>
-      <button v-on:click="searchByLocation()" focused> Find Food </button>
+      <button class ="find-food" v-on:click="searchByLocation()" focused> Find Food </button>
 </form>
 </div>
 
@@ -178,6 +179,63 @@ section{
   display:flex;
 }
 
+label {
+  font-weight:bold;
+}
+
+.location-search{
+  display:flex;
+  flex-direction:column;
+}
+
+.search-heading{
+  font-weight:bold;
+  font-size:1.5em;
+  margin-bottom:1em;
+}
+.search-bar {
+  background-color: #fdf2f2;
+}
+
+.radius {
+  margin-top:1em;
+  
+}
+
+select {
+  width:100%;
+  height:40px;
+  border-radius:3px;
+}
+
+input {
+  width:100%;
+  height:40px;
+   border-radius:3px;
+}
+
+
+.find-food{
+   background-color: #dc6b67;
+  border: none;
+  color: white;
+   padding:10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 30px;
+
+}
+
+/*  Check boxes start here -----------------------------*/
+
+
+
 .container {
   display: flex;
   position: relative;
@@ -253,13 +311,7 @@ section{
   display: inline-block;
   }
 
-.location-search{
-  display:flex;
-  flex-direction:column;
-}
-.search-bar {
-  background-color: #fdf2f2;
-}
+
 
 
 
@@ -296,6 +348,10 @@ section{
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 1em;
+}
+
+.find-food{
+  margin-top:2em;
 }
 
 </style>
