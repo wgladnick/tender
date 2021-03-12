@@ -16,6 +16,9 @@
   :key="restaurant.id"
   :restaurant="restaurant" 
   />
+  <div v-if="errorMsg">
+    Invite not Found!!!!!!!!!
+  </div>
   </div>
 </template>
 
@@ -32,6 +35,8 @@ export default {
 
       isLoading: true,
 
+      errorMsg: false,
+
     };
   },
      created() {
@@ -39,6 +44,9 @@ export default {
       (response) => {
         this.invitee = response.data;
         this.isLoading = false;
+        if(this.invitee.uniqueId === null) {
+          this.errorMsg = true;
+        }
       }
     );
   },

@@ -200,8 +200,9 @@ h1 {
   display: flex;
   align-items: center;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   justify-content: center;
+
 }
 #register-container {
   width: 30%;
