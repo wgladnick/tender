@@ -33,7 +33,7 @@
             {{ ln }}
           </span>
           <a
-            :href="`https://www.google.com/maps/dir/19801/${restaurant.location.display_address
+            :href="`https://www.google.com/maps/dir/${this.$store.state.searchDirections}/${restaurant.location.display_address
               .toString()
               .split(' ')
               .join('+')}/`"

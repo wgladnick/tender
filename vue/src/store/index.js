@@ -66,7 +66,7 @@ export default new Vuex.Store({
 
     SET_SEARCH_LOCATION(state, location) {
       state.searchLocation = location;
-      
+      state.searchDirections = state.searchLocation.split(' ').join('+');
     },
 
     SET_SEARCH_RADIUS(state, radius) {
