@@ -31,6 +31,7 @@
         :increment="0.01"
         :show-rating="false"
         :inline="true"
+        :star-size=25
       /> 
     </div>
     <div class="categories">

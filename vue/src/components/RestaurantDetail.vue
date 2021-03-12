@@ -9,12 +9,10 @@
       </div>
       <div class="right-panel">
         <h1 class="title">{{ restaurant.name }}</h1>
-        <b-button
-          size="is-small"
-          rounded
+        <span
           v-for="category in restaurant.categories"
           v-bind:key="category.title"
-          >{{ category.title }}</b-button
+          >{{ category.title }} </span
         >
         <div>
           <star-rating class="stars"
@@ -26,12 +24,8 @@
           />
           <a :href="restaurant.url" target="_blank"> See Yelp Reviews Here </a>
         </div>
-        <span
-            v-for="ln in restaurant.location.display_address"
-            v-bind:key="ln.display_address"
-          >
-            {{ ln }}
-          </span>
+        
+        <div>
           <a
             :href="`https://www.google.com/maps/dir/${this.$store.state.searchDirections}/${restaurant.location.display_address
               .toString()
@@ -44,8 +38,17 @@
               Get Directions</b-button
             >
           </a>
+          </div>
+          <div>
+        <span
+            v-for="ln in restaurant.location.display_address"
+            v-bind:key="ln.display_address"
+          >
+            {{ ln }}
+          </span>
+        </div>
           <br />
-          
+          <div>
           <span>
             <a :href="`tel:${restaurant.phone}`">
               <b-button type="is-primary" rounded size="is-small">
@@ -54,8 +57,10 @@
               >
             </a>
           </span>
+          </div>
+          <div>
           <span>{{ restaurant.display_phone }} </span>
-
+          </div>
         <p class="price">Price: {{ restaurant.price }}</p>
 
         <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
