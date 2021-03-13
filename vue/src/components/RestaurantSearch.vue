@@ -119,6 +119,9 @@
 
           <div class="right"></div>
 
+      
+          <restaurant-detail />
+
         </div>
       </div>
     </section>
