@@ -28,12 +28,25 @@
 
 <script>
 export default {
-  name: "invitation-card",
+  name: "new-dinner-card",
+  vuetify: new Vuetify(),
 
   data() {
       return {
           invites: []
+
       };
+  },
+  methods: {
+    add () {
+      this.invites.push({
+        label1: "Enter Friend's Email Address",
+        value1: ""
+      })
+    },
+    remove (index){
+      this.invites.splice(index, 1)
+    }
   }
 
 
@@ -42,4 +55,5 @@ export default {
 </script>
 
 <style>
+
 </style>
