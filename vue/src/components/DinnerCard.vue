@@ -16,6 +16,7 @@
                 horizontal-time-picker>
             </b-datetimepicker>
         </b-field>
+        <b-field label="Who's invited?">
         <b-input
           id="email"
           type="text"
