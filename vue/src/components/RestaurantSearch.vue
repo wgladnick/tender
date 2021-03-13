@@ -173,6 +173,7 @@ export default {
       this.isLoading = false;
       this.isShowingResults = true;
       this.isInitialSearch = false;
+      this.updatedLocation = this.location;
     }
   },
 
