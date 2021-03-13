@@ -36,11 +36,19 @@ export default new Vuex.Store({
     searchLocation: '',
     searchDirections: '',
     radius: '',
-    restaurants: []
+    restaurants: [],
+    thumbsUpList: [],
+    invitees: []
   },
   mutations: {
     SET_RESTAURANT_LIST(state, restaurants){
       state.restaurants = restaurants;
+    },
+    SET_THUMBS_UP_LIST(state, thumbsUpList){
+      state.thumbsUpList = thumbsUpList;
+    },
+    SET_INVITEES_LIST(state, invitees){
+      state.invitees = invitees;
     },
     //sets the auth token
     SET_AUTH_TOKEN(state, token) {
