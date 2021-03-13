@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "new-dinner-card",
+  name: "create-dinner",
   vuetify: new Vuetify(),
 
   data() {
