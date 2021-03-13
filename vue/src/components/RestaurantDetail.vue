@@ -157,6 +157,7 @@ import StarRating from "vue-star-rating";
 
 export default {
   name: "restaurant-detail",
+  props:["isInitialSearch"],
   components: {
     StarRating,
   },
@@ -171,6 +172,7 @@ export default {
     };
   },
   created() {
+
     RestaurantService.getTheRestaurant(this.$route.params.id).then(
       (response) => {
         this.restaurant = response.data;

@@ -1,7 +1,7 @@
 <template>
   <main class="zoom">
     <div class="left-panel">
-      <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
+      <router-link  :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
       /></router-link>
     </div>
@@ -15,7 +15,7 @@
           {{ category }}
         </span>
       </div>
-      <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
+      <router-link  :to="{ name: 'details', params: { id: restaurant.id } }"
         ><h1 class="title">{{ restaurant.name }}</h1>
       </router-link>
       <div class="star-rating">
@@ -118,6 +118,7 @@ export default {
       }
     }
   },
+ 
 };
 </script>
 

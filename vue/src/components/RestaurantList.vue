@@ -20,7 +20,7 @@ export default {
   name: "restaurant-list",
   components: { RestaurantCard },
 
-  props: ["restaurants", "isLoading"],
+  props: ["restaurants", "isLoading", "isInitialSearch"],
 
   data() {
     return {};

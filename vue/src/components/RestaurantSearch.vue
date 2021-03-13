@@ -1,7 +1,10 @@
 <template>
-  <main>
-    <section class="left">
-      <!-- Search Bar -->
+  <main class = body>
+
+    <!-- Left Panel -->
+    <section class="left" v-if="isShowingResults === true">
+
+      <!-- Search Bar - Left Panel -->
       <div class="search-banner">
         <h1 class="search-heading">Where are we partying?</h1>
         <form class="location-search" v-on:submit.prevent>
@@ -30,8 +33,8 @@
         </form>
       </div>
 
-      <section>
-        <!-- Categories -->
+  <!-- Categories -->
+      <div>
         <div class="cat-filter">
           <h1 class="search-heading">Filter Categories</h1>
           <p>(Choose your cravings)</p>
@@ -53,24 +56,61 @@
             <span class="checkmark"></span>
           </label>
         </div>
-      </section>
+      </div>
     </section>
+    <!--Categories End -->
 
-    <section class="right">
+   <!-- Initial Search -->
+      <section class="login-search">
+     <div class="initial-search" v-if="isInitialSearch === true">
+        <div class="loading-gif">
+          <img src="../assets/loading.gif" />
+        </div>
       <div v-if="location === ''">
         <h1 class="loading-text">
-          Let's Find You Some Grub <br />
-          Enter a Location
+          Let's Find You Some Grub 
         </h1>
       </div>
+
+       <form class="search-main" v-on:submit.prevent>
+          <div>
+            <label for="searchLocate">Location:</label><br />
+            <input
+              id="searchLocate"
+              v-model.lazy="location"
+              type="text"
+              placeholder="Enter a Zipcode or Location"
+            /><br />
+          </div>
+
+          <div class="radius">
+            <label for="selectRadius">Radius:</label><br />
+            <select name="selectRadius" id="selectRadius" v-model="radius">
+              <option value="8050">5 miles</option>
+              <option value="16100">10 miles</option>
+              <option value="24200">15 miles</option>
+              <option value="40000">25 miles</option>
+            </select>
+          </div>
+          <button class="find-food" v-on:click="searchByLocation()" focused>
+            Find Food
+          </button>
+
+        </form>
+        </div>
+        </section>
+<!-- Inital Search Ends -->
+  
+<!--Restaurant List Body -->
+ <section class="middle">
       <div class="restaurant-list">
         <div class="loading-gif" v-if="isLoading">
           <img src="../assets/loading.gif" />
         </div>
 
-        <div v-if="!isLoading" class="result-list">
+        <div v-if="hasResults" class="result-list">
           <h1 class="title">
-            Here are the restaurants we found near {{ location }}
+            Here are the restaurants we found near {{ updatedLocation }}
           </h1>
 
           <restaurant-card
@@ -79,6 +119,12 @@
             v-bind:restaurant="restaurant"
             class="card"
           />
+ 
+        
+          <!-- Restaurant List Body Ends -->
+
+          <div class = "right">
+            </div>
 
           <Invitation-card />
         </div>
@@ -88,18 +134,19 @@
 
   <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
 
-  <!-- Category Dropdown -->
 </template>
 <script>
 import RestaurantService from "../services/RestaurantService";
 import RestaurantCard from "../components/RestaurantCard";
 import InvitationCard from "../components/InvitationCard";
+import RestaurantDetail from './RestaurantDetail.vue';
 
 export default {
   name: "restaurant-search",
   components: { 
     RestaurantCard,
-    InvitationCard 
+    InvitationCard,
+    RestaurantDetail 
   },
 
   data() {
@@ -107,11 +154,14 @@ export default {
       restaurants: [],
       location: "",
       invalidLocation: false,
-      isLoading: true,
+      isLoading: false,
+      isInitialSearch: true,
+      isShowingResults: false,
       availCategories: [],
       radius: "8050",
       categoriesSelected: [],
       noneFound: false,
+      updatedLocation:""
     };
   },
   created() {
@@ -121,7 +171,15 @@ export default {
       this.location = this.$store.state.searchLocation;
       this.radius = this.$store.state.radius;
       this.isLoading = false;
+      this.isShowingResults = true;
+      this.isInitialSearch = false;
     }
+  },
+
+  computed: {
+    hasResults(){
+      return this.isShowingResults === true && this.isLoading === false;
+    },
   },
 
   methods: {
@@ -139,6 +197,7 @@ export default {
       this.isLoading = true;
       this.$store.commit("SET_SEARCH_LOCATION", this.location);
       this.$store.commit("SET_SEARCH_RADIUS", this.radius);
+      this.isInitialSearch = false;
 
       RestaurantService.getRestaurants(
         this.location,
@@ -162,7 +221,11 @@ export default {
             this.noneFound = true;
             this.isLoading = true;
           } else {
+            this.updatedLocation = this.location;
             this.isLoading = false;
+            this.isShowingResults = true;
+
+            
           }
         })
 
@@ -180,9 +243,13 @@ export default {
 };
 </script>
 <style scoped>
-main {
+.body {
   display: flex;
-  margin-top: 3em;
+  flex-direction: row;
+  margin-top: 5em;
+  height:100%;
+ 
+
 }
 
 .left {
@@ -191,13 +258,16 @@ main {
   padding-left: 4em;
   border-right: 2px;
   border-color: black;
+  width:20vw;
 }
-.right {
+.middle {
   margin-top: 2em;
   display: flex;
   width: 80vw;
   flex-direction: column;
+ 
 }
+
 
 section {
   display: flex;
@@ -205,6 +275,25 @@ section {
 
 label {
   font-weight: bold;
+}
+
+.search-main{
+  width:30%;
+  align-self:center;
+  margin-top:3em;
+ 
+}
+
+
+.initial-search{
+  display:flex;
+  flex-direction: column;
+  width:100vw;
+  height:80vh;
+  margin-top:3em;
+ 
+ 
+
 }
 
 .location-search {
@@ -221,7 +310,7 @@ label {
 .loading-text {
   font-weight: bold;
   font-size: 1.5em;
-  padding-top: 5em;
+  padding-top:0;
   text-align: center;
   margin-bottom: -100em;
 }
@@ -368,20 +457,38 @@ input {
 .loading-gif {
   display: flex;
   justify-content: center;
-  height: 80vh;
-  margin-top: -1em;
-  margin-left: 7em;
+  height:20vh;
+ 
+ 
 }
 
 .loading-gif img {
   width: 400px;
-  height: 400px;
+  max-height: 400px;
   object-fit: contain;
   align-self: center;
+  margin-top:-em;
 }
+
+.restaurant-list .loading-gif{
+  width:100%;
+  height:75vh;
+
+
+}
+.restaurant-list .loading-gif img{
+ 
+ padding:0;
+
+}
+
+
 .restaurant-list {
+  display: flex;
+  flex-direction: column;
   width: 70vw;
   margin-left: 2em;
+
 }
 .result-list {
   padding-left: 10em;
