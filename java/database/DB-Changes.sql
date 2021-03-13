@@ -64,6 +64,7 @@ INSERT INTO food_categories (display_name, search_name) VALUES
 
 CREATE TABLE IF NOT EXISTS invitation (
     invite_id SERIAL PRIMARY KEY,
+    invite_name VARCHAR,
     location VARCHAR,
     radius INTEGER,
     creator_user_id INTEGER,
