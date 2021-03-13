@@ -119,11 +119,9 @@
 
           <div class="right"></div>
 
-<<<<<<< HEAD
-          <Invitation-card />
+      
           <restaurant-detail />
-=======
->>>>>>> ee023bbd3c94b474da9642178732e108720a1fcb
+
         </div>
       </div>
     </section>
