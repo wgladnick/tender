@@ -119,25 +119,22 @@
 
           <div class="right"></div>
 
-          <Invitation-card />
         </div>
       </div>
     </section>
   </main>
 
-  <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
+  <!-- This passes the restaurant array and isLoading as a prop to restaurant list -->
 </template>
 <script>
 import RestaurantService from "../services/RestaurantService";
 import RestaurantCard from "../components/RestaurantCard";
-import InvitationCard from "../components/InvitationCard";
 import RestaurantDetail from "./RestaurantDetail.vue";
 
 export default {
   name: "restaurant-search",
   components: {
     RestaurantCard,
-    InvitationCard,
     RestaurantDetail,
   },
 
