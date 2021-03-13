@@ -1,9 +1,7 @@
 <template>
-  <main class = body>
-
+  <main class="body">
     <!-- Left Panel -->
     <section class="left" v-if="isShowingResults === true">
-
       <!-- Search Bar - Left Panel -->
       <div class="search-banner">
         <h1 class="search-heading">Where are we partying?</h1>
@@ -33,7 +31,7 @@
         </form>
       </div>
 
-  <!-- Categories -->
+      <!-- Categories -->
       <div>
         <div class="cat-filter">
           <h1 class="search-heading">Filter Categories</h1>
@@ -60,19 +58,17 @@
     </section>
     <!--Categories End -->
 
-   <!-- Initial Search -->
-      <section class="login-search">
-     <div class="initial-search" v-if="isInitialSearch === true">
+    <!-- Initial Search -->
+    <section class="login-search">
+      <div class="initial-search" v-if="isInitialSearch === true">
         <div class="loading-gif">
           <img src="../assets/loading.gif" />
         </div>
-      <div v-if="location === ''">
-        <h1 class="loading-text">
-          Let's Find You Some Grub 
-        </h1>
-      </div>
+        <div v-if="location === ''">
+          <h1 class="loading-text">Let's Find You Some Grub</h1>
+        </div>
 
-       <form class="search-main" v-on:submit.prevent>
+        <form class="search-main" v-on:submit.prevent>
           <div>
             <label for="searchLocate">Location:</label><br />
             <input
@@ -95,14 +91,13 @@
           <button class="find-food" v-on:click="searchByLocation()" focused>
             Find Food
           </button>
-
         </form>
-        </div>
-        </section>
-<!-- Inital Search Ends -->
-  
-<!--Restaurant List Body -->
- <section class="middle">
+      </div>
+    </section>
+    <!-- Inital Search Ends -->
+
+    <!--Restaurant List Body -->
+    <section class="middle">
       <div class="restaurant-list">
         <div class="loading-gif" v-if="isLoading">
           <img src="../assets/loading.gif" />
@@ -119,35 +114,33 @@
             v-bind:restaurant="restaurant"
             class="card"
           />
- 
-        
+
           <!-- Restaurant List Body Ends -->
 
-          <div class = "right">
-            </div>
+          <div class="right"></div>
 
+<<<<<<< HEAD
           <Invitation-card />
           <restaurant-detail />
+=======
+>>>>>>> ee023bbd3c94b474da9642178732e108720a1fcb
         </div>
       </div>
     </section>
   </main>
 
-  <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
-
+  <!-- This passes the restaurant array and isLoading as a prop to restaurant list -->
 </template>
 <script>
 import RestaurantService from "../services/RestaurantService";
 import RestaurantCard from "../components/RestaurantCard";
-import InvitationCard from "../components/InvitationCard";
-import RestaurantDetail from './RestaurantDetail.vue';
+import RestaurantDetail from "./RestaurantDetail.vue";
 
 export default {
   name: "restaurant-search",
-  components: { 
+  components: {
     RestaurantCard,
-    InvitationCard,
-    RestaurantDetail 
+    RestaurantDetail,
   },
 
   data() {
@@ -162,7 +155,7 @@ export default {
       radius: "8050",
       categoriesSelected: [],
       noneFound: false,
-      updatedLocation:""
+      updatedLocation: "",
     };
   },
   created() {
@@ -174,11 +167,12 @@ export default {
       this.isLoading = false;
       this.isShowingResults = true;
       this.isInitialSearch = false;
+      this.updatedLocation = this.location;
     }
   },
 
   computed: {
-    hasResults(){
+    hasResults() {
       return this.isShowingResults === true && this.isLoading === false;
     },
   },
@@ -212,10 +206,11 @@ export default {
           this.restaurants.sort(function (a, b) {
             return a.distance - b.distance;
           });
-          this.restaurants = this.restaurants.filter( restaurant => { 
-            if(this.radius >= restaurant.distance) {return restaurant}
-          } );
-
+          this.restaurants = this.restaurants.filter((restaurant) => {
+            if (this.radius >= restaurant.distance) {
+              return restaurant;
+            }
+          });
 
           // this controls loading gif
           if (this.restaurants.length === 0) {
@@ -225,8 +220,6 @@ export default {
             this.updatedLocation = this.location;
             this.isLoading = false;
             this.isShowingResults = true;
-
-            
           }
         })
 
@@ -248,9 +241,7 @@ export default {
   display: flex;
   flex-direction: row;
   margin-top: 5em;
-  height:100%;
- 
-
+  height: 100%;
 }
 
 .left {
@@ -259,16 +250,14 @@ export default {
   padding-left: 4em;
   border-right: 2px;
   border-color: black;
-  width:20vw;
+  width: 20vw;
 }
 .middle {
   margin-top: 2em;
   display: flex;
   width: 80vw;
   flex-direction: column;
- 
 }
-
 
 section {
   display: flex;
@@ -277,25 +266,21 @@ section {
 label {
   font-weight: bold;
 }
-
-.search-main{
-  width:30%;
-  align-self:center;
-  margin-top:3em;
- 
+/* Home search */
+.search-main {
+  width: 30%;
+  align-self: center;
+  margin-top: 3em;
 }
 
-
-.initial-search{
-  display:flex;
+.initial-search {
+  display: flex;
   flex-direction: column;
-  width:100vw;
-  height:80vh;
-  margin-top:3em;
- 
- 
-
+  width: 100vw;
+  height: 80vh;
+  margin-top: 3em;
 }
+/* Home Search Ends Here */
 
 .location-search {
   display: flex;
@@ -311,12 +296,9 @@ label {
 .loading-text {
   font-weight: bold;
   font-size: 1.5em;
-  padding-top:0;
+  padding-top: 0;
   text-align: center;
   margin-bottom: -100em;
-}
-.search-bar {
-  background-color: #fdf2f2;
 }
 
 .radius {
@@ -341,10 +323,17 @@ input {
   font-weight: 600;
 }
 
+/* Update My Search Button */
 .cat-filter .find-food {
   margin-bottom: 2em;
   background-color: #81974e;
 }
+
+.cat-filter .find-food:hover {
+  background-color: #a5c064;
+}
+
+/* Find Food Button */
 .find-food {
   background-color: #dc6b67;
   border: none;
@@ -365,10 +354,6 @@ input {
 
 .find-food:hover {
   background-color: #f7a09d;
-}
-
-.cat-filter .find-food:hover {
-  background-color: #a5c064;
 }
 
 /*  Check boxes start here -----------------------------*/
@@ -453,14 +438,14 @@ input {
   margin-bottom: -1em;
 }
 
-/*  rest list */
+/* Checkboxes end here */
+
+/*  restaurant list */
 
 .loading-gif {
   display: flex;
   justify-content: center;
-  height:20vh;
- 
- 
+  height: 20vh;
 }
 
 .loading-gif img {
@@ -468,28 +453,22 @@ input {
   max-height: 400px;
   object-fit: contain;
   align-self: center;
-  margin-top:-em;
+  margin-top: -em;
 }
 
-.restaurant-list .loading-gif{
-  width:100%;
-  height:75vh;
-
-
+.restaurant-list .loading-gif {
+  width: 100%;
+  height: 75vh;
 }
-.restaurant-list .loading-gif img{
- 
- padding:0;
-
+.restaurant-list .loading-gif img {
+  padding: 0;
 }
-
 
 .restaurant-list {
   display: flex;
   flex-direction: column;
   width: 70vw;
   margin-left: 2em;
-
 }
 .result-list {
   padding-left: 10em;
