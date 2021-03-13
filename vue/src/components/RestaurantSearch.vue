@@ -127,6 +127,7 @@
             </div>
 
           <Invitation-card />
+          <restaurant-detail />
         </div>
       </div>
     </section>
