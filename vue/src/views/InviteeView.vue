@@ -4,17 +4,17 @@
   <br>
   <br>
   <br>
-  <dinner-card /> 
+  <copy-dinner-card />
 
   </div>
 </template>
 
 <script>
 import Invitee from '../components/Invitee.vue'
-import DinnerCard from '../components/DinnerCard.vue'
+import CopyDinnerCard from '../components/CopyDinnerCard.vue'
 export default {
   name: "invitee-view",
-  components: { Invitee, DinnerCard },
+  components: { Invitee, CopyDinnerCard },
 
 }
 </script>

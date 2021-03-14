@@ -35,6 +35,11 @@ public class AuthenticationController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDAO = userDAO;
     }
+    
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
+    public User getUserInfo(@PathVariable String username) {
+    	return userDAO.findByUsername(username);
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginDTO loginDto) {

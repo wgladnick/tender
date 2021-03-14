@@ -94,8 +94,9 @@
           </button>
            <button class="find-food" v-on:click="inviteePage()" focused>
               See Invitee Page
-              
           </button>
+          <input type="date" v-model="date"/>
+          <input type="time" v-model="time"/>
         </form>
       </div>
     </section>
@@ -123,7 +124,7 @@
           <!-- Restaurant List Body Ends -->
 
           <div class="right"></div>
-
+ 
       
           <restaurant-detail />
 
@@ -159,6 +160,8 @@ export default {
       categoriesSelected: [],
       noneFound: false,
       updatedLocation: "",
+      date: "",
+      time: ""
     };
   },
   created() {

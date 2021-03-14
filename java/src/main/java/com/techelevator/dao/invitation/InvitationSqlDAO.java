@@ -54,7 +54,8 @@ public class InvitationSqlDAO implements InvitationDAO {
 
 	}
 
-	@Override
+
+ @Override
 	public Invitation create(Invitation invitation) {
 
 		String sql = "INSERT INTO invitation (location, radius, creator_user_id, deadline, reservation_date_time) VALUES (?,?,?,?,?) RETURNING invite_id";
@@ -70,6 +71,7 @@ public class InvitationSqlDAO implements InvitationDAO {
 			throw new RuntimeException("Unable to create your invitation");
 		}
 	}
+	
 
 	private Invitation mapRowToInvitation(SqlRowSet rs) {
 

@@ -7,8 +7,8 @@ export default {
     getInvitee(uniqueId) {
         return axios.get(`/invitation/invitee/${uniqueId}`);
     },
-    sendInvite(invite){
-        return axios.post(`/invitation`, invite)
+    sendInvite(invitation){
+        return axios.post(`/invitation`, invitation)
     }
 
 }

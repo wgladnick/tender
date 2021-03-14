@@ -27,6 +27,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+
     token: currentToken || '',
     user: currentUser || {},
     byLocationBoard: [],
@@ -63,10 +64,17 @@ export default new Vuex.Store({
       localStorage.setItem('user',JSON.stringify(user));
     },
 
+    
+
+    },
+
+    
+
     //removes token and user from local storage, sets token and user to blank, 
     LOGOUT(state) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('currentUsername')
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
