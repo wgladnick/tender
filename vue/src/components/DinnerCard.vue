@@ -26,10 +26,11 @@
           type="email"
           placeholder="Enter friend's email"
           />
-          <b-button id="add-invitee"> Add Invitee</b-button>
+          <b-button v-on:click="addField()" id="add-invitee"> Add Invitee</b-button>
+        </b-field>
     </div>
     </div>
-    
+    <b-button type="submit"> Click to find out Where Dinner will be</b-button>
   </form>
 </template>
 
