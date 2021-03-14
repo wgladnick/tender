@@ -28,6 +28,7 @@
           <button class="find-food" v-on:click="searchByLocation()" focused>
             Find Food
           </button>
+           
         </form>
       </div>
 
@@ -90,6 +91,10 @@
           </div>
           <button class="find-food" v-on:click="searchByLocation()" focused>
             Find Food
+          </button>
+           <button class="find-food" v-on:click="inviteePage()" focused>
+              See Invitee Page
+              
           </button>
         </form>
       </div>
@@ -176,6 +181,11 @@ export default {
   },
 
   methods: {
+
+    inviteePage(uniqueId){
+      this.$router.push(`/invite/${uniqueId}`);
+
+    },
     getCategories() {
       RestaurantService.getAvailableCategories().then((response) => {
         this.availCategories = response.data;

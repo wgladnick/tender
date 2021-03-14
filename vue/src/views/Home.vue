@@ -1,6 +1,11 @@
 <template>
+<div>
+  <button>
+    Create Invite
+    </button>
+  </div>
 
-<dinner-list />
+<!-- <dinner-list /> -->
 
 </template>
 
