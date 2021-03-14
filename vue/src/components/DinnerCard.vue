@@ -19,7 +19,11 @@
                 horizontal-time-picker>
             </b-datetimepicker>
         </b-field>
+<<<<<<< HEAD
         <div id="container">
+=======
+        <b-field label="Who's invited?">
+>>>>>>> 5045f9e42f9cee3e19cff4de18f3cfa4951ce05b
         <b-input
           v-model="dinnerInvite.email" id="email"
           type="email"

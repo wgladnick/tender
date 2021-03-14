@@ -64,6 +64,7 @@ INSERT INTO food_categories (display_name, search_name) VALUES
 
 CREATE TABLE IF NOT EXISTS invitation (
     invite_id SERIAL PRIMARY KEY,
+    invite_name VARCHAR,
     location VARCHAR,
     radius INTEGER,
     creator_user_id INTEGER,
@@ -92,6 +93,9 @@ CREATE TABLE IF NOT EXISTS invitation_restaurant (
 CREATE USER final_capstone_owner
 WITH PASSWORD 'finalcapstone';
 
+CREATE USER final_capstone_appuser
+WITH PASSWORD 'finalcapstone';
+
 GRANT ALL
 ON ALL TABLES IN SCHEMA public
 TO final_capstone_owner;
@@ -99,9 +103,6 @@ TO final_capstone_owner;
 GRANT ALL
 ON ALL SEQUENCES IN SCHEMA public
 TO final_capstone_owner;
-
-CREATE USER final_capstone_appuser
-WITH PASSWORD 'finalcapstone';
 
 GRANT SELECT, INSERT, UPDATE, DELETE
 ON ALL TABLES IN SCHEMA public

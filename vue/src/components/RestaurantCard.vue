@@ -1,5 +1,6 @@
 <template>
   <main class="zoom">
+
     <div class="left-panel">
       <router-link  :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
@@ -87,24 +88,39 @@
         >
         <br />
       </div>
+
     </div>
+
+  <button v-if="isAddingRestaurants"> Fun </button>
+  
+
+
+
   </main>
 </template>
 
 <script>
 import StarRating from "vue-star-rating";
+
+
 export default {
   name: "restaurant-card",
   components: {
-    StarRating,
+    StarRating
+  
   },
-  props: ["restaurant"],
+  props: ["restaurant", "isAddingRestaurants"],
   data() {
     return {
       transactionTypes: '',
       categories: [],
+      isSelected:false
+     
     };
   },
+
+ 
+
   created() {
     for (let i = 0; i < this.restaurant.transactions.length; i++) {
       this.transactionTypes +=
@@ -118,8 +134,19 @@ export default {
       }
     }
   },
+
  
-};
+
+
+  methods:{
+    updateSelected(){
+      this.$emit('addSelectedRestaurant',this.isSelected)
+    }
+  }
+}
+
+ 
+
 </script>
 
 <style scoped>
