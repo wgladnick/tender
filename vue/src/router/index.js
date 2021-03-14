@@ -57,7 +57,7 @@ const router = new Router({
       }
     },
     {
-      path: "/:id",
+      path: "/search/:id",
       name: "details",
       component: RestaurantDetails,
       meta: {
@@ -75,7 +75,7 @@ const router = new Router({
 
     {
       path: "/search",
-      name: "restaurant-finder",
+      name: "restaurantFinder",
       component: restaurantFinder,
       meta: {
         requiresAuth: true

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="logo">
-      <router-link class="nav" v-bind:to="{ name: 'restaurantFinder' }"
+      <router-link class="nav" v-bind:to="{ name: 'home' }"
         ><img
           class="flame"
           style="padding-right: 10px"

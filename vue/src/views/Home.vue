@@ -37,7 +37,7 @@ export default {
   name: "home",
   methods: {
     searchForRestaurants(){
-      this.$router.push({ name: 'restaurant-finder'});
+      this.$router.push({ name: 'restaurantFinder'});
     },
       invite(){
       this.$router.push({ name: 'inviteeView'});

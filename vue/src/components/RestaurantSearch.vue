@@ -70,7 +70,7 @@ Restaurant Search
           <h1 class="loading-text">Let's Find You Some Grub</h1>
         </div>
 
-        <form class="search-main" v-on:submit.prevent>
+        <div class="search-main" >
           <div>
             <label for="searchLocate">Location:</label><br />
             <input
@@ -93,7 +93,7 @@ Restaurant Search
           <button class="find-food" v-on:click="searchByLocation()" focused>
             Find Food
           </button>
-        </form>
+        </div>
       </div>
     </section>
     <!-- Inital Search Ends -->
@@ -183,9 +183,7 @@ export default {
 
   methods: {
 
-    addToArray(id){
-        this.selectedRestauraunts.push(id);
-    },
+  
 
     getCategories() {
       RestaurantService.getAvailableCategories().then((response) => {
