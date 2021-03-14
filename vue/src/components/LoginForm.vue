@@ -84,7 +84,7 @@ export default {
             // sets token and user info
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$store.commit("SET_CURRENT_USERNAME", this.user.username);
+           
             this.$router.push("/");
           }
         })

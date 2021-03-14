@@ -6,7 +6,8 @@
           <img src="../assets/loading.gif" />
         </div>
         <div >
-          <h1 class="loading-text">What would you like to do today?</h1>
+           <h1 class="loading-text">Hey {{this.$store.state.user.username}}! <br>
+         What would you like to do today?</h1>
         </div>
 
         
@@ -58,7 +59,7 @@ export default {
 .search-main {
 
   align-self: center;
-  margin-top: 3em;
+
 }
 
 .loading-gif {
@@ -79,7 +80,7 @@ export default {
   font-size: 1.5em;
   padding-top: 0;
   text-align: center;
-  margin-bottom: -100em;
+  
 }
 
 .initial-search {

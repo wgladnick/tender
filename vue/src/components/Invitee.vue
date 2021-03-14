@@ -4,6 +4,7 @@
      <div class="welcome-message"> 
        
        <h2> Hey {{invitee.firstName}} </h2>
+     
 
          <div v-show="invitee.isAttending !== 'true'">
           <b-button type="is-primary" rounded size="is-small" class="m-2">
