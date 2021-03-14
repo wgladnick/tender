@@ -1,7 +1,8 @@
 <template>
   <b-form>
-    <h1>Create Dinner</h1>
+    
     <div class="input-fields">
+      <h1 class="headingText">Create Dinner</h1>
       <b-field label="Dinner Name">
         <b-input v-model="dinnerInvite.dinnerName" type="text" />
       </b-field>
@@ -32,7 +33,6 @@
             />
           </template>
         </b-datetimepicker>
-        <input type="datetime-local" v-model="datetime2" />
       </b-field>
       <div id="email-container">
         <div>
@@ -60,10 +60,12 @@
             v-if="emailFields.legnth > 1"
             >Delete</b-button
           >
+          <router-link to: ="{ name: restaurant-search}"> <b-button type="submit"> Click to find out Where Dinner will be</b-button> </router-link>
         </div>
       </div>
+      
     </div>
-    <b-button type="submit"> Click to find out Where Dinner will be</b-button>
+    
   </b-form>
 </template>
 
@@ -81,7 +83,6 @@ export default {
       dinnerInvite: {
         dinnerName: "",
         datetime: new Date(),
-        datetime2: "",
       },
       emailFields: [],
     };
@@ -113,5 +114,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.input-fields{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+.headingText{
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5em;
+
+}
 </style>
