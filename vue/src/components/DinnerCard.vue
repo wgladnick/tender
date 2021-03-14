@@ -8,17 +8,28 @@
       <b-field label="First Name">
         <b-input v-model="dinnerInvite.firstName" type="text"/>
       </b-field>
-        <b-field label="Select Date and Time">
-            <b-datetimepicker v-model="dinnerInvite.time"
-                rounded
-                placeholder="Click to select..."
-                icon="calendar-today"
-                :locale="locale"
-                :datepicker="{ showWeekNumber }"
-                :timepicker="{ enableSeconds, hourFormat }"
-                horizontal-time-picker>
-            </b-datetimepicker>
-        </b-field>
+        <b-field label="Select datetime">
+        <b-datetimepicker v-model="dinnerInvite.datetime"
+            placeholder="Click to select...">
+
+            <template #left>
+                <b-button
+                    label="Now"
+                    type="is-primary"
+                    icon-left="clock"
+                    @click="dinnerInvite.datetime = new Date()" />
+            </template>
+
+            <template #right>
+                <b-button
+                    label="Clear"
+                    type="is-danger"
+                    icon-left="close"
+                    outlined
+                    @click="dinnerInvite.datetime = null" />
+            </template>
+        </b-datetimepicker>
+    </b-field>
         <div id="container">
         <b-field label="Who's invited?">
         <b-input
@@ -50,7 +61,7 @@ export default {
             dinnerName: "",
             firstName: "",
             email: "",
-            time: "",
+            datetime: new Date(),
           }
 
       };
@@ -61,7 +72,7 @@ export default {
     addField () {
       let input = document.createElement("b-input");
       input.type = "email";
-      container.appendChild(input);
+      container.addField(input);
       container.appendChild(document.createElement("br"));
       }
       
