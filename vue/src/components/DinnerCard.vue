@@ -8,7 +8,7 @@
       <b-field label="First Name">
         <b-input v-model="dinnerInvite.firstName" type="text" />
       </b-field>
-      <b-field label="Select datetime">
+      <b-field label="Select Date and Time">
         <b-datetimepicker
           v-model="dinnerInvite.datetime"
           placeholder="Click to select..."
@@ -34,22 +34,34 @@
         </b-datetimepicker>
         <input type="datetime-local" v-model="datetime2" />
       </b-field>
-      <div id="email-container"
-       >
-       <div>
-        <b-field v-for="(email, i) in emailFields"
+      <div id="email-container">
+        <div>
+          <b-field
+            v-for="(email, i) in emailFields"
             :key="i"
-            class="email-fields-row" id="emails" v-model="emailFields" label="Who's invited?">
-          <b-input id="email" type="email" :label="email.label1" v-model="email.value1" placeholder="Enter friend's email" />
-          
-          
-        </b-field>
-        <b-button @click="add()" id="add-invitee"> Add Invitee</b-button>
-        <b-button @click="remove(i)" class="delete" id="delete-invite" v-if="emailFields.legnth > 1">Delete</b-button>
-       </div>
+            class="email-fields-row"
+            id="emails"
+            v-model="emailFields"
+            label="Who's invited?"
+          >
+            <b-input
+              id="email"
+              type="email"
+              :label="email.label1"
+              v-model="email.value1"
+              placeholder="Enter friend's email"
+            />
+          </b-field>
+          <b-button @click="add()" id="add-invitee"> Add Invitee</b-button>
+          <b-button
+            @click="remove(i)"
+            class="delete"
+            id="delete-invite"
+            v-if="emailFields.legnth > 1"
+            >Delete</b-button
+          >
+        </div>
       </div>
-      
-      
     </div>
     <b-button type="submit"> Click to find out Where Dinner will be</b-button>
   </b-form>
@@ -72,7 +84,6 @@ export default {
         datetime2: "",
       },
       emailFields: [],
-      
     };
   },
 
@@ -88,21 +99,18 @@ export default {
         this.emailFields = response.data;
       });
     },
-    add () {
-        this.emailFields.push({ 
-          label1: "Invite-Email", 
-          value1: "",
-        })
-     },
-    
-     remove (index) {
-         this.emailFields.splice(index, 1)
-     },
-     
-  
-}
-}
+    add() {
+      this.emailFields.push({
+        label1: "Invite-Email",
+        value1: "",
+      });
+    },
 
+    remove(index) {
+      this.emailFields.splice(index, 1);
+    },
+  },
+};
 </script>
 
 <style>
