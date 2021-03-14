@@ -1,22 +1,25 @@
 <template>
-<div>
+<div class="main">
   
 
-  <dinner-card/>
+<invitee/>
 
   </div>
 </template>
 
 <script>
 
-import DinnerCard from '../components/DinnerCard.vue'
+import Invitee from '../components/Invitee.vue'
 export default {
   name: "invitee-view",
-  components: {  DinnerCard },
+  components: { Invitee },
 
 }
 </script>
 
 <style>
+.main {
+  height:90vh;
+}
 
 </style>

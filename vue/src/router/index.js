@@ -8,6 +8,7 @@ import restaurantFinder from '../views/restaurantFinder.vue'
 import RestaurantDetails from '../views/RestaurantDetails'
 import InviteeView from '../views/InviteeView.vue'
 import Home from '../views/Home.vue'
+import CreateInvite from '../views/CreateInvite.vue'
 
 Vue.use(Router)
 
@@ -81,6 +82,16 @@ const router = new Router({
         requiresAuth: true
       }
     },
+
+    {
+      path: "/create",
+      name: "createInvite",
+      component: CreateInvite,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
 
    
 

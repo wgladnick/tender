@@ -1,9 +1,12 @@
 <template>
-  <div>
-      {{invitee.firstName}} {{ invitee.lastName}}
+  <div class="main">
+    
+     <div class="welcome-message"> 
+       
+       <h2> Hey {{invitee.firstName}} </h2>
 
-  <div v-show="invitee.isAttending !== 'true'">
-      <b-button type="is-primary" rounded size="is-small" class="m-2">
+         <div v-show="invitee.isAttending !== 'true'">
+          <b-button type="is-primary" rounded size="is-small" class="m-2">
           <i class="far fa-thumbs-up"></i>
           Yes I'll be there!</b-button>
 
@@ -11,11 +14,19 @@
           <i class="far fa-sad-tear"></i>
           Sorry Maybe next time!</b-button>
   </div>
+
+       </div>
+
+
+  <div class="restaurants">
   <restaurant-card
   v-for="restaurant in invitee.businessDetails"
   :key="restaurant.id"
   :restaurant="restaurant" 
+  class="card"
   />
+  </div>
+
   <div v-if="errorMsg">
     Invite not Found!!!!!!!!!
   </div>
@@ -55,7 +66,26 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.main{
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  
+}
+
+.welcome-message{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  text-align:center;
+  margin-bottom:2em;
+}
+
+.restaurants{
+  display:flex;
+}
 .button.is-primary {
 
   background-color: #dc6b67;
@@ -63,4 +93,7 @@ export default {
 .button.is-primary:hover {
     background-color: #d6544f;
 }
+
+
+
 </style>

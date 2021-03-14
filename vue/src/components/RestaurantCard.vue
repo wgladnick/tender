@@ -1,8 +1,7 @@
 <template>
-  <main class="zoom">
-
+  <div class="zoom">
     <div class="left-panel">
-      <router-link  :to="{ name: 'details', params: { id: restaurant.id } }"
+      <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
       /></router-link>
     </div>
@@ -16,7 +15,7 @@
           {{ category }}
         </span>
       </div>
-      <router-link  :to="{ name: 'details', params: { id: restaurant.id } }"
+      <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><h1 class="title">{{ restaurant.name }}</h1>
       </router-link>
       <div class="star-rating">
@@ -40,10 +39,35 @@
         <br />
         <span>{{ restaurant.display_phone }} </span>
 
-        <p class="price">Price: <span class="has-text-success has-text-weight-bold">{{ restaurant.price }}</span></p>
+        <p class="price">
+          Price:
+          <span class="has-text-success has-text-weight-bold">{{
+            restaurant.price
+          }}</span>
+        </p>
       </div>
 
-      <span class="call-to-order">
+      <!-- Invite Buttons --> 
+
+         <span class="invite-buttons" v-if="$route.name === 'inviteeView'">
+
+          <span class="yes-button"> <b-button type="is-primary" rounded size="is-small" class="m-2">
+          <i class="far fa-thumbs-up"></i>
+          LIKE</b-button>
+          </span>
+
+          <span class="nah-button">
+          <b-button type="is-primary" rounded size="is-small" class="m-2">
+          <i class="far fa-sad-tear"></i>
+          NAH</b-button>
+          </span>
+  </span>
+
+
+
+
+
+      <span v-if="$route.name !== 'inviteeView'" class="call-to-order">
         <a :href="`tel:${restaurant.phone}`">
           <b-button type="is-primary" rounded size="is-small">
             <i class="fas fa-phone-alt"></i>
@@ -52,7 +76,7 @@
         </a>
       </span>
 
-      <div class="transactions">
+      <div v-if="$route.name !== 'inviteeView'" class="transactions">
         <b-button size="is-small">
           <i
             class="fas fa-check has-text-success"
@@ -88,38 +112,28 @@
         >
         <br />
       </div>
-
     </div>
 
-  <button v-if="isAddingRestaurants"> Fun </button>
-  
-
-
-
-  </main>
+    <button v-if="isAddingRestaurants">Fun</button>
+  </div>
 </template>
 
 <script>
 import StarRating from "vue-star-rating";
 
-
 export default {
   name: "restaurant-card",
   components: {
-    StarRating
-  
+    StarRating,
   },
   props: ["restaurant", "isAddingRestaurants"],
   data() {
     return {
-      transactionTypes: '',
+      transactionTypes: "",
       categories: [],
-      isSelected:false
-     
+      isSelected: false,
     };
   },
-
- 
 
   created() {
     for (let i = 0; i < this.restaurant.transactions.length; i++) {
@@ -135,28 +149,26 @@ export default {
     }
   },
 
- 
-
-
-  methods:{
-    updateSelected(){
-      this.$emit('addSelectedRestaurant',this.isSelected)
-    }
-  }
-}
-
- 
-
+  methods: {
+    updateSelected() {
+      this.$emit("addSelectedRestaurant", this.isSelected);
+    },
+  },
+};
 </script>
 
 <style scoped>
-main {
+.zoom {
   display: flex;
   flex-direction: row;
-  width: 75%;
+ 
+  padding: 1em;
+  transition: transform 0.5s;
+
+  margin: 0 auto;
 }
 .yelp-image {
-  width: 350px;
+  max-width: 350px;
   height: 350px;
   object-fit: cover;
 }
@@ -167,6 +179,7 @@ main {
 }
 .right-panel {
   padding: 20px 20px 20px 0px;
+  max-width: 100%;
 }
 
 .call-to-order {
@@ -175,6 +188,26 @@ main {
 }
 .button.is-primary {
   background-color: #dc6b67;
+}
+
+.nah-button .button.is-rounded {
+  background-color:#dc6b67;
+}
+.nah-button .button.is-rounded:hover {
+  background-color:#ad5451;
+}
+
+.yes-button .button.button.is-rounded{
+  background-color:#a5c064;
+}
+.yes-button .button.button.is-rounded:hover{
+  background-color:#7d973f;
+}
+
+
+.invite-buttons .button.is-rounded{
+ 
+  width:7em;
 }
 .button.is-rounded {
   border-radius: 290486px;
@@ -212,14 +245,6 @@ main {
 .transactions {
   margin-top: 25px;
   margin-left: -0.5em;
-}
-
-.zoom {
-  padding: 50px;
-
-  transition: transform 0.5s;
-
-  margin: 0 auto;
 }
 
 .zoom:hover {

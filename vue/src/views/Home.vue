@@ -40,7 +40,7 @@ export default {
       this.$router.push({ name: 'restaurantFinder'});
     },
       invite(){
-      this.$router.push({ name: 'inviteeView'});
+      this.$router.push({ name: 'createInvite'});
     }
   }
 };

@@ -373,6 +373,24 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Restaurant Choices by Invite Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get Invitee By Unique Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
 		}
 	]
 }
