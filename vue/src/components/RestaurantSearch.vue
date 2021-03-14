@@ -93,10 +93,9 @@
             Find Food
           </button>
            <button class="find-food" v-on:click="inviteePage()" focused>
-              See Invitee Page
+              Go To Testing Page
           </button>
-          <input type="date" v-model="date"/>
-          <input type="time" v-model="time"/>
+        
         </form>
       </div>
     </section>

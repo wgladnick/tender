@@ -14,7 +14,7 @@
 
 <script>
 import InviteService from "../services/InviteService";
-import AuthService from "../services/AuthService";
+
 export default {
   data() {
     return {

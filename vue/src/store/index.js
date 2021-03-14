@@ -89,5 +89,5 @@ export default new Vuex.Store({
       state.radius = radius;
 
     }
-  }
-})
+  })
+
