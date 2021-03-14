@@ -1,33 +1,53 @@
  <template>
-  <section>
-    <div class="loading-gif" v-if="isLoading">
-      <img src="../assets/loading.gif" />
-    </div>
+     <section class="middle">
+      <div class="restaurant-list">
+        <div class="loading-gif">
+          <img src="../assets/loading.gif" />
+        </div>
 
-    <div v-if="!isLoading" class="result-list">
-      <restaurant-card
-        v-for="restaurant in restaurants"
-        v-bind:key="restaurant.id"
-        v-bind:restaurant="restaurant"
-        class="card"
-      />
-    </div>
-  </section>
+        <div  class="result-list">
+          <h1 class="title">
+            Here are the restaurants we found near 
+          </h1>
+
+            
+          <restaurant-card
+            v-for="restaurant in restaurants"
+            v-bind:key="restaurant.id"
+            v-bind:restaurant="restaurant"
+            class="card" 
+            />
+    
+       
+    
+
+          <!-- Restaurant List Body Ends -->
+
+          <div class="right"></div>
+
+      
+        </div>
+      </div>
+    </section>
 </template>
 <script>
+
 import RestaurantCard from "../components/RestaurantCard";
+
 export default {
   name: "restaurant-list",
   components: { RestaurantCard },
 
-  props: ["restaurants", "isLoading", "isInitialSearch"],
-
+  props: ["restaurants", "restaurant"],
+  
   data() {
-    return {};
+    return {
+    
+    };
   },
   computed: {},
   methods: {},
-};
+}
 </script>
 <style scoped>
 

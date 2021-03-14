@@ -11,8 +11,8 @@
 
 import DinnerCard from '../components/DinnerCard.vue'
 export default {
-  name: "invitee-view",
-  components: {  DinnerCard },
+  name: "create-dinner",
+  components: { DinnerCard },
 
 }
 </script>

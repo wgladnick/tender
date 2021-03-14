@@ -12,9 +12,9 @@
 
     <div id="nav-container">
       <router-link
-        v-if="$route.name !== 'restaurantFinder'"
+        v-if="$route.name !== 'home'"
         class="nav"
-        v-bind:to="{ name: 'restaurantFinder' }"
+        v-bind:to="{ name: 'home' }"
         >Home</router-link
       >&nbsp;&nbsp;
       <router-link

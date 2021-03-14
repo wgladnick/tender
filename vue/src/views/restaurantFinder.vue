@@ -1,28 +1,19 @@
 <template>
-<main class="main">
-  <restaurant-search/>
-
-
+  <main class="main">
+    <restaurant-search />
   </main>
-
 </template>
 
 <script>
-import RestaurantSearch from '../components/RestaurantSearch';
-import RestaurantList from '../components/RestaurantList'
-
+import RestaurantSearch from "../components/RestaurantSearch";
 
 export default {
-    name:"restaurant-finder",
-    components: {
-        RestaurantSearch,
-       RestaurantList,
-    
-        
-    }
+  name: "restaurant-finder",
+  components: {
+    RestaurantSearch,
+  },
 };
 </script>
 
 <style scoped>
-
 </style>

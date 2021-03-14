@@ -4,9 +4,10 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import RestaurantFinder from '../views/restaurantFinder'
+import restaurantFinder from '../views/restaurantFinder.vue'
 import RestaurantDetails from '../views/RestaurantDetails'
 import InviteeView from '../views/InviteeView.vue'
+import Home from '../views/Home.vue'
 
 Vue.use(Router)
 
@@ -25,8 +26,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: "restaurantFinder",
-      component: RestaurantFinder,
+      name: "home",
+      component: Home,
       meta: {
         requiresAuth: true
       }
@@ -68,7 +69,16 @@ const router = new Router({
       name: "inviteeView",
       component: InviteeView,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
+      }
+    },
+
+    {
+      path: "/search",
+      name: "restaurant-finder",
+      component: restaurantFinder,
+      meta: {
+        requiresAuth: true
       }
     },
 

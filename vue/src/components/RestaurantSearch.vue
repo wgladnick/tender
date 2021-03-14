@@ -1,3 +1,5 @@
+Restaurant Search
+
 <template>
   <main class="body">
     <!-- Left Panel -->
@@ -28,7 +30,6 @@
           <button class="find-food" v-on:click="searchByLocation()" focused>
             Find Food
           </button>
-           
         </form>
       </div>
 
@@ -92,10 +93,6 @@
           <button class="find-food" v-on:click="searchByLocation()" focused>
             Find Food
           </button>
-           <button class="find-food" v-on:click="inviteePage()" focused>
-              Go To Testing Page
-          </button>
-        
         </form>
       </div>
     </section>
@@ -104,7 +101,7 @@
     <!--Restaurant List Body -->
     <section class="middle">
       <div class="restaurant-list">
-        <div class="loading-gif" v-if="isLoading">
+        <div v-bind:class="{ isShowingResults: !isShowingResults }" class="loading-gif" v-if="isLoading">
           <img src="../assets/loading.gif" />
         </div>
 
@@ -113,37 +110,40 @@
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
 
+            
           <restaurant-card
             v-for="restaurant in restaurants"
             v-bind:key="restaurant.id"
             v-bind:restaurant="restaurant"
-            class="card"
-          />
+            class="card" 
+            v-on:click="addToArray(this.restaurant.id)"/>
+    
+       
+    
 
           <!-- Restaurant List Body Ends -->
 
           <div class="right"></div>
- 
-      
-          <restaurant-detail />
 
+         
         </div>
       </div>
     </section>
   </main>
 
-  <!-- This passes the restaurant array and isLoading as a prop to restaurant list -->
+  <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
 </template>
 <script>
 import RestaurantService from "../services/RestaurantService";
 import RestaurantCard from "../components/RestaurantCard";
-import RestaurantDetail from "./RestaurantDetail.vue";
+
+
 
 export default {
   name: "restaurant-search",
   components: {
     RestaurantCard,
-    RestaurantDetail,
+   
   },
 
   data() {
@@ -159,8 +159,7 @@ export default {
       categoriesSelected: [],
       noneFound: false,
       updatedLocation: "",
-      date: "",
-      time: ""
+      selectedRestauraunts:[]
     };
   },
   created() {
@@ -184,10 +183,10 @@ export default {
 
   methods: {
 
-    inviteePage(uniqueId){
-      this.$router.push(`/invite/${uniqueId}`);
-
+    addToArray(id){
+        this.selectedRestauraunts.push(id);
     },
+
     getCategories() {
       RestaurantService.getAvailableCategories().then((response) => {
         this.availCategories = response.data;
@@ -247,6 +246,12 @@ export default {
 };
 </script>
 <style scoped>
+
+.isShowingResults{
+  margin-left:10em;
+  margin-top:-5em;
+ 
+}
 .body {
   display: flex;
   flex-direction: row;
@@ -288,7 +293,7 @@ label {
   flex-direction: column;
   width: 100vw;
   height: 80vh;
-  margin-top: 3em;
+  margin-top: 0em;
 }
 /* Home Search Ends Here */
 
@@ -450,7 +455,7 @@ input {
 
 /* Checkboxes end here */
 
-/*  restaurant list */
+/*  Restaurant List */
 
 .loading-gif {
   display: flex;

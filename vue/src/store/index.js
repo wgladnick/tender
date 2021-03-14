@@ -41,6 +41,7 @@ export default new Vuex.Store({
     thumbsUpList: [],
     invitees: []
   },
+
   mutations: {
     SET_RESTAURANT_LIST(state, restaurants){
       state.restaurants = restaurants;
@@ -64,20 +65,19 @@ export default new Vuex.Store({
       localStorage.setItem('user',JSON.stringify(user));
     },
 
-    
 
-    },
-
-    
 
     //removes token and user from local storage, sets token and user to blank, 
     LOGOUT(state) {
+      this.state.searchLocation = "";
+      this.state.searchDirections = "";
+      this.state.restaurants = "";
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      localStorage.removeItem('currentUsername')
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+     
     },
 
     SET_SEARCH_LOCATION(state, location) {
@@ -89,5 +89,7 @@ export default new Vuex.Store({
       state.radius = radius;
 
     }
-  })
+
+  }
+})
 
