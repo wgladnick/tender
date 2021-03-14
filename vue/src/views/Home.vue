@@ -16,7 +16,7 @@
        <button class="find-food" v-on:click="searchForRestaurants()" focused>Search For Nearby Restaurants</button>
        
   
-             <button class="find-food" v-on:click="searchByLocation()" focused>
+             <button class="find-food" v-on:click="invite()" focused>
           Invite Friends Out For Food
           </button>
              <button class="find-food" v-on:click="searchByLocation()" focused>
@@ -38,6 +38,9 @@ export default {
   methods: {
     searchForRestaurants(){
       this.$router.push({ name: 'restaurant-finder'});
+    },
+      invite(){
+      this.$router.push({ name: 'inviteeView'});
     }
   }
 };
