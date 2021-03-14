@@ -72,7 +72,7 @@ export default {
     addField () {
       let input = document.createElement("b-input");
       input.type = "email";
-      container.addField(input);
+      container.appendChild(input);
       container.appendChild(document.createElement("br"));
       }
       
