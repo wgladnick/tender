@@ -3,10 +3,13 @@
       <h1>Create Dinner</h1>
     <div class="input-fields">
       <b-field label="Dinner Name">
-        <b-input type="text"/>
+        <b-input v-model="dinnerInvite.dinnerName" type="text"/>
+      </b-field>
+      <b-field label="First Name">
+        <b-input v-model="dinnerInvite.firstName" type="text"/>
       </b-field>
         <b-field label="Select Date and Time">
-            <b-datetimepicker
+            <b-datetimepicker v-model="dinnerInvite.time"
                 rounded
                 placeholder="Click to select..."
                 icon="calendar-today"
@@ -16,11 +19,14 @@
                 horizontal-time-picker>
             </b-datetimepicker>
         </b-field>
+        <div id="container">
         <b-input
-          id="email"
-          type="text"
+          v-model="dinnerInvite.email" id="email"
+          type="email"
           placeholder="Enter friend's email"
           />
+          <b-button id="add-invitee"> Add Invitee</b-button>
+    </div>
     </div>
     
   </form>
@@ -29,27 +35,38 @@
 <script>
 export default {
   name: "create-dinner",
-  vuetify: new Vuetify(),
+  
 
   data() {
       return {
-          invites: []
+        showWeekNumber: false,
+            enableSeconds: false,
+            hourFormat: undefined, // Browser locale
+            locale: undefined, // Browser locale
+          invitees: [],
+          dinnerInvite: {
+            dinnerName: "",
+            firstName: "",
+            email: "",
+            time: "",
+          }
 
       };
   },
+  
+  
   methods: {
-    add () {
-      this.invites.push({
-        label1: "Enter Friend's Email Address",
-        value1: ""
-      })
+    addField () {
+      let input = document.createElement("b-input");
+      input.type = "email";
+      container.appendChild(input);
+      container.appendChild(document.createElement("br"));
+      }
+      
     },
-    remove (index){
-      this.invites.splice(index, 1)
-    }
+  addInviteesToDinner(){
+    this.invitees = [];
   }
-
-
 
 };
 </script>
