@@ -57,6 +57,7 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = user;
       localStorage.setItem('user',JSON.stringify(user));
+      console.log(user);
     },
 
 
@@ -82,7 +83,12 @@ export default new Vuex.Store({
     SET_SEARCH_RADIUS(state, radius) {
       state.radius = radius;
 
-    }
+    },
+    UPDATE_USER(state, user) {
+      state.user = user;
+      localStorage.update('user',JSON.stringify(user));
+      console.log(user);
+    },
 
   }
 })
