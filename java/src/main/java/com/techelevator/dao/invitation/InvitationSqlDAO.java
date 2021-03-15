@@ -59,7 +59,7 @@ public class InvitationSqlDAO implements InvitationDAO {
 	public Invitation create(Invitation invitation) {
 
 		String sql = "INSERT INTO invitation (invite_name, location, radius, creator_user_id, deadline, reservation_date_time) VALUES (?,?,?,?,?,?) RETURNING invite_id";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, invitation.getLocation(), invitation.getRadius(),
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, invitation.getInviteName(), invitation.getLocation(), invitation.getRadius(),
 				invitation.getCreatorId(), invitation.getDeadline(), invitation.getReservationDate());
 		if (results.next()) {
 			Long invite_id = results.getLong("invite_id");
