@@ -2,11 +2,18 @@ DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS user_categories;
 DROP TABLE IF EXISTS food_categories;
 DROP TABLE IF EXISTS invitation_votes;
+DROP TABLE IF EXISTS invitee_vote;
 DROP TABLE IF EXISTS invitation_restaurant;
 DROP TABLE IF EXISTS invitee_details;
 DROP TABLE IF EXISTS invitation;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS seq_user_id;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM final_capstone_owner;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM final_capstone_owner;
+DROP USER IF EXISTS final_capstone_owner;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM final_capstone_appuser;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM final_capstone_appuser;
+DROP USER IF EXISTS final_capstone_appuser;
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
@@ -69,15 +76,14 @@ CREATE TABLE IF NOT EXISTS invitation (
     radius INTEGER,
     creator_user_id INTEGER,
     deadline TIMESTAMPTZ,
-    reservation_date_time VARCHAR
+    reservation_date_time TIMESTAMPTZ
 );
               
 CREATE TABLE IF NOT EXISTS invitee_details (
     invite_id INTEGER,
     unique_id VARCHAR NOT NULL,
     invitee_user_id INTEGER DEFAULT 0,
-    first_name VARCHAR NOT NULL,
-    last_name VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
     email VARCHAR NOT NULL,
     has_voted BOOLEAN DEFAULT false,
     is_attending VARCHAR DEFAULT 'Pending'
@@ -88,6 +94,14 @@ CREATE TABLE IF NOT EXISTS invitation_restaurant (
      yelp_id VARCHAR NOT NULL,
      thumbs_up INTEGER DEFAULT 0,
      thumbs_down INTEGER DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS invitee_vote (
+    invite_id INTEGER,
+    invitee_unique_id VARCHAR NOT NULL,
+    yelp_id VARCHAR NOT NULL,
+    thumbs_up BOOLEAN DEFAULT false,
+    thumbs_down BOOLEAN DEFAULT false
 );
 
 CREATE USER final_capstone_owner

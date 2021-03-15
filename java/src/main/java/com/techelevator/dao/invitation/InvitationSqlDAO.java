@@ -77,7 +77,7 @@ public class InvitationSqlDAO implements InvitationDAO {
 
 		Invitation invite = new Invitation();
 
-		invite.setInviteName(rs.getString("invite-name"));
+		invite.setInviteName(rs.getString("invite_name"));
 		invite.setInviteId(rs.getLong("invite_id"));
 		invite.setLocation(rs.getString("location"));
 		invite.setRadius(rs.getInt("radius"));
@@ -86,8 +86,10 @@ public class InvitationSqlDAO implements InvitationDAO {
 		if (deadline != null) {
 			invite.setDeadline(deadline);
 		}
-		invite.setReservationDate(rs.getString("reservation_date_time"));
-
+		Timestamp reservationDate = rs.getTimestamp("reservation_date_time");
+		if (reservationDate != null) {
+			invite.setReservationDate(reservationDate);
+		}
 
 		//todo call invitee and restaurant daos to get what we need to build a full invite list.
 		return invite;
