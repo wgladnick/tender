@@ -1,7 +1,25 @@
 Restaurant Search
 
 <template>
+
+<!-- Side Nav -->
   <main class="body">
+      <button class="nav-butt" v-on:click="isMenuOpen = false"> Hide List </button>
+
+<div id="mySidenav" class="sidenav" v-bind:style="{width: isMenuOpen ? '400px' : '0px'}">
+  
+  <ul>
+    <li v-for="rest in selectedRestauraunts" v-bind:key="rest.id">
+      <h1> {{rest.name}} </h1><button v-on:click="updateList(rest)">x</button>
+      </li>
+    </ul>
+</div>
+
+<!-- Use any element to open the sidenav -->
+
+<span class="open-button"  v-on:click="isMenuOpen=true"><button>OPEN</button></span>
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+
     <!-- Left Panel -->
     <section class="left" v-if="isShowingResults === true">
       <!-- Search Bar - Left Panel -->
@@ -98,9 +116,11 @@ Restaurant Search
     </section>
     <!-- Inital Search Ends -->
 
+<div id="main" v-bind:style="{ 'margin-left': isMenuOpen ? '-175px' : '0px' }">
+
     <!--Restaurant List Body -->
     <section class="middle">
-      <div class="restaurant-list">
+      <span class="restaurant-list">
         <div v-bind:class="{ isShowingResults: !isShowingResults }" class="loading-gif" v-if="isLoading">
           <img src="../assets/loading.gif" />
         </div>
@@ -116,7 +136,7 @@ Restaurant Search
             v-bind:key="restaurant.id"
             v-bind:restaurant="restaurant"
             class="card" 
-            v-on:click="addToArray(this.restaurant.id)"/>
+            @update-list="updateList"/>
     
        
     
@@ -127,8 +147,9 @@ Restaurant Search
 
          
         </div>
-      </div>
+      </span>
     </section>
+    </div>
   </main>
 
   <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
@@ -148,6 +169,7 @@ export default {
 
   data() {
     return {
+      isMenuOpen: false,
       restaurants: [],
       location: "",
       invalidLocation: false,
@@ -183,7 +205,15 @@ export default {
 
   methods: {
 
-  
+  updateList(rest){
+    const index = this.selectedRestauraunts.indexOf(rest)
+    if(!this.selectedRestauraunts.includes(rest)){
+    this.selectedRestauraunts.push(rest);
+    }else{
+      this.selectedRestauraunts.splice(index,1);
+
+    }
+  },
 
     getCategories() {
       RestaurantService.getAvailableCategories().then((response) => {
@@ -245,11 +275,78 @@ export default {
 </script>
 <style scoped>
 
+.open-button{
+  position:fixed;
+  top:0;
+  right:0;
+  z-index:3;
+  height:50px;
+  
+}
+.nav-butt{
+  height:50px;
+  position:fixed;
+  right:0;
+  z-index:3;
+
+
+}
+
+.sidenav {
+  height: 100vh; /* 100% Full-height */
+  width: 0px; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Stay on top */
+  bottom: 0; /* Stay at the top */
+  right: 0;
+  background-color:#dc6b67; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #000000;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
 .isShowingResults{
   margin-left:10em;
   margin-top:-5em;
  
 }
+
 .body {
   display: flex;
   flex-direction: row;
@@ -484,14 +581,14 @@ input {
   margin-left: 2em;
 }
 .result-list {
-  padding-left: 10em;
+ 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .card {
-  width: 75vw;
+  width: 50vw;
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 1em;

@@ -32,6 +32,10 @@ export default {};
 </script>
 
 <style scoped>
+
+.header{
+  z-index: 2;
+}
 .logo {
   display: flex;
   flex-direction: row;

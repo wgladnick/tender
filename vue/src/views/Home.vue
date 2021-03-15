@@ -1,5 +1,4 @@
 <template>
-
     <section class="login-search">
       <div class="initial-search" >
         <div class="loading-gif">
@@ -26,7 +25,6 @@
         </form>
       </div>
     </section>
-
 <!-- <dinner-list /> -->
 
 </template>
@@ -36,13 +34,23 @@
 
 export default {
   name: "home",
+
+  data(){
+    return{
+        isMenuOpen: false
+    }
+  },
   methods: {
     searchForRestaurants(){
       this.$router.push({ name: 'restaurantFinder'});
     },
       invite(){
       this.$router.push({ name: 'createInvite'});
-    }
+    },
+
+
+
+
   }
 };
 </script>
@@ -86,9 +94,10 @@ export default {
 .initial-search {
   display: flex;
   flex-direction: column;
-  width: 30vw;
+ 
   height: 80vh;
   margin-top: 0em;
+ 
 }
 .find-food {
   background-color: #dc6b67;

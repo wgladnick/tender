@@ -1,5 +1,5 @@
 <template>
-  <div class="zoom">
+  <span class="zoom">
     <div class="left-panel">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
@@ -74,6 +74,7 @@
             Call to order</b-button
           >
         </a>
+        <button v-on:click="addToList(restaurant)">addToList</button>
       </span>
 
       <div v-if="$route.name !== 'inviteeView'" class="transactions">
@@ -115,7 +116,7 @@
     </div>
 
     <button v-if="isAddingRestaurants">Fun</button>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -150,6 +151,10 @@ export default {
   },
 
   methods: {
+
+    addToList(restaurant){
+      this.$emit('update-list', restaurant)
+    },
     updateSelected() {
       this.$emit("addSelectedRestaurant", this.isSelected);
     },
@@ -179,7 +184,7 @@ export default {
 }
 .right-panel {
   padding: 20px 20px 20px 0px;
-  max-width: 100%;
+ 
 }
 
 .call-to-order {
