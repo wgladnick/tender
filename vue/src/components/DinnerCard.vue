@@ -37,30 +37,38 @@
       <div id="email-container">
         <div>
           <b-field
-            v-for="(email, i) in emailFields"
+            v-for="(invitee, i) in dinnerInvite.invitees"
             :key="i"
-            class="email-fields-row"
-            id="emails"
-            v-model="emailFields"
+            class="invitee-fields"
+            id="invitee"
+            v-model="dinnerInvite.invitees"
             label="Who's invited?"
           >
+          <b-input
+            id="name"
+            type="text"
+            :label="dinnerInvite.invitees.label2"
+            v-model="dinnerInvite.invitees.value2"
+            placeholder="Enter friend's name:"
+            />
             <b-input
               id="email"
               type="email"
-              :label="email.label1"
-              v-model="email.value1"
-              placeholder="Enter friend's email"
+              :label="dinnerInvite.invitees.label1"
+              v-model="dinnerInvite.invitees.value1"
+              placeholder="Enter friend's email:"
             />
+            
           </b-field>
           <b-button @click="add()" id="add-invitee"> Add Invitee</b-button>
           <b-button
             @click="remove(i)"
             class="delete"
             id="delete-invite"
-            v-if="emailFields.legnth > 1"
+            v-if="invitees.legnth > 1"
             >Delete</b-button
           >
-          <router-link to: ="{ name: restaurant-search}"> <b-button type="submit"> Click to find out Where Dinner will be</b-button> </router-link>
+          <b-button type="submit"> Click to find out Where Dinner will be</b-button> 
         </div>
       </div>
       
@@ -81,10 +89,16 @@ export default {
       hourFormat: undefined, // Browser locale
       locale: undefined, // Browser locale
       dinnerInvite: {
-        dinnerName: "",
-        datetime: new Date(),
+        inviteName: "",
+        reservationDate: new Date(),
+        deadline: new Date(),
+        invitees: [name, emailFields],
+        location: "",
+        radius: "",
+        restaurantChoices: []
+        
       },
-      emailFields: [],
+      
     };
   },
 
@@ -97,18 +111,21 @@ export default {
     },*/
     addInviteesToDinner() {
       InviteService.sendInvite().then((response) => {
-        this.emailFields = response.data;
+        this.dinnerInvite.invitees = response.data;
       });
     },
     add() {
-      this.emailFields.push({
-        label1: "Invite-Email",
+      this.dinnerInvite.invitees.push({
+        label1: "email",
         value1: "",
+        label2: "name",
+        value2: ""
       });
+      
     },
 
     remove(index) {
-      this.emailFields.splice(index, 1);
+      this.dinnerInvite.invitees.splice(index, 1);
     },
   },
 };
