@@ -9,6 +9,7 @@ import RestaurantDetails from '../views/RestaurantDetails'
 import InviteeView from '../views/InviteeView.vue'
 import Home from '../views/Home.vue'
 import CreateInvite from '../views/CreateInvite.vue'
+import UserProfile from '../views/UserProfile.vue'
 
 Vue.use(Router)
 
@@ -91,11 +92,17 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
+    {
+      path: "/user",
+      name: "UserProfile",
+      component: UserProfile,
+      meta: {
+        requiresAuth: true
+    }
+  },
 
    
 
-    
   ]
 })
 
