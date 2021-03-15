@@ -4,7 +4,7 @@ public class InviteeVotes {
 
     private boolean thumbs_up;
     private boolean thumbs_down;
-    private String inviteId;
+    private int inviteId;
     private String uniqueId;
     private String yelpId;
 
@@ -31,11 +31,11 @@ public class InviteeVotes {
         return uniqueId;
     }
 
-    public String getInviteId() {
+    public int getInviteId() {
         return inviteId;
     }
 
-    public void setInviteId(String inviteId) {
+    public void setInviteId(int inviteId) {
         this.inviteId = inviteId;
     }
 

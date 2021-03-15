@@ -3,6 +3,7 @@ package com.techelevator.dao.invitation;
 import java.util.List;
 
 import com.techelevator.model.invitation.InviteRestaurants;
+import com.techelevator.model.invitation.InviteeVotes;
 
 public interface InviteRestaurantsDAO {
 
@@ -10,7 +11,11 @@ public interface InviteRestaurantsDAO {
 	
 	InviteRestaurants create(InviteRestaurants listOfChoices);
 	
-	InviteRestaurants voteThumbsUp(InviteRestaurants inviterestaurants);
+	boolean voteThumbsUp(InviteeVotes inviteeVote);
 	
-	InviteRestaurants voteThumbsDown(InviteRestaurants inviterestaurants);
+	boolean voteThumbsDown(InviteeVotes inviteeVote);
+
+	boolean undoThumbsUp(InviteeVotes inviteeVote);
+
+	boolean undoThumbsDown(InviteeVotes inviteeVote);
 }

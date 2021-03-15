@@ -3,6 +3,7 @@ package com.techelevator.dao.invitation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.invitation.InviteeVotes;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.techelevator.model.invitation.InviteRestaurants;
@@ -59,38 +60,58 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 	}
 
 	@Override
-	public InviteRestaurants voteThumbsUp(InviteRestaurants inviterestaurants) {
+	public boolean voteThumbsUp(InviteeVotes inviteeVote) {
 
-		String sql = "UPDATE invitation_restaurant SET thumbs_up = thumbs_up + 1 "
+		String sql = "UPDATE invitation_restaurant SET total_thumbs_up = total_thumbs_up + 1 "
 				+ "WHERE yelp_id = ? AND invite_id = ?";
-		jdbcTemplate.update(sql, inviterestaurants.getYelpId(), inviterestaurants.getInviteId());
+		jdbcTemplate.update(sql, inviteeVote.getYelpId(), inviteeVote.getInviteId());
 
-		String sql2 = "SELECT * FROM invitation_restaurant WHERE yelp_id = ? AND invite_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, inviterestaurants.getYelpId(),
-				inviterestaurants.getInviteId());
+		String sql3 = "INSERT INTO invitee_vote (invite_id, invitee_unique_id, yelp_id, thumbs_up) VALUES (?,?,?,true)";
+		jdbcTemplate.update(sql3, inviteeVote.getInviteId(), inviteeVote.getUniqueId(), inviteeVote.getYelpId());
 
-		while (results.next()) {
-			inviterestaurants = mapRowToInviteRestaurant(results);
-		}
-		return inviterestaurants;
+		return true;
 
 	}
 
 	@Override
-	public InviteRestaurants voteThumbsDown(InviteRestaurants inviterestaurants) {
+	public boolean voteThumbsDown(InviteeVotes inviteeVote) {
 
-		String sql = "UPDATE invitation_restaurant " + "SET thumbs_down = thumbs_down + 1 "
+		String sql = "UPDATE invitation_restaurant SET total_thumbs_down = total_thumbs_down + 1 "
 				+ "WHERE yelp_id = ? AND invite_id = ?";
-		jdbcTemplate.update(sql, inviterestaurants.getYelpId(), inviterestaurants.getInviteId());
+		jdbcTemplate.update(sql, inviteeVote.getYelpId(), inviteeVote.getInviteId());
 
-		String sql2 = "SELECT * FROM invitation_restaurant WHERE yelp_id = ? AND invite_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, inviterestaurants.getYelpId(),
-				inviterestaurants.getInviteId());
+		String sql3 = "INSERT INTO invitee_vote (invite_id, invitee_unique_id, yelp_id, thumbs_down) VALUES (?,?,?,true)";
+		jdbcTemplate.update(sql3, inviteeVote.getInviteId(), inviteeVote.getUniqueId(), inviteeVote.getYelpId());
 
-		while (results.next()) {
-			inviterestaurants = mapRowToInviteRestaurant(results);
-		}
-		return inviterestaurants;
+		return true;
+
+	}
+
+	@Override
+	public boolean undoThumbsUp(InviteeVotes inviteeVote) {
+
+		String sql = "UPDATE invitation_restaurant SET total_thumbs_up = total_thumbs_up - 1 "
+				+ "WHERE yelp_id = ? AND invite_id = ?";
+		jdbcTemplate.update(sql, inviteeVote.getYelpId(), inviteeVote.getInviteId());
+
+		String sql3 = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND thumbs_up = true";
+		jdbcTemplate.update(sql3, inviteeVote.getUniqueId(), inviteeVote.getYelpId());
+
+		return true;
+
+	}
+
+	@Override
+	public boolean undoThumbsDown(InviteeVotes inviteeVote) {
+
+		String sql = "UPDATE invitation_restaurant SET total_thumbs_down = total_thumbs_down - 1 "
+				+ "WHERE yelp_id = ? AND invite_id = ?";
+		jdbcTemplate.update(sql, inviteeVote.getYelpId(), inviteeVote.getInviteId());
+
+		String sql3 = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND thumbs_down = true";
+		jdbcTemplate.update(sql3, inviteeVote.getUniqueId(), inviteeVote.getYelpId());
+
+		return true;
 
 	}
 
