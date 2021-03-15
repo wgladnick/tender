@@ -65,7 +65,8 @@ public class InviteeSqlDAO implements InviteeDAO {
         while (results2.next()) {
             yelpId.add(results2.getString("yelp_id"));
         }
-        invitee.setBusinessDetails(yelpFusion.getBusinessDetailsById(yelpId));
+        invitee.setBusinessDetails(yelpFusion.getBusinessDetailsById(yelpId, uniqueId));
+
         return invitee;
     }
 

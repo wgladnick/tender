@@ -1,6 +1,8 @@
 package com.techelevator.services.yelpfusion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.techelevator.dao.invitation.InviteeDAO;
+import com.techelevator.model.invitation.InviteeVotes;
 import com.techelevator.services.yelpfusion.models.business.BusinessesWrapper;
 import com.techelevator.services.yelpfusion.models.business.Businesses;
 import com.techelevator.services.yelpfusion.models.business.BusinessDetails;
@@ -25,9 +27,11 @@ public class YelpFusion {
     private RestTemplate restTemplate = new RestTemplate();
     private JdbcTemplate jdbcTemplate;
 
+
     public YelpFusion(JdbcTemplate jdbcTemplate) {
 
         this.jdbcTemplate = jdbcTemplate;
+
 
     }
 
@@ -55,11 +59,14 @@ public class YelpFusion {
         return business;
 
     }
-    public List<BusinessDetails> getBusinessDetailsById(List<String> yelpId) {
+    public List<BusinessDetails> getBusinessDetailsById(List<String> yelpId, String uniqueId) {
         List<BusinessDetails> businessDetails= new ArrayList<>();
     	for(String id : yelpId) {
     	String endpointURL = "https://api.yelp.com/v3/businesses/" + id;
-        businessDetails.add(restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody());
+    	BusinessDetails details = new BusinessDetails();
+    	details = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody();
+    	details.setInviteeVotes(this.getVotesByInvitee(id, uniqueId));
+        businessDetails.add(details);
     	}
 
     	return businessDetails;
@@ -159,6 +166,19 @@ public class YelpFusion {
 
     }
 
+    private InviteeVotes getVotesByInvitee(String yelpId, String uniqueID) {
+        InviteeVotes inviteeVotes = new InviteeVotes();
+
+        String sql ="SELECT invite_id, yelp_id, thumbs_down, thumbs_down FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, uniqueID, yelpId);
+        while (results.next()) {
+            inviteeVotes.setThumbs_up(results.getBoolean("thumbs_up"));
+            inviteeVotes.setThumbs_down(results.getBoolean("thumbs_down"));
+        }
+
+        return inviteeVotes;
+
+    }
 
     private HttpEntity makeAuthEntity() {
         HttpHeaders headers = new HttpHeaders();
