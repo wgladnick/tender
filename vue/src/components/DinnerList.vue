@@ -6,27 +6,30 @@
 
     <div v-if="!isLoading" class="result-list">
       <ul>
-        <li 
+        <li
           v-for="dinner in dinners"
           v-bind:key="dinner.id"
           v-bind:dinner="dinner"
-          class="card">
-
+          class="card"
+        >
           <div>
-            <p>{{dinner.inviteName}}</p>
+          <router-link v-bind:to="{ name: 'dinner-details', params: { id: dinner.id } }"> 
+            <p>{{ dinner.inviteName }}</p>
+          </router-link>
           </div>
           <div>
-            <p>{{dinner.reservationDate}}</p>
+            <p>{{ dinner.restaurantChoices.yelpId }}</p>
           </div>
           <div>
-            <p>{{dinner.invitees.name}}</p>
+            <p>{{ dinner.reservationDate }}</p>
           </div>
           <div>
-            <p>{{dinner.restaurantChoices.yelpId}}</p>
+            <p>{{ dinner.invitees.name }}</p>
           </div>
         </li>
       </ul>
     </div>
+    <dinner-card />
   </main>
 </template>
 
@@ -37,6 +40,12 @@ export default {
   components: { DinnerCard },
 
   props: ["dinners", "isLoading"],
+
+data() {
+  return {
+    
+  }
+}
 };
 </script>
 

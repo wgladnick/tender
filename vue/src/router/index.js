@@ -10,6 +10,7 @@ import InviteeView from '../views/InviteeView.vue'
 import Home from '../views/Home.vue'
 import CreateInvite from '../views/CreateInvite.vue'
 import UserProfile from '../views/UserProfile.vue'
+import DinnerDetails from '../components/DinnerDetails.vue'
 
 Vue.use(Router)
 
@@ -98,13 +99,19 @@ const router = new Router({
       component: UserProfile,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: "invitation/:id",
+      name: "dinner-details",
+      component: DinnerDetails,
+      meta: {
+        requiresAuth: true
+      }
     }
-  },
-
-   
 
   ]
-})
+});
 
 router.beforeEach((to, from, next) => {
 
