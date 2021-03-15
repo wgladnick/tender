@@ -33,14 +33,14 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 
 	@Override
 	public InviteRestaurants create(InviteRestaurants listOfChoices) {
-		String sql = "INSERT INTO invitation_restaurant (invite_id, yelp_id) VALUES (?,?) RETURNING invite_id, yelp_id, thumbs_up, thumbs_down";
+		String sql = "INSERT INTO invitation_restaurant (invite_id, yelp_id) VALUES (?,?) RETURNING invite_id, yelp_id, total_thumbs_up, total_thumbs_down";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, listOfChoices.getInviteId(), listOfChoices.getYelpId());
 
 		while (results.next()) {
 			listOfChoices.setInviteId(results.getLong("invite_id"));
 			listOfChoices.setYelpId(results.getString("yelp_id"));
-			listOfChoices.setThumbsUp(results.getInt("thumbs_up"));
-			listOfChoices.setThumbsDown(results.getInt("thumbs_down"));
+			listOfChoices.setThumbsUp(results.getInt("total_thumbs_up"));
+			listOfChoices.setThumbsDown(results.getInt("total_thumbs_down"));
 		}
 
 		return listOfChoices;
@@ -51,8 +51,8 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 
 		ir.setInviteId(rs.getInt("invite_id"));
 		ir.setYelpId(rs.getString("yelp_id"));
-		ir.setThumbsUp(rs.getInt("thumbs_up"));
-		ir.setThumbsDown(rs.getInt("thumbs_down"));
+		ir.setThumbsUp(rs.getInt("total_thumbs_up"));
+		ir.setThumbsDown(rs.getInt("total_thumbs_down"));
 
 		return ir;
 

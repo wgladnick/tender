@@ -1,6 +1,7 @@
 package com.techelevator.dao.invitation;
 
 import com.techelevator.model.invitation.InviteRestaurants;
+import com.techelevator.model.invitation.InviteeVotes;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -99,6 +100,20 @@ public class InviteeSqlDAO implements InviteeDAO {
 			invitee = mapRowToInvitee(results);
 		}
         return invitee;
+    }
+
+    private List<InviteeVotes> getVotesByUniqueId(String uniqueId) {
+        List<InviteeVotes> inviteeVotes = new ArrayList<InviteeVotes>();
+
+        String sql = "SELECT yelp_id, thumbs_up, thumbs_down FROM public.invitee_vote WHERE unique_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, uniqueId);
+
+        while (results.next()) {
+
+        }
+
+        return inviteeVotes;
+
     }
 
     private Invitee mapRowToInvitee(SqlRowSet rs) {
