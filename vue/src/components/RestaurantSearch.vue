@@ -7,12 +7,13 @@ Restaurant Search
       <button class="nav-butt" v-on:click="isMenuOpen = false"> Hide List </button>
 
 <div id="mySidenav" class="sidenav" v-bind:style="{width: isMenuOpen ? '400px' : '0px'}">
-
-
+<span>
+<dinner-card/>
+</span>
   
   <ul>
     <li v-for="rest in selectedRestauraunts" v-bind:key="rest.id">
-      <h1> {{rest.name}} </h1><button v-on:click="updateList(rest)">x</button>
+      <h1> {{rest.name}} </h1><span><button v-on:click="updateList(rest)">x</button></span>
       </li>
     </ul>
 </div>
@@ -161,6 +162,7 @@ Restaurant Search
 <script>
 import RestaurantService from "../services/RestaurantService";
 import RestaurantCard from "../components/RestaurantCard";
+import DinnerCard from "../components/DinnerCard";
 
 
 
@@ -168,6 +170,7 @@ export default {
   name: "restaurant-search",
   components: {
     RestaurantCard,
+    DinnerCard
    
   },
 
@@ -284,6 +287,8 @@ export default {
 </script>
 <style scoped>
 
+
+
 .open-button{
   position:fixed;
   top:0;
@@ -301,7 +306,10 @@ export default {
 
 }
 
+
+
 .sidenav {
+ 
   height: 100vh; /* 100% Full-height */
   width: 0px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */

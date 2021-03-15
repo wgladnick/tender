@@ -139,7 +139,11 @@ export default {
 </script>
 
 <style scoped>
-.input-fields {
+
+.input-fields{
+  padding:1.5em;
+}
+/*.input-fields {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -150,5 +154,5 @@ export default {
   text-align: center;
   font-weight: 700;
   font-size: 1.5em;
-}
+}*/
 </style>
