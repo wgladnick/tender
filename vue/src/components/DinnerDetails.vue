@@ -1,6 +1,11 @@
 <template>
 
-<div></div>
+  <div class="main-div">
+    <div class="left-panel">
+
+    </div>
+
+  </div>
   
 </template>
 
@@ -13,6 +18,17 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.main-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.left-panel {
+  padding: 20px;
+  margin-right: 25px;
+}
 
 </style>
