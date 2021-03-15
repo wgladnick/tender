@@ -9,6 +9,11 @@ export default {
     name: "user-profile",
     created() {
         this.getUserId(this.$route.params.username)
+    },
+    data() {
+        return {
+            user: {},
+        }
     }
 
 
