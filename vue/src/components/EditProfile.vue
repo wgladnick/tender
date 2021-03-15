@@ -1,5 +1,6 @@
 <template>
   <main class="main-section">
+      <div id="edit-profile-container">
       <form class="form-edit-profile" @submit.prevent="editProfile">
           <h1 class ="h3 mb-3 font-weight normal">Edit Profile</h1>
 
@@ -50,6 +51,7 @@
 
 
       </form>
+      </div>
       </main>
 </template>
 
@@ -79,5 +81,32 @@ export default {
 </script>
 
 <style>
+h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+.main-section {
+  background-color: #fdf2f2;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+
+}
+#edit-profile-container {
+    width: 30%;
+  align-self: center;
+  background-color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-edit-profile{
+    width: 75%;
+}
 
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <div>
+<main >
+  <div id="profile-container">
      <h1>Welcome to your profile, {{this.user.username}} </h1>
      <p>Name: {{this.user.firstName}} {{this.user.lastName}}</p>
      <p> Email Address: {{this.user.email}}</p>
@@ -9,6 +10,7 @@
      <button type = "submit">Edit My Profile</button>
      </router-link>
       </div>
+      </main>
 </template>
 
 <script>
@@ -31,5 +33,30 @@ export default {
 </script>
 
 <style>
+h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+p {
+  text-align: center;
+  font-size: 1.5em;
+
+}
+button {
+  background-color: #dc6b67;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 75%;
+  margin-top: 30px;
+}
 
 </style>
