@@ -1,6 +1,5 @@
  <template>
   <b-form>
-    
     <div class="input-fields">
       <h1 class="headingText">Create Dinner</h1>
       <b-field label="Dinner Name">
@@ -66,12 +65,12 @@
             v-model="dinnerInvite.invitees"
             label="Who's invited?"
           >
-          <b-input
-            id="name"
-            type="text"
-            :label="invitee.label2"
-            v-model="invitee.value2"
-            placeholder="Enter friend's name:"
+            <b-input
+              id="name"
+              type="text"
+              :label="invitee.label2"
+              v-model="invitee.value2"
+              placeholder="Enter friend's name:"
             />
             <b-input
               id="email"
@@ -80,22 +79,17 @@
               v-model="invitee.value1"
               placeholder="Enter friend's email:"
             />
-            
+              <button @click="remove(i)" class="delete" id="delete-invitee" />
           </b-field>
-          <b-button @click="add()" id="add-invitee"> Add Invitee</b-button>
-          <b-button
-            @click="remove(i)"
-            class="delete"
-            id="delete-invite"
-            v-if="dinnerInvite.invitees.legnth > 1"
-            >Delete</b-button
+          <div>
+            <b-button @click="add()" id="add-invitee"> Add Invitee</b-button>
+          </div>
+          <b-button type="submit">
+            Create Dinner and Invite Friends</b-button
           >
-          <b-button type="submit"> Click to find out Where Dinner will be</b-button> 
         </div>
       </div>
-      
     </div>
-    
   </b-form>
 </template>
 
@@ -117,23 +111,15 @@ export default {
         invitees: [],
         location: "",
         radius: "",
-        restaurantChoices: []
-        
+        restaurantChoices: [],
       },
-      
     };
   },
 
   methods: {
-    /*addField() {
-      let input = document.createElement("input");
-      input.type = "text";
-      container.appendChild(input);
-      container.appendChild(document.createElement("br"));
-    },*/
     addInviteesToDinner() {
-      InviteService.sendInvite().then((response) => {
-        this.dinnerInvite.invitees = response.data;
+      InviteService.sendInvite(this.dinnerInvite).then((response) => {
+        this.dinnerInvite = response.data;
       });
     },
     add() {
@@ -141,9 +127,8 @@ export default {
         label1: "email",
         value1: "",
         label2: "name",
-        value2: ""
+        value2: "",
       });
-      
     },
 
     remove(index) {
@@ -154,18 +139,16 @@ export default {
 </script>
 
 <style scoped>
-
-.input-fields{
+.input-fields {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 100vw;
 }
-.headingText{
+.headingText {
   text-align: center;
   font-weight: 700;
   font-size: 1.5em;
-
 }
 </style>

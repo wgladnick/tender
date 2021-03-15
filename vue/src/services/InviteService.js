@@ -10,5 +10,6 @@ export default {
     sendInvite(invitation){
         return axios.post(`/invitation`, invitation)
     }
+    
 
 }
