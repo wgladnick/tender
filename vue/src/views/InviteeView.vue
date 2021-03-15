@@ -14,6 +14,20 @@ export default {
   name: "invitee-view",
   components: { Invitee },
 
+  data(){
+
+    return{
+      vote:{
+        inviteId:"",
+        yelpId:"",
+        thumbsUp:false,
+        thumbsDown:false,
+      },
+      inviteeVotes: []
+
+    }
+  }
+
 }
 </script>
 

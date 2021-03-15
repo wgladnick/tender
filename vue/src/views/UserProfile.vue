@@ -1,17 +1,26 @@
-<template>
 
-  <user-profile />
+<template>
+<div>
+  <dinner-list/>
+
+  </div>
+
 </template>
 
 <script>
-import UserProfile from '../components/UserProfile'
+
+//import UserProfile from '../components/UserProfile.vue'
+import DinnerList from '../components/DinnerList.vue'
+
 export default {
-    name: "user-profile",
+    name: "userProfile",
    components: {
-       UserProfile
+       //UserProfile,
+      
+       DinnerList
    }
 
-}
+};
 </script>
 
 <style>

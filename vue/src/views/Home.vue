@@ -19,7 +19,7 @@
              <button class="find-food" v-on:click="invite()" focused>
           Invite Friends Out For Food
           </button>
-             <button class="find-food" v-on:click="searchByLocation()" focused>
+             <button class="find-food" v-on:click="visitProfile()" focused>
         View My Profile
           </button>
         </form>
@@ -47,6 +47,9 @@ export default {
       invite(){
       this.$router.push({ name: 'createInvite'});
     },
+    visitProfile(){
+      this.$router.push({name: 'userProfile' });
+    }
 
 
 

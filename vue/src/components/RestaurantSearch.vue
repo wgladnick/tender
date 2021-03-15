@@ -7,6 +7,8 @@ Restaurant Search
       <button class="nav-butt" v-on:click="isMenuOpen = false"> Hide List </button>
 
 <div id="mySidenav" class="sidenav" v-bind:style="{width: isMenuOpen ? '400px' : '0px'}">
+
+
   
   <ul>
     <li v-for="rest in selectedRestauraunts" v-bind:key="rest.id">
@@ -85,6 +87,7 @@ Restaurant Search
           <img src="../assets/loading.gif" />
         </div>
         <div v-if="location === ''">
+        
           <h1 class="loading-text">Let's Find You Some Grub</h1>
         </div>
 
@@ -126,6 +129,7 @@ Restaurant Search
         </div>
 
         <div v-if="hasResults" class="result-list">
+         
           <h1 class="title">
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
@@ -181,7 +185,8 @@ export default {
       categoriesSelected: [],
       noneFound: false,
       updatedLocation: "",
-      selectedRestauraunts:[]
+      selectedRestauraunts:[],
+      user:{}
     };
   },
   created() {
@@ -195,7 +200,11 @@ export default {
       this.isInitialSearch = false;
       this.updatedLocation = this.location;
     }
+
+    this.user = this.$store.state.user;
   },
+
+  
 
   computed: {
     hasResults() {
@@ -299,7 +308,7 @@ export default {
   z-index: 2; /* Stay on top */
   bottom: 0; /* Stay at the top */
   right: 0;
-  background-color:#dc6b67; /* Black*/
+  background-color:#e08f8c; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */

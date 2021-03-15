@@ -93,8 +93,8 @@ const router = new Router({
       }
     },
     {
-      path: "/user",
-      name: "UserProfile",
+      path: "/profile",
+      name: "userProfile",
       component: UserProfile,
       meta: {
         requiresAuth: true
