@@ -12,7 +12,17 @@ export default {
     },
     data() {
         return {
-            user: {},
+            user: {
+                firstName: "",
+                lastName: "",
+                email: "",
+                address: "",
+                city: "",
+                state: "",
+                zip: 0,
+                defaultRadius: 16100,
+                searchedCategories: "", 
+            },
         }
     }
 
