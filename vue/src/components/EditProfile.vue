@@ -22,22 +22,23 @@
               <b-input maxLength="15" v-model="user.username" required></b-input>
           </b-field>
           <b-field label="Address">
-              <b-input v-model="user.address"> </b-input>
+              <b-input v-model="user.userDetails.address"> </b-input>
           </b-field>
           <b-field label="City">
-              <b-input v-model="user.city"> </b-input>
+              <b-input v-model="user.userDetails.city"> </b-input>
           </b-field>
           <b-field label="State">
-              <b-input v-model="user.state"> </b-input>
+              <b-input v-model="user.userDetails.state"> </b-input>
           </b-field>
           <b-field label="Zip Code">
-              <b-input v-model="user.zip"></b-input>
+              <b-input v-model="user.userDetails.zip"></b-input>
           </b-field>
-          
+          <div v-for="category in user.userDetails.availCategories"
+            v-bind:key="category.categoryId">
+
           <label
             class="container"
-            v-for="category in availCategories"
-            v-bind:key="category.categoryId"
+            
             >{{ category.displayName }}
             <input
               type="checkbox"
@@ -48,8 +49,8 @@
             />
             <span class="checkmark"></span>
           </label>
-
-
+            </div>
+        <button type="submit" v-on:click.prevent="editProfile">Save Changes</button>
       </form>
       </div>
       </main>
@@ -61,6 +62,7 @@ export default {
     name:"edit-profile",
     created() {
         this.user = this.$store.state.user;
+        console.log(this.user);
     },
 
     data() {
@@ -71,8 +73,10 @@ export default {
     },
     methods: {
         editProfile() {
-            this.user = [];
             this.$store.commit("UPDATE_USER", this.user);
+            this.user = [];
+            this.$router.push('/profile');
+            
 
         }
     }
@@ -108,5 +112,19 @@ h1 {
 .form-edit-profile{
     width: 75%;
 }
-
+button {
+  background-color: #dc6b67;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 30px;
+}
 </style>

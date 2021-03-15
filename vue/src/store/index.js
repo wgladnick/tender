@@ -86,8 +86,6 @@ export default new Vuex.Store({
     },
     UPDATE_USER(state, user) {
       state.user = user;
-      localStorage.update('user',JSON.stringify(user));
-      console.log(user);
     },
 
   }
