@@ -169,9 +169,12 @@ public class YelpFusion {
     private InviteeVotes getVotesByInvitee(String yelpId, String uniqueID) {
         InviteeVotes inviteeVotes = new InviteeVotes();
 
-        String sql ="SELECT invite_id, yelp_id, thumbs_down, thumbs_down FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
+        String sql ="SELECT invite_id, invitee_unique_id, yelp_id, thumbs_down, thumbs_down FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, uniqueID, yelpId);
         while (results.next()) {
+            inviteeVotes.setYelpId(results.getString("yelp_id"));
+            inviteeVotes.setInviteId(results.getString("invite_id"));
+            inviteeVotes.setUniqueId(results.getString("invitee_unique_id"));
             inviteeVotes.setThumbs_up(results.getBoolean("thumbs_up"));
             inviteeVotes.setThumbs_down(results.getBoolean("thumbs_down"));
         }
