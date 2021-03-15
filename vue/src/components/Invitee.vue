@@ -56,10 +56,12 @@ export default {
 
   methods: {
     addVote(vote){
-      if(this.votes.inlcudes(vote)){
-        const index = this.votes.indexOf(vote);
-        this.votes.splice(index,1);
+      
+    for(let i=0; i < this.votes.length; i++){
+      if(this.votes[i].yelpId === vote.yelpId){
+        this.votes.splice(i,1);
       }
+    }
       this.votes.push(vote);
     }
 
