@@ -9,8 +9,7 @@ public class Invitee {
 	private long inviteId;
 	private String uniqueId;
 	private int userId;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private String email;
 	private Boolean hasVoted;
 	private String isAttending;
@@ -46,20 +45,12 @@ public class Invitee {
 		this.userId = userId;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {

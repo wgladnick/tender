@@ -13,7 +13,8 @@ public class Invitation {
 	private int creatorId;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private Timestamp deadline;
-	private String reservationDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	private Timestamp reservationDate;
 	private List<Invitee> invitees;
 	private List<InviteRestaurants> restaurantChoices;
 	
@@ -69,11 +70,11 @@ public class Invitation {
 		this.deadline = deadline;
 	}
 
-	public String getReservationDate() {
+	public Timestamp getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(String reservationDate) {
+	public void setReservationDate(Timestamp reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 

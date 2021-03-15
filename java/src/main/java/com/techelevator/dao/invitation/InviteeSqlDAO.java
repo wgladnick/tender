@@ -43,7 +43,7 @@ public class InviteeSqlDAO implements InviteeDAO {
     @Override
     public Invitee getInviteeByUniqueId(String uniqueId) {
         Invitee invitee = new Invitee();
-        String sql = "SELECT id.invitee_user_id AS \"invitee_user_id\",id.invite_id AS \"invite_id\", id.unique_id AS \"unique_id\", id.first_name AS \"first_name\", id.last_name AS \"last_name\", " +
+        String sql = "SELECT id.invitee_user_id AS \"invitee_user_id\",id.invite_id AS \"invite_id\", id.unique_id AS \"unique_id\", id.name AS \"name\", " +
                 "id.email AS \"email\", id.has_voted AS \"has_voted\", id.is_attending AS \"is_attending\", inv.deadline AS \"deadline\", inv.reservation_date_time AS \"reservation_date_time\" " +
                 "FROM invitee_details AS id  JOIN invitation AS inv ON id.invite_id = inv.invite_id WHERE id.unique_id = ?";
 
@@ -75,9 +75,9 @@ public class InviteeSqlDAO implements InviteeDAO {
         String uniqueId = generateUniqueId();
         invitee.setUniqueId(uniqueId);
 
-        String sql = "INSERT INTO invitee_details (invite_id,unique_id, invitee_user_id, first_name, last_name, email) VALUES (?,?,?,?,?,?) RETURNING has_voted, is_attending";
+        String sql = "INSERT INTO invitee_details (invite_id,unique_id, invitee_user_id, name, email) VALUES (?,?,?,?,?) RETURNING has_voted, is_attending";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, invitee.getInviteId(), invitee.getUniqueId(), invitee.getUserId(),
-                invitee.getFirstName(), invitee.getLastName(), invitee.getEmail());
+                invitee.getName(), invitee.getEmail());
 
         while (results.next()) {
             invitee.setHasVoted(results.getBoolean("has_voted"));
@@ -106,8 +106,7 @@ public class InviteeSqlDAO implements InviteeDAO {
         invitee.setInviteId(rs.getInt("invite_id"));
         invitee.setUniqueId(rs.getString("unique_id"));
         invitee.setUserId(rs.getInt("invitee_user_id"));
-        invitee.setFirstName(rs.getString("first_name"));
-        invitee.setLastName(rs.getString("last_name"));
+        invitee.setName(rs.getString("name"));
         invitee.setEmail(rs.getString("email"));
         invitee.setHasVoted(rs.getBoolean("has_voted"));
         invitee.setIsAttending(rs.getString("is_attending"));
