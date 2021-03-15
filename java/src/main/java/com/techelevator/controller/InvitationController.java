@@ -77,15 +77,9 @@ public class InvitationController {
 		return true;
 	}
 
-	@RequestMapping(value = "/thumbsup", method = RequestMethod.DELETE)
-	public boolean undoThumbsUp(@RequestBody InviteeVotes inviteeVotes) {
-		inviteRestaurantsDAO.undoThumbsUp(inviteeVotes);
-		return true;
-	}
-
-	@RequestMapping(value = "/thumbsdown", method = RequestMethod.DELETE)
-	public boolean undoThumbsDown(@RequestBody InviteeVotes inviteeVotes) {
-		inviteRestaurantsDAO.undoThumbsDown(inviteeVotes);
+	@RequestMapping(value = "/removevote", method = RequestMethod.DELETE)
+	public boolean removeVote(@RequestBody InviteeVotes inviteeVotes) {
+		inviteRestaurantsDAO.removeVote(inviteeVotes);
 		return true;
 	}
 }

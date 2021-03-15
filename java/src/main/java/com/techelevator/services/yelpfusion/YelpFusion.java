@@ -66,6 +66,10 @@ public class YelpFusion {
     	BusinessDetails details = new BusinessDetails();
     	details = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody();
     	details.setInviteeVotes(this.getVotesByInvitee(id, uniqueId));
+
+    	//TODO add votes to object
+    	details.setTotalThumbsUp();
+    	details.setTotalThumbsDown();
         businessDetails.add(details);
     	}
 
@@ -189,4 +193,14 @@ public class YelpFusion {
         HttpEntity entity = new HttpEntity<>(headers);
         return entity;
     }
+
+    private int getBusinessThumbsUp() {
+
+    }
+
+    private int getBusinessThumbsDown() {
+
+    }
+
+
 }

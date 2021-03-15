@@ -14,8 +14,5 @@ public interface InviteRestaurantsDAO {
 	boolean voteThumbsUp(InviteeVotes inviteeVote);
 	
 	boolean voteThumbsDown(InviteeVotes inviteeVote);
-
-	boolean undoThumbsUp(InviteeVotes inviteeVote);
-
-	boolean undoThumbsDown(InviteeVotes inviteeVote);
+	boolean removeVote(InviteeVotes inviteeVote);
 }
