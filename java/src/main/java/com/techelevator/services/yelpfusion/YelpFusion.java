@@ -173,7 +173,7 @@ public class YelpFusion {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, uniqueID, yelpId);
         while (results.next()) {
             inviteeVotes.setYelpId(results.getString("yelp_id"));
-            inviteeVotes.setInviteId(results.getString("invite_id"));
+            inviteeVotes.setInviteId(results.getInt("invite_id"));
             inviteeVotes.setUniqueId(results.getString("invitee_unique_id"));
             inviteeVotes.setThumbs_up(results.getBoolean("thumbs_up"));
             inviteeVotes.setThumbs_down(results.getBoolean("thumbs_down"));

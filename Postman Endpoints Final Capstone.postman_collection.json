@@ -232,7 +232,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/invitation/1",
+							"raw": "http://localhost:8080/invitation/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -240,7 +240,7 @@
 							"port": "8080",
 							"path": [
 								"invitation",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -348,7 +348,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n        \"inviteId\": 1,\n        \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\",\n        \"thumbsUp\": 0,\n        \"thumbsDown\": 0\n    }",
+							"raw": " {\n        \"inviteId\": 3,\n        \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\",\n        \"uniqueId\": \"rRDABSdliLRjFZb\"\n\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -377,7 +377,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n        \"inviteId\": 1,\n        \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\",\n        \"thumbsUp\": 0,\n        \"thumbsDown\": 0\n    }",
+							"raw": " {\n        \"inviteId\": 3,\n        \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\",\n        \"uniqueId\": \"rRDABSdliLRjFZb\"\n\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -417,7 +417,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/invitation/invitee/AmDabWpILB328SV",
+							"raw": "http://localhost:8080/invitation/invitee/rRDABSdliLRjFZb",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -426,7 +426,7 @@
 							"path": [
 								"invitation",
 								"invitee",
-								"AmDabWpILB328SV"
+								"rRDABSdliLRjFZb"
 							]
 						}
 					},
