@@ -2,7 +2,7 @@
 <template>
 <div>
   <dinner-list/>
-
+ 
   </div>
 
 </template>
@@ -15,7 +15,7 @@ import DinnerList from '../components/DinnerList.vue'
 export default {
     name: "userProfile",
    components: {
-       //UserProfile,
+      //UserProfile,
       
        DinnerList
    }

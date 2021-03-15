@@ -48,7 +48,7 @@ export default {
       this.$router.push({ name: 'createInvite'});
     },
     visitProfile(){
-      this.$router.push({name: 'userProfile' });
+      this.$router.push({name: 'profile' });
     }
 
 
