@@ -4,14 +4,11 @@
     <div class="input-fields">
       <h1 class="headingText">Create Dinner</h1>
       <b-field label="Dinner Name">
-        <b-input v-model="dinnerInvite.dinnerName" type="text" />
+        <b-input v-model="dinnerInvite.inviteName" type="text" />
       </b-field>
-      <b-field label="First Name">
-        <b-input v-model="dinnerInvite.firstName" type="text" />
-      </b-field>
-      <b-field label="Select Date and Time">
+      <b-field id="reservationDate" label="Select Date and Time">
         <b-datetimepicker
-          v-model="dinnerInvite.datetime"
+          v-model="dinnerInvite.reservationDate"
           placeholder="Click to select..."
         >
           <template #left>
@@ -19,7 +16,7 @@
               label="Now"
               type="is-primary"
               icon-left="clock"
-              @click="dinnerInvite.datetime = new Date()"
+              @click="dinnerInvite.reservationDate = new Date()"
             />
           </template>
 
@@ -29,7 +26,32 @@
               type="is-danger"
               icon-left="close"
               outlined
-              @click="dinnerInvite.datetime = null"
+              @click="dinnerInvite.reservationDate = null"
+            />
+          </template>
+        </b-datetimepicker>
+      </b-field>
+      <b-field id="deadline" label="Deadline for Dinner Invite">
+        <b-datetimepicker
+          v-model="dinnerInvite.deadline"
+          placeholder="Click to select..."
+        >
+          <template #left>
+            <b-button
+              label="Now"
+              type="is-primary"
+              icon-left="clock"
+              @click="dinnerInvite.deadline = new Date()"
+            />
+          </template>
+
+          <template #right>
+            <b-button
+              label="Clear"
+              type="is-danger"
+              icon-left="close"
+              outlined
+              @click="dinnerInvite.deadline = null"
             />
           </template>
         </b-datetimepicker>
@@ -47,15 +69,15 @@
           <b-input
             id="name"
             type="text"
-            :label="dinnerInvite.invitees.label2"
-            v-model="dinnerInvite.invitees.value2"
+            :label="invitee.label2"
+            v-model="invitee.value2"
             placeholder="Enter friend's name:"
             />
             <b-input
               id="email"
               type="email"
-              :label="dinnerInvite.invitees.label1"
-              v-model="dinnerInvite.invitees.value1"
+              :label="invitee.label1"
+              v-model="invitee.value1"
               placeholder="Enter friend's email:"
             />
             
@@ -65,7 +87,7 @@
             @click="remove(i)"
             class="delete"
             id="delete-invite"
-            v-if="invitees.legnth > 1"
+            v-if="dinnerInvite.invitees.legnth > 1"
             >Delete</b-button
           >
           <b-button type="submit"> Click to find out Where Dinner will be</b-button> 
@@ -92,7 +114,7 @@ export default {
         inviteName: "",
         reservationDate: new Date(),
         deadline: new Date(),
-        invitees: [name, emailFields],
+        invitees: [],
         location: "",
         radius: "",
         restaurantChoices: []
