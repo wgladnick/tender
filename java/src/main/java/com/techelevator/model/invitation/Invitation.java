@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Invitation {
 	private Long inviteId;
+	private String inviteName;
 	private String location;
 	private int radius;
 	private int creatorId;
@@ -30,6 +31,14 @@ public class Invitation {
 
 	public String getLocation() {
 		return location;
+	}
+
+	public String getInviteName() {
+		return inviteName;
+	}
+
+	public void setInviteName(String inviteName) {
+		this.inviteName = inviteName;
 	}
 
 	public void setLocation(String location) {
