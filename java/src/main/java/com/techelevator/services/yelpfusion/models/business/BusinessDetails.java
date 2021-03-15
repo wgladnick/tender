@@ -1,5 +1,6 @@
 package com.techelevator.services.yelpfusion.models.business;
 
+import com.techelevator.model.invitation.InviteeVotes;
 import com.techelevator.services.yelpfusion.models.review.Review;
 
 import java.time.DayOfWeek;
@@ -29,6 +30,7 @@ public class BusinessDetails {
     private Hours[] hours;
     private Review[] reviews;
     private int day;
+    private InviteeVotes inviteeVotes;
 
     public BusinessDetails() {
         setDay();
@@ -195,6 +197,14 @@ public class BusinessDetails {
         DayOfWeek day = date.getDayOfWeek();
 
         this.day = day.getValue() - 1;
+    }
+
+    public InviteeVotes getInviteeVotes() {
+        return inviteeVotes;
+    }
+
+    public void setInviteeVotes(InviteeVotes inviteeVotes) {
+        this.inviteeVotes = inviteeVotes;
     }
 
     @Override
