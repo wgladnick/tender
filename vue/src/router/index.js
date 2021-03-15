@@ -91,11 +91,17 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
+    {
+    path: "/user",
+    name: "UserProfile",
+    component: UserProfile,
+    meta: {
+      requiresAuth: true
+    }
+  },
 
    
 
-    
   ]
 })
 
