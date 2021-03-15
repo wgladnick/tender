@@ -12,7 +12,7 @@ Restaurant Search
 </span>
   
   <ul>
-    <li v-for="rest in selectedRestauraunts" v-bind:key="rest.id">
+    <li class="list-item" v-for="rest in selectedRestauraunts" v-bind:key="rest.id">
       <h1> {{rest.name}} </h1><span><button v-on:click="updateList(rest)">x</button></span>
       </li>
     </ul>
@@ -288,7 +288,9 @@ export default {
 <style scoped>
 
 
-
+.list-item{
+  display:flex;
+}
 .open-button{
   position:fixed;
   top:0;

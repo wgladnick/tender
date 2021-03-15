@@ -17,6 +17,7 @@ public class Invitation {
 	private Timestamp reservationDate;
 	private List<Invitee> invitees;
 	private List<InviteRestaurants> restaurantChoices;
+	private List<InviteeVotes> inviteevotes;
 	
 	public Invitation() {
 		
@@ -94,9 +95,12 @@ public class Invitation {
 		this.restaurantChoices = restaurantChoices;
 	}
 
-	
-	
-	
-	
+	public List<InviteeVotes> getInviteevotes() {
+		return inviteevotes;
+	}
+
+	public void setInviteevotes(List<InviteeVotes> inviteevotes) {
+		this.inviteevotes = inviteevotes;
+	}
 }
 

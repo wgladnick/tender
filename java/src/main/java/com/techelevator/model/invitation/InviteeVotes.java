@@ -4,6 +4,9 @@ public class InviteeVotes {
 
     private boolean thumbs_up;
     private boolean thumbs_down;
+    private String inviteId;
+    private String uniqueId;
+    private String yelpId;
 
     public InviteeVotes() {
     }
@@ -22,5 +25,29 @@ public class InviteeVotes {
 
     public void setThumbs_down(boolean thumbs_down) {
         this.thumbs_down = thumbs_down;
+    }
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public String getInviteId() {
+        return inviteId;
+    }
+
+    public void setInviteId(String inviteId) {
+        this.inviteId = inviteId;
+    }
+
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
+    public String getYelpId() {
+        return yelpId;
+    }
+
+    public void setYelpId(String yelpId) {
+        this.yelpId = yelpId;
     }
 }

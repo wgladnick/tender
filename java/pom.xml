@@ -98,6 +98,20 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                <executable>
+                true
+                </executable>
+                </configuration>
+                <executions>
+                <execution>
+                <configuration>
+                <mainClass>
+                com.techelevator.Application
+                </mainClass>
+                </configuration>
+                </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

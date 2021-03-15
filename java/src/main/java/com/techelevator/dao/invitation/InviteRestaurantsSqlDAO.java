@@ -58,9 +58,10 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 
 	}
 
+	@Override
 	public InviteRestaurants voteThumbsUp(InviteRestaurants inviterestaurants) {
 
-		String sql = "UPDATE invitation_restaurant " + "SET thumbs_up = thumbs_up + 1 "
+		String sql = "UPDATE invitation_restaurant SET thumbs_up = thumbs_up + 1 "
 				+ "WHERE yelp_id = ? AND invite_id = ?";
 		jdbcTemplate.update(sql, inviterestaurants.getYelpId(), inviterestaurants.getInviteId());
 
@@ -75,6 +76,7 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 
 	}
 
+	@Override
 	public InviteRestaurants voteThumbsDown(InviteRestaurants inviterestaurants) {
 
 		String sql = "UPDATE invitation_restaurant " + "SET thumbs_down = thumbs_down + 1 "

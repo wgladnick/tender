@@ -1,5 +1,6 @@
 <template>
   <span class="zoom">
+
     <div class="left-panel">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
@@ -47,26 +48,30 @@
         </p>
       </div>
 
-      <!-- Invite Buttons --> 
-
-         <span class="invite-buttons" v-if="$route.name === 'inviteeView'">
-
-          <span class="yes-button"> <b-button type="is-primary" rounded size="is-small" class="m-2">
-          <i class="far fa-thumbs-up"></i>
-          LIKE</b-button>
-          </span>
-
-          <span class="nah-button">
-          <b-button type="is-primary" rounded size="is-small" class="m-2">
-          <i class="far fa-sad-tear"></i>
-          NAH</b-button>
-          </span>
-  </span>
+      <!-- Invite Buttons -->
 
 
+      <!-- Like -->
+      <span class="invite-buttons" v-if="$route.name === 'inviteeView'">
+        <span class="yes-button">
+          <b-button v-on:click="thumbsUp(vote)" type="is-primary" rounded size="is-small" class="m-2">
+            <i class="far fa-thumbs-up"></i>
+            LIKE</b-button
+          >
+        </span>
 
 
+         <!-- NAH -->
+        
+          <b-button v-on:click="thumbsDown(vote)" type="is-primary" rounded size="is-small" class="m-2">
+            <i class="far fa-sad-tear"></i>
+            NAH</b-button
+          >
+       
+      </span>
 
+
+       <!-- Call To Order -->
       <span v-if="$route.name !== 'inviteeView'" class="call-to-order">
         <a :href="`tel:${restaurant.phone}`">
           <b-button type="is-primary" rounded size="is-small">
@@ -74,9 +79,12 @@
             Call to order</b-button
           >
         </a>
+
+        <!-- Add to List -->
         <button v-on:click="addToList(restaurant)">addToList</button>
       </span>
 
+      <!-- Delivery/ TakeOut Tags -->
       <div v-if="$route.name !== 'inviteeView'" class="transactions">
         <b-button size="is-small">
           <i
@@ -115,7 +123,7 @@
       </div>
     </div>
 
-    <button v-if="isAddingRestaurants">Fun</button>
+  
   </span>
 </template>
 
@@ -124,18 +132,26 @@ import StarRating from "vue-star-rating";
 
 export default {
   name: "restaurant-card",
+
   components: {
     StarRating,
   },
-  props: ["restaurant", "isAddingRestaurants"],
+
+  props: ["restaurant"],
+
   data() {
     return {
       transactionTypes: "",
       categories: [],
-      isSelected: false,
-    };
+      
+      vote: {
+        yelpId: this.restaurant.id,
+        thumbsUp: false,
+        thumbsDown: false
+      }
+     
+    }
   },
-
   created() {
     for (let i = 0; i < this.restaurant.transactions.length; i++) {
       this.transactionTypes +=
@@ -152,8 +168,25 @@ export default {
 
   methods: {
 
-    addToList(restaurant){
-      this.$emit('update-list', restaurant)
+    
+    thumbsUp(vote){
+      this.vote.thumbsUp = true;
+      this.vote.thumbsDown= false;
+      this.$emit('add-vote', vote);
+    },
+
+    thumbsDown(vote){
+      this.vote.thumbsDown = true;
+      this.vote.thumbsUp = false;
+      this.$emit('add-vote', vote);
+   
+
+    },
+
+
+
+    addToList(restaurant) {
+      this.$emit("update-list", restaurant);
     },
     updateSelected() {
       this.$emit("addSelectedRestaurant", this.isSelected);
@@ -166,7 +199,7 @@ export default {
 .zoom {
   display: flex;
   flex-direction: row;
- 
+
   padding: 1em;
   transition: transform 0.5s;
 
@@ -184,7 +217,6 @@ export default {
 }
 .right-panel {
   padding: 20px 20px 20px 0px;
- 
 }
 
 .call-to-order {
@@ -196,23 +228,21 @@ export default {
 }
 
 .nah-button .button.is-rounded {
-  background-color:#dc6b67;
+  background-color: #dc6b67;
 }
 .nah-button .button.is-rounded:hover {
-  background-color:#ad5451;
+  background-color: #ad5451;
 }
 
-.yes-button .button.button.is-rounded{
-  background-color:#a5c064;
+.yes-button .button.button.is-rounded {
+  background-color: #a5c064;
 }
-.yes-button .button.button.is-rounded:hover{
-  background-color:#7d973f;
+.yes-button .button.button.is-rounded:hover {
+  background-color: #7d973f;
 }
 
-
-.invite-buttons .button.is-rounded{
- 
-  width:7em;
+.invite-buttons .button.is-rounded {
+  width: 7em;
 }
 .button.is-rounded {
   border-radius: 290486px;
