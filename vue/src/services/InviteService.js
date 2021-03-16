@@ -7,30 +7,25 @@ export default {
     getInvitee(uniqueId) {
         return axios.get(`/invitation/invitee/${uniqueId}`);
     },
-    sendInvite(invitation){
+    sendInvite(invitation) {
         return axios.post(`/invitation`, invitation)
     },
     getInviteById(id) {
         return axios.get(`/invitation/user/${id}`);
     },
 
-    voteThumbsUp(inviteeVotes){
-        console.log("invite up")
+    voteThumbsUp(inviteeVotes) {
         return axios.put('/invitation/thumbsup', inviteeVotes);
-},
-
-    voteThumbsDown(inviteeVotes){
-        console.log("invite down")
-        return axios.put('/invitation/thumbsdown', inviteeVotes);
-
-
     },
 
-    undoVote(inviteeVotes){
+    voteThumbsDown(inviteeVotes) {
+        return axios.put('/invitation/thumbsdown', inviteeVotes);
+    },
+    undoVote(vote) {
         console.log("invite removed")
-        console.log(inviteeVotes)
-        return axios.delete('/invitation/removevote', inviteeVotes);
+        console.log(vote)
+        return axios.put('/invitation/removevote', vote);
     }
-    
+
 
 }

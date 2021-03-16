@@ -77,7 +77,7 @@ public class InvitationController {
 		return true;
 	}
 
-	@RequestMapping(value = "/removevote", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/removevote", method = RequestMethod.PUT)
 	public boolean removeVote(@RequestBody InviteeVotes inviteeVotes) {
 		inviteRestaurantsDAO.removeVote(inviteeVotes);
 		return true;
