@@ -9,6 +9,9 @@ export default {
     },
     sendInvite(invitation){
         return axios.post(`/invitation`, invitation)
+    },
+    getInviteById() {
+        return axios.get(`/invitation/user/${id}`);
     }
     
 

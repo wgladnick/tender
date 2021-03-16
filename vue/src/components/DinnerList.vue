@@ -1,51 +1,33 @@
 <template>
-  <main>
-    <div class="loading-gif" v-if="isLoading">
-      <img src="../assets/loading.gif" />
-    </div>
+  <div>
+  <section class="loading-gif" v-if="isLoading">
+    <img src="../assets/loading.gif" />
+  </section>
+  <div v-if="!isLoading">
+    <scheduled-dinner 
+      v-for="dinner in dinners"
+      v-bind:key="dinner.id"
+      v-bind:dinner="dinner"
+      class="card"
+      />
+  </div>
+  </div>
 
-    <div v-if="!isLoading" class="result-list">
-      <ul>
-        <li
-          v-for="dinner in dinners"
-          v-bind:key="dinner.id"
-          v-bind:dinner="dinner"
-          class="card"
-        >
-          <div>
-          <router-link v-bind:to="{ name: 'dinner-details', params: { id: dinner.id } }"> 
-            <p>{{ dinner.inviteName }}</p>
-          </router-link>
-          </div>
-          <div>
-            <p>{{ dinner.restaurantChoices.yelpId }}</p>
-          </div>
-          <div>
-            <p>{{ dinner.reservationDate }}</p>
-          </div>
-          <div>
-            <p>{{ dinner.invitees.name }}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <dinner-card />
-  </main>
 </template>
 
 <script>
-import DinnerCard from "./DinnerCard.vue";
+
+import ScheduledDinner from './ScheduledDinner.vue';
 export default {
   name: "dinner-list",
-  components: { DinnerCard },
+  components: {  
+    ScheduledDinner 
+  },
+  props: ["isLoading"],
 
-  props: ["dinners", "isLoading"],
-
-data() {
-  return {
-    
-  }
-}
+  data() {
+    return {};
+  },
 };
 </script>
 
