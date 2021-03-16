@@ -33,6 +33,7 @@ public class BusinessDetails {
     private int totalThumbsUp;
     private int totalThumbsDown;
     private InviteeVotes inviteeVotes;
+    private String yelpId;
 
     public BusinessDetails() {
         setDay();
@@ -44,6 +45,7 @@ public class BusinessDetails {
 
     public void setId(String id) {
         this.id = id;
+        setYelpId(id);
     }
 
     public String getAlias() {
@@ -227,6 +229,14 @@ public class BusinessDetails {
 
     public void setInviteeVotes(InviteeVotes inviteeVotes) {
         this.inviteeVotes = inviteeVotes;
+    }
+
+    public String getYelpId() {
+        return yelpId;
+    }
+
+    public void setYelpId(String yelpId) {
+        this.yelpId = yelpId;
     }
 
     @Override

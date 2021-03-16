@@ -18,6 +18,7 @@ public class Businesses {
     private String phone;
     private String display_phone;
     private double distance;
+    private String yelpId;
 
     public Businesses() {
     }
@@ -28,6 +29,7 @@ public class Businesses {
 
     public void setId(String id) {
         this.id = id;
+        setYelpId(id);
     }
 
     public String getAlias() {
@@ -150,4 +152,11 @@ public class Businesses {
         this.distance = distance;
     }
 
+    public String getYelpId() {
+        return yelpId;
+    }
+
+    public void setYelpId(String yelpId) {
+        this.yelpId = yelpId;
+    }
 }

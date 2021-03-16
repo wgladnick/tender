@@ -52,8 +52,8 @@ public class InvitationSqlDAO implements InvitationDAO {
         invite.setBusinessDetails(yelpFusion.getBusinessDetailsForInvite(yelpId));
 
         for (BusinessDetails details : invite.getBusinessDetails()) {
-            details.setTotalThumbsUp(getUpVotes(details.getId(), inviteId));
-            details.setTotalThumbsDown(getDownVotes(details.getId(), inviteId));
+            details.setTotalThumbsUp(getUpVotes(details.getYelpId(), inviteId));
+            details.setTotalThumbsDown(getDownVotes(details.getYelpId(), inviteId));
         }
 
         return invite;
