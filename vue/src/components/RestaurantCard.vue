@@ -54,7 +54,7 @@
       <!-- Like -->
       <span class="invite-buttons" v-if="$route.name === 'inviteeView'">
         <span class="yes-button">
-          <b-button v-on:click="thumbsUp(vote)" type="is-primary" rounded size="is-small" class="m-2">
+          <b-button v-on:click="thumbsUp()" type="is-primary" rounded size="is-small" class="m-2" v-show="!hasVoted">
             <i class="far fa-thumbs-up"></i>
             LIKE</b-button
           >
@@ -63,14 +63,14 @@
 
          <!-- NAH -->
         
-          <b-button v-on:click="thumbsDown(vote)" type="is-primary" rounded size="is-small" class="m-2">
+          <b-button v-on:click="thumbsDown()" type="is-primary" rounded size="is-small" class="m-2" v-show="!hasVoted">
             <i class="far fa-sad-tear"></i>
             NAH</b-button
           >
 
            <!-- Undo Vote -->
         
-          <b-button v-on:click="undoVote(vote)" type="is-primary" rounded size="is-small" class="m-2">
+          <b-button v-on:click="undoVote()" type="is-primary" rounded size="is-small" class="m-2" v-show="hasVoted">
             <i class="far fa-sad-tear"></i>
             Whoops</b-button
           >
@@ -151,12 +151,11 @@ export default {
   data() {
     return {
       transactionTypes: "",
+
       categories: [],
-      
+      hasVoted: false,
       vote: {
         yelpId: this.restaurant.id,
-        thumbsUp: false,
-        thumbsDown: false,
         thumbs_up: false,
         thumbs_down: false,
         inviteId: this.$store.state.currentInvitee.inviteId,
@@ -182,28 +181,28 @@ export default {
   methods: {
 
         
-    thumbsUp(vote){
-      this.vote.thumbsUp = true;
-      this.vote.thumbsDown= false;
-      this.$emit('place-vote', vote);
+    thumbsUp(){
+      this.vote.thumbs_up = true;
+      this.vote.thumbs_down= false;
+      InviteService.voteThumbsUp(this.vote)
+      this.hasVoted = true;
     },
 
-    thumbsDown(vote){
+    thumbsDown(){
       this.vote.thumbsDown = true;
       this.vote.thumbsUp = false;
-      this.$emit('place-vote', vote);
-   
+      InviteService.voteThumbsDown(this.vote);
+      this.hasVoted = true;
 
     },
 
-     undoVote(vote){
-      this.vote.thumbsDown = false;
-      this.vote.thumbsUp = false;
-      InviteService.undoVote(vote)   
+     undoVote(){
+      this.vote.thumbs_down = false;
+      this.vote.thumbs_up = false;
+      InviteService.undoVote(this.vote);
+      this.hasVoted = false;
 
     },
-
-
 
     addToList(restaurant) {
       this.$emit("update-list", restaurant);

@@ -105,15 +105,18 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 			thumbsUp = result.getBoolean("thumbs_up");
 
 			if (thumbsDown) {
-				thumbsDown = false;
 				this.undoThumbsDown(inviteeVote);
+				String sql3 = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND invite_id = ?";
+				jdbcTemplate.update(sql3, inviteeVote.getUniqueId(), inviteeVote.getYelpId(), inviteeVote.getInviteId());
 
 			} else if (thumbsUp) {
-				thumbsUp = false;
 				this.undoThumbsUp(inviteeVote);
 			} else {
 				return false;
 			}
+
+			String sql3 = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND invite_id = ?";
+			jdbcTemplate.update(sql3, inviteeVote.getUniqueId(), inviteeVote.getYelpId(), inviteeVote.getInviteId());
 		}
 
 		return true;
@@ -125,9 +128,6 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 		String sql = "UPDATE invitation_restaurant SET total_thumbs_up = total_thumbs_up - 1 "
 				+ "WHERE yelp_id = ? AND invite_id = ?";
 		jdbcTemplate.update(sql, inviteeVote.getYelpId(), inviteeVote.getInviteId());
-
-		String sql3 = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND thumbs_up = true";
-		jdbcTemplate.update(sql3, inviteeVote.getUniqueId(), inviteeVote.getYelpId());
 
 		return true;
 
