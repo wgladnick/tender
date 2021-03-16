@@ -75,6 +75,14 @@ public class AuthenticationController {
         }
     }
 
+    @RequestMapping(value = "/user", method = RequestMethod.PUT)
+    public User update(@Valid @RequestBody User user) {
+
+        User updatedUser = userDAO.updateUser(user);
+        return updatedUser;
+
+    }
+
     /**
      * Object to return as body in JWT Authentication.
      */

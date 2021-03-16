@@ -24,7 +24,10 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         if (results.next()) {
-            return mapRowToUserDetails(results);
+            UserDetails userDetails = new UserDetails();
+            userDetails = mapRowToUserDetails(results);
+
+            return userDetails;
         } else {
             return new UserDetails();
         }
@@ -32,15 +35,13 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
     @Override
     public UserDetails updateDetails(UserDetails uD) {
-        String sql = "UPDATE users_details SET " +
-                "SET address = ?, city = ?, state = ?, zip = ?, default_radius = ?" +
+        String sql = "UPDATE user_details " +
+                "SET address = ?, city = ?, state = ?, zip = ?, default_radius = ? " +
                 "WHERE user_id = ?";
         jdbcTemplate.update(sql, uD.getAddress(), uD.getCity(),
                 uD.getState(),uD.getZip(), uD.getDefault_radius(), uD.getUserId());
 
-        uD = this.removeCategories(uD);
-        uD = this.addCategories(uD);
-
+        uD = this.setActiveCategories(uD);
 
         return uD;
     }
@@ -51,30 +52,6 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
                 "VALUES (?) RETURNING user_id";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-    }
-
-    @Override
-    public UserDetails addCategories(UserDetails userDetails) {
-        String sql = "INSERT INTO user_categories (user_id, category_id) VALUES (?,?)";
-        List<Integer> newCategories = userDetails.getActiveCategoryId();
-        for (int categoryId : newCategories) {
-            jdbcTemplate.update(sql, userDetails.getUserId(), categoryId);
-        }
-
-        return userDetails;
-    }
-
-    @Override
-    public UserDetails removeCategories(UserDetails userDetails) {
-
-        String sql = "DELETE FROM user_categories WHERE user_id = ?";
-        List<Integer> newCategories = userDetails.getRemoveCategoryId();
-        for (int categoryId : newCategories) {
-            jdbcTemplate.update(sql, userDetails.getUserId(), categoryId);
-        }
-
-        userDetails.setRemoveCategoryId(null);
-        return userDetails;
     }
 
     @Override
@@ -92,6 +69,32 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         userDetails.setActiveCategoryId(activeCategories);
 
         return activeCategories;
+    }
+
+    @Override
+    public UserDetails setActiveCategories(UserDetails userDetails) {
+        List<Integer> activeCategories = new ArrayList<>();
+        String removeSql = "DELETE FROM user_categories WHERE user_id = ?";
+        jdbcTemplate.update(removeSql, userDetails.getUserId());
+
+        String addSql = "INSERT INTO user_categories (user_id, category_id) VALUES (?,?)";
+        for (int category : userDetails.getActiveCategoryId()) {
+            jdbcTemplate.update(addSql,userDetails.getUserId(), category);
+        }
+
+
+        String getSql = "SELECT fc.category_id AS \"category_id\" FROM food_categories AS fc " +
+                "JOIN user_categories ON fc.category_id = user_categories.category_id " +
+                "WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(getSql, userDetails.getUserId());
+
+        while (results.next()) {
+            activeCategories.add(results.getInt("category_id"));
+        }
+
+        userDetails.setActiveCategoryId(activeCategories);
+
+        return userDetails;
     }
 
 

@@ -9,7 +9,6 @@ public class UserDetails {
     private String state;
     private int zip;
     private int default_radius;
-    private List<Integer> removeCategoryId;
     private List<Integer> activeCategoryId;
     private String searchCategories;
 
@@ -62,14 +61,6 @@ public class UserDetails {
 
     public void setDefault_radius(int default_radius) {
         this.default_radius = default_radius;
-    }
-
-    public List<Integer> getRemoveCategoryId() {
-        return removeCategoryId;
-    }
-
-    public void setRemoveCategoryId(List<Integer> removeCategoryId) {
-        this.removeCategoryId = removeCategoryId;
     }
 
     public List<Integer> getActiveCategoryId() {
