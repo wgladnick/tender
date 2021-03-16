@@ -47,7 +47,7 @@ export default new Vuex.Store({
       inviteName: "",
       invitees: "",
       reservationDate: "",
-      inviteRestaurants: []
+      restaurantChoices: []
     }
   },
 
@@ -103,10 +103,13 @@ export default new Vuex.Store({
         state.invitation.inviteName = invitation.inviteName;
         state.invitation.invitees = invitation.invitees;
         state.invitation.reservationDate = invitation.reservationDate;
+        state.invitation.restaurantChoices = invitation.selectedRestaurants;
+        state.invitation.location = state.searchLocation;
+        state.invitation.radius = state.radius;
       },
   
       UPDATE_INVITATION(state, invitation){
-        state.invitation.inviteRestaurants = invitation.selectedRestaurants;
+        state.invitation.restaurantChoices = invitation.selectedRestaurants;
         state.invitation.location = state.searchLocation;
         state.invitation.radius = state.radius;
 
