@@ -12,6 +12,16 @@ export default {
     },
     getInviteById(id) {
         return axios.get(`/invitation/user/${id}`);
+    },
+
+    voteThumbsUp(inviteeVotes){
+        return axios.put('/invitation/thumbsup/', inviteeVotes);
+},
+
+    voteThumbsDown(inviteeVotes){
+        return axios.put('/invitation/thumbsdown/', inviteeVotes)
+
+
     }
     
 

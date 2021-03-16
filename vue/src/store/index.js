@@ -41,6 +41,8 @@ export default new Vuex.Store({
     thumbsUpList: [],
     invitees: [],
     invitation: {
+      location:"",
+      radius:"",
       deadline: "",
       inviteName: "",
       invitees: "",
@@ -96,14 +98,17 @@ export default new Vuex.Store({
     },
 
     CREATE_INVITATION(state, invitation){
-      state.invitation.deadline = invitation.deadline;
+        state.invitation.deadline = invitation.deadline;
         state.invitation.inviteName = invitation.inviteName;
         state.invitation.invitees = invitation.invitees;
         state.invitation.reservationDate = invitation.reservationDate;
       },
   
-      UPDATE_INVITATION(state, restaurantChoices){
-        state.invitation.inviteRestaurants = restaurantChoices;
+      UPDATE_INVITATION(state, invitation){
+        state.invitation.inviteRestaurants = invitation.selectedRestaurants;
+        state.invitation.location = invitation.location;
+        state.invitation.radius = invitation.radius;
+
   
     }
 

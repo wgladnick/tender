@@ -22,7 +22,7 @@
         :key="restaurant.id"
         :restaurant="restaurant"
         class="card"
-        @add-vote="addVote"
+        @place-vote="placeVote"
       />
     </div>
 
@@ -41,12 +41,24 @@ export default {
       invitee: {},
       isLoading: true,
       errorMsg: false,
-      votes: []
+      inviteeVotes:{
+        yelpId:"",
+        uniqueId:"",
+        inviteId:"",
+        thumbsUp:"",
+        thumbsDown:""
+
+
+      }
     };
   },
   created() {
+    
+
     InviteService.getInvitee(this.$route.params.uniqueId).then((response) => {
       this.invitee = response.data;
+      this.inviteeVotes.uniqueId = this.invitee.uniqueId;
+      this.inviteeVotes.inviteId = this.invitee.inviteId;
       this.isLoading = false;
       if (this.invitee.uniqueId === null) {
         this.errorMsg = true;
@@ -55,18 +67,23 @@ export default {
   },
 
   methods: {
-    addVote(vote){
-      
-    for(let i=0; i < this.votes.length; i++){
-      if(this.votes[i].yelpId === vote.yelpId){
-        this.votes.splice(i,1);
+    placeVote(vote){
+      this.inviteeVotes.yelpId = vote.yelpId;
+      this.inviteeVotes.thumbsUp = vote.thumbsUp;
+      this.inviteeVotes.thumbsDown = vote.thumbsDown;
+      console.log(this.inviteeVotes);
+      if(this.inviteeVotes.thumbsUp){
+      InviteService.voteThumbsUp(this.inviteeVotes);
+      }else if(this.inviteeVotes.thumbsDown){
+        InviteService.voteThumbsDown(this.inviteVotes);
       }
-    }
-      this.votes.push(vote);
-    }
+
+      
+   
 
   }
-};
+}
+}
 </script>
 
 <style scoped>

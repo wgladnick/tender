@@ -12,12 +12,13 @@ Restaurant Search
 </span>
   
   <ul>
-    <li class="list-item" v-for="rest in selectedRestauraunts" v-bind:key="rest.id">
+    <li class="list-item" v-for="rest in invitation.selectedRestaurants" v-bind:key="rest.id">
       <h1> {{rest.name}} </h1><span><button v-on:click="updateList(rest)">x</button></span>
       </li>
     </ul>
 
     <button v-on:click="addRestaurants"> ADD RESTAURANTS </button>
+    <button v-on:click="sendInvite"> SEND INVITE </button>
 </div>
 
 
@@ -166,6 +167,7 @@ Restaurant Search
 import RestaurantService from "../services/RestaurantService";
 import RestaurantCard from "../components/RestaurantCard";
 import DinnerCard from "../components/DinnerCard";
+import InviteService from '../services/InviteService';
 
 
 
@@ -191,7 +193,12 @@ export default {
       categoriesSelected: [],
       noneFound: false,
       updatedLocation: "",
-      selectedRestauraunts:[],
+
+      invitation: {
+      location:"",
+      radius:"",
+      selectedRestaurants:[],
+      },
       user:{}
     };
   },
@@ -220,18 +227,26 @@ export default {
 
   methods: {
 
+    sendInvite(){
+      this.invitation.location = this.location;
+      this.invitation.radius = this.radius;
+      InviteService.sendInvite(this.$store.state.invitation);
+      console.log(this.$store.state.invitation);
+
+    },
+
     addRestaurants(){
-      this.$store.commit("UPDATE_INVITATION", this.selectedRestauraunts);
+      this.$store.commit("UPDATE_INVITATION", this.invitation);
       console.log(this.$store.state.invitation);
 
     },
 
   updateList(rest){
-    const index = this.selectedRestauraunts.indexOf(rest)
-    if(!this.selectedRestauraunts.includes(rest)){
-    this.selectedRestauraunts.push(rest);
+    const index = this.invitation.selectedRestaurants.indexOf(rest)
+    if(!this.invitation.selectedRestaurants.includes(rest)){
+    this.invitation.selectedRestaurants.push(rest);
     }else{
-      this.selectedRestauraunts.splice(index,1);
+      this.invitation.selectedRestaurants.splice(index,1);
 
     }
   },

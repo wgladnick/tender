@@ -5,56 +5,15 @@
       <b-field label="Dinner Name">
         <b-input v-model="dinnerInvite.inviteName" type="text" />
       </b-field>
-      <b-field id="reservationDate" label="Select Date and Time">
-        <b-datetimepicker
-          v-model="dinnerInvite.reservationDate"
-          placeholder="Click to select..."
-        >
-          <template #left>
-            <b-button
-              label="Now"
-              type="is-primary"
-              icon-left="clock"
-              @click="dinnerInvite.reservationDate = new Date()"
-            />
-          </template>
+    
+    <input type="date" v-model="reservationDate" />
+    <input type="time" v-model="reservationTime" />
 
-          <template #right>
-            <b-button
-              label="Clear"
-              type="is-danger"
-              icon-left="close"
-              outlined
-              @click="dinnerInvite.reservationDate = null"
-            />
-          </template>
-        </b-datetimepicker>
-      </b-field>
-      <b-field id="deadline" label="Deadline for Dinner Invite">
-        <b-datetimepicker
-          v-model="dinnerInvite.deadline"
-          placeholder="Click to select..."
-        >
-          <template #left>
-            <b-button
-              label="Now"
-              type="is-primary"
-              icon-left="clock"
-              @click="dinnerInvite.deadline = new Date()"
-            />
-          </template>
+    <input type="date" v-model="deadlineDate" />
+    <input type="time" v-model="deadlineTime" />
 
-          <template #right>
-            <b-button
-              label="Clear"
-              type="is-danger"
-              icon-left="close"
-              outlined
-              @click="dinnerInvite.deadline = null"
-            />
-          </template>
-        </b-datetimepicker>
-      </b-field>
+
+   
       <div id="email-container">
         <div>
           <b-field
@@ -68,15 +27,13 @@
             <b-input
               id="name"
               type="text"
-              :label="invitee.label2"
-              v-model="invitee.value2"
+              v-model="invitee.name"
               placeholder="Enter friend's name:"
             />
             <b-input
               id="email"
               type="email"
-              :label="invitee.label1"
-              v-model="invitee.value1"
+              v-model="invitee.email"
               placeholder="Enter friend's email:"
             />
               <button @click="remove(i)" class="delete" id="delete-invitee" />
@@ -84,7 +41,7 @@
           <div>
             <b-button @click="add()" id="add-invitee"> Add Invitee</b-button>
           </div>
-          <b-button type="submit">
+          <b-button v-on:click="createInvite">
             Create Dinner and Invite Friends</b-button
           >
         </div>
@@ -104,31 +61,45 @@ export default {
       enableSeconds: false,
       hourFormat: undefined, // Browser locale
       locale: undefined, // Browser locale
+      reservationDate:"",
+      reservationTime:"",
+      deadlineDate:"",
+      deadlineTime:"",
+      location: "",
+        radius: "",
+         restaurantChoices: [],
       dinnerInvite: {
         inviteName: "",
-        reservationDate: new Date(),
-        deadline: new Date(),
+        reservationDate:"",
+        deadline:"",
         invitees: [],
-        location: "",
-        radius: "",
-        restaurantChoices: [],
+       
       },
     };
   },
 
+  
+
+      
+  
+
+  
+
   methods: {
+        
+createInvite(){
+  this.dinnerInvite.reservationDate = this.reservationDate + " " + this.reservationTime;
+     this.dinnerInvite.deadline = this.deadlineDate + " " + this.deadlineTime;
+this.$store.commit("CREATE_INVITATION", this.dinnerInvite);
+console.log(this.$store.state.invitation);
+},
     addInviteesToDinner() {
       InviteService.sendInvite(this.dinnerInvite).then((response) => {
         this.dinnerInvite = response.data;
       });
     },
     add() {
-      this.dinnerInvite.invitees.push({
-        label1: "email",
-        value1: "",
-        label2: "name",
-        value2: "",
-      });
+      this.dinnerInvite.invitees.push({});
     },
 
     remove(index) {

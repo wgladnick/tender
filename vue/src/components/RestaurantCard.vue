@@ -147,7 +147,9 @@ export default {
       vote: {
         yelpId: this.restaurant.id,
         thumbsUp: false,
-        thumbsDown: false
+        thumbsDown: false,
+        inviteId:"",
+        uniqueId:""
       }
      
     }
@@ -168,17 +170,17 @@ export default {
 
   methods: {
 
-    
+        
     thumbsUp(vote){
       this.vote.thumbsUp = true;
       this.vote.thumbsDown= false;
-      this.$emit('add-vote', vote);
+      this.$emit('place-vote', vote);
     },
 
     thumbsDown(vote){
       this.vote.thumbsDown = true;
       this.vote.thumbsUp = false;
-      this.$emit('add-vote', vote);
+      this.$emit('place-vote', vote);
    
 
     },
