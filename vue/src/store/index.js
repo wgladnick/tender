@@ -40,6 +40,7 @@ export default new Vuex.Store({
     restaurants: [],
     thumbsUpList: [],
     invitees: [],
+    createdInvite:{},
     invitation: {
       location:"",
       radius:"",
@@ -96,6 +97,10 @@ export default new Vuex.Store({
     UPDATE_USER(state, user) {
       state.user = user;
       
+    },
+
+    SET_CREATED_INVITE(state, createdInvite){
+      state.createdInvite = createdInvite;
     },
 
     CREATE_INVITATION(state, invitation){

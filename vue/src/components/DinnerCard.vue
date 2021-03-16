@@ -90,8 +90,8 @@ export default {
 createInvite(){
   this.dinnerInvite.reservationDate = this.reservationDate + " " + this.reservationTime;
      this.dinnerInvite.deadline = this.deadlineDate + " " + this.deadlineTime;
-this.$store.commit("CREATE_INVITATION", this.dinnerInvite);
-console.log(this.$store.state.invitation);
+      this.$store.commit("CREATE_INVITATION", this.dinnerInvite);
+
 },
     addInviteesToDinner() {
       InviteService.sendInvite(this.dinnerInvite).then((response) => {

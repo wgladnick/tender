@@ -138,6 +138,7 @@ Restaurant Search
           <h1 class="title">
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
+          <button> INVITE FRIENDS </button>
 
             
           <restaurant-card
@@ -199,7 +200,8 @@ export default {
       radius:"",
       selectedRestaurants:[],
       },
-      user:{}
+      user:{},
+      createdInvite: {}
     };
   },
   created() {
@@ -231,15 +233,22 @@ export default {
       this.addRestaurants();
       this.invitation.location = this.location;
       this.invitation.radius = this.radius;
-      
-      InviteService.sendInvite(this.$store.state.invitation);
-      console.log(this.$store.state.invitation);
+
+      InviteService.sendInvite(this.$store.state.invitation)
+      .then((response) => {
+        this.createdInvite = response.data;
+        this.$store.commit("SET_CREATED_INVITE", this.createdInvite);
+
+      });
+     
+    
+
 
     },
 
     addRestaurants(){
       this.$store.commit("UPDATE_INVITATION", this.invitation);
-      console.log(this.$store.state.invitation);
+    
 
     },
 
