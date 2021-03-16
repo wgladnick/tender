@@ -24,7 +24,7 @@ Restaurant Search
 
 <!-- Use any element to open the sidenav -->
 
-<span class="open-button"  v-on:click="isMenuOpen=true"><button>OPEN</button></span>
+
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
 
     <!-- Left Panel -->
@@ -138,14 +138,15 @@ Restaurant Search
           <h1 class="title">
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
-
-            
+          <div>
+          <b-button class="open-button"  v-on:click="isMenuOpen=true" focused>Invite Friends to Vote</b-button>
+          </div>
           <restaurant-card
             v-for="restaurant in restaurants"
             v-bind:key="restaurant.id"
             v-bind:restaurant="restaurant"
             class="card" 
-            @update-list="updateList"/>
+            />
     
        
     
@@ -318,12 +319,26 @@ export default {
   display:flex;
 }
 .open-button{
-  position:fixed;
-  top:0;
-  right:0;
-  z-index:3;
   height:50px;
+  width: 400px;
+  background-color: #dc6b67;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-top: 2em;
+  font-weight: bold;
   
+}
+.open-button:hover {
+  background-color: #f7a09d;
 }
 .nav-butt{
   height:100px;
