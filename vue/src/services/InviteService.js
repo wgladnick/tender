@@ -15,17 +15,21 @@ export default {
     },
 
     voteThumbsUp(inviteeVotes){
-        return axios.put('/invitation/thumbsup/', inviteeVotes);
+        console.log("invite up")
+        return axios.put('/invitation/thumbsup', inviteeVotes);
 },
 
     voteThumbsDown(inviteeVotes){
-        return axios.put('/invitation/thumbsdown/', inviteeVotes);
+        console.log("invite down")
+        return axios.put('/invitation/thumbsdown', inviteeVotes);
 
 
     },
 
     undoVote(inviteeVotes){
-        return axios.delete('/invitation/removevote/', inviteeVotes);
+        console.log("invite removed")
+        console.log(inviteeVotes)
+        return axios.delete('/invitation/removevote', inviteeVotes);
     }
     
 

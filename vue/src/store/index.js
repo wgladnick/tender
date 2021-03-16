@@ -35,6 +35,7 @@ export default new Vuex.Store({
     restaurantCard: {
       
     },
+    currentInvitee: {},
     searchLocation: '',
     searchDirections: '',
     radius: '',
@@ -105,6 +106,11 @@ export default new Vuex.Store({
     SET_CREATED_INVITE(state, createdInvite){
       state.createdInvite = createdInvite;
     },
+
+    SET_CURRENT_INVITEE(state, invitee){
+      state.currentInvitee = invitee;
+    },
+
 
     CREATE_INVITATION(state, invitation){
         state.invitation.deadline = invitation.deadline;

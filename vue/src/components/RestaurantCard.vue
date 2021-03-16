@@ -67,6 +67,14 @@
             <i class="far fa-sad-tear"></i>
             NAH</b-button
           >
+
+           <!-- Undo Vote -->
+        
+          <b-button v-on:click="undoVote(vote)" type="is-primary" rounded size="is-small" class="m-2">
+            <i class="far fa-sad-tear"></i>
+            Whoops</b-button
+          >
+       
        
       </span>
 
@@ -128,6 +136,7 @@
 </template>
 
 <script>
+import InviteService from '../services/InviteService.js'
 import StarRating from "vue-star-rating";
 
 export default {
@@ -148,8 +157,10 @@ export default {
         yelpId: this.restaurant.id,
         thumbsUp: false,
         thumbsDown: false,
-        inviteId:"",
-        uniqueId:""
+        thumbs_up: false,
+        thumbs_down: false,
+        inviteId: this.$store.state.currentInvitee.inviteId,
+        uniqueId:this.$store.state.currentInvitee.uniqueId,
       }
      
     }
@@ -182,6 +193,13 @@ export default {
       this.vote.thumbsUp = false;
       this.$emit('place-vote', vote);
    
+
+    },
+
+     undoVote(vote){
+      this.vote.thumbsDown = false;
+      this.vote.thumbsUp = false;
+      InviteService.undoVote(vote)   
 
     },
 

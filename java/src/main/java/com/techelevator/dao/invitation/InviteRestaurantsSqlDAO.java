@@ -62,6 +62,9 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 	@Override
 	public boolean voteThumbsUp(InviteeVotes inviteeVote) {
 
+		String sqlRemove = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
+		jdbcTemplate.update(sqlRemove, inviteeVote.getUniqueId(), inviteeVote.getYelpId());
+
 		String sql = "UPDATE invitation_restaurant SET total_thumbs_up = total_thumbs_up + 1 "
 				+ "WHERE yelp_id = ? AND invite_id = ?";
 		jdbcTemplate.update(sql, inviteeVote.getYelpId(), inviteeVote.getInviteId());
@@ -75,6 +78,9 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 
 	@Override
 	public boolean voteThumbsDown(InviteeVotes inviteeVote) {
+
+		String sqlRemove = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
+		jdbcTemplate.update(sqlRemove, inviteeVote.getUniqueId(), inviteeVote.getYelpId());
 
 		String sql = "UPDATE invitation_restaurant SET total_thumbs_down = total_thumbs_down + 1 "
 				+ "WHERE yelp_id = ? AND invite_id = ?";

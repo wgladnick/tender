@@ -61,6 +61,8 @@ export default {
       if (this.invitee.uniqueId === null) {
         this.errorMsg = true;
       }
+      this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
+      console.log(this.$store.state.currentInvitee)
     });
   },
 
