@@ -15,7 +15,7 @@ Restaurant Search
       </li>
     </ul>
 
-    <button v-on:click="addRestaurants"> ADD RESTAURANTS </button>
+   
     <button v-on:click="sendInvite"> SEND INVITE </button>
     <div>
       <b-button class="close-sidenav" v-show="this.$store.state.sideMenuToggle" v-on:click="toggleSideMenu()" > Cancel </b-button>
@@ -235,11 +235,12 @@ export default {
     
       InviteService.sendInvite(this.$store.state.invitation)
       .then((response) => {
-        this.createdInvite = response.data;
+         this.$store.commit("SET_CREATED_INVITE", response.data);
       });
-      this.$store.commit("SET_CREATED_INVITE", this.createdInvite)
-      console.log(this.$store.state.createdInvite);
-     // this.$router.push('/inviteConfirmationPage')
+      this.$router.push('/confirmation');
+      
+   
+    
      
 
     },
@@ -250,7 +251,7 @@ export default {
 
     addRestaurants(){
       this.$store.commit("UPDATE_INVITATION", this.invitation);
-      console.log(this.$store.state.invitation);
+     
 
     },
 

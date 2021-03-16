@@ -44,6 +44,7 @@ export default new Vuex.Store({
     invitees: [],
     createdInvite:{},
     invitation: {
+      creatorId:"",
       location:"",
       radius:"",
       deadline: "",
@@ -103,16 +104,13 @@ export default new Vuex.Store({
       
     },
 
-    SET_CREATED_INVITE(state, createdInvite){
-      state.createdInvite = createdInvite;
-    },
-
     SET_CURRENT_INVITEE(state, invitee){
       state.currentInvitee = invitee;
     },
 
 
     CREATE_INVITATION(state, invitation){
+      state.invitation.creatorId = invitation.creatorId;
         state.invitation.deadline = invitation.deadline;
         state.invitation.inviteName = invitation.inviteName;
         state.invitation.invitees = invitation.invitees;
@@ -126,8 +124,10 @@ export default new Vuex.Store({
         state.invitation.restaurantChoices = invitation.selectedRestaurants;
         state.invitation.location = state.searchLocation;
         state.invitation.radius = state.radius;
+    },
 
-  
+    SET_CREATED_INVITE(state, invite){
+      state.createdInvite = invite;
     }
 
   }

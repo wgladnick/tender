@@ -69,7 +69,8 @@ export default {
       location: "",
         radius: "",
          restaurantChoices: [],
-      dinnerInvite: {
+        dinnerInvite: {
+        creatorId:"",
         inviteName: "",
         reservationDate:"",
         deadline:"",
@@ -91,6 +92,7 @@ export default {
 createInvite(){
   this.dinnerInvite.reservationDate = this.reservationDate + " " + this.reservationTime;
      this.dinnerInvite.deadline = this.deadlineDate + " " + this.deadlineTime;
+     this.dinnerInvite.creatorId = this.$store.state.user.id;
       this.$store.commit("CREATE_INVITATION", this.dinnerInvite);
 
 },
