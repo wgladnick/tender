@@ -186,7 +186,6 @@ export default {
 
 
     addToList(restaurant) {
-
       this.$emit("update-list", restaurant);
     },
     updateSelected() {

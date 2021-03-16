@@ -39,7 +39,14 @@ export default new Vuex.Store({
     radius: '',
     restaurants: [],
     thumbsUpList: [],
-    invitees: []
+    invitees: [],
+    invitation: {
+      deadline: "",
+      inviteName: "",
+      invitees: "",
+      reservationDate: "",
+      inviteRestaurants: []
+    }
   },
 
   mutations: {
@@ -87,6 +94,18 @@ export default new Vuex.Store({
     UPDATE_USER(state, user) {
       state.user = user;
     },
+
+    CREATE_INVITATION(state, invitation){
+      state.invitation.deadline = invitation.deadline;
+        state.invitation.inviteName = invitation.inviteName;
+        state.invitation.invitees = invitation.invitees;
+        state.invitation.reservationDate = invitation.reservationDate;
+      },
+  
+      UPDATE_INVITATION(state, restaurantChoices){
+        state.invitation.inviteRestaurants = restaurantChoices;
+  
+    }
 
   }
 })

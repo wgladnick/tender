@@ -45,7 +45,7 @@ export default {
       return this.date + " " + this.time;
     },
     deadlinedatetime() {
-      return this.deadlineDate + " " + this.deadlineTime;
+      this.deadline = this.deadlineDate + " " + this.deadlineTime;
     },
   },
   

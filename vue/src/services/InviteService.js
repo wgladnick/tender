@@ -10,7 +10,7 @@ export default {
     sendInvite(invitation){
         return axios.post(`/invitation`, invitation)
     },
-    getInviteById() {
+    getInviteById(id) {
         return axios.get(`/invitation/user/${id}`);
     }
     

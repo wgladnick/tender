@@ -16,7 +16,10 @@ Restaurant Search
       <h1> {{rest.name}} </h1><span><button v-on:click="updateList(rest)">x</button></span>
       </li>
     </ul>
+
+    <button v-on:click="addRestaurants"> ADD RESTAURANTS </button>
 </div>
+
 
 <!-- Use any element to open the sidenav -->
 
@@ -217,6 +220,12 @@ export default {
 
   methods: {
 
+    addRestaurants(){
+      this.$store.commit("UPDATE_INVITATION", this.selectedRestauraunts);
+      console.log(this.$store.state.invitation);
+
+    },
+
   updateList(rest){
     const index = this.selectedRestauraunts.indexOf(rest)
     if(!this.selectedRestauraunts.includes(rest)){
@@ -300,7 +309,8 @@ export default {
   
 }
 .nav-butt{
-  height:50px;
+  height:100px;
+  width:100px;
   position:fixed;
   right:0;
   z-index:3;

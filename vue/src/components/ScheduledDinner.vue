@@ -32,7 +32,7 @@
 
 <script>
 export default {
-    props: {dinner}
+   /* props:  [dinner] */
 
 }
 </script>
