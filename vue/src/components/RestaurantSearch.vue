@@ -5,6 +5,7 @@ Restaurant Search
 <!-- Side Nav -->
   <main class="body">
       <button class="nav-butt" v-on:click="isMenuOpen = false"> Hide List </button>
+      
 
 <div id="mySidenav" class="sidenav" v-bind:style="{width: isMenuOpen ? '400px' : '0px'}">
 <span>
@@ -19,6 +20,9 @@ Restaurant Search
 
     <button v-on:click="addRestaurants"> ADD RESTAURANTS </button>
     <button v-on:click="sendInvite"> SEND INVITE </button>
+    <div>
+      <b-button class="close-sidenav" v-show="this.$store.state.sideMenuToggle" v-on:click="toggleSideMenu()" > Cancel </b-button>
+    </div>
 </div>
 
 
@@ -139,17 +143,14 @@ Restaurant Search
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
           <div>
-          <b-button class="open-button"  v-on:click="isMenuOpen=true" focused>Invite Friends to Vote</b-button>
+          <b-button class="open-button" v-show="!this.$store.state.sideMenuToggle" v-on:click="toggleSideMenu()" focused>Invite Friends to Vote</b-button>
           </div>
-          <button> INVITE FRIENDS </button>
-
-            
           <restaurant-card
             v-for="restaurant in restaurants"
             v-bind:key="restaurant.id"
             v-bind:restaurant="restaurant"
             class="card" 
-            />
+            @update-list="updateList"/>
     
        
     
@@ -203,8 +204,7 @@ export default {
       radius:"",
       selectedRestaurants:[],
       },
-      user:{},
-      createdInvite: {}
+      user:{}
     };
   },
   created() {
@@ -236,22 +236,19 @@ export default {
       this.addRestaurants();
       this.invitation.location = this.location;
       this.invitation.radius = this.radius;
+      
+      InviteService.sendInvite(this.$store.state.invitation);
+      console.log(this.$store.state.invitation);
 
-      InviteService.sendInvite(this.$store.state.invitation)
-      .then((response) => {
-        this.createdInvite = response.data;
-        this.$store.commit("SET_CREATED_INVITE", this.createdInvite);
-
-      });
-     
-    
-
-
+    },
+    toggleSideMenu(){
+      this.$store.commit("SET_TOGGLE_STATUS");
+      this.isMenuOpen = this.$store.state.sideMenuToggle;
     },
 
     addRestaurants(){
       this.$store.commit("UPDATE_INVITATION", this.invitation);
-    
+      console.log(this.$store.state.invitation);
 
     },
 
@@ -327,7 +324,7 @@ export default {
 
 
 .list-item{
-  display:flex;    
+  display:flex;
 }
 .open-button{
   height:50px;
