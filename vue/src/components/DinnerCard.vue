@@ -39,7 +39,7 @@
               <button @click="remove(i)" class="delete" id="delete-invitee" />
           </b-field>
           <div>
-            <b-button @click="add()" id="add-invitee"> Add Invitee</b-button>
+            <b-button @click="add()" id="add-invitee"><i class="fas fa-plus"></i></b-button>
           </div>
           <b-button v-on:click="createInvite">
             Create Dinner and Invite Friends</b-button
