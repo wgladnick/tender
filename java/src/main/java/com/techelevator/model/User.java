@@ -14,10 +14,15 @@ public class User {
 	private String password;
 	@JsonIgnore
 	private boolean activated;
+	@JsonIgnore
 	private Set<Authority> authorities = new HashSet<>();
+
 	private String firstName;
+
 	private String lastName;
+
 	private String email;
+
 	private UserDetails userDetails;
 
 	public User() {
@@ -136,4 +141,6 @@ public class User {
 		return "User{" + "id=" + id + ", username='" + username + '\'' + ", activated=" + activated + ", authorities="
 				+ authorities + ", firstname=" + firstName + ", lastname=" + lastName + ", email=" + email +", userdetails=" + '}';
 	}
+
+
 }
