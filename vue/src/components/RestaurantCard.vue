@@ -48,27 +48,36 @@
         </p>
       </div>
 
-      <!-- Invite Buttons -->
+      <!-- Invitee Vote Buttons -->
 
 
       <!-- Like -->
       <span class="invite-buttons" v-if="$route.name === 'inviteeView'">
-        <span class="yes-button">
+       
+        <span class="yes-button" v-if="!isVoteSubmitted">
           <b-button v-on:click="thumbsUp(vote)" type="is-primary" rounded size="is-small" class="m-2">
             <i class="far fa-thumbs-up"></i>
-            LIKE</b-button
-          >
+            LIKE</b-button >
         </span>
 
-
          <!-- NAH -->
-        
+        <span class="nah-button" v-if="!isVoteSubmitted">
           <b-button v-on:click="thumbsDown(vote)" type="is-primary" rounded size="is-small" class="m-2">
             <i class="far fa-sad-tear"></i>
-            NAH</b-button
-          >
-       
-      </span>
+            NAH</b-button>
+            </span>
+
+
+
+      </span>    
+
+          <!-- Undo Votes -->
+       <span v-if="isVoteSubmitted"> 
+         <h1>VOTE SUBMITTED </h1>
+           <button on:click="undoVote"> Change Vote </button>
+
+       </span>
+    
 
 
        <!-- Call To Order -->
@@ -143,6 +152,7 @@ export default {
     return {
       transactionTypes: "",
       categories: [],
+      isVoteSubmitted: false,
       
       vote: {
         yelpId: this.restaurant.id,
@@ -172,19 +182,18 @@ export default {
 
         
     thumbsUp(vote){
+      this.isVoteSubmitted = true;
       this.vote.thumbsUp = true;
       this.vote.thumbsDown= false;
       this.$emit('place-vote', vote);
     },
 
     thumbsDown(vote){
+      this.isVoteSubmitted = true;
       this.vote.thumbsDown = true;
       this.vote.thumbsUp = false;
       this.$emit('place-vote', vote);
-   
-
     },
-
 
 
     addToList(restaurant) {
