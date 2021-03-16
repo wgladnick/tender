@@ -236,14 +236,13 @@ export default {
       InviteService.sendInvite(this.$store.state.invitation)
       .then((response) => {
          this.$store.commit("SET_CREATED_INVITE", response.data);
+         console.log(this.$store.state.createdInvite);
       });
-      this.$router.push('/confirmation');
-      
-   
+         this.$router.push('/confirmation');
     
-     
-
     },
+
+    
     toggleSideMenu(){
       this.$store.commit("SET_TOGGLE_STATUS");
       this.isMenuOpen = this.$store.state.sideMenuToggle;

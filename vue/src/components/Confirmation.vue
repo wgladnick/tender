@@ -1,6 +1,16 @@
 <template>
   <div>
-      <p>{{invitation}}</p>
+
+ <p> {{invitation}} </p>
+ <ul>
+     <li v-for="invitee in invitation.invitees" v-bind:key="invitee.uniqueId">
+         <p>{{invitee.name}}</p>
+         <p>{{invitee.uniqueId}}</p>
+         </li>
+     </ul>
+
+
+
       </div>
 </template>
 
@@ -9,15 +19,18 @@ export default {
 
     data(){
         return{
-        invitation: {}
+        invitation: {},
+        
 
         };
     },
-    created(){
-
+created(){
 this.invitation = this.$store.state.createdInvite;
-console.log(this.invitation);
-    }
+
+
+
+
+}
 
 }
 </script>
