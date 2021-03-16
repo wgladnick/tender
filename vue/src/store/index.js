@@ -95,6 +95,7 @@ export default new Vuex.Store({
     },
     UPDATE_USER(state, user) {
       state.user = user;
+      
     },
 
     CREATE_INVITATION(state, invitation){
@@ -106,8 +107,8 @@ export default new Vuex.Store({
   
       UPDATE_INVITATION(state, invitation){
         state.invitation.inviteRestaurants = invitation.selectedRestaurants;
-        state.invitation.location = invitation.location;
-        state.invitation.radius = invitation.radius;
+        state.invitation.location = state.searchLocation;
+        state.invitation.radius = state.radius;
 
   
     }

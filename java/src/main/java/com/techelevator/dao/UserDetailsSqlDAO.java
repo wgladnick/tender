@@ -117,20 +117,20 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         String searchCategoryString = "";
         int counter = 0;
 
-        String sql = "SELECT search_name FROM food_categories " +
+        String sql = "SELECT display_name FROM food_categories " +
                 "JOIN user_categories ON food_categories.category_id = user_categories.category_id " +
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 
         while (results.next()) {
-            searchCategories.add(results.getString("search_name"));
+            searchCategories.add(results.getString("display_name"));
         }
 
         if (searchCategories.size() > 0) {
             for(String searchItem : searchCategories) {
                 searchCategoryString += searchItem;
                 if (counter < searchCategories.size() - 1) {
-                    searchCategoryString += ",";
+                    searchCategoryString += ", ";
                     counter++;
                 }
             }
