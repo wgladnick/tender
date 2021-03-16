@@ -40,7 +40,7 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
         uD = this.removeCategories(uD);
         uD = this.addCategories(uD);
-        uD = this.setActiveCategories(uD);
+
 
         return uD;
     }
@@ -78,10 +78,10 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
     }
 
     @Override
-    public UserDetails setActiveCategories(UserDetails userDetails) {
+    public List<Integer> getActiveCategories(UserDetails userDetails) {
         List<Integer> activeCategories = new ArrayList<>();
-        String sql = "SELECT category_id FROM food_categories " +
-                "JOIN user_categories ON food_categories.category_id = user_categories.category_id " +
+        String sql = "SELECT fc.category_id AS \"category_id\" FROM food_categories AS fc " +
+                "JOIN user_categories ON fc.category_id = user_categories.category_id " +
                 "WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userDetails.getUserId());
 
@@ -91,7 +91,7 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
 
         userDetails.setActiveCategoryId(activeCategories);
 
-        return userDetails;
+        return activeCategories;
     }
 
 
@@ -103,6 +103,8 @@ public class UserDetailsSqlDAO implements UserDetailsDAO {
         userDetails.setState(results.getString("state"));
         userDetails.setZip(results.getInt("zip"));
         userDetails.setDefault_radius(results.getInt("default_radius"));
+
+        userDetails.setActiveCategoryId(getActiveCategories(userDetails));
 
         long userId = results.getLong("user_id");
 
