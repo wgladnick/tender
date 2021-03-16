@@ -7,6 +7,7 @@ import 'buefy/dist/buefy.css'
 
 
 
+
 Vue.use(Buefy)
 Vue.use(Vuex)
 
@@ -95,7 +96,7 @@ export default new Vuex.Store({
 
     },
     UPDATE_USER(state, user) {
-      state.user = user;
+     state.user = user; 
       
     },
 

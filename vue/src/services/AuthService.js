@@ -12,6 +12,9 @@ export default {
 
   getUserId(username){
     return axios.get(`/user/${username}`)
+  },
+  updateUser(user) {
+    return axios.put(`/user`, user)
   }
 
 }
