@@ -80,12 +80,13 @@ export default {
     },
     methods: {
         editProfile() {
-            console.log(this.user);
+            
             this.user.userDetails.activeCategoryId = this.userCategories;
             AuthService.updateUser(this.user).then((response)=>{
-                this.$store.commit(response.data);
+                this.$store.commit("UPDATE_USER", response.data);
             })
             this.user=this.$store.state.user;
+            console.log(this.$store.state.user);
             this.$router.push('/profile');
             
 
