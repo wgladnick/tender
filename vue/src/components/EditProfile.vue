@@ -2,7 +2,7 @@
   <main class="main-section">
       <div id="edit-profile-container">
           <div class="leftside">
-      <form class="form-edit-profile" @submit.prevent="editProfile">
+      <form class="form-edit-profile" >
           <h1 class ="h3 mb-3 font-weight normal">Edit Profile</h1>
 
           <div class="alert" role="alert" v-if="editProfileErrors">
