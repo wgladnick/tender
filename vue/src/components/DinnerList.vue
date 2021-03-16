@@ -1,40 +1,39 @@
 <template>
   <div>
-  <section class="loading-gif" v-if="isLoading">
-    <img src="../assets/loading.gif" />
-  </section>
-  <div v-if="!isLoading">
-    <scheduled-dinner 
-      v-for="dinner in dinners"
-      v-bind:key="dinner.id"
-      v-bind:dinner="dinner"
-      class="card"
+    <section class="loading-gif" v-if="isLoading">
+      <img src="../assets/loading.gif" />
+    </section>
+    <div v-if="!isLoading">
+      <scheduled-dinner
+        v-for="dinner in dinners"
+        v-bind:key="dinner.id"
+        v-bind:dinner="dinner"
+        class="card"
       />
+    </div>
   </div>
-  </div>
-
 </template>
 
 <script>
-import InviteService from '../services/InviteService.js';
-import ScheduledDinner from './ScheduledDinner.vue';
+import InviteService from "../services/InviteService.js";
+import ScheduledDinner from "./ScheduledDinner.vue";
 export default {
   name: "dinner-list",
-  components: {  
-    ScheduledDinner 
+  components: {
+    ScheduledDinner,
   },
   props: ["isLoading"],
 
   data() {
     return {
-      dinners: []
+      dinners: [],
     };
   },
   created() {
     InviteService.getInviteById(this.$store.state.user.id).then((response) => {
       this.dinners = response.data;
     });
-  }
+  },
 };
 </script>
 
@@ -58,9 +57,9 @@ export default {
   align-items: center;
 }
 .card {
-  width: 60%;
+  width: 80%;
   margin-top: 25px;
   margin-bottom: 25px;
-  padding: 50px;
+  padding: 30px;
 }
 </style>

@@ -1,27 +1,43 @@
 <template>
-  <div> 
-    <user-profile />
-    <dinner-list />
+  <div class="main"> 
+    <div class="left">
+      <user-profile />
+    </div>
+    <div class="right">
+      <dinner-list />
+    </div>
   </div>
 </template>
 
 <script>
-import DinnerList from '../components/DinnerList.vue';
-import UserProfile from '../components/UserProfile.vue';
+import DinnerList from "../components/DinnerList.vue";
+import UserProfile from "../components/UserProfile.vue";
 export default {
-    name: "profile",
-  components: { 
+  name: "profile",
+  components: {
     UserProfile,
-    DinnerList
-   },
+    DinnerList,
+  },
 
-created() {
-  
-}
-}; 
+  created() {},
+};
 </script>
 
 
 <style scoped>
 
+.main {
+  display: flex;
+  
+  width: 100vw;
+}
+
+.right {
+  width: 40vw
+
+}
+
+.left {
+   width: 60vw 
+}
 </style>

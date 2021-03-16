@@ -1,27 +1,23 @@
 <template>
   <main class="body">
 
-    <section class="left">
+    <section class="card">
       <div id="profile-container">
         <h1>Welcome to your profile, {{ this.user.username }}</h1>
-        <p>Name: {{ this.user.firstName }} {{ this.user.lastName }}</p>
-        <p>Email Address: {{ this.user.email }}</p>
-        <p>
+        <p class="details">Name: {{ this.user.firstName }} {{ this.user.lastName }}</p>
+        <p class="details">Email Address: {{ this.user.email }}</p>
+        <p class="details">
           Address: {{ this.user.userDetails.address }}
           {{ this.user.userDetails.city }},{{ this.user.userDetails.state }}
           {{ this.user.userDetails.zip }}
         </p>
-        <p>Favorite Categories: {{ this.user.userDetails.searchCategories }}</p>
+        <p class="details">Favorite Categories: {{ this.user.userDetails.searchCategories }}</p>
         <router-link :to="{ name: 'editProfile' }">
           <button type="submit">Edit My Profile</button>
         </router-link>
       </div>
     </section>
 
-    <section class="right">
-
-
-    </section>
 
   </main>
 </template>
@@ -44,25 +40,25 @@ export default {
 .body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.left {
-  display: flex;
-  flex-direction: column;
+.card {
+  width: 70%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 50px;
+  justify-content: left;
+  height: 75vh;
 }
 
-.right {
-  display: flex;
-  flex-direction: column;
-}
 
 h1 {
-  text-align: center;
   font-weight: 700;
   font-size: 1.5em;
 }
 p {
-  text-align: center;
   font-size: 1.5em;
 }
 button {
