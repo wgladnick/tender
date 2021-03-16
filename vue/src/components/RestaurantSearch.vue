@@ -183,6 +183,7 @@ export default {
 
   data() {
     return {
+      createdInvite: {},
       isMenuOpen: false,
       restaurants: [],
       location: "",
@@ -231,11 +232,15 @@ export default {
 
     sendInvite(){
       this.addRestaurants();
-      this.invitation.location = this.location;
-      this.invitation.radius = this.radius;
-      
-      InviteService.sendInvite(this.$store.state.invitation);
-      console.log(this.$store.state.invitation);
+    
+      InviteService.sendInvite(this.$store.state.invitation)
+      .then((response) => {
+        this.createdInvite = response.data;
+      });
+      this.$store.commit("SET_CREATED_INVITE", this.createdInvite)
+      console.log(this.$store.state.createdInvite);
+     // this.$router.push('/inviteConfirmationPage')
+     
 
     },
     toggleSideMenu(){

@@ -121,7 +121,7 @@ const router = new Router({
     },
     {
       path: "/confirmation",
-      name:"inviteconfirmationpage",
+      name:"inviteConfirmationPage",
       component: InviteConfirmation,
       meta: {
         requiresAuth: true
