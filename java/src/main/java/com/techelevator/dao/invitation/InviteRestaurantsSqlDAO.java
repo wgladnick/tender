@@ -91,16 +91,19 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 	public boolean removeVote(InviteeVotes inviteeVote) {
 		boolean thumbsUp = false;
 		boolean thumbsDown = false;
-		String sql = "SELECT thumbs_down, thumbs_up FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
+		String sql = "SELECT thumbs_down, thumbs_up FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND invite_id = ?";
 
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, inviteeVote.getUniqueId(), inviteeVote.getYelpId());
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, inviteeVote.getUniqueId(), inviteeVote.getYelpId(), inviteeVote.getInviteId());
 		while (result.next()) {
 			thumbsDown = result.getBoolean("thumbs_down");
 			thumbsUp = result.getBoolean("thumbs_up");
 
 			if (thumbsDown) {
+				thumbsDown = false;
 				this.undoThumbsDown(inviteeVote);
+
 			} else if (thumbsUp) {
+				thumbsUp = false;
 				this.undoThumbsUp(inviteeVote);
 			} else {
 				return false;

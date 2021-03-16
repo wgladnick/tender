@@ -41,24 +41,22 @@ export default {
       invitee: {},
       isLoading: true,
       errorMsg: false,
-      inviteeVotes:{
-        yelpId:"",
-        uniqueId:"",
-        inviteId:"",
-        thumbsUp:"",
-        thumbsDown:""
 
+      isVotedSubmitted: false,
 
-      }
+      inviteeVotes: {
+        yelpId: "",
+        uniqueId: "",
+        inviteId: "",
+        thumbsUp: false,
+        thumbsDown: false,
+      },
     };
   },
   created() {
-    
-
     InviteService.getInvitee(this.$route.params.uniqueId).then((response) => {
       this.invitee = response.data;
-      this.inviteeVotes.uniqueId = this.invitee.uniqueId;
-      this.inviteeVotes.inviteId = this.invitee.inviteId;
+
       this.isLoading = false;
       if (this.invitee.uniqueId === null) {
         this.errorMsg = true;
@@ -67,28 +65,29 @@ export default {
   },
 
   methods: {
-    placeVote(vote){
+    placeVote(vote) {
       this.inviteeVotes.yelpId = vote.yelpId;
       this.inviteeVotes.thumbsUp = vote.thumbsUp;
       this.inviteeVotes.thumbsDown = vote.thumbsDown;
-      console.log(this.inviteeVotes);
-      if(this.inviteeVotes.thumbsUp){
-      InviteService.voteThumbsUp(this.inviteeVotes);
-      }else if(this.inviteeVotes.thumbsDown){
-        InviteService.voteThumbsDown(this.inviteVotes);
+      this.inviteeVotes.uniqueId = this.invitee.uniqueId;
+      this.inviteeVotes.inviteId = this.invitee.inviteId;
+
+      if (!vote.isVoteSubmitted) {
+        if (this.inviteeVotes.thumbsUp) {
+          InviteService.voteThumbsUp(this.inviteeVotes);
+        } else {
+          InviteService.voteThumbsDown(this.inviteeVotes);
+        }
+      } else {
+        console.log(this.inviteeVotes);
+        InviteService.undoVote(this.inviteeVotes);
       }
-
-      
-   
-
-  }
-}
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-
 .main {
   display: flex;
   flex-direction: column;

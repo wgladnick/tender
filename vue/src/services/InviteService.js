@@ -19,9 +19,13 @@ export default {
 },
 
     voteThumbsDown(inviteeVotes){
-        return axios.put('/invitation/thumbsdown/', inviteeVotes)
+        return axios.put('/invitation/thumbsdown/', inviteeVotes);
 
 
+    },
+
+    undoVote(inviteeVotes){
+        return axios.delete('/invitation/removevote/', inviteeVotes);
     }
     
 

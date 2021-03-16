@@ -147,6 +147,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 1,\n        \"username\": \"users\",\n        \"firstName\": \"user1\",\n        \"lastName\": \"name1\",\n        \"email\": \"user1@user.com\",\n        \"userDetails\": {\n            \"userId\": 1,\n            \"address\": \"413 N Market St\",\n            \"city\": \"Wilmington\",\n            \"state\": \"DE\",\n            \"zip\": 19801,\n            \"default_radius\": 16100,\n            \"activeCategoryId\": [\n                1,\n                5,\n                7,\n                8,\n                21\n            ],\n            \"searchCategories\": \"American, BBQ, Chinese, Steakhouse\"\n        }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -193,7 +221,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"location\": \"Charlotte\",\n        \"inviteName\": \"Test Invite\",\n        \"radius\": \"16100\",\n        \"creatorId\": \"1\",\n        \"deadline\": \"2021-03-07 16:00\",\n        \"reservationDate\": \"2021-03-17 18:30\",\n        \"invitees\": [{\n            \"userId\": 1,\n            \"name\": \"Will Gladnick\",\n            \"email\": \"bigwillystyle@aol.com\"\n        },{\n            \"name\": \"Mike\",\n            \"email\": \"Mikeistheman@gmail.com\"\n        },{\n            \"name\": \"Emily Charlson\",\n            \"email\": \"emily@yahoo.com\"\n        }\n        ],\n        \"restaurantChoices\": [{\n            \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\"\n\n        },\n        {\n            \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\"\n        }\n        ]\n      }",
+							"raw": "{\n        \"location\": \"Charlotte\",\n        \"inviteName\": \"Test 2 Invite\",\n        \"radius\": \"16100\",\n        \"creatorId\": \"1\",\n        \"deadline\": \"2021-03-07 16:00\",\n        \"reservationDate\": \"2021-03-17 18:30\",\n        \"invitees\": [{\n            \"userId\": 1,\n            \"name\": \"Will Gladnick\",\n            \"email\": \"bigwillystyle@aol.com\"\n        },{\n            \"name\": \"Mike\",\n            \"email\": \"Mikeistheman@gmail.com\"\n        },{\n            \"name\": \"Emily Charlson\",\n            \"email\": \"emily@yahoo.com\"\n        }\n        ],\n        \"restaurantChoices\": [{\n            \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\"\n\n        },\n        {\n            \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\"\n        }\n        ]\n      }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,7 +376,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n        \"inviteId\": 3,\n        \"yelpId\": \"5IFqqWJTaPNoY2ZgRlX73w\",\n        \"uniqueId\": \"rRDABSdliLRjFZb\"\n\n    }",
+							"raw": " {\n        \"inviteId\": 13,\n        \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\",\n        \"uniqueId\": \"ZXrQKMlyZoEa5Zw\"\n\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -427,6 +455,35 @@
 								"invitation",
 								"invitee",
 								"rRDABSdliLRjFZb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Vote",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"inviteId\": 13,\n        \"yelpId\": \"ifEkf8JxP3RCBeszcIGLww\",\n        \"uniqueId\": \"ZXrQKMlyZoEa5Zw\"\n\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/invitation/removevote",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"invitation",
+								"removevote"
 							]
 						}
 					},

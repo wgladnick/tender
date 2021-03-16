@@ -9,7 +9,6 @@ public interface UserDetailsDAO {
     UserDetails getDetails(long userId);
     UserDetails updateDetails(UserDetails userDetails);
     void create(long userId);
-    UserDetails addCategories(UserDetails userDetails);
-    UserDetails removeCategories(UserDetails userDetails);
+    List<Integer> getActiveCategories(UserDetails userDetails);
     UserDetails setActiveCategories(UserDetails userDetails);
 }

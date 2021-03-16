@@ -12,6 +12,7 @@ import CreateInvite from '../views/CreateInvite.vue'
 import Profile from '../views/Profile.vue'
 import DinnerDetails from '../components/DinnerDetails.vue'
 import EditProfile from '../components/EditProfile.vue'
+import InviteConfirmation from '../views/InviteConfirmation.vue'
 
 Vue.use(Router)
 
@@ -118,6 +119,15 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path: "/confirmation",
+      name:"inviteconfirmationpage",
+      component: InviteConfirmation,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
   ]
 });
 
