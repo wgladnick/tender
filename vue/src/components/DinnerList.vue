@@ -16,7 +16,7 @@
 </template>
 
 <script>
-
+import InviteService from '../services/InviteService.js';
 import ScheduledDinner from './ScheduledDinner.vue';
 export default {
   name: "dinner-list",
@@ -26,8 +26,15 @@ export default {
   props: ["isLoading"],
 
   data() {
-    return {};
+    return {
+      dinners: []
+    };
   },
+  created() {
+    InviteService.getInviteById(this.$store.state.user.id).then((response) => {
+      this.dinners = response.data;
+    });
+  }
 };
 </script>
 

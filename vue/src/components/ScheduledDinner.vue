@@ -7,9 +7,11 @@
             class="card-header"
             role="button"
             aria-controls="contentIdForA11y3">
-            <p class="card-header-title">
+            <h1 
+            class="card-header-title">
+           
                 {{ dinner.inviteName }}
-            </p>
+            </h1>
             <a class="card-header-icon">
               <b-icon
                 :icon="props.open ? 'menu-down' : 'menu-up'">
@@ -21,8 +23,14 @@
         <div class="card-content">
           <div class="content">
             <p>When: {{ dinner.reservationDate }}</p>
-            <p>Where: {{ dinner.restaurantChoices.yelpId }}</p>
-            <p>Friends: {{ dinner.invitees.name }}</p>
+            <p
+            v-for="rst in dinner.businessDetails" 
+            v-bind:key="rst.id"
+            >Where: {{ rst.name }}</p>
+            <p
+            v-for="invitee in dinner.invitees"
+            v-bind:key="invitee.uniqueId"
+            >Friends: {{ invitee.name }}</p>
           </div>
         </div>
     </b-collapse>
@@ -32,7 +40,18 @@
 
 <script>
 export default {
-   /* props:  [dinner] */
+  name: 'scheduled-dinner', 
+  props:  ["dinner"],
+
+  data() {
+    return {
+
+    }
+  },
+
+  created() {
+    this.getInviteById();
+  }
 
 }
 </script>
