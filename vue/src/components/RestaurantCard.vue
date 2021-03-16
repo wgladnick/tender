@@ -54,14 +54,14 @@
       <!-- Like -->
       <span class="invite-buttons" v-if="$route.name === 'inviteeView'">
        
-        <span class="yes-button" v-if="!isVoteSubmitted">
+        <span class="yes-button" v-if="!vote.isVoteSubmitted">
           <b-button v-on:click="thumbsUp(vote)" type="is-primary" rounded size="is-small" class="m-2">
             <i class="far fa-thumbs-up"></i>
             LIKE</b-button >
         </span>
 
          <!-- NAH -->
-        <span class="nah-button" v-if="!isVoteSubmitted">
+        <span class="nah-button" v-if="!vote.isVoteSubmitted">
           <b-button v-on:click="thumbsDown(vote)" type="is-primary" rounded size="is-small" class="m-2">
             <i class="far fa-sad-tear"></i>
             NAH</b-button>
@@ -72,7 +72,7 @@
       </span>    
 
           <!-- Undo Votes -->
-       <span v-if="isVoteSubmitted"> 
+       <span v-if="vote.isVoteSubmitted"> 
          <h1>VOTE SUBMITTED </h1>
            <button v-on:click="changeVote(vote)"> Change Vote </button>
 
@@ -152,14 +152,15 @@ export default {
     return {
       transactionTypes: "",
       categories: [],
-      isVoteSubmitted: false,
+      
       
       vote: {
         yelpId: this.restaurant.id,
         thumbsUp: false,
         thumbsDown: false,
         inviteId:"",
-        uniqueId:""
+        uniqueId:"",
+        isVoteSubmitted: false
       }
      
     }
@@ -182,23 +183,26 @@ export default {
 
         
     thumbsUp(vote){
-      this.isVoteSubmitted = true;
+      
       this.vote.thumbsUp = true;
       this.vote.thumbsDown= false;
       this.$emit('place-vote', vote);
+      this.vote.isVoteSubmitted = true;
     },
 
     thumbsDown(vote){
-      this.isVoteSubmitted = true;
+     
       this.vote.thumbsDown = true;
       this.vote.thumbsUp = false;
       this.$emit('place-vote', vote);
+       this.vote.isVoteSubmitted = true;
     },
 
     
     changeVote(vote){
     this.$emit('place-vote', vote);
-    this.isVoteSubmitted = false;
+    this.vote.isVoteSubmitted = false;
+    
     }
 
 
