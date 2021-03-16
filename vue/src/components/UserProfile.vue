@@ -1,38 +1,61 @@
 <template>
-<main >
-  <div id="profile-container">
-     <h1>Welcome to your profile, {{this.user.username}} </h1>
-     <p>Name: {{this.user.firstName}} {{this.user.lastName}}</p>
-     <p> Email Address: {{this.user.email}}</p>
-     <p>Address: {{this.user.userDetails.address}} {{this.user.userDetails.city}},{{this.user.userDetails.state}} {{this.user.userDetails.zip}} </p>
-     <p>Favorite Categories: {{this.user.userDetails.searchCategories}} </p>
-     <router-link :to="{name: 'editProfile' }">
-     <button type = "submit">Edit My Profile</button>
-     </router-link>
+  <main class="body">
+
+    <section class="left">
+      <div id="profile-container">
+        <h1>Welcome to your profile, {{ this.user.username }}</h1>
+        <p>Name: {{ this.user.firstName }} {{ this.user.lastName }}</p>
+        <p>Email Address: {{ this.user.email }}</p>
+        <p>
+          Address: {{ this.user.userDetails.address }}
+          {{ this.user.userDetails.city }},{{ this.user.userDetails.state }}
+          {{ this.user.userDetails.zip }}
+        </p>
+        <p>Favorite Categories: {{ this.user.userDetails.searchCategories }}</p>
+        <router-link :to="{ name: 'editProfile' }">
+          <button type="submit">Edit My Profile</button>
+        </router-link>
       </div>
-      </main>
+    </section>
+
+    <section class="right">
+
+
+    </section>
+
+  </main>
 </template>
 
 <script>
-
 export default {
-    name: "user-profile",
-    created() {
-        this.user = this.$store.state.user;
-    },
-    data() {
-        return {
-            user: {
-                
-            },
-        }
-    }
-
-
-}
+  name: "user-profile",
+  created() {
+    this.user = this.$store.state.user;
+  },
+  data() {
+    return {
+      user: {},
+    };
+  },
+};
 </script>
 
 <style scoped>
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
 h1 {
   text-align: center;
   font-weight: 700;
@@ -41,7 +64,6 @@ h1 {
 p {
   text-align: center;
   font-size: 1.5em;
-
 }
 button {
   background-color: #dc6b67;
@@ -59,5 +81,4 @@ button {
   width: 100%;
   margin-top: 30px;
 }
-
 </style>

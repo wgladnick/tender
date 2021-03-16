@@ -138,15 +138,12 @@ Restaurant Search
           <h1 class="title">
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
-<<<<<<< HEAD
           <div>
           <b-button class="open-button"  v-on:click="isMenuOpen=true" focused>Invite Friends to Vote</b-button>
           </div>
-=======
           <button> INVITE FRIENDS </button>
 
             
->>>>>>> 0da77a9252e6518d9fab58ae2174a531b60a1416
           <restaurant-card
             v-for="restaurant in restaurants"
             v-bind:key="restaurant.id"
@@ -330,7 +327,7 @@ export default {
 
 
 .list-item{
-  display:flex;
+  display:flex;    
 }
 .open-button{
   height:50px;
