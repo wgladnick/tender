@@ -10,7 +10,6 @@ import InviteeView from '../views/InviteeView.vue'
 import Home from '../views/Home.vue'
 import CreateInvite from '../views/CreateInvite.vue'
 import Profile from '../views/Profile.vue'
-import DinnerDetails from '../components/DinnerDetails.vue'
 import EditProfile from '../components/EditProfile.vue'
 import InviteConfirmation from '../views/InviteConfirmation.vue'
 
@@ -99,14 +98,6 @@ const router = new Router({
       path: "/profile",
       name: "profile",
       component: Profile,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: "/invitation/:id",
-      name: "dinner-details",
-      component: DinnerDetails,
       meta: {
         requiresAuth: true
       }
