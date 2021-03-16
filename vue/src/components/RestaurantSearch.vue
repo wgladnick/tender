@@ -140,7 +140,7 @@ Restaurant Search
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
           <div>
-          <b-button class="open-button" v-show="!this.$store.state.sideMenuToggle" v-on:click="toggleSideMenu()" focused>Invite Friends to Vote</b-button>
+          <b-button class="open-button" v-show="!this.isMenuOpen" v-on:click="toggleSideMenu()" focused>Invite Friends to Vote</b-button>
           </div>
           <restaurant-card
             v-for="restaurant in restaurants"
@@ -218,9 +218,9 @@ export default {
     }
 
     this.user = this.$store.state.user;
+    this.$store.commit("SET_TOGGLE_STATUS");
+    this.isMenuOpen = this.$store.state.sideMenuToggle;
   },
-
-  
 
   computed: {
     hasResults() {
