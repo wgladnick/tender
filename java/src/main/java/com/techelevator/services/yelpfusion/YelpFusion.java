@@ -66,10 +66,22 @@ public class YelpFusion {
     	BusinessDetails details = new BusinessDetails();
     	details = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody();
     	details.setInviteeVotes(this.getVotesByInvitee(id, uniqueId));
-        businessDetails.add(details);
+    	businessDetails.add(details);
     	}
 
     	return businessDetails;
+    }
+
+    public List<BusinessDetails> getBusinessDetailsForInvite(List<String> yelpId) {
+        List<BusinessDetails> businessDetails= new ArrayList<>();
+        for(String id : yelpId) {
+            String endpointURL = "https://api.yelp.com/v3/businesses/" + id;
+            BusinessDetails details = new BusinessDetails();
+            details = restTemplate.exchange(endpointURL, HttpMethod.GET, makeAuthEntity(), BusinessDetails.class).getBody();
+            businessDetails.add(details);
+        }
+
+        return businessDetails;
     }
 
     public Review[] getReviewsByBusinessById(String Id) {
@@ -167,19 +179,19 @@ public class YelpFusion {
     }
 
     private InviteeVotes getVotesByInvitee(String yelpId, String uniqueID) {
-        InviteeVotes inviteeVotes = new InviteeVotes();
+        InviteeVotes inviteeVote = new InviteeVotes();
 
-        String sql ="SELECT invite_id, invitee_unique_id, yelp_id, thumbs_down, thumbs_down FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
+        String sql ="SELECT invite_id, invitee_unique_id, yelp_id, thumbs_up, thumbs_down FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, uniqueID, yelpId);
         while (results.next()) {
-            inviteeVotes.setYelpId(results.getString("yelp_id"));
-            inviteeVotes.setInviteId(results.getString("invite_id"));
-            inviteeVotes.setUniqueId(results.getString("invitee_unique_id"));
-            inviteeVotes.setThumbs_up(results.getBoolean("thumbs_up"));
-            inviteeVotes.setThumbs_down(results.getBoolean("thumbs_down"));
+            inviteeVote.setYelpId(results.getString("yelp_id"));
+            inviteeVote.setInviteId(results.getInt("invite_id"));
+            inviteeVote.setUniqueId(results.getString("invitee_unique_id"));
+            inviteeVote.setThumbs_up(results.getBoolean("thumbs_up"));
+            inviteeVote.setThumbs_down(results.getBoolean("thumbs_down"));
         }
 
-        return inviteeVotes;
+        return inviteeVote;
 
     }
 
@@ -189,4 +201,5 @@ public class YelpFusion {
         HttpEntity entity = new HttpEntity<>(headers);
         return entity;
     }
+
 }

@@ -30,6 +30,8 @@ public class BusinessDetails {
     private Hours[] hours;
     private Review[] reviews;
     private int day;
+    private int totalThumbsUp;
+    private int totalThumbsDown;
     private InviteeVotes inviteeVotes;
 
     public BusinessDetails() {
@@ -197,6 +199,26 @@ public class BusinessDetails {
         DayOfWeek day = date.getDayOfWeek();
 
         this.day = day.getValue() - 1;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getTotalThumbsUp() {
+        return totalThumbsUp;
+    }
+
+    public void setTotalThumbsUp(int totalThumbsUp) {
+        this.totalThumbsUp = totalThumbsUp;
+    }
+
+    public int getTotalThumbsDown() {
+        return totalThumbsDown;
+    }
+
+    public void setTotalThumbsDown(int totalThumbsDown) {
+        this.totalThumbsDown = totalThumbsDown;
     }
 
     public InviteeVotes getInviteeVotes() {

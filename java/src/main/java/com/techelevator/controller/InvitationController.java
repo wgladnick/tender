@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import com.techelevator.model.invitation.InviteeVotes;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -65,12 +66,20 @@ public class InvitationController {
 	}
 
 	@RequestMapping(value = "/thumbsup", method = RequestMethod.PUT)
-	public InviteRestaurants voteThumbsUp(@RequestBody InviteRestaurants inviterestaurants) {
-		return inviteRestaurantsDAO.voteThumbsUp(inviterestaurants);
+	public boolean voteThumbsUp(@RequestBody InviteeVotes inviteeVotes) {
+				inviteRestaurantsDAO.voteThumbsUp(inviteeVotes);
+				return true;
 	}
 
 	@RequestMapping(value = "/thumbsdown", method = RequestMethod.PUT)
-	public InviteRestaurants voteThumbsDown(@RequestBody InviteRestaurants inviterestaurants) {
-		return inviteRestaurantsDAO.voteThumbsDown(inviterestaurants);
+	public boolean voteThumbsDown(@RequestBody InviteeVotes inviteeVotes) {
+		inviteRestaurantsDAO.voteThumbsDown(inviteeVotes);
+		return true;
+	}
+
+	@RequestMapping(value = "/removevote", method = RequestMethod.DELETE)
+	public boolean removeVote(@RequestBody InviteeVotes inviteeVotes) {
+		inviteRestaurantsDAO.removeVote(inviteeVotes);
+		return true;
 	}
 }

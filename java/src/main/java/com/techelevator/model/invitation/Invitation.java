@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.techelevator.services.yelpfusion.models.business.BusinessDetails;
 
 public class Invitation {
 	private Long inviteId;
@@ -18,6 +19,7 @@ public class Invitation {
 	private List<Invitee> invitees;
 	private List<InviteRestaurants> restaurantChoices;
 	private List<InviteeVotes> inviteevotes;
+	private List<BusinessDetails> businessDetails;
 	
 	public Invitation() {
 		
@@ -101,6 +103,14 @@ public class Invitation {
 
 	public void setInviteevotes(List<InviteeVotes> inviteevotes) {
 		this.inviteevotes = inviteevotes;
+	}
+
+	public List<BusinessDetails> getBusinessDetails() {
+		return businessDetails;
+	}
+
+	public void setBusinessDetails(List<BusinessDetails> businessDetails) {
+		this.businessDetails = businessDetails;
 	}
 }
 

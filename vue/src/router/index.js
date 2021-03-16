@@ -11,6 +11,7 @@ import Home from '../views/Home.vue'
 import CreateInvite from '../views/CreateInvite.vue'
 import Profile from '../views/Profile.vue'
 import DinnerDetails from '../components/DinnerDetails.vue'
+import EditProfile from '../components/EditProfile.vue'
 
 Vue.use(Router)
 
@@ -108,8 +109,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
-
+    },
+    {
+      path: "/editprofile",
+      name:"editProfile",
+      component: EditProfile,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 });
 
