@@ -228,8 +228,10 @@ export default {
   methods: {
 
     sendInvite(){
+      this.addRestaurants();
       this.invitation.location = this.location;
       this.invitation.radius = this.radius;
+      
       InviteService.sendInvite(this.$store.state.invitation);
       console.log(this.$store.state.invitation);
 
