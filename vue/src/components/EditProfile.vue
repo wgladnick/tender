@@ -52,7 +52,7 @@
               checked="checked"
               v-bind:id="category.categoryId"
               v-bind:value="category.categoryId"
-              v-model.number="user.userDetails.activeCategoryId"
+              v-model.number="userCategories"
             />
             </span>
           </div>
@@ -69,16 +69,10 @@ import RestaurantService from '../services/RestaurantService.js'
 import AuthService from '../services/AuthService.js'
 export default {
     name:"edit-profile",
-    created() {
-        this.user = this.$store.state.user;
-        RestaurantService.getAvailableCategories().then((response)=> {
-            this.foodCategories = response.data;
-        })
-    },
-
-    data() {
+       data() {
         return  {
             user: {},
+            userCategories: [],
             foodCategories: [],
             editProfileErrors: false,
             editProfileErrorMsg: "There was an issue editing your profile,",
@@ -87,6 +81,7 @@ export default {
     methods: {
         editProfile() {
             console.log(this.user);
+            this.user.userDetails.activeCategoryId = this.userCategories;
             AuthService.updateUser(this.user).then((response)=>{
                 this.$store.commit(response.data);
             })
@@ -95,7 +90,14 @@ export default {
             
 
         }
-    }
+    },
+     created() {
+        this.user = this.$store.state.user;
+        this.userCategories = this.$store.state.user.userDetails.activeCategoryId;
+        RestaurantService.getAvailableCategories().then((response)=> {
+            this.foodCategories = response.data;
+        })
+    },
 
 }
 </script>

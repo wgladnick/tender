@@ -16,9 +16,13 @@ public class User {
 	private boolean activated;
 	@JsonIgnore
 	private Set<Authority> authorities = new HashSet<>();
+
 	private String firstName;
+
 	private String lastName;
+
 	private String email;
+
 	private UserDetails userDetails;
 
 	public User() {
