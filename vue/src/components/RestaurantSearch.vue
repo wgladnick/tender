@@ -101,7 +101,7 @@ Restaurant Search
             <label for="searchLocate">Location:</label><br />
             <input
               id="searchLocate"
-              v-model.lazy="location"
+              v-model="location"
               type="text"
               placeholder="Enter a Zipcode or Location"
             /><br />
