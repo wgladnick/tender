@@ -4,9 +4,6 @@ Restaurant Search
 
 <!-- Side Nav -->
   <main class="body">
-      <button class="nav-butt" v-on:click="isMenuOpen = false"> Hide List </button>
-      
-
 <div id="mySidenav" class="sidenav" v-bind:style="{width: isMenuOpen ? '400px' : '0px'}">
 <span>
 <dinner-card/>
