@@ -28,7 +28,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
-
+    sideMenuToggle: false,
     token: currentToken || '',
     user: currentUser || {},
     byLocationBoard: [],
@@ -71,7 +71,9 @@ export default new Vuex.Store({
       console.log(user);
     },
 
-
+    SET_TOGGLE_STATUS(state) {
+      state.sideMenuToggle = !state.sideMenuToggle
+    },
 
     //removes token and user from local storage, sets token and user to blank, 
     LOGOUT(state) {
