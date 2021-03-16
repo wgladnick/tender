@@ -74,7 +74,7 @@
           <!-- Undo Votes -->
        <span v-if="isVoteSubmitted"> 
          <h1>VOTE SUBMITTED </h1>
-           <button on:click="undoVote"> Change Vote </button>
+           <button v-on:click="changeVote(vote)"> Change Vote </button>
 
        </span>
     
@@ -195,15 +195,21 @@ export default {
       this.$emit('place-vote', vote);
     },
 
+    
+    changeVote(vote){
+    this.$emit('place-vote', vote);
+    this.isVoteSubmitted = false;
+    }
+
+
+    },
 
     addToList(restaurant) {
       this.$emit("update-list", restaurant);
-    },
-    updateSelected() {
-      this.$emit("addSelectedRestaurant", this.isSelected);
-    },
-  },
-};
+    }
+ 
+  };
+
 </script>
 
 <style scoped>

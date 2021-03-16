@@ -41,12 +41,14 @@ export default {
       invitee: {},
       isLoading: true,
       errorMsg: false,
+      isVoteSubmitted: false,
       inviteeVotes:{
         yelpId:"",
         uniqueId:"",
         inviteId:"",
         thumbsUp:"",
-        thumbsDown:""
+        thumbsDown:"",
+       
 
 
       }
@@ -68,6 +70,13 @@ export default {
 
   methods: {
     placeVote(vote){
+
+      if(this.isVoteSubmitted){
+        InviteService.undoVote(vote);
+        this.isVoteSubmitted = false;
+      }
+
+      else if(!this.isVoteSubmitted){
       this.inviteeVotes.yelpId = vote.yelpId;
       this.inviteeVotes.thumbsUp = vote.thumbsUp;
       this.inviteeVotes.thumbsDown = vote.thumbsDown;
@@ -76,6 +85,8 @@ export default {
       InviteService.voteThumbsUp(this.inviteeVotes);
       }else if(this.inviteeVotes.thumbsDown){
         InviteService.voteThumbsDown(this.inviteVotes);
+      };
+      this.isVoteSubmitted = true;
       }
 
       
