@@ -39,6 +39,7 @@
               <button @click="remove(i)" class="delete" id="delete-invitee" />
           </b-field>
           <div>
+            <p class="add-invitees">Add Participants</p>
             <b-button @click="add()" id="add-invitee"><i class="fas fa-plus"></i></b-button>
           </div>
           <b-button v-on:click="createInvite">
@@ -110,9 +111,15 @@ createInvite(){
 </script>
 
 <style scoped>
-
+h1 {
+  font-size: 20pt;
+  font-weight: bold;
+}
 .input-fields{
   padding:1.5em;
+}
+.add-invitees{
+  font-weight: bold;
 }
 /*.input-fields {
   display: flex;
