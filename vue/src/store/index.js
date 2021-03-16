@@ -95,6 +95,7 @@ export default new Vuex.Store({
     },
     UPDATE_USER(state, user) {
       state.user = user;
+      
     },
 
     CREATE_INVITATION(state, invitation){
