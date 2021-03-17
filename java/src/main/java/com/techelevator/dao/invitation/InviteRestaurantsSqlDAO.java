@@ -104,12 +104,8 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 		while (result.next()) {
 			thumbsDown = result.getBoolean("thumbs_down");
 			thumbsUp = result.getBoolean("thumbs_up");
-
 			if (thumbsDown) {
 				this.undoThumbsDown(inviteeVote);
-				String sql3 = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND invite_id = ?";
-				jdbcTemplate.update(sql3, inviteeVote.getUniqueId(), inviteeVote.getYelpId(), inviteeVote.getInviteId());
-
 			} else if (thumbsUp) {
 				this.undoThumbsUp(inviteeVote);
 			} else {
@@ -121,6 +117,38 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 		}
 
 		return true;
+
+	}
+
+	@Override
+	public void removeAllVotesForUser(InviteeVotes inviteeVote) {
+		int inviteId = inviteeVote.getInviteId();
+		String uniqueID = inviteeVote.getUniqueId();
+
+		String sql = "SELECT ir.yelp_id AS \"yelp_id\", iv.invitee_unique_id AS \"invitee_unique_id\", iv.thumbs_down " +
+				"AS \"thumbs_down\", iv.thumbs_up AS \"thumbs_up\" " +
+				"FROM  invitation_restaurant AS ir " +
+				"RIGHT JOIN invitee_vote AS iv ON ir.yelp_id = iv.yelp_id " +
+				"WHERE iv.invitee_unique_id = ? AND ir.invite_id = ?";
+
+		SqlRowSet selection = jdbcTemplate.queryForRowSet(sql, uniqueID, inviteId);
+		while (selection.next()) {
+			String yelpId = selection.getString("yelp_id");
+			boolean thumbsDown = selection.getBoolean("thumbs_down");
+			boolean thumbsUp = selection.getBoolean("thumbs_up");
+			if (thumbsDown) {
+				String sqlDown = "UPDATE invitation_restaurant SET total_thumbs_down = total_thumbs_down - 1 "
+						+ "WHERE yelp_id = ? AND invite_id = ?";
+				jdbcTemplate.update(sqlDown, yelpId, inviteId);
+			} else if (thumbsUp) {
+				String sqlUp = "UPDATE invitation_restaurant SET total_thumbs_up = total_thumbs_up - 1 "
+						+ "WHERE yelp_id = ? AND invite_id = ?";
+				jdbcTemplate.update(sqlUp, yelpId, inviteId);
+			}
+		}
+
+		String deleteSql = "DELETE FROM invitee_vote WHERE invitee_unique_id = ?";
+		jdbcTemplate.update(deleteSql, uniqueID);
 
 	}
 
@@ -141,29 +169,8 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 				+ "WHERE yelp_id = ? AND invite_id = ?";
 		jdbcTemplate.update(sql, inviteeVote.getYelpId(), inviteeVote.getInviteId());
 
-		String sql3 = "DELETE FROM invitee_vote WHERE invitee_unique_id = ? AND yelp_id = ? AND thumbs_down = true";
-		jdbcTemplate.update(sql3, inviteeVote.getUniqueId(), inviteeVote.getYelpId());
-
 		return true;
 
 	}
-
-	public void removeAllVotesForUser(int inviteId, String uniqueID) {
-		List<String> yelpId = new ArrayList<>();
-	String sql = "SELECT ir.total_thumbs_up AS \"total_thumbs_up\", ir.total_thumbs_down AS \"total_thumbs_down\", ir.yelp_id AS \"yelp_id\", \n" +
-			"iv.invitee_unique_id AS \"invitee_unique_id\" FROM  invitation_restaurant AS ir\n" +
-			"RIGHT JOIN invitee_vote AS iv ON ir.yelp_id = iv.yelp_id\n" +
-			"WHERE iv.invitee_unique_id = ? AND ir.invite_id = ?";
-
-	SqlRowSet selection = jdbcTemplate.queryForRowSet(sql, uniqueID, inviteId);
-	
-
-	String deleteSql = "DELETE FROM invitee_vote WHERE invitee_unique_id = ?";
-
-
-
-
-	}
-
 
 }
