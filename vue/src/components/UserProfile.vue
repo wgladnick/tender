@@ -13,7 +13,7 @@
         </p>
         <p class="details">Favorite Categories: {{ this.user.userDetails.searchCategories }}</p>
         <router-link :to="{ name: 'editProfile' }">
-          <button type="submit">Edit My Profile</button>
+          <button class="btn" type="submit">Edit My Profile</button>
         </router-link>
       </div>
     </section>
@@ -77,4 +77,9 @@ button {
   width: 100%;
   margin-top: 30px;
 }
+
+.btn:hover {
+  background-color: #f7a09d;
+}
+
 </style>
