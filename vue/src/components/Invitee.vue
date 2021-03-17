@@ -128,7 +128,7 @@ export default {
 
 .main{
   height:100%;
-  margin-top:120em;
+  margin-top:600px;
 }
 h1{
     font-size: 2.7vw;
@@ -168,7 +168,6 @@ p{
 .restaurants {
   display: flex;
   flex-direction:column;
-  margin-top:
 }
 .button.is-primary {
   background-color: #dc6b67;

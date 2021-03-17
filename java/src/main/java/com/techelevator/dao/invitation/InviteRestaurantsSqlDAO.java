@@ -1,5 +1,6 @@
 package com.techelevator.dao.invitation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,10 +149,20 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 	}
 
 	public void removeAllVotesForUser(int inviteId, String uniqueID) {
-	String sql = "SELECT ir.total_thumbs_up, ir.total_thumbs_down, ir.yelp_id, invitee_vote.invitee_unique_id " +
-			"FROM  invitation_restaurant AS ir " +
-			"RIGHT JOIN invitee_vote ON ir.yelp_id = invitee_vote.yelp_id " +
-			"WHERE invitee_vote.invitee_unique_id = ? AND ir.invite_id = ?;";
+		List<String> yelpId = new ArrayList<>();
+	String sql = "SELECT ir.total_thumbs_up AS \"total_thumbs_up\", ir.total_thumbs_down AS \"total_thumbs_down\", ir.yelp_id AS \"yelp_id\", \n" +
+			"iv.invitee_unique_id AS \"invitee_unique_id\" FROM  invitation_restaurant AS ir\n" +
+			"RIGHT JOIN invitee_vote AS iv ON ir.yelp_id = iv.yelp_id\n" +
+			"WHERE iv.invitee_unique_id = ? AND ir.invite_id = ?";
+
+	SqlRowSet selection = jdbcTemplate.queryForRowSet(sql, uniqueID, inviteId);
+	
+
+	String deleteSql = "DELETE FROM invitee_vote WHERE invitee_unique_id = ?";
+
+
+
+
 	}
 
 
