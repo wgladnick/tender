@@ -1,5 +1,13 @@
 <template>
   <div class="main">
+    <section class="has-text-centered" v-if="this.isLoading">
+      <div>
+      <p class="is-size-3 has-text-weight-semibold">Loading...</p>
+      </div>
+      <div class="loading-gif">
+      <img src="../assets/loading.gif" />
+      </div>      
+    </section>
     <div class="welcome-message" v-if="!invitee.deadlinePassed && !isLoading">
       <h2>Hey, {{ invitee.name }}</h2>
       <p> <strong>  You've been invited out for food! Place your vote on which restaurant to visit </strong><br><br>
@@ -97,10 +105,10 @@ export default {
     InviteService.getInvitee(this.$route.params.uniqueId).then((response) => {
       this.invitee = response.data;
 
-      this.isLoading = false;
       if (this.invitee.uniqueId === null) {
         this.errorMsg = true;
       }
+
       this.businessDetails = this.invitee.businessDetails;
       this.invitee.businessDetails = null;
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
@@ -112,13 +120,14 @@ export default {
   methods: {
     isAttending(status) {
       this.invitee.isAttending = status;
-      InviteService.updateInvitee(this.invitee);
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
+      InviteService.updateInvitee(this.invitee);
     },
     hasVoted(status) {
       this.invitee.hasVoted = status;
-      InviteService.updateInvitee(this.invitee);
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
+      InviteService.updateInvitee(this.invitee);
+      
     },
   },
 };
@@ -127,8 +136,7 @@ export default {
 <style scoped>
 
 .main{
-  height:100%;
-  margin-top:120em;
+  min-height:100%;
 }
 h1{
     font-size: 2.7vw;
@@ -168,7 +176,6 @@ p{
 .restaurants {
   display: flex;
   flex-direction:column;
-  margin-top:
 }
 .button.is-primary {
   background-color: #dc6b67;

@@ -19,19 +19,19 @@ export default {
     updateInvitee(invitee) {
         return axios.put('/invitation/invitee', invitee);
     },
-
     voteThumbsUp(inviteeVotes) {
         return axios.put('/invitation/thumbsup', inviteeVotes);
     },
-
     voteThumbsDown(inviteeVotes) {
         return axios.put('/invitation/thumbsdown', inviteeVotes);
     },
-    undoVote(vote) {
-        console.log("invite removed")
-        console.log(vote)
-        return axios.put('/invitation/removevote', vote);
+    undoVote(inviteeVotes) {
+        return axios.put('/invitation/removevote', inviteeVotes);
+    },
+    undoAllVotes(inviteeVotes) {
+        return axios.put('/invitation/removeallvotes', inviteeVotes);
     }
+
 
 
 }

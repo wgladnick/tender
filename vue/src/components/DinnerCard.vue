@@ -81,6 +81,8 @@ export default {
         deadline: "",
         invitees: [],
       },
+      createInviteErrors: false,
+      createInviteErrorMsg: "",
       createdInvite:{}
     };
   },
@@ -92,7 +94,15 @@ export default {
       this.dinnerInvite.deadline = this.deadlineDate + " " + this.deadlineTime;
       this.dinnerInvite.creatorId = this.$store.state.user.id;
       this.$store.commit("CREATE_INVITATION", this.dinnerInvite);
-     
+     if(this.$store.state.invitation.invitees === [] ) {
+       this.createInviteErrors = true;
+       this.createInviteErrorMsg= "Add some friends to invite!";
+       return;
+     } else if( this.$store.state.invitation.restaurantChoices.length === 0){
+       this.createInviteErrors = true;
+       this.createInviteErrorMsg= "Add some restaurants to your list!";
+       return;
+     }
       InviteService.sendInvite(this.$store.state.invitation).then ((response) => {
         this.createdInvite = response.data;
         this.$store.commit("SET_CREATED_INVITE", this.createdInvite);
