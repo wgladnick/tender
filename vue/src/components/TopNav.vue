@@ -18,7 +18,7 @@
       <router-link
         class="nav"
         v-bind:to="{ name: 'profile' }"
-        >Profile / Invite History</router-link
+        >My Invites</router-link
       >
       &nbsp;&nbsp;
       <router-link
