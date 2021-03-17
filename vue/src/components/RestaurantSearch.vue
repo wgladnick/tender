@@ -16,7 +16,7 @@ Restaurant Search
     </ul>
 
    
-    <button v-on:click="sendInvite"> SEND INVITE </button>
+    
     <div>
       <b-button class="close-sidenav" v-show="this.$store.state.sideMenuToggle" v-on:click="toggleSideMenu()" > Cancel </b-button>
     </div>
@@ -391,15 +391,6 @@ export default {
   color: #f1f1f1;
 }
 
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s;
@@ -663,5 +654,8 @@ input {
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 1em;
+}
+.close-sidenav{
+  margin-left: 24px;
 }
 </style>

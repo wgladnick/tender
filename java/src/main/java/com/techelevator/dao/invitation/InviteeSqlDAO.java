@@ -91,6 +91,14 @@ public class InviteeSqlDAO implements InviteeDAO {
 
     @Override
     public Invitee updateInviteeStatus(Invitee invitee) {
+        String sqlVoteStatus = "SELECT has_voted FROM invitee_details WHERE unique_id = ?";
+        SqlRowSet votestat = jdbcTemplate.queryForRowSet(sqlVoteStatus, invitee.getUniqueId());
+        boolean hasVoted = votestat.getBoolean("has_voted");
+
+        if (hasVoted) {
+            String sqlVotes = "SELECT ";
+        }
+
 
         String sql = "UPDATE invitee_details SET has_voted = ?, is_attending = ? WHERE unique_id = ?";
 

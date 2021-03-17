@@ -19,6 +19,7 @@
     "buefy": "^0.9.4",
     "core-js": "^2.6.5",
     "vue": "^2.6.12",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.0.3",
     "vue-star-rating": "^1.7.0",
     "vuex": "^3.0.1"

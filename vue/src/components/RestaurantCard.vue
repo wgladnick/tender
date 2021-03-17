@@ -48,30 +48,25 @@
         </p>
       </div>
 
-      <!-- Invite Buttons -->
-
-
+      <!-- Vote Buttons -->
       <!-- Like -->
-      <span class="invite-buttons" v-if="$route.name === 'inviteeView'">
-        <span class="yes-button">
+      <span class="invite-buttons" v-if="$route.name === 'inviteeView'" v-show="!this.$store.state.currentInvitee.hasVoted">
+        <span class="yes-button" v-show="!this.$store.state.currentInvitee.hasVoted">
           <b-button v-on:click="thumbsUp()" type="is-primary" rounded size="is-small" class="m-2" v-show="!hasVoted">
             <i class="far fa-thumbs-up"></i>
             LIKE</b-button
           >
         </span>
-
-
          <!-- NAH -->
         
           <b-button v-on:click="thumbsDown()" type="is-primary" rounded size="is-small" class="m-2" v-show="!hasVoted">
             <i class="far fa-sad-tear"></i>
             NAH</b-button
           >
-
            <!-- Undo Vote -->
         
           <b-button v-on:click="undoVote()" type="is-primary" rounded size="is-small" class="m-2" v-show="hasVoted">
-            <i class="far fa-sad-tear"></i>
+            <i class="fas fa-undo-alt"></i>
             Whoops</b-button
           >
        
@@ -178,9 +173,7 @@ export default {
     }
   },
 
-  methods: {
-
-        
+  methods: { 
     thumbsUp(){
       this.vote.thumbs_up = true;
       this.vote.thumbs_down= false;
@@ -207,6 +200,7 @@ export default {
     addToList(restaurant) {
       this.$emit("update-list", restaurant);
     },
+
     updateSelected() {
       this.$emit("addSelectedRestaurant", this.isSelected);
     },
