@@ -32,8 +32,5 @@ export default {
 </script>
 
 <style>
-.main {
-  height:90vh;
-}
 
 </style>
