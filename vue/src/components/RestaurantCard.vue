@@ -219,20 +219,22 @@ export default {
 
 <style scoped>
 
-
+h1{
+  font-size:2vw;
+}
 
 .zoom {
   display: flex;
   flex-direction: row;
-  
+  width:50vw;
   padding: 1em;
   transition: transform 0.5s;
 
   margin: 0 auto;
 }
 .yelp-image {
-  max-width: 350px;
-  height: 350px;
+  max-width: 18vw;
+  height: 18vw;
   object-fit: cover;
 }
 
@@ -288,7 +290,7 @@ export default {
   margin-right: 10px;
   padding-right: calc(1em + 0.25em);
   font-size: 1em;
-  width: 12em;
+  width: 11vw;
 }
 .transactions > button.is-small {
   border: none;
