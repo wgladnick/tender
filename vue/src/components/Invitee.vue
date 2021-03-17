@@ -128,7 +128,7 @@ export default {
 
 .main{
   height:100%;
-  margin-top:600px;
+  margin-top:120em;
 }
 h1{
     font-size: 2.7vw;
