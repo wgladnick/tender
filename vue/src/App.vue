@@ -39,6 +39,8 @@ components: {
   .app {
     background-color:#fdf2f2;
     height:100%;
+   
+    
   }
 </style>
 

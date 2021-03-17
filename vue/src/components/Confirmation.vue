@@ -24,6 +24,8 @@ export default {
 
         };
     },
+
+
 created(){
 this.invitation = this.$store.state.createdInvite;
 
