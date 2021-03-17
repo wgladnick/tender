@@ -49,7 +49,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-self: center;
-  height: 80vh;
+  height:fit-content;
   align-self: center;
   background-color: white;
   padding: 75px;

@@ -115,15 +115,12 @@ export default new Vuex.Store({
         state.invitation.inviteName = invitation.inviteName;
         state.invitation.invitees = invitation.invitees;
         state.invitation.reservationDate = invitation.reservationDate;
-        state.invitation.restaurantChoices = invitation.selectedRestaurants;
         state.invitation.location = state.searchLocation;
         state.invitation.radius = state.radius;
       },
   
-      UPDATE_INVITATION(state, invitation){
-        state.invitation.restaurantChoices = invitation.selectedRestaurants;
-        state.invitation.location = state.searchLocation;
-        state.invitation.radius = state.radius;
+     ADD_CHOICE_TO_LIST(state, restaurant){
+       state.invitation.restaurantChoices.push(restaurant);
     },
 
     SET_CREATED_INVITE(state, invite){

@@ -1,9 +1,17 @@
 <template>
   <div>
-    <section class="loading-gif" v-if="isLoading">
-      <img src="../assets/loading.gif" />
+    <section class="card">
+      <h1 class="is-size-3 has-text-weight-semibold">Invitation History</h1>
     </section>
-    <div v-if="!isLoading">
+    <section class="has-text-centered" v-if="this.isLoading">
+      <div>
+      <p class="is-size-3 has-text-weight-semibold">Loading...</p>
+      </div>
+      <div class="loading-gif">
+      <img src="../assets/loading.gif" />
+      </div>      
+    </section>
+    <div v-if="!this.isLoading">
       <scheduled-dinner
         v-for="dinner in dinners"
         v-bind:key="dinner.id"
@@ -22,16 +30,17 @@ export default {
   components: {
     ScheduledDinner,
   },
-  props: ["isLoading"],
 
   data() {
     return {
       dinners: [],
+      isLoading: true,
     };
   },
   created() {
     InviteService.getInviteById(this.$store.state.user.id).then((response) => {
       this.dinners = response.data;
+      this.isLoading = false;
     });
   },
 };

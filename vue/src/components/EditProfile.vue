@@ -76,6 +76,7 @@ export default {
             foodCategories: [],
             editProfileErrors: false,
             editProfileErrorMsg: "There was an issue editing your profile,",
+
         }
     },
     methods: {
@@ -84,10 +85,18 @@ export default {
             this.user.userDetails.activeCategoryId = this.userCategories;
             AuthService.updateUser(this.user).then((response)=>{
                 this.$store.commit("UPDATE_USER", response.data);
-            })
-            this.user=this.$store.state.user;
-            console.log(this.$store.state.user);
+                this.user=this.$store.state.user;
+                console.log(this.$store.state.user);
             this.$router.push('/profile');
+            })
+            .catch((error) => {
+          const response = error.response;
+
+            if (response.status === 401 && response.status === 500) {
+              this.editProfileErrorMsg = "Sorry there was an error updating your profile, please try again.";
+            }
+        });
+            
             
 
         }

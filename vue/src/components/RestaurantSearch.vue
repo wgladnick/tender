@@ -4,21 +4,25 @@ Restaurant Search
 
 <!-- Side Nav -->
   <main class="body">
-<div id="mySidenav" class="sidenav" v-bind:style="{width: isMenuOpen ? '400px' : '0px'}">
+<div id="mySidenav" class="sidenav" v-bind:style="{width: isMenuOpen ? '500px' : '0px'}">
 <span>
+   <h1 class="headingText">Create My Invite</h1>
+      <p class="subheading"> Select your restaurant choices to put to a vote, add some guests and let's have a party!</p>
+   <ul>
+ 
+    <li class="list-item" v-for="rest in restaurantChoices" v-bind:key="rest.id">
+      <span class="delete-selection"><button class="find-food" v-on:click="updateList(rest)">x</button></span>
+      <h1> {{rest.name}} </h1>
+      </li>
+    </ul>
 <dinner-card/>
 </span>
   
-  <ul>
-    <li class="list-item" v-for="rest in invitation.selectedRestaurants" v-bind:key="rest.id">
-      <h1> {{rest.name}} </h1><span><button v-on:click="updateList(rest)">x</button></span>
-      </li>
-    </ul>
-
+ 
    
     
-    <div>
-      <b-button class="close-sidenav" v-show="this.$store.state.sideMenuToggle" v-on:click="toggleSideMenu()" > Cancel </b-button>
+    <div class="cancel">
+      <button class="find-food" v-on:click="toggleSideMenu()"  > Cancel </button>
     </div>
 </div>
 
@@ -125,7 +129,7 @@ Restaurant Search
     </section>
     <!-- Inital Search Ends -->
 
-<div id="main" v-bind:style="{ 'margin-left': isMenuOpen ? '-175px' : '0px' }">
+<div id="main" v-bind:style="{ 'margin-left': isMenuOpen ? '-225px' : '0px' }">
 
     <!--Restaurant List Body -->
     <section class="middle">
@@ -140,7 +144,7 @@ Restaurant Search
             Here are the restaurants we found near {{ updatedLocation }}
           </h1>
           <div>
-          <b-button class="open-button" v-show="!this.isMenuOpen" v-on:click="toggleSideMenu()" focused>Invite Friends to Vote</b-button>
+          <b-button class="open-button" v-show="!this.isMenuOpen" v-on:click="toggleSideMenu()" focused>Invite Some Friends Out For Food</b-button>
           </div>
           <restaurant-card
             v-for="restaurant in restaurants"
@@ -196,11 +200,13 @@ export default {
       categoriesSelected: [],
       noneFound: false,
       updatedLocation: "",
+      restaurantChoices:[],
+      errorMsg: '',
 
       invitation: {
       location:"",
       radius:"",
-      selectedRestaurants:[],
+      
       },
       user:{}
     };
@@ -219,7 +225,7 @@ export default {
 
     this.user = this.$store.state.user;
     this.$store.commit("SET_TOGGLE_STATUS");
-    this.isMenuOpen = this.$store.state.sideMenuToggle;
+    //this.isMenuOpen = this.$store.state.sideMenuToggle;
   },
 
   computed: {
@@ -231,35 +237,38 @@ export default {
   methods: {
 
     sendInvite(){
-      this.addRestaurants();
-    
-      InviteService.sendInvite(this.$store.state.invitation)
+     
+      
+      InviteService.sendInvite(this.createdInvite)
       .then((response) => {
          this.$store.commit("SET_CREATED_INVITE", response.data);
-         console.log(this.$store.state.createdInvite);
-      });
+         this.createdInvite = {};
          this.$router.push('/confirmation');
+      }).catch((error) => {
+          const response = error.response;
+
+            if (response.status === 401 && response.status === 500) {
+              this.errorMsg = "Sorry there was an error creating your invitation, please try again.";
+            }
+        });
+         
     
     },
 
     
     toggleSideMenu(){
       this.$store.commit("SET_TOGGLE_STATUS");
-      this.isMenuOpen = this.$store.state.sideMenuToggle;
-    },
-
-    addRestaurants(){
-      this.$store.commit("UPDATE_INVITATION", this.invitation);
-     
-
+      this.isMenuOpen = !this.$store.state.sideMenuToggle;
     },
 
   updateList(rest){
-    const index = this.invitation.selectedRestaurants.indexOf(rest)
-    if(!this.invitation.selectedRestaurants.includes(rest)){
-    this.invitation.selectedRestaurants.push(rest);
+    const index = this.restaurantChoices.indexOf(rest)
+    if(!this.restaurantChoices.includes(rest)){
+    this.restaurantChoices.push(rest);
     }else{
-      this.invitation.selectedRestaurants.splice(index,1);
+      this.restaurantChoices.splice(index,1);
+      this.$store.state.invitation.restaurantChoices.splice(index,1);
+      console.log(this.$store.state.invitation.restaurantChoices);
 
     }
   },
@@ -324,9 +333,48 @@ export default {
 </script>
 <style scoped>
 
+.login-search{
+ 
+  height:100%;
+}
+
+.delete-selection{
+  margin-right:.7em;
+}
+.title{
+  margin-top:1em;
+}
+.headingText {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2em;
+  margin-top:-1em;
+
+}
+
+.subheading{
+  font-weight:bold;
+  margin-bottom:2em;
+  padding-right:1.5em;
+  padding-left:1.5em;
+  text-align:center;
+}
 
 .list-item{
   display:flex;
+}
+
+.list-item h1{
+  font-weight:600;
+  font-size:.8em;
+}
+
+.list-item button{
+margin-top:-1.3em;
+  
+  
+  
+  
 }
 .open-button{
   height:50px;
@@ -342,8 +390,8 @@ export default {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 30px;
-  margin-top: 2em;
+ 
+ margin-bottom:2em;
   font-weight: bold;
   
 }
@@ -360,17 +408,23 @@ export default {
 
 }
 
+.cancel .find-food {
+width:90%;
+margin-left:1.9em;
+margin-top:0em;
 
+background-color: #1e1e32;
+}
 
 .sidenav {
  
-  height: 100vh; /* 100% Full-height */
+  height: 88.5vh; /* 100% Full-height */
   width: 0px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 2; /* Stay on top */
   bottom: 0; /* Stay at the top */
   right: 0;
-  background-color:#e08f8c; /* Black*/
+  background-color:#f8c5c2; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -408,31 +462,39 @@ export default {
   margin-top:-5em;
  
 }
-
+.list-item{
+  padding-left:1.5em;
+  font-size: 1.5em;
+  font-weight: 800;
+}
 .body {
   display: flex;
   flex-direction: row;
-  margin-top: 5em;
-  height: 100%;
+  margin-top:6em;
+
+ 
 }
 
 .left {
   display: flex;
   flex-direction: column;
-  padding-left: 4em;
+  padding-left: 3em;
   border-right: 2px;
   border-color: black;
   width: 20vw;
+  margin-top:5em;
 }
 .middle {
   margin-top: 2em;
   display: flex;
   width: 80vw;
   flex-direction: column;
+
 }
 
 section {
   display: flex;
+  
 }
 
 label {
@@ -450,7 +512,7 @@ label {
   flex-direction: column;
   width: 100vw;
   height: 80vh;
-  margin-top: 0em;
+  margin-top: 4em;
 }
 /* Home Search Ends Here */
 
@@ -617,15 +679,16 @@ input {
 .loading-gif {
   display: flex;
   justify-content: center;
-  height: 20vh;
+  
 }
+
 
 .loading-gif img {
   width: 400px;
   max-height: 400px;
   object-fit: contain;
   align-self: center;
-  margin-top: -em;
+  margin-bottom: -3em;
 }
 
 .restaurant-list .loading-gif {

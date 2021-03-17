@@ -75,16 +75,25 @@
 
 
        <!-- Call To Order -->
-      <span v-if="$route.name !== 'inviteeView'" class="call-to-order">
+      <span v-if="$route.name !== 'inviteeView'" class="action-buttons">
+        <span class="call-to-order">
         <a :href="`tel:${restaurant.phone}`">
           <b-button type="is-primary" rounded size="is-small">
             <i class="fas fa-phone-alt"></i>
             Call to order</b-button
           >
         </a>
+        </span>
 
         <!-- Add to List -->
-        <button v-show="this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">addToList</button>
+        <span class ="add-to-list">
+         <b-button type="is-primary" rounded size="is-small"
+           v-show="!this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">
+           <i class="fas fa-plus"></i>
+           Add To Invite List</b-button>
+           </span>
+           
+       
       </span>
 
       <!-- Delivery/ TakeOut Tags -->
@@ -198,21 +207,24 @@ export default {
     },
 
     addToList(restaurant) {
-      this.$emit("update-list", restaurant);
-    },
-
-    updateSelected() {
-      this.$emit("addSelectedRestaurant", this.isSelected);
+      if(!this.$store.state.invitation.restaurantChoices.includes(restaurant)){
+      this.$store.commit("ADD_CHOICE_TO_LIST", restaurant);
+      this.$emit('update-list', restaurant);
+      console.log(this.$store.state.invitation.restaurantChoices);
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+
+
+
 .zoom {
   display: flex;
   flex-direction: row;
-
+  
   padding: 1em;
   transition: transform 0.5s;
 
@@ -232,13 +244,17 @@ export default {
   padding: 20px 20px 20px 0px;
 }
 
-.call-to-order {
-  margin-top: 2em;
-  display: block;
+
+.action-buttons {
+ display:flex;
+ margin-top:2em;
+
+
 }
 .button.is-primary {
   background-color: #dc6b67;
 }
+
 
 .nah-button .button.is-rounded {
   background-color: #dc6b67;
@@ -251,9 +267,18 @@ export default {
   background-color: #a5c064;
 }
 .yes-button .button.button.is-rounded:hover {
-  background-color: #7d973f;
+  background-color: #9cbd4f;
 }
 
+.call-to-order .button.is-rounded:hover {
+  background-color: #f1837f;
+}
+.add-to-list .button.button.is-rounded:hover {
+  background-color: #9dbd52;
+}
+.add-to-list .button.button.is-rounded {
+  background-color: #81974e;
+}
 .invite-buttons .button.is-rounded {
   width: 7em;
 }
@@ -263,7 +288,7 @@ export default {
   margin-right: 10px;
   padding-right: calc(1em + 0.25em);
   font-size: 1em;
-  width: 15em;
+  width: 12em;
 }
 .transactions > button.is-small {
   border: none;

@@ -16,9 +16,9 @@
        <button class="find-food" v-on:click="searchForRestaurants()" focused>Search For Nearby Restaurants</button>
        
   
-             <button class="find-food" v-on:click="invite()" focused>
+           <!--  <button class="find-food" v-on:click="invite()" focused>
           Invite Friends Out For Food
-          </button>
+          </button> -->
              <button class="find-food" v-on:click="visitProfile()" focused>
         View My Profile
           </button>
@@ -63,7 +63,7 @@ export default {
 .login-search{
   display:flex;
   justify-content: center;
-  margin-top:5em;
+  height:100vh;
   
 
 }
@@ -77,6 +77,7 @@ export default {
   display: flex;
   justify-content: center;
   height: 20vh;
+  margin-top:5em;
 }
 
 .loading-gif img {
@@ -84,7 +85,7 @@ export default {
   max-height: 400px;
   object-fit: contain;
   align-self: center;
-  margin-top: -em;
+
 }
 .loading-text {
   font-weight: bold;
@@ -97,9 +98,10 @@ export default {
 .initial-search {
   display: flex;
   flex-direction: column;
- 
-  height: 80vh;
-  margin-top: 0em;
+
+  height: 100vh;
+  margin-top: 10em;
+  
  
 }
 .find-food {
