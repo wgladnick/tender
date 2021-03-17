@@ -66,7 +66,7 @@
 
     <div v-if="errorMsg">Invite not Found!!!!!!!!!</div>
     <div v-if="invitee.deadlinePassed">
-      Sorry, the voting period for this invite has passed.
+     <h1> Sorry, the voting period for this invite has passed.</h1>
     </div>
   </div>
 
@@ -124,6 +124,27 @@ export default {
 </script>
 
 <style scoped>
+h1{
+    font-size: 2.7vw;
+    text-align:center;
+}
+
+h2{
+    font-size: 2.3vw;
+    font-weight:600;
+    text-align:center;
+}
+
+h3{
+    font-size: 1.7vw;;
+    font-weight:bold;
+    text-align:center;
+}
+
+p{
+    font-size:1.5vw;
+    text-align:center;
+}
 .main {
   display: flex;
   flex-direction: column;

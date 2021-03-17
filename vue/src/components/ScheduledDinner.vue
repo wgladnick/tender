@@ -31,7 +31,7 @@
             v-for="invitee in this.friends"
             v-bind:key="invitee.uniqueId"
             > {{ invitee }} </span></p>
-            <router-link :to="{ name: 'inviteDetailsPage' }">
+            <router-link :to="{ name: 'inviteDetailsPage', params: {id: dinner.inviteId} }">
               <b-button class="btn" type="is-info" size="is-small">View Details</b-button>
             </router-link>
           </div>

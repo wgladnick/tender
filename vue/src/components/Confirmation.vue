@@ -82,6 +82,7 @@ div {
     display:flex;
     flex-direction: column;
     justify-content:center;
+    padding:100px;
 }
 img{
     width:15vw;
@@ -125,7 +126,7 @@ ul p {
 }
 .rest{
     display:flex;
-   padding:50px;
+    justify-content:center;
     flex-wrap:wrap;
 }
 
