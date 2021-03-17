@@ -88,4 +88,6 @@ public class InvitationController {
 		inviteRestaurantsDAO.removeVote(inviteeVotes);
 		return true;
 	}
+
+
 }
