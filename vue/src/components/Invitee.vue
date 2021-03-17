@@ -2,8 +2,8 @@
   <div class="main">
     <div class="welcome-message" v-if="!invitee.deadlinePassed">
       <h2>Hey, {{ invitee.name }}</h2>
-      <p> <span>Voting Deadline: {{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm:ss a") }}</span></p>
-      <p> <span>Reservation Date: {{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm:ss a") }}</span></p>
+      <p> <span>Voting Deadline: {{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
+      <p> <span>Reservation Date: {{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
       <div>
       <span v-show="invitee.isAttending === 'Pending'">
         <b-button type="is-primary" rounded size="is-small" class="m-2"
