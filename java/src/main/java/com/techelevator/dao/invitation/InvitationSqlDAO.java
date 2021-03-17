@@ -101,6 +101,17 @@ public class InvitationSqlDAO implements InvitationDAO {
             invitation.setInviteId(invite_id);
             invitation = makeInviteeList(invitation, invite_id);
             invitation = makeInvitationRestaurants(invitation, invite_id);
+
+            String sql2 = "SELECT yelp_id FROM invitation_restaurant WHERE invite_id = ?";
+
+            SqlRowSet results2 = jdbcTemplate.queryForRowSet(sql2, invitation.getInviteId());
+            List<String> yelpId = new ArrayList<>();
+            while (results2.next()) {
+                yelpId.add(results2.getString("yelp_id"));
+            }
+            invitation.setBusinessDetails(yelpFusion.getBusinessDetailsForInvite(yelpId));
+
+
             return invitation;
         } else {
             throw new RuntimeException("Unable to create your invitation");

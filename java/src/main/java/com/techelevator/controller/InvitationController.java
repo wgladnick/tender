@@ -89,5 +89,4 @@ public class InvitationController {
 		return true;
 	}
 
-
 }
