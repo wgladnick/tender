@@ -30,7 +30,7 @@ export default {
   display: flex;
   height:100%;
   width: 100vw;
-  margin-top:5em;
+
   padding:5em;
   justify-content: center;
   margin-left:7em;
