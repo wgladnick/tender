@@ -92,6 +92,9 @@ Restaurant Search
 
     <!-- Initial Search -->
     <section class="login-search">
+    <div class="nonefound" v-if="noneFound === true">
+        Please enter a location.
+      </div>
       <div class="initial-search" v-if="isInitialSearch === true">
         <div class="loading-gif">
           <img src="../assets/loading.gif" />
@@ -104,6 +107,7 @@ Restaurant Search
         <div class="search-main" >
           <div>
             <label for="searchLocate">Location:</label><br />
+              
             <input
               id="searchLocate"
               v-model="location"
@@ -321,11 +325,12 @@ export default {
         .catch((error) => {
           const response = error.response;
 
-          if (response.status === 401 && response.status === 500) {
+          if (response.status === 401 || response.status === 500) {
             this.noneFound = true;
+            this.errorMsg = "Please enter valid search parameters";
           }
         });
-
+        
       //Display a message if no restaurants are returned
     },
   },
