@@ -3,15 +3,15 @@
 
     <section class="card">
       <div id="profile-container">
-        <h1>Welcome to your profile, {{ this.user.username }}</h1>
-        <p class="details">Name: {{ this.user.firstName }} {{ this.user.lastName }}</p>
-        <p class="details">Email Address: {{ this.user.email }}</p>
-        <p class="details">
-          Address: {{ this.user.userDetails.address }}
+        <h1>Welcome to your profile, <span class="username">{{ this.user.username }}</span></h1>
+        <div class="details"><span class="details-header">Name:</span><span> {{ this.user.firstName }} {{ this.user.lastName }}</span></div>
+        <div class="details"><span class="details-header">Email Address:</span><span> {{ this.user.email }}</span></div>
+        <div class="details"><span class="details-header">
+          Address:</span><span> {{ this.user.userDetails.address }}
           {{ this.user.userDetails.city }},{{ this.user.userDetails.state }}
           {{ this.user.userDetails.zip }}
-        </p>
-        <p class="details">Favorite Categories: {{ this.user.userDetails.searchCategories }}</p>
+        </span></div>
+        <div class="details"><span class="details-header">Favorite Categories:</span><span> {{ this.user.userDetails.searchCategories }} </span></div>
         <router-link :to="{ name: 'editProfile' }">
           <button type="submit">Edit My Profile</button>
         </router-link>
@@ -52,13 +52,16 @@ export default {
   justify-content: left;
   height: 75vh;
 }
-
-
+.details-header{
+  font-weight:bold;
+  color:#dc6b67;
+  text-decoration: underline;
+}
 h1 {
   font-weight: 700;
-  font-size: 1.5em;
+  font-size: 25pt;
 }
-p {
+.details {
   font-size: 1.5em;
 }
 button {
@@ -76,5 +79,8 @@ button {
   border-radius: 5px;
   width: 100%;
   margin-top: 30px;
+}
+.username{
+  color:#dc6b67;
 }
 </style>

@@ -184,5 +184,5 @@ public class InvitationSqlDAO implements InvitationDAO {
     }
 
 
-    public
+
 }
