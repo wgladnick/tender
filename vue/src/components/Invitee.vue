@@ -2,6 +2,8 @@
   <div class="main">
     <div class="welcome-message" v-if="!invitee.deadlinePassed">
       <h2>Hey, {{ invitee.name }}</h2>
+      <p> <span>Voting Deadline: {{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm:ss a") }}</span></p>
+      <p> <span>Reservation Date: {{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm:ss a") }}</span></p>
       <div>
       <span v-show="invitee.isAttending === 'Pending'">
         <b-button type="is-primary" rounded size="is-small" class="m-2"
@@ -104,11 +106,12 @@ export default {
     isAttending(status) {
       this.invitee.isAttending = status;
       InviteService.updateInvitee(this.invitee);
+      this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
     },
     hasVoted(status) {
       this.invitee.hasVoted = status;
       InviteService.updateInvitee(this.invitee);
-      console.log(this.invitee)
+      this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
     } 
   },
 };
