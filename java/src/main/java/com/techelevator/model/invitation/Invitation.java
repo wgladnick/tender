@@ -16,6 +16,7 @@ public class Invitation {
 	private Timestamp deadline;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private Timestamp reservationDate;
+	private boolean deadlinePassed;
 	private List<Invitee> invitees;
 	private List<InviteRestaurants> restaurantChoices;
 	private List<InviteeVotes> inviteevotes;
@@ -71,6 +72,14 @@ public class Invitation {
 
 	public void setDeadline(Timestamp deadline) {
 		this.deadline = deadline;
+		Timestamp date = new Timestamp(System.currentTimeMillis());
+
+		if (this.deadline.after(date)) {
+			setDeadlinePassed(false);
+		} else {
+			setDeadlinePassed(true);
+		}
+
 	}
 
 	public Timestamp getReservationDate() {
@@ -111,6 +120,14 @@ public class Invitation {
 
 	public void setBusinessDetails(List<BusinessDetails> businessDetails) {
 		this.businessDetails = businessDetails;
+	}
+
+	public boolean isDeadlinePassed() {
+		return deadlinePassed;
+	}
+
+	public void setDeadlinePassed(boolean deadlinePassed) {
+		this.deadlinePassed = deadlinePassed;
 	}
 }
 
