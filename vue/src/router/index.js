@@ -120,7 +120,7 @@ const router = new Router({
       }
     },
     {
-      path: "/invite/:id",
+      path: "/:id",
       name:"inviteDetailsPage",
       component: InviteDetailsPage,
       meta: {

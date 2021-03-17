@@ -147,5 +147,12 @@ public class InviteRestaurantsSqlDAO implements InviteRestaurantsDAO {
 
 	}
 
+	public void removeAllVotesForUser(int inviteId, String uniqueID) {
+	String sql = "SELECT ir.total_thumbs_up, ir.total_thumbs_down, ir.yelp_id, invitee_vote.invitee_unique_id " +
+			"FROM  invitation_restaurant AS ir " +
+			"RIGHT JOIN invitee_vote ON ir.yelp_id = invitee_vote.yelp_id " +
+			"WHERE invitee_vote.invitee_unique_id = ? AND ir.invite_id = ?;";
+	}
+
 
 }
