@@ -31,6 +31,9 @@
             v-for="invitee in this.friends"
             v-bind:key="invitee.uniqueId"
             > {{ invitee }} </span></p>
+            <router-link :to="{ name: 'inviteDetailsPage' }">
+              <b-button class="btn" type="is-info" size="is-small">View Details</b-button>
+            </router-link>
           </div>
         </div>
     </b-collapse>
@@ -79,6 +82,14 @@ export default {
 
 .card-header-title:hover {
   color: #dc6b67;
+}
+
+.btn {
+  background-color: #dc6b67;
+}
+
+.btn:hover {
+  background-color: #f7a09d;
 }
 
 
