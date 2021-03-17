@@ -1,7 +1,7 @@
 <template>
   <section>
 
-    <b-collapse class="card" animation="slide" aria-id="contentIdForA11y3">
+    <b-collapse class="card" animation="slide" :open.sync="isOpen" aria-id="contentIdForA11y3">
         <template #trigger="props">
           <div
             class="card-header"
@@ -45,7 +45,8 @@ export default {
   data() {
     return {
       restaurants: [],
-      friends: []
+      friends: [],
+      isOpen: false
 
     }
   },
