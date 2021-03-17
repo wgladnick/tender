@@ -16,13 +16,13 @@
      <ul class="card">
      <li v-for="invitee in invitation.invitees" v-bind:key="invitee.uniqueId">
          <p><strong>Name:</strong> {{invitee.name}}</p>
-         <p><strong>Voting Link:</strong> www.tenderinvite.com/invite/ <span class="strong"> {{invitee.uniqueId}}</span></p>
+         <p><strong>Voting Link:</strong> www.tenderinvite.com/invite/ <span class="strong">{{invitee.uniqueId}}</span></p>
          <br>
          
          </li>
         
      </ul><br><br>
-       <h2> Restaurant Choices </h2><br>
+       <h2> Restaurant Choices </h2>
     <ul class="rest">
       
      <li v-for="restaurant in invitation.businessDetails" v-bind:key="restaurant.yelpId">
@@ -77,9 +77,15 @@ methods: {
 </script>
 
 <style scoped>
+
+div {
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+}
 img{
-    width:300px;
-    height:300px;
+    width:15vw;
+    height:15vw;
     object-fit:cover;
 }
 
@@ -119,8 +125,8 @@ ul p {
 }
 .rest{
     display:flex;
-    padding-left:100px;
-    padding-right:100px;
+   padding:50px;
+    flex-wrap:wrap;
 }
 
 .rest p {
