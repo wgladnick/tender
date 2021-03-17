@@ -38,11 +38,11 @@ export default {
 }
 
 .right {
-  width: 70vw
+  width: 60vw
 
 }
 
 .left {
-   width: 30vw 
+   width: 40vw 
 }
 </style>

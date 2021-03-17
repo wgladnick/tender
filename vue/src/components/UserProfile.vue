@@ -1,24 +1,87 @@
 <template>
   <main class="body">
+    
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            
+            <div class="media-content pb-6">
+              <p class="title is-size-3">{{ this.user.firstName }} {{ this.user.lastName }}</p>
+              <p class="subtitle is-6"> @{{ this.user.username }}</p>
+            </div>
+          </div>
 
-    <section class="card is-fullheight">
-      <div id="profile-container">
-        <h1 class="is-size-3 has-text-weight-semibold">Welcome, <span class="username">{{ this.user.username }}</span></h1><br />
-        <div class="details"><span class="details-header is-size-4">Name:<br /></span><span class="pb-1"> {{ this.user.firstName }} {{ this.user.lastName }}</span></div>
-        <div class="details"><span class="details-header is-size-4">Email Address:<br /></span><span class="pb-1"> {{ this.user.email }}</span></div>
-        <div class="details"><span class="details-header is-size-4">
-          Address: <br /></span><span class="pb-1"> {{ this.user.userDetails.address }}
-          {{ this.user.userDetails.city }},{{ this.user.userDetails.state }}
-          {{ this.user.userDetails.zip }}
-        </span></div>
-        <div class="details"><span class="details-header">Default Search Categories:<br /></span><span class="pb-1"> {{ this.user.userDetails.searchCategories }} </span></div>
+          <div >
+
+            <div class="content">
+              <span class="details-header is-size-5"> Location <br /></span>
+              <span>
+              {{ this.user.userDetails.city }}, {{ this.user.userDetails.state }}
+              </span>
+            </div> 
+
+            <div class="content">
+              <span class="details-header is-size-5">Food favs <br /></span>
+              <span>
+                {{ this.user.userDetails.searchCategories }}
+              </span>
+            </div>
+
+            <router-link :to="{ name: 'editProfile' }">
+              <b-button class="btn" type="is-info" size="is-small">Edit My Profile</b-button>
+            </router-link>
+            
+            <br>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- <h1 class="is-size-3 has-text-weight-semibold">
+          Welcome,
+          <span class="username">{{ this.user.username }}</span>
+        </h1>
+        <br />
+
+        <div class="details">
+          <span class="details-header is-size-4"> Name:</span>
+          <br />
+          <span class="pb-1">
+            {{ this.user.firstName }} {{ this.user.lastName }}</span
+          >
+        </div>
+
+        <div class="details">
+          <span class="details-header is-size-4">Email Address:<br /></span
+          ><span class="pb-1"> {{ this.user.email }}</span>
+        </div>
+
+        <div class="details">
+          <span class="details-header is-size-4"> Address: <br /></span
+          ><span class="pb-1">
+            {{ this.user.userDetails.address }}
+            {{ this.user.userDetails.city }},{{ this.user.userDetails.state }}
+            {{ this.user.userDetails.zip }}
+          </span>
+        </div>
+
+        <div class="details">
+          <span class="details-header">Default Search Categories:<br /></span
+          ><span class="pb-1">
+            {{ this.user.userDetails.searchCategories }}
+          </span>
+        </div>
+
         <router-link :to="{ name: 'editProfile' }">
           <button class="btn" type="submit">Edit My Profile</button>
         </router-link>
-      </div>
-    </section>
-
-
+      </div> -->
+    
   </main>
 </template>
 
@@ -51,34 +114,25 @@ export default {
   margin-bottom: 25px;
   padding: 50px;
   justify-content: left;
+  
+}
 
+.details-header {
+  font-weight: 500;
+  
 }
-.details-header{
-  font-weight:bold;
-  color:#dc6b67;
-}
-.details {
-  font-size: 1.5em;
-}
-button {
+
+.btn {
   background-color: #dc6b67;
-  border: none;
-  color: white;
-  padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
-  width: 100%;
-  margin-top: 30px;
+  width: 30%;
+  display: inline-block;
 }
 
 .btn:hover {
   background-color: #f7a09d;
 }
-
 </style>

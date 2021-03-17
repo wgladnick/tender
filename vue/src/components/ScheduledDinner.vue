@@ -86,6 +86,7 @@ export default {
 
 .btn {
   background-color: #dc6b67;
+  border-radius: 5px;
 }
 
 .btn:hover {

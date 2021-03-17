@@ -38,7 +38,7 @@ export default {
     };
   },
   created() {
-    InviteService.getInviteById(this.$store.state.user.id).then((response) => {
+    InviteService.getInviteByUserId(this.$store.state.user.id).then((response) => {
       this.dinners = response.data;
       this.isLoading = false;
     });
