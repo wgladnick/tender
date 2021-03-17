@@ -6,7 +6,7 @@
       <b-field>
         <b-input v-model="dinnerInvite.inviteName" type="text" />
       </b-field>
-      <p class="date">Dinner Date:</p>
+      <p class="date">Dinner Reservation:</p>
       <input type="date" v-model="reservationDate" />
       <input type="time" v-model="reservationTime" />
       <p class="deadline">Deadline to Vote:</p>
@@ -125,7 +125,7 @@ h1 {
 }
 .dinner {
   font-size: 15pt;
-  font-weight: bold;
+  
 }
 /*.input-fields {
   display: flex;
