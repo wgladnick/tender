@@ -11,8 +11,9 @@
      <h3> Reservation Date: </h3> <p> {{ invitation.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }} </p><br>
      
      <h3> Voting Deadline </h3> <p> {{ invitation.deadline | moment("dddd, MMMM Do YYYY h:mm a") }} </p><br><br>
-     <h3> Friends List </h3> 
-     <ul>
+     <h3> Friends List </h3>
+     <p>  Send each friend on your list their unique voting link to submit their restaurant vote</p><br>
+     <ul class="card">
      <li v-for="invitee in invitation.invitees" v-bind:key="invitee.uniqueId">
          <p><strong>Name:</strong> {{invitee.name}}</p>
          <p><strong>Voting Link:</strong> www.tenderinvite.com/invite/ <span class="strong"> {{invitee.uniqueId}}</span></p>
@@ -20,11 +21,13 @@
          
          </li>
         
-     </ul>
-    <ul>
-     <li v-for="restaurant in restaurants" v-bind:key="restaurant.yelpId">
-        <h2> Restaurant Choices </h2>
-         <p><strong> {{restaurant.name}} </strong></p>
+     </ul><br><br>
+       <h2> Restaurant Choices </h2><br>
+    <ul class="rest">
+      
+     <li v-for="restaurant in invitation.businessDetails" v-bind:key="restaurant.yelpId">
+        
+         <p><strong> {{restaurant.name}} </strong></p><br>
          <img :src="restaurant.image_url"/>
          
          </li>
@@ -48,8 +51,8 @@ export default {
 
     data(){
         return{
-        invitation: {},
-        restaurants:[]
+        invitation: {}
+      
         
 
         };
@@ -60,7 +63,7 @@ created(){
 this.invitation = this.$store.state.createdInvite;
 console.log(this.invitation);
 
-this.invitation.businessDetails = this.restaurants;
+
 
 },
 
@@ -74,6 +77,11 @@ methods: {
 </script>
 
 <style scoped>
+img{
+    width:300px;
+    height:300px;
+    object-fit:cover;
+}
 
 h1{
     font-size: 2.7vw;
@@ -81,13 +89,13 @@ h1{
 }
 
 h2{
-    font-size: 2.5vw;
+    font-size: 2.3vw;
     font-weight:600;
     text-align:center;
 }
 
 h3{
-    font-size: 2vw;;
+    font-size: 1.7vw;;
     font-weight:bold;
     text-align:center;
 }
@@ -98,9 +106,30 @@ p{
 }
 
 ul p {
-    text-align:left;
-    justify-content: center;
-    margin-left:20em;
+    text-align:center;
+
+
+}
+
+.card{
+    padding-top:20px;
+    margin-left:50px;
+    margin-right:50px;
+    
+}
+.rest{
+    display:flex;
+    padding-left:100px;
+    padding-right:100px;
+}
+
+.rest p {
+    font-size:1.1vw;
+}
+
+.rest li{
+    padding:20px;
+    text-align:center;
 }
 
 </style>
