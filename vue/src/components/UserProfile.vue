@@ -13,7 +13,7 @@
         </span></div>
         <div class="details"><span class="details-header">Favorite Categories:</span><span> {{ this.user.userDetails.searchCategories }} </span></div>
         <router-link :to="{ name: 'editProfile' }">
-          <button type="submit">Edit My Profile</button>
+          <button class="btn" type="submit">Edit My Profile</button>
         </router-link>
       </div>
     </section>
@@ -80,7 +80,15 @@ button {
   width: 100%;
   margin-top: 30px;
 }
+<<<<<<< HEAD
 .username{
   color:#dc6b67;
 }
+=======
+
+.btn:hover {
+  background-color: #f7a09d;
+}
+
+>>>>>>> d3fd948cdd5a1d50d44f8c62df9ff93544c3f800
 </style>

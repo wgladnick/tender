@@ -69,6 +69,8 @@
       Sorry, the voting period for this invite has passed.
     </div>
   </div>
+
+  
 </template>
 
 <script>
@@ -85,6 +87,9 @@ export default {
       businessDetails: [],
       currentTime: '',
       deadlinePassed: '',
+      minutesGranularity: 15,
+            hoursGranularity: 1,
+            time: '',
     };
   },
   created() {
@@ -112,7 +117,7 @@ export default {
       this.invitee.hasVoted = status;
       InviteService.updateInvitee(this.invitee);
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
-    } 
+    },
   },
 };
 </script>

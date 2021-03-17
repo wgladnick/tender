@@ -104,6 +104,12 @@ CREATE TABLE IF NOT EXISTS invitee_vote (
     thumbs_down BOOLEAN DEFAULT false
 );
 
+CREATE USER final_capstone_owner
+WITH PASSWORD 'finalcapstone';
+
+CREATE USER final_capstone_appuser
+WITH PASSWORD 'finalcapstone';
+
 GRANT ALL
 ON ALL TABLES IN SCHEMA public
 TO final_capstone_owner;
