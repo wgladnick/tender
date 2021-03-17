@@ -18,18 +18,22 @@
 
         <div class="card-content">
           <div class="content">
-            <p>When: {{ dinner.reservationDate }}</p>
+            <p><strong>When: </strong> {{ dinner.reservationDate | moment("dddd, MMMM Do YYYY h:mm a")}}</p>
 
-            <p>Where: 
-            <span v-for="rst in dinner.businessDetails" 
-            v-bind:key="rst.id"
-            > {{ rst.name }}</span></p>
+            <p><strong>Where: </strong> 
+            <span 
+            v-for="rst in this.restaurants" 
+            v-bind:key="rst.name"
+            > {{ rst }} </span></p>
 
-            <p>Friends: 
+            <p><strong>Friends: </strong> 
             <span
             v-for="invitee in this.friends"
             v-bind:key="invitee.uniqueId"
             > {{ invitee }} </span></p>
+            <router-link :to="{ name: 'inviteDetailsPage' }">
+              <b-button class="btn" type="is-info" size="is-small">View Details</b-button>
+            </router-link>
           </div>
         </div>
     </b-collapse>
@@ -58,6 +62,12 @@ export default {
             this.friends[j] += ", ";
           } 
         }
+    for (let j = 0; j < this.dinner.businessDetails.length; j++) {
+          this.restaurants.push(this.dinner.businessDetails[j].name);
+          if (j < this.dinner.businessDetails.length - 1) {
+            this.restaurants[j] += ", ";
+          } 
+        }
 
       
       
@@ -72,6 +82,14 @@ export default {
 
 .card-header-title:hover {
   color: #dc6b67;
+}
+
+.btn {
+  background-color: #dc6b67;
+}
+
+.btn:hover {
+  background-color: #f7a09d;
 }
 
 
