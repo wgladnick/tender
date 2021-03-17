@@ -11,6 +11,9 @@ export default {
         return axios.post(`/invitation`, invitation)
     },
     getInviteById(id) {
+        return axios.get(`/invitation/${id}`);
+    },
+    getInviteByUserId(id) {
         return axios.get(`/invitation/user/${id}`);
     },
     updateInvitee(invitee) {
