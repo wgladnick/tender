@@ -178,9 +178,7 @@ export default {
     }
   },
 
-  methods: {
-
-        
+  methods: { 
     thumbsUp(){
       this.vote.thumbs_up = true;
       this.vote.thumbs_down= false;
@@ -207,6 +205,7 @@ export default {
     addToList(restaurant) {
       this.$emit("update-list", restaurant);
     },
+    
     updateSelected() {
       this.$emit("addSelectedRestaurant", this.isSelected);
     },

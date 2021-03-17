@@ -1,32 +1,71 @@
 <template>
   <div class="main">
-    <div class="welcome-message">
-      <h2>Hey {{ invitee.firstName }}</h2>
-
-      <div v-show="invitee.isAttending !== 'true'">
-        <b-button type="is-primary" rounded size="is-small" class="m-2">
+    <div class="welcome-message" v-if="!invitee.deadlinePassed">
+      <h2>Hey, {{ invitee.name }}</h2>
+      <div>
+      <span v-show="invitee.isAttending === 'Pending'">
+        <b-button type="is-primary" rounded size="is-small" class="m-2"
+        v-on:click="isAttending('Attending')">
           <i class="far fa-thumbs-up"></i>
           Yes I'll be there!</b-button
         >
 
-        <b-button type="is-primary" rounded size="is-small" class="m-2">
+        <b-button type="is-primary" rounded size="is-small" class="m-2"
+        v-on:click="isAttending('Declined')">
           <i class="far fa-sad-tear"></i>
           Sorry Maybe next time!</b-button
         >
-      </div>
-    </div>
+        </span>
 
+        <span v-show="invitee.isAttending !== 'Pending'">
+          <p>RSVP Status: {{ invitee.isAttending }} </p>
+          <b-button type="is-primary" rounded size="is-small" class="m-2"
+        v-on:click="isAttending('Pending')">
+          <i class="fas fa-exchange-alt"></i>
+          Change my Status</b-button
+        >
+        </span>
+      </div>
+
+
+
+
+    <div>
+      <span>
+         <b-button type="is-primary" rounded size="is-small" class="m-2"
+        v-on:click="hasVoted(true)"
+        v-show="!this.invitee.hasVoted">
+          <i class="fas fa-check"></i>
+          I'm done voting!</b-button
+        >
+      </span>
+
+      <span>
+ <b-button type="is-primary" rounded size="is-small" class="m-2"
+        v-on:click="hasVoted(false)"
+        v-show="this.invitee.hasVoted">
+          <i class="fas fa-times"></i>
+          Hey, let me revote!</b-button
+        >
+      </span>
+
+    </div>
     <div class="restaurants">
       <restaurant-card
-        v-for="restaurant in invitee.businessDetails"
+        v-for="restaurant in this.businessDetails"
         :key="restaurant.id"
         :restaurant="restaurant"
         class="card"
-        @place-vote="placeVote"
       />
     </div>
+    </div>
+
+    
 
     <div v-if="errorMsg">Invite not Found!!!!!!!!!</div>
+    <div v-if="invitee.deadlinePassed">
+      Sorry, the voting period for this invite has passed.
+    </div>
   </div>
 </template>
 
@@ -41,16 +80,9 @@ export default {
       invitee: {},
       isLoading: true,
       errorMsg: false,
-
-      isVotedSubmitted: false,
-
-      inviteeVotes: {
-        yelpId: "",
-        uniqueId: "",
-        inviteId: "",
-        thumbsUp: false,
-        thumbsDown: false,
-      },
+      businessDetails: [],
+      currentTime: '',
+      deadlinePassed: '',
     };
   },
   created() {
@@ -61,30 +93,23 @@ export default {
       if (this.invitee.uniqueId === null) {
         this.errorMsg = true;
       }
+      this.businessDetails = this.invitee.businessDetails;
+      this.invitee.businessDetails = null;
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
-      console.log(this.$store.state.currentInvitee)
+
     });
   },
 
   methods: {
-    placeVote(vote) {
-      this.inviteeVotes.yelpId = vote.yelpId;
-      this.inviteeVotes.thumbsUp = vote.thumbsUp;
-      this.inviteeVotes.thumbsDown = vote.thumbsDown;
-      this.inviteeVotes.uniqueId = this.invitee.uniqueId;
-      this.inviteeVotes.inviteId = this.invitee.inviteId;
-
-      if (!vote.isVoteSubmitted) {
-        if (this.inviteeVotes.thumbsUp) {
-          InviteService.voteThumbsUp(this.inviteeVotes);
-        } else {
-          InviteService.voteThumbsDown(this.inviteeVotes);
-        }
-      } else {
-        console.log(this.inviteeVotes);
-        InviteService.undoVote(this.inviteeVotes);
-      }
+    isAttending(status) {
+      this.invitee.isAttending = status;
+      InviteService.updateInvitee(this.invitee);
     },
+    hasVoted(status) {
+      this.invitee.hasVoted = status;
+      InviteService.updateInvitee(this.invitee);
+      console.log(this.invitee)
+    } 
   },
 };
 </script>

@@ -13,6 +13,9 @@ export default {
     getInviteById(id) {
         return axios.get(`/invitation/user/${id}`);
     },
+    updateInvitee(invitee) {
+        return axios.put('/invitation/invitee', invitee);
+    },
 
     voteThumbsUp(inviteeVotes) {
         return axios.put('/invitation/thumbsup', inviteeVotes);

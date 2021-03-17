@@ -15,6 +15,7 @@ public class Invitee {
 	private String isAttending;
 	private List<BusinessDetails> businessDetails;
 	private Timestamp deadline;
+	private boolean deadlinePassed;
 	private String reservationDate;
 
 	public Invitee() {
@@ -83,6 +84,13 @@ public class Invitee {
 
 	public void setDeadline(Timestamp deadline) {
 		this.deadline = deadline;
+		Timestamp date = new Timestamp(System.currentTimeMillis());
+
+		if (this.deadline.after(date)) {
+			setDeadlinePassed(false);
+		} else {
+			setDeadlinePassed(true);
+		}
 	}
 
 	public String getReservationDate() {
@@ -99,5 +107,13 @@ public class Invitee {
 
 	public void setBusinessDetails(List<BusinessDetails> businessDetails) {
 		this.businessDetails = businessDetails;
+	}
+
+	public boolean isDeadlinePassed() {
+		return deadlinePassed;
+	}
+
+	public void setDeadlinePassed(boolean deadlinePassed) {
+		this.deadlinePassed = deadlinePassed;
 	}
 }
