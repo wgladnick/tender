@@ -2,13 +2,8 @@
   <div class="header mb-2">
     <div class="logo">
       <router-link class="nav" v-bind:to="{ name: 'restaurantFinder' }">
-        
-       <!-- <img
-          class="flame"
-          style="padding-right: 10px"
-          src="../assets/TenderFlame2.png"/> --> 
 
-        <img class="tender-text" src="../assets/TenderTextNew.png" />
+        <img class="tender-text" src="../assets/TenderTextAndIcon.png" />
       </router-link>
     
     </div>
