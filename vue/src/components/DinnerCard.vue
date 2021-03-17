@@ -1,5 +1,5 @@
  <template>
-  <b-form>
+  
     <div class="input-fields">
       <h1 class="headingText">Create Dinner</h1>
       <p class="dinner">Dinner Name:</p>
@@ -11,7 +11,7 @@
       <input type="time" v-model="reservationTime" />
       <p class="deadline">Deadline to Vote:</p>
       <input type="date" v-model="deadlineDate" />
-      <input type="time" v-model="deadlineTime" />
+      <input step="900" type="time" v-model="deadlineTime" />
 
       <div id="email-container">
         <div>
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-  </b-form>
+  
 </template>
 
 <script>
