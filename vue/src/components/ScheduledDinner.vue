@@ -19,7 +19,7 @@
         <div class="card-content">
           <div class="content">
             <p>When: {{ dinner.reservationDate }}</p>
-            
+
             <p
             v-for="rst in dinner.businessDetails" 
             v-bind:key="rst.id"
@@ -27,9 +27,9 @@
 
             <p>Friends: </p>
             <span
-            v-for="invitee in dinner.invitees"
+            v-for="invitee in this.friends"
             v-bind:key="invitee.uniqueId"
-            > {{ invitee.name }}, </span>
+            > {{ invitee }} </span>
           </div>
         </div>
     </b-collapse>
@@ -51,12 +51,15 @@ export default {
   },
 
   created() {
-    for (let j = 0; j < this.restaurant.categories.length; j++) {
-          this.categories.push(this.restaurant.categories[j].title);
-          if (j < this.restaurant.categories.length - 1) {
-            this.categories[j] += " | ";
+    for (let j = 0; j < this.dinner.invitees.length; j++) {
+          this.friends.push(this.dinner.invitees[j].name);
+          if (j < this.dinner.invitees.length - 1) {
+            this.friends[j] += ", ";
           } 
         }
+
+      
+      
   }
 
 
