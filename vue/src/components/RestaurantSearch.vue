@@ -504,7 +504,7 @@ label {
   flex-direction: column;
   width: 100vw;
   height: 80vh;
-  margin-top: 10em;
+  margin-top: 4em;
 }
 /* Home Search Ends Here */
 
@@ -671,7 +671,7 @@ input {
 .loading-gif {
   display: flex;
   justify-content: center;
-  height: vh;
+  
 }
 
 
@@ -680,7 +680,7 @@ input {
   max-height: 400px;
   object-fit: contain;
   align-self: center;
-  margin-top: -em;
+  margin-bottom: -3em;
 }
 
 .restaurant-list .loading-gif {

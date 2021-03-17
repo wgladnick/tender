@@ -77,7 +77,7 @@ export default {
   display: flex;
   justify-content: center;
   height: 20vh;
-  margin-top:6em;
+  margin-top:5em;
 }
 
 .loading-gif img {
