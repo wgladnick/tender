@@ -2,17 +2,18 @@
   <div class="main">
     <div class="welcome-message" v-if="!invitee.deadlinePassed && !isLoading">
       <h2>Hey, {{ invitee.name }}</h2>
+      <p> <strong>  You've been invited out for food! Place your vote on which restaurant to visit </strong><br><br>
       <p> <span>Voting Deadline: {{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
       <p> <span>Reservation Date: {{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
       <div>
       <span v-show="invitee.isAttending === 'Pending'">
-        <b-button type="is-primary" rounded size="is-small" class="m-2"
+        <b-button type="is-primary" rounded size="is-medium" class="m-2"
         v-on:click="isAttending('Attending')">
           <i class="far fa-thumbs-up"></i>
           Yes I'll be there!</b-button
         >
 
-        <b-button type="is-primary" rounded size="is-small" class="m-2"
+        <b-button type="is-primary" rounded size="is-medium" class="m-2"
         v-on:click="isAttending('Declined')">
           <i class="far fa-sad-tear"></i>
           Sorry Maybe next time!</b-button
@@ -21,7 +22,7 @@
 
         <span v-show="invitee.isAttending !== 'Pending'">
           <p>RSVP Status: {{ invitee.isAttending }} </p>
-          <b-button type="is-primary" rounded size="is-small" class="m-2"
+          <b-button type="is-primary" rounded size="is-medium" class="m-2"
         v-on:click="isAttending('Pending')">
           <i class="fas fa-exchange-alt"></i>
           Change my Status</b-button
@@ -34,7 +35,7 @@
 
     <div>
       <span>
-         <b-button type="is-primary" rounded size="is-small" class="m-2"
+         <b-button type="is-primary" rounded size="is-medium" class="m-2"
         v-on:click="hasVoted(true)"
         v-show="!this.invitee.hasVoted">
           <i class="fas fa-check"></i>
@@ -124,6 +125,11 @@ export default {
 </script>
 
 <style scoped>
+
+.main{
+  height:100%;
+  margin-top:120em;
+}
 h1{
     font-size: 2.7vw;
     text-align:center;
@@ -161,11 +167,17 @@ p{
 
 .restaurants {
   display: flex;
+  flex-direction:column;
+  margin-top:
 }
 .button.is-primary {
   background-color: #dc6b67;
 }
 .button.is-primary:hover {
   background-color: #d6544f;
+}
+
+.card{
+  margin-top:3em;
 }
 </style>

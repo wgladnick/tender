@@ -16,7 +16,7 @@
      <ul class="card">
      <li v-for="invitee in invitation.invitees" v-bind:key="invitee.uniqueId">
          <p><strong>Name:</strong> {{invitee.name}}</p>
-         <p><strong>Voting Link:</strong> www.tenderinvite.com/invite/ <span class="strong">{{invitee.uniqueId}}</span></p>
+         <p><strong>Voting Link:</strong> www.tenderinvite.com/invite/<span class="strong">{{invitee.uniqueId}}</span></p>
          <br>
          
          </li>

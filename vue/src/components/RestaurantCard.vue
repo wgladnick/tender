@@ -290,7 +290,7 @@ h1{
   margin-right: 10px;
   padding-right: calc(1em + 0.25em);
   font-size: 1em;
-  width: 11vw;
+  width: 10vw;
 }
 .transactions > button.is-small {
   border: none;
