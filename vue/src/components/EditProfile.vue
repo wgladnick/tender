@@ -187,9 +187,12 @@ span.checkmark {
 
 .center {
    display: flex;
-   margin-left: auto;
-   margin-right: auto;
+   align-content: center;
+   justify-content: center;
+   padding-top: 25%;
+   padding-right: 5%;
    width: 50%;
+   margin: auto;
 }
 button {
   background-color: #dc6b67;
