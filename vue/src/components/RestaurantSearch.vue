@@ -713,7 +713,7 @@ input {
   align-items: center;
 }
 .card {
-  width: 50vw;
+
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 1em;
