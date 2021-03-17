@@ -1,24 +1,31 @@
 <template>
-  <div class="header">
+  <div class="header mb-2">
     <div class="logo">
-      <router-link class="nav" v-bind:to="{ name: 'home' }"
-        >
+      <router-link class="nav" v-bind:to="{ name: 'restaurantFinder' }">
+        
        <!-- <img
           class="flame"
           style="padding-right: 10px"
-          src="../assets/TenderFlame2.png" /> -->
+          src="../assets/TenderFlame2.png"/> --> 
 
-        <img class="tender-text" src="../assets/TenderTextNew.png"
-      /></router-link>
+        <img class="tender-text" src="../assets/TenderTextNew.png" />
+      </router-link>
     
-</div>
+    </div>
     <div id="nav-container">
       <router-link
-        v-if="$route.name !== 'home'"
+        v-if="$route.name !== 'restaurantFinder'"
         class="nav"
-        v-bind:to="{ name: 'home' }"
+        v-bind:to="{ name: 'restaurantFinder' }"
         >Home</router-link
-      >&nbsp;&nbsp;
+      >
+      &nbsp;&nbsp;
+      <router-link
+        class="nav"
+        v-bind:to="{ name: 'profile' }"
+        >Profile / Invite History</router-link
+      >
+      &nbsp;&nbsp;
       <router-link
         class="nav"
         v-bind:to="{ name: 'logout' }"
@@ -27,7 +34,6 @@
       >
     </div>
   </div>
-  </div>
 </template>
 
 <script>
@@ -35,28 +41,22 @@ export default {};
 </script>
 
 <style scoped>
-
-.header{
+.header {
   z-index: 2;
-  position:fixed;
-  top:0;
-  width:100vw;
-
+  position: fixed;
+  top: 0;
+  width: 100vw;
 }
 .logo {
   display: flex;
   flex-direction: row;
-
 }
 .flame {
-width:40px;
-margin-top:-3em;
+  width: 40px;
+  margin-top: -3em;
 }
 .tender-text {
-  width:200px;
- 
-  
-  
+  width: 200px;
 }
 
 #nav-container {

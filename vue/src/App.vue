@@ -37,10 +37,13 @@ components: {
   padding-left: 50px;
 }
   .app {
-    background-color:#fdf2f2;
-    height:100%;
-   
     
+    height:100vh;
+  }
+  html, body {
+  background-color:#fdf2f2 !important;
+  height: 100%;
+   min-height: 100vh;
   }
 </style>
 

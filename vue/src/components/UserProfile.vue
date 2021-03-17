@@ -1,17 +1,17 @@
 <template>
   <main class="body">
 
-    <section class="card">
+    <section class="card is-fullheight">
       <div id="profile-container">
-        <h1>Welcome to your profile, <span class="username">{{ this.user.username }}</span></h1>
-        <div class="details"><span class="details-header">Name:</span><span> {{ this.user.firstName }} {{ this.user.lastName }}</span></div>
-        <div class="details"><span class="details-header">Email Address:</span><span> {{ this.user.email }}</span></div>
-        <div class="details"><span class="details-header">
-          Address:</span><span> {{ this.user.userDetails.address }}
+        <h1 class="is-size-3 has-text-weight-semibold">Welcome, <span class="username">{{ this.user.username }}</span></h1><br />
+        <div class="details"><span class="details-header is-size-4">Name:<br /></span><span class="pb-1"> {{ this.user.firstName }} {{ this.user.lastName }}</span></div>
+        <div class="details"><span class="details-header is-size-4">Email Address:<br /></span><span class="pb-1"> {{ this.user.email }}</span></div>
+        <div class="details"><span class="details-header is-size-4">
+          Address: <br /></span><span class="pb-1"> {{ this.user.userDetails.address }}
           {{ this.user.userDetails.city }},{{ this.user.userDetails.state }}
           {{ this.user.userDetails.zip }}
         </span></div>
-        <div class="details"><span class="details-header">Favorite Categories:</span><span> {{ this.user.userDetails.searchCategories }} </span></div>
+        <div class="details"><span class="details-header">Default Search Categories:<br /></span><span class="pb-1"> {{ this.user.userDetails.searchCategories }} </span></div>
         <router-link :to="{ name: 'editProfile' }">
           <button class="btn" type="submit">Edit My Profile</button>
         </router-link>
@@ -27,6 +27,7 @@ export default {
   name: "user-profile",
   created() {
     this.user = this.$store.state.user;
+    console.log("profile page: " + this.user.userDetails.searchCategories);
   },
   data() {
     return {
@@ -50,16 +51,11 @@ export default {
   margin-bottom: 25px;
   padding: 50px;
   justify-content: left;
-  height: 75vh;
+
 }
 .details-header{
   font-weight:bold;
   color:#dc6b67;
-  text-decoration: underline;
-}
-h1 {
-  font-weight: 700;
-  font-size: 25pt;
 }
 .details {
   font-size: 1.5em;

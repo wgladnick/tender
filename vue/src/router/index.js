@@ -12,6 +12,7 @@ import CreateInvite from '../views/CreateInvite.vue'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../components/EditProfile.vue'
 import InviteConfirmation from '../views/InviteConfirmation.vue'
+import InviteDetailsPage from '../views/InviteDetails.vue'
 
 Vue.use(Router)
 
@@ -28,14 +29,14 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
+   /* {
       path: '/',
       name: "home",
       component: Home,
       meta: {
         requiresAuth: true
       }
-    },
+    },*/
     {
       path: "/login",
       name: "login",
@@ -78,7 +79,7 @@ const router = new Router({
     },
 
     {
-      path: "/search",
+      path: "/",
       name: "restaurantFinder",
       component: restaurantFinder,
       meta: {
@@ -114,6 +115,14 @@ const router = new Router({
       path: "/confirmation",
       name:"inviteConfirmationPage",
       component: InviteConfirmation,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/invite/:id",
+      name:"inviteDetailsPage",
+      component: InviteDetailsPage,
       meta: {
         requiresAuth: true
       }

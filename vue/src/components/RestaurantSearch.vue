@@ -201,6 +201,7 @@ export default {
       noneFound: false,
       updatedLocation: "",
       restaurantChoices:[],
+      errorMsg: '',
 
       invitation: {
       location:"",
@@ -237,13 +238,20 @@ export default {
 
     sendInvite(){
      
-    
-      InviteService.sendInvite(this.$store.state.invitation)
+      
+      InviteService.sendInvite(this.createdInvite)
       .then((response) => {
          this.$store.commit("SET_CREATED_INVITE", response.data);
-         console.log(this.$store.state.createdInvite);
-      });
+         this.createdInvite = {};
          this.$router.push('/confirmation');
+      }).catch((error) => {
+          const response = error.response;
+
+            if (response.status === 401 && response.status === 500) {
+              this.errorMsg = "Sorry there was an error creating your invitation, please try again.";
+            }
+        });
+         
     
     },
 

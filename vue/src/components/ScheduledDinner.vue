@@ -20,16 +20,16 @@
           <div class="content">
             <p>When: {{ dinner.reservationDate }}</p>
 
-            <p
-            v-for="rst in dinner.businessDetails" 
+            <p>Where: 
+            <span v-for="rst in dinner.businessDetails" 
             v-bind:key="rst.id"
-            >Where: {{ rst.name }}</p>
+            > {{ rst.name }}</span></p>
 
-            <p>Friends: </p>
+            <p>Friends: 
             <span
             v-for="invitee in this.friends"
             v-bind:key="invitee.uniqueId"
-            > {{ invitee }} </span>
+            > {{ invitee }} </span></p>
           </div>
         </div>
     </b-collapse>

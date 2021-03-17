@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="welcome-message" v-if="!invitee.deadlinePassed">
+    <div class="welcome-message" v-if="!invitee.deadlinePassed && !isLoading">
       <h2>Hey, {{ invitee.name }}</h2>
       <p> <span>Voting Deadline: {{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
       <p> <span>Reservation Date: {{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
@@ -103,6 +103,7 @@ export default {
       this.businessDetails = this.invitee.businessDetails;
       this.invitee.businessDetails = null;
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
+      this.isLoading = false;
 
     });
   },
