@@ -9,7 +9,7 @@
       </div>      
     </section>
     <div class="welcome-message" v-if="!invitee.deadlinePassed && !isLoading">
-      <h2>Hey, {{ invitee.name }}</h2>
+      <p class="is-size-2">Hey, {{ invitee.name }}</h2>
       <p> <strong>  You've been invited out for food! Place your vote on which restaurant to visit </strong><br><br>
       <p> <span>Voting Deadline: {{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
       <p> <span>Reservation Date: {{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
