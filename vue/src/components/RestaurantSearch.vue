@@ -470,7 +470,7 @@ background-color: #1e1e32;
 .body {
   display: flex;
   flex-direction: row;
-  margin-top:6em;
+ 
 
  
 }

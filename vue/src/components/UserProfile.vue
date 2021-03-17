@@ -76,12 +76,6 @@ button {
   width: 100%;
   margin-top: 30px;
 }
-<<<<<<< HEAD
-.username{
-  color:#dc6b67;
-}
-=======
->>>>>>> ad72b7783e15bd3dffa576f06e144bc2b73126ff
 
 .btn:hover {
   background-color: #f7a09d;

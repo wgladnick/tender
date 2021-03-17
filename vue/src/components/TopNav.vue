@@ -43,8 +43,6 @@ export default {};
 <style scoped>
 .header {
   z-index: 2;
-  position: fixed;
-  top: 0;
   width: 100vw;
 }
 .logo {

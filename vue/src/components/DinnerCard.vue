@@ -98,7 +98,9 @@ export default {
         this.$store.commit("SET_CREATED_INVITE", this.createdInvite);
         console.log(this.$store.state.createdInvite);
         this.$router.push('/confirmation');
-      })
+
+      });
+              
   
     },
    
@@ -150,7 +152,6 @@ button {
 button:hover {
   background-color: #f7a09d;
   color:white;
-
 
 }
 
