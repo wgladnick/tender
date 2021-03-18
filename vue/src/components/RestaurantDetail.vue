@@ -1,9 +1,125 @@
 <template>
+<div>
 <div class="columns">
   <div class="column">
     <img class="yelp-image" v-bind:src="restaurant.image_url" />
   </div>
   <div class="column">
+<p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
+          <b-button
+            v-bind:type="{
+              'is-danger': !hours.is_open_now,
+              'is-success': hours.is_open_now,
+            }"
+          >
+           
+            <span v-if="!hours.is_open_now">Currently Closed</span>
+            <span v-else>Currently Open</span>
+          </b-button>
+        </p>
+
+  <span class="bold-class">Price: <span class="has-text-success" >{{ restaurant.price }} </span> </span>
+        <span class="detail-cats"
+          v-for="category in this.categories"
+          v-bind:key="category"
+          > {{ category }}
+        </span>
+        <h1 class="title">{{ restaurant.name }}</h1>
+
+     
+        <div class="stars">
+          <star-rating
+            class="stars"
+            :rating="restaurant.rating"
+            :read-only="true"
+            :increment="0.01"
+            :show-rating="false"
+            :star-size="25"
+          />
+          <a :href="restaurant.url" target="_blank"> View reviews on <img height="12px" width="12px" src="../assets/yelp.png">Yelp</a>
+        </div>
+
+        <div>
+          
+          
+    
+        </div>
+        <div>
+          <span class="location-number"
+            v-for="ln in restaurant.location.display_address"
+            v-bind:key="ln.display_address"
+          >
+            {{ ln }}
+          </span>
+          <br>
+        </div>
+        
+        <div>
+          <span class="location-number">{{ restaurant.display_phone }} </span>
+        </div>
+
+      <div class="transactions has-addons">
+          <b-button size="is-small">
+            <i
+              class="fas fa-check has-text-success"
+              v-if="transactionTypes.includes('pickup')"
+            ></i>
+            <i
+              class="fas fa-times has-text-danger"
+              v-if="!transactionTypes.includes('pickup')"
+            ></i>
+            Takeout</b-button
+          >
+          <b-button size="is-small">
+            <i
+              class="fas fa-check has-text-success"
+              v-if="transactionTypes.includes('delivery')"
+            ></i>
+            <i
+              class="fas fa-times has-text-danger"
+              v-if="!transactionTypes.includes('delivery')"
+            ></i>
+            Delivery</b-button
+          >
+          <b-button size="is-small">
+            <i
+              class="fas fa-check has-text-success"
+              v-if="transactionTypes.includes('restaurant_reservation')"
+            ></i>
+            <i
+              class="fas fa-times has-text-danger"
+              v-if="!transactionTypes.includes('restaurant_reservation')"
+            ></i>
+            Reservations</b-button
+          >
+        </div>
+ <div class="call-to-action">
+            <a :href="`tel:${restaurant.phone}`">
+              <b-button type="is-primary" rounded size="is-small">
+                <i class="fas fa-phone-alt"></i>
+                Call to order</b-button
+              >
+            </a>
+            <a
+            :href="`https://www.google.com/maps/dir/${
+              this.$store.state.searchDirections
+            }/${restaurant.location.display_address
+              .toString()
+              .split(' ')
+              .join('+')}/`"
+            target="_blank"
+          >
+              <b-button rounded size="is-small">
+              <i class="fas fa-route"></i>
+              Get Directions</b-button>
+              </a>
+          </div>
+
+
+
+
+
+
   </div>
   <div class="column">
      <p>Hours:</p>
@@ -33,8 +149,9 @@
           </span>
         </p>
   </div>
+</div>
 
-
+ 
 
 
 
@@ -44,6 +161,14 @@
       <div class="left-panel">
         <img class="yelp-image" v-bind:src="restaurant.image_url" />
       </div>
+
+
+
+
+
+
+
+
       <div class="right-panel">
           <div class="open-sign"> 
             <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
@@ -59,6 +184,13 @@
           </b-button>
         </p>
         </div>
+
+
+
+
+
+
+
                 <span class="bold-class">Price: <span class="has-text-success" >{{ restaurant.price }} </span> </span>
         <span class="detail-cats"
           v-for="category in this.categories"
@@ -159,6 +291,19 @@
       
         <br />
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="far-right-panel">
         <p>Hours:</p>
         <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
@@ -189,6 +334,7 @@
       </div>
     </div>
   </main>
+  </div>
 </template>
 
 <script>
@@ -235,6 +381,7 @@ export default {
 </script>
 
 <style scoped>
+/*
 .location-number{
   font-weight:500;
   font-size:1.5em;
@@ -320,5 +467,5 @@ margin-left:-.5em;
   .time{
     padding-bottom:1em;
   }
-
+/**/
 </style>
