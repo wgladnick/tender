@@ -218,7 +218,7 @@ export default {
       isInitialSearch: true,
       isShowingResults: false,
       availCategories: [],
-      radius: "",
+      radius: "8050",
       categoriesSelected: [],
       noneFound: false,
       updatedLocation: "",
@@ -233,7 +233,12 @@ export default {
     };
   },
   created() {
+     //loads available categories and sets preferred categories
     this.getCategories();
+    this.categoriesSelected = this.$store.state.user.userDetails.activeCategoryId;
+
+
+    //loads $store information
     if (this.$store.state.restaurants.length !== 0) {
       this.restaurants = this.$store.state.restaurants;
       this.location = this.$store.state.searchLocation;
@@ -247,6 +252,8 @@ export default {
     this.user = this.$store.state.user;
     this.$store.commit("SET_TOGGLE_STATUS");
     //this.isMenuOpen = this.$store.state.sideMenuToggle;
+
+    this.$store.state.invitation.restaurantChoices = [];
   },
 
   computed: {
@@ -353,6 +360,12 @@ export default {
 };
 </script>
 <style scoped>
+
+.body {
+  display: flex;
+  flex-direction: row;
+} 
+
 .home-search-container {
   display: flex;
   justify-content: center;
@@ -373,24 +386,16 @@ width:100%;
   font-size: 1.5em;
   font-weight: 800;
 }
-.body {
-  display: flex;
-  flex-direction: row;
-}
+
 
 .left {
   display: flex;
   flex-direction: column;
   padding-left: 3em;
   margin-top: 5em;
+  width:20%;
 }
 
-.middle {
-  margin-top: 2em;
-  display: flex;
-  width: 80vw;
-  flex-direction: column;
-}
 
 /*  Restaurant List */
 
@@ -415,8 +420,7 @@ width:100%;
 .result-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
 }
 
 .card {
@@ -460,6 +464,7 @@ width:100%;
 #main {
   transition: margin-left 0.5s;
   padding: 20px;
+  width:80%;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

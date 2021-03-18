@@ -7,10 +7,8 @@
       /></router-link>
     </div>
 <!-- Restaurant Card Image Ends -->
-
 <!-- Restaurant Card Information -->
     <div class="right-panel">
-      
       <!-- Categories -->
         <span
           class="categories-tag"
@@ -19,14 +17,10 @@
         >
           {{ category }}
         </span>
-
-
 <!-- Restaurant Name -->
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><h1 class="is-size-3">{{ restaurant.name }}</h1>
       </router-link>
-
-
 <!-- Stars -->
       <div class="star-rating">
         <star-rating
@@ -38,23 +32,19 @@
           :star-size="25"
         />
       </div>
-
       <!-- Location/Phone Number -->
       <div class="location-phone">
         <p class="has-text-weight-medium" v-for="ln in restaurant.location.display_address"
           v-bind:key="ln.display_address">
           {{ ln }}
         </p>
-        
         <p>{{ restaurant.display_phone }} </p>
-
         <p class="price">
           Price:
           <span class="has-text-success has-text-weight-bold">{{
             restaurant.price}}</span>
         </p>
       </div>
-
       <!-- Vote Buttons -->
       <!-- Like -->
       <span class="invite-buttons" v-if="$route.name === 'inviteeView'" v-show="!checkVote">
@@ -65,19 +55,15 @@
           >
         </span>
          <!-- NAH -->
-        
           <b-button v-on:click="thumbsDown()" type="is-primary" rounded size="is-small" class="m-2" v-show="!hasVoted">
             <i class="far fa-sad-tear"></i>
             NAH</b-button
           >
            <!-- Undo Vote -->
-        
           <b-button v-on:click="undoVote()" type="is-primary" rounded size="is-small" class="m-2" v-show="hasVoted">
             <i class="fas fa-undo-alt"></i>
             Whoops</b-button
           >
-       
-       
       </span>
       <!-- Show how user voted -->
       <div>
@@ -89,8 +75,6 @@
         <i class="far fa-thumbs-down has-text-danger"></i>
       </span></p>
       </div>
-
-
        <!-- Call To Order -->
       <span v-if="$route.name !== 'inviteeView'" >
         <span class="call-to-order">
@@ -100,17 +84,12 @@
             Call to order</b-button>
         </a>
         </span>
-
         <!-- Add to List -->
-      
          <b-button type="is-primary"
            v-show="!this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">
            <i class="fas fa-plus"></i>
            Add To Party</b-button>
            </span>
-           
-    
-
       <!-- Delivery/ TakeOut Tags -->
       <div v-if="$route.name !== 'inviteeView'" class="transactions">
         <b-button size="is-small">
@@ -149,28 +128,20 @@
         <br />
       </div>
     </div>
-
-  
   </span>
 </template>
-
 <script>
 import InviteService from '../services/InviteService.js'
 import StarRating from "vue-star-rating";
-
 export default {
   name: "restaurant-card",
-
   components: {
     StarRating,
   },
-
   props: ["restaurant"],
-
   data() {
     return {
       transactionTypes: "",
-
       categories: [],
       hasVoted: false,
       vote: {
@@ -180,19 +151,15 @@ export default {
         inviteId: this.$store.state.currentInvitee.inviteId,
         uniqueId: this.$store.state.currentInvitee.uniqueId,
       }
-     
     }
   },
   created() {
     this.vote.thumbs_up = this.restaurant.inviteeVotes.thumbs_up;
     this.vote.thumbs_down = this.restaurant.inviteeVotes.thumbs_down;
-
-
     for (let i = 0; i < this.restaurant.transactions.length; i++) {
       this.transactionTypes +=
         this.restaurant.transactions[i].transactions + " ";
     }
-
     for (let j = 0; j < this.restaurant.categories.length; j++) {
       this.categories.push(this.restaurant.categories[j].title);
       if (j < this.restaurant.categories.length - 1) {
@@ -210,10 +177,8 @@ computed: {
       const voted = this.vote.thumbs_down || this.vote.thumbs_up;
       const attending = this.$store.state.currentInvitee.isAttending !== 'Declined';
       return voted && attending;
-
     }
   },
-
   methods: { 
     thumbsUp(){
       this.vote.thumbs_up = true;
@@ -221,23 +186,18 @@ computed: {
       InviteService.voteThumbsUp(this.vote)
       this.hasVoted = true;
     },
-
     thumbsDown(){
       this.vote.thumbs_down = true;
       this.vote.thumbs_up = false;
       InviteService.voteThumbsDown(this.vote);
       this.hasVoted = true;
-
     },
-
      undoVote(){
       this.vote.thumbs_down = false;
       this.vote.thumbs_up = false;
       InviteService.undoVote(this.vote);
       this.hasVoted = false;
-
     },
-
     addToList(restaurant) {
       if(!this.$store.state.invitation.restaurantChoices.includes(restaurant)){
       this.$store.commit("ADD_CHOICE_TO_LIST", restaurant);
@@ -248,24 +208,17 @@ computed: {
   },
 };
 </script>
-
 <style scoped>
-
-
-
 h1{
   font-size:2vw;
 }
-
 .zoom {
   display: flex;
   flex-direction: row;
   width:70%;
-  
   padding: 1em;
   transition: transform 0.5s;
 }
-
 .button.is-primary{
   background-color: #dc6b67;
   margin-top:1em;
@@ -273,13 +226,11 @@ h1{
 .button.is-fullwidth{
    background-color: #dc6b67;
 }
-
 .yelp-image {
   width: 20em;
   height: 20em;
   object-fit:cover;
 }
-
 .left-panel {
   padding: 1vw;
   margin-right:1vw;;
@@ -288,31 +239,22 @@ h1{
 .right-panel {
   padding: 20px 20px 20px 0px;
 }
-
-
 .action-buttons {
  display:flex;
  margin-top:2em;
-
-
 }
-
-
-
 .nah-button .button.is-rounded {
   background-color: #dc6b67;
 }
 .nah-button .button.is-rounded:hover {
   background-color: #ad5451;
 }
-
 .yes-button .button.button.is-rounded {
   background-color: #a5c064;
 }
 .yes-button .button.button.is-rounded:hover {
   background-color: #9cbd4f;
 }
-
 .add-to-list .button.button.is-rounded:hover {
   background-color: #9dbd52;
 }
@@ -322,9 +264,6 @@ h1{
 .invite-buttons .button.is-rounded {
   width: 7em;
 }
-
-
-
 .transactions > button.is-small {
   border: none;
   font-size: 1em;
@@ -339,27 +278,21 @@ h1{
   display: inline-block;
   width: 0.2em;
 }
-
-
-
 .categories {
   padding: 10px 0px 0px 0px;
 }
 .categories-tag {
   color: rgb(179, 179, 179);
 }
-
 .transactions {
   margin-top: 25px;
   margin-left: -0.5em;
 }
-
 .zoom:hover {
   -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari 3-8 */
   transform: scale(1.1);
 }
-
 .title:hover {
   color: #dc6b67;
 }
