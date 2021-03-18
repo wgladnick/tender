@@ -12,8 +12,8 @@
       <p class="is-size-2 has-text-weight-semibold">Hey, <span class="is-capitalized">{{ invitee.name }}</span></p>
       <p class="is-size-3 has-text-weight-semibold">You've been invited out for food! </p>
       <p class="is-size-3 has-text-weight-semibold">Place your vote on which restaurant to visit </p><br><br>
-      <p> <span class="is-size-3 has-text-weight-semibold">Voting Deadline: </span>{{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</p>
-      <p> <span class="is-size-3 has-text-weight-semibold">Reservation Date: </span>{{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</p>
+      <p> <span class="is-size-3 has-text-weight-semibold">Voting Deadline: </span>{{ invitee.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</p>
+      <p> <span class="is-size-3 has-text-weight-semibold">Reservation Date: </span>{{ invitee.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a") }}</p>
       <div>
       <span v-show="invitee.isAttending === 'Pending'">
         <b-button type="is-primary" rounded size="is-medium" class="m-2"
@@ -42,7 +42,7 @@
 
 
 
-    <div>
+    <div v-show="invitee.isAttending !== 'Declined'">
       <span>
          <b-button type="is-primary" rounded size="is-medium" class="m-2"
         v-on:click="hasVoted(true)"
@@ -97,10 +97,13 @@ export default {
       businessDetails: [],
       currentTime: '',
       deadlinePassed: '',
-      minutesGranularity: 15,
-            hoursGranularity: 1,
-            time: '',
-    };
+      undoVote: {
+        inviteId: 1,
+        yelpId: "",
+        uniqueId: "",
+      },
+
+    }
   },
   created() {
     InviteService.getInvitee(this.$route.params.uniqueId).then((response) => {
@@ -114,6 +117,8 @@ export default {
       this.invitee.businessDetails = null;
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
       this.isLoading = false;
+      this.undoVote.uniqueId = this.invitee.uniqueId;
+      this.undoVote.inviteId = this.invitee.inviteId;
 
     });
   },
@@ -123,6 +128,9 @@ export default {
       this.invitee.isAttending = status;
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
       InviteService.updateInvitee(this.invitee);
+      if (status === 'Declined') {
+        InviteService.undoAllVotes(this.undoVote);
+      }
     },
     hasVoted(status) {
       this.invitee.hasVoted = status;

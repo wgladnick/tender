@@ -1,64 +1,58 @@
 <template>
   <main>
-    <div class="main">
+    <div class="left-panel">
       <div class="loading-gif" v-if="isLoading">
         <img src="../assets/loading.gif" />
       </div>
-      <div class="left-panel">
-        <div class="invite">
+      <div>
           <h1 class="invite-name">{{ this.invite.inviteName }}</h1>
-        </div>
-        <div class="deadline">
+          <div>
           <span class="head">Voting Deadline:</span
           ><span> {{ this.invite.deadline }}</span>
-          <div class="deadline-passed">
-          <b-button label="Voting Open" placeholder="Voting Open" v-show="!this.invite.deadlinePassed" class="deadline-open"
-            />
-          <b-button label="Voting Closed" placeholder="Voting Closed" v-show="this.invite.deadlinePassed" class="deadline-close"
-            />
           </div>
-        </div>
-      </div>
-    
-        
-          <div class="reservation-date">
-            <span class="head">Reservation Date and Time:</span
-            ><span> {{ this.invite.reservationDate }}</span>
-          </div>
-          <div class="invitees">
-            <span class="head">Participants:</span
-            ><span
-              v-for="invitee in this.friends"
-              v-bind:key="invitee.uniqueId"
-            >
-              {{ invitee }}
-            </span>
-          </div>
-        </div>
-        <div class="right-panel">
-          <div class="finalists">
-            <span class="head">Finalists:</span>
-            <restaurant-card
-              v-for="restaurant in this.invite.businessDetails"
-              :key="restaurant.id"
-              :restaurant="restaurant"
-              class="card"
-            />
-            <span class="head">Total Votes:</span
-            ><span class="total-votes">
-              {{ this.invite.totalThumbsUp }}/{{ this.friends.length }}</span
-            >
-          </div>
-        </div>
       
+            <b-button
+              label="Voting Open"
+              placeholder="Voting Open"
+              v-show="!this.invite.deadlinePassed"
+              class="deadline-open"
+            />
+            <b-button
+              label="Voting Closed"
+              placeholder="Voting Closed"
+              v-show="this.invite.deadlinePassed"
+              class="deadline-close"
+            />
+          
+      </div>
+
+      <div class="reservation-date">
+        <span class="head">Reservation Date and Time:</span
+        ><span> {{ this.invite.reservationDate }}</span>
+      </div>
+      <div class="invitees">
+        <span class="head">Participants:</span
+        ><span v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
+          {{ invitee }}
+        </span>
+      </div>
+    </div>
+    
+    <div class="right-panel">
+        <div class="final-head"><span class="head">Finalists</span></div>
+        <div class="finalists">
+<restaurant-invite-detail-card class="invite-card" v-for="restaurant in this.invite.businessDetails" v-bind:restaurant="restaurant" v-bind:key="restaurant.id"/>
+        </div>
+    </div>
   </main>
 </template>
 
 <script>
 import InviteService from "../services/InviteService";
-import RestaurantCard from "./RestaurantCard.vue";
+import RestaurantInviteDetailCard from "../components/RestaurantInviteDetailCard";
+
 export default {
-  components: { RestaurantCard },
+  components: { RestaurantInviteDetailCard },
   name: "invite-detail",
 
   data() {
@@ -89,38 +83,43 @@ export default {
 </script>
 
 <style scoped>
+main {
+    display: flex;
+}
+.finalists {
+  display: flex;
+  flex-wrap: wrap;
+}
+.final-head {
+    text-align: center;
+    text-decoration: underline;
+}
 .deadline-open {
   background-color: green;
+  color: white;
+  width: auto;
 }
 .deadline-close {
   background-color: red;
-}
-.main {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.left-panel {
-  padding: 20px;
-  margin-right: 25px;
-}
-.right-panel {
-  padding-top: 4.5em;
+  width: auto;
 }
 
 h1 {
   font-size: 2.7vw;
   text-align: center;
+  text-decoration: underline;
 }
 .head {
   font-size: 18pt;
   font-weight: bold;
 }
-.card {
-  padding-top: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
+.invite-card {
+  width: 33%;
+}
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 30%;
 }
 </style>
