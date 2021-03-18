@@ -1,7 +1,7 @@
 <template>
   <article class="tile is-child notification has-background-white">
     <p class="title">Invite History</p>
-    <div class="content">
+    <div>
       <!-- Content -->
 
       <div>
@@ -15,7 +15,7 @@
             v-for="dinner in dinners"
             v-bind:key="dinner.id"
             v-bind:dinner="dinner"
-            class="my-3"
+            class="my-4"
           />
         </div>
       </div>
