@@ -28,7 +28,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
-    sideMenuToggle: false,
+    sideMenuToggle: true,
     token: currentToken || '',
     user: currentUser || {},
     byLocationBoard: [],
