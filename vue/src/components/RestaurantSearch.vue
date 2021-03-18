@@ -480,12 +480,12 @@ width:100%;
 
 /*  Check boxes start here -----------------------------*/
 
-/*  Check boxes start here -----------------------------*/
+
 
 .c-container {
   display: flex;
   position: relative;
-  padding-left: 35px;
+  padding-left: 30px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 1em;

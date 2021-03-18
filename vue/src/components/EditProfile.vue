@@ -38,6 +38,25 @@
       <div id="rightside" class="card">
         <br /><br />
         <h1 class="h3 mb-3 font-weight normal">Edit Favorite Categories</h1>
+        <div class="column">
+          
+         <label
+            class="c-container"
+            v-for="category in this.foodCategories"
+            v-bind:key="category.categoryId"
+            >{{ category.displayName }}
+            <input
+              type="checkbox"
+              checked="checked"
+              v-bind:id="category.categoryId"
+              v-bind:value="category.categoryId"
+              v-model.number="userCategories"
+            />
+            <span class="checkmark"></span>
+          </label>
+          </div>
+
+        <!--   
         <div
           class="column"
           v-for="category in this.foodCategories"
@@ -50,14 +69,16 @@
             <b-checkbox type="is-primary">{{ category.displayName }}</b-checkbox>
         </b-field>
         </div>
+
+         -->
         
-        <section>
+       <!-- <section>
           <img
             src="../assets/TenderFlameWText.png"
             alt="secondaryLogo"
             class="center"
           />
-        </section>
+        </section> -->
       </div>
     </div>
     <button type="submit" v-on:click.prevent="editProfile">Save Changes</button>
@@ -189,4 +210,84 @@ button {
   border-radius: 5px;
   width: 50%;
 }
+
+/* Checkbox */
+.column {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.c-container {
+  padding-right:30px;
+  display: flex;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox ------------------- */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-style: solid;
+  border-width: 0.1em;
+  border-color: #1e1e32;
+}
+
+/* On mouse-over, add a grey background color */
+.c-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.c-container input:checked ~ .checkmark {
+  background-color: #dc6b67;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.c-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.c-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*Checkbox Ends*/
+
 </style>
