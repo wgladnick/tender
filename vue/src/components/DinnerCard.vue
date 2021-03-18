@@ -116,7 +116,13 @@ export default {
        this.errorMsg = "";
        this.errorMsg = "Don't forget to add your guests";
        this.isError = true;
-       }else if(new Date(this.dinnerInvite.reservationDate) < new Date(this.dinnerInvite.deadline)){
+       }else if((new Date(this.dinnerInvite.reservationDate) || new Date(this.dinnerInvite.deadline)) < new Date().getTime() ){
+         this.errorMsg= "";
+         this.errorMsg = "Make sure to set your dates after today's date :)"
+         this.isError = true;
+       }
+       
+       else if(new Date(this.dinnerInvite.reservationDate) < new Date(this.dinnerInvite.deadline)){
          this.errorMsg= "";
          this.errorMsg = "Your voting deadline can't be later than your reservation"
          this.isError = true;

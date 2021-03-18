@@ -7,14 +7,12 @@
       aria-id="contentIdForA11y3"
     >
       <template #trigger="props">
-        <div
-          class="card-header"
-        >
-          <p class="is-size-3">{{ dinner.inviteName }}</p>
+        
+          <p class="is-size-3" >{{ dinner.inviteName }}</p>
           <a class="card-header-icon">
             <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
           </a>
-        </div>
+        
       </template>
 
       <div class="card-content">
@@ -26,7 +24,9 @@
                 dinner.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a")
               }}
             </div>
-            <div class="column has-text-left-mobile has-text-right-tablet is-one-quarter is-desktop">
+            <div
+              class="column has-text-left-mobile has-text-right-tablet is-one-quarter is-desktop"
+            >
               <b-button
                 label="Voting Open"
                 placeholder="Voting Open"
@@ -41,39 +41,63 @@
               />
             </div>
 
-<div class="column is-full">
-<p class="has-text-weight-semibold">Where:
-            <span class="has-text-weight-normal" v-for="rst in this.restaurants" v-bind:key="rst.name">
-              {{ rst }}
-            </span>
-          </p>
-</div>
+            <div class="column is-full">
+              <p class="has-text-weight-semibold">
+                Where:
+                <span
+                  class="has-text-weight-normal"
+                  v-for="rst in this.restaurants"
+                  v-bind:key="rst.name"
+                >
+                  {{ rst }}
+                </span>
+              </p>
+            </div>
 
-<div class="column is-full ">
-  <p class="has-text-weight-semibold">Friends:
-            <span class="has-text-weight-normal" v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
-              {{ invitee }}
-            </span>
-          </p>
-</div>
+            <div class="column is-full">
+              <p class="has-text-weight-semibold">
+                Friends:
+                <span
+                  class="has-text-weight-normal"
+                  v-for="invitee in this.friends"
+                  v-bind:key="invitee.uniqueId"
+                >
+                  {{ invitee }}
+                </span>
+              </p>
+            </div>
 
-<div class="column is-full">
-  <p class="has-text-weight-semibold">Friends:
-            <span class="has-text-weight-normal" v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
-              {{ invitee }}
-            </span>
-          </p>
-</div>
-
+            <div class="column is-full">
+              <p class="has-text-weight-semibold">
+                Friends:
+                <span
+                  class="has-text-weight-normal"
+                  v-for="invitee in this.friends"
+                  v-bind:key="invitee.uniqueId"
+                >
+                  {{ invitee }}
+                </span>
+              </p>
+            </div>
           </div>
-          <p class="has-text-weight-semibold">Where:
-            <span class="has-text-weight-normal" v-for="rst in this.restaurants" v-bind:key="rst.name">
+          <p class="has-text-weight-semibold">
+            Where:
+            <span
+              class="has-text-weight-normal"
+              v-for="rst in this.restaurants"
+              v-bind:key="rst.name"
+            >
               {{ rst }}
             </span>
           </p>
 
-          <p class="has-text-weight-semibold">Friends:
-            <span class="has-text-weight-normal" v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
+          <p class="has-text-weight-semibold">
+            Friends:
+            <span
+              class="has-text-weight-normal"
+              v-for="invitee in this.friends"
+              v-bind:key="invitee.uniqueId"
+            >
               {{ invitee }}
             </span>
           </p>
@@ -123,6 +147,17 @@ export default {
 </script>
 
 <style scoped>
+
+
+.card-header {
+  display: flex;
+  justify-content: 
+}
+
+.card-header:hover {
+  color: #dc6b67;
+}
+
 .btn {
   background-color: #dc6b67;
   border-radius: 5px;

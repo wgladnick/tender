@@ -128,7 +128,6 @@ Restaurant Search
         <br />
 
         <b-select placeholder="Enter a radius" v-model="radius" expanded>
-          <option>Enter a radius</option>
           <option value="8050">5 miles</option>
           <option value="16100">10 miles</option>
           <option value="24200">15 miles</option>
@@ -480,12 +479,12 @@ width:100%;
 
 /*  Check boxes start here -----------------------------*/
 
-/*  Check boxes start here -----------------------------*/
+
 
 .c-container {
   display: flex;
   position: relative;
-  padding-left: 35px;
+  padding-left: 30px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 1em;

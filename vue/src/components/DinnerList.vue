@@ -50,6 +50,7 @@ export default {
 </script>
 
 <style scoped>
+
 .loading-gif {
   display: flex;
   flex-direction: column;
