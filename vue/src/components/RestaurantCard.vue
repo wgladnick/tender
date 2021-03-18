@@ -57,7 +57,7 @@
 
       <!-- Vote Buttons -->
       <!-- Like -->
-      <span class="invite-buttons" v-if="$route.name === 'inviteeView'" v-show="!this.$store.state.currentInvitee.hasVoted">
+      <span class="invite-buttons" v-if="$route.name === 'inviteeView'" v-show="!checkVote">
         <span class="yes-button" v-show="!this.$store.state.currentInvitee.hasVoted">
           <b-button v-on:click="thumbsUp()" type="is-primary" rounded size="is-small" class="m-2" v-show="!hasVoted">
             <i class="far fa-thumbs-up"></i>
@@ -161,9 +161,10 @@ export default {
   data() {
     return {
       transactionTypes: "",
-
+      
       categories: [],
       hasVoted: false,
+      disableVoting: false,
       vote: {
         yelpId: this.restaurant.id,
         thumbs_up: false,
@@ -185,7 +186,16 @@ export default {
       if (j < this.restaurant.categories.length - 1) {
         this.categories[j] += " | ";
       }
+
     }
+  },
+  computed: {
+    checkVote() {
+      const hasVotedState = this.$store.state.currentInvitee.hasVoted === true;
+      const attending = this.$store.state.currentInvitee.isAttending !== 'Declined';
+      return hasVotedState || !attending;
+    },
+  
   },
 
   methods: { 

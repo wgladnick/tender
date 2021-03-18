@@ -12,8 +12,8 @@
       <p class="is-size-2 has-text-weight-semibold">Hey, <span class="is-capitalized">{{ invitee.name }}</span></p>
       <p class="is-size-3 has-text-weight-semibold">You've been invited out for food! </p>
       <p class="is-size-3 has-text-weight-semibold">Place your vote on which restaurant to visit </p><br><br>
-      <p> <span class="is-size-3 has-text-weight-semibold">Voting Deadline: </span>{{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</p>
-      <p> <span class="is-size-3 has-text-weight-semibold">Reservation Date: </span>{{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</p>
+      <p> <span class="is-size-3 has-text-weight-semibold">Voting Deadline: </span>{{ invitee.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</p>
+      <p> <span class="is-size-3 has-text-weight-semibold">Reservation Date: </span>{{ invitee.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a") }}</p>
       <div>
       <span v-show="invitee.isAttending === 'Pending'">
         <b-button type="is-primary" rounded size="is-medium" class="m-2"
@@ -42,7 +42,7 @@
 
 
 
-    <div>
+    <div v-show="invitee.isAttending !== 'Declined'">
       <span>
          <b-button type="is-primary" rounded size="is-medium" class="m-2"
         v-on:click="hasVoted(true)"
