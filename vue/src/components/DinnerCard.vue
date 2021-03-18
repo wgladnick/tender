@@ -47,7 +47,7 @@
           </b-field>
           <div>
             <span class="add-guests">
-               <b-button type="is-primary" @click="add()">
+               <b-button type="is-primary" expanded @click="add()">
             Add Guests</b-button>
 
    
@@ -55,8 +55,11 @@
           </div>
           <span class="create-invite">
 
-                <b-button type="is-primary" v-on:click="createInvite">
+                <b-button type="is-primary" expanded v-on:click="createInvite">
             Create Invite</b-button>
+</span>
+            
+      </div>
          
 
            
@@ -159,7 +162,9 @@ export default {
 
     remove(index) {
       this.dinnerInvite.invitees.splice(index, 1);
-    },
+    }
+
+    
   },
 };
 </script>
