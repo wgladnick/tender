@@ -12,53 +12,53 @@
           <span class="head">Voting Deadline:</span
           ><span> {{ this.invite.deadline }}</span>
           <div class="deadline-passed">
-          <b-button label="Voting Open" placeholder="Voting Open" v-show="!this.invite.deadlinePassed" class="deadline-open"
+            <b-button
+              label="Voting Open"
+              placeholder="Voting Open"
+              v-show="!this.invite.deadlinePassed"
+              class="deadline-open"
             />
-          <b-button label="Voting Closed" placeholder="Voting Closed" v-show="this.invite.deadlinePassed" class="deadline-close"
+            <b-button
+              label="Voting Closed"
+              placeholder="Voting Closed"
+              v-show="this.invite.deadlinePassed"
+              class="deadline-close"
             />
           </div>
         </div>
       </div>
-    
-        
-          <div class="reservation-date">
-            <span class="head">Reservation Date and Time:</span
-            ><span> {{ this.invite.reservationDate }}</span>
-          </div>
-          <div class="invitees">
-            <span class="head">Participants:</span
-            ><span
-              v-for="invitee in this.friends"
-              v-bind:key="invitee.uniqueId"
-            >
-              {{ invitee }}
-            </span>
-          </div>
+
+      <div class="reservation-date">
+        <span class="head">Reservation Date and Time:</span
+        ><span> {{ this.invite.reservationDate }}</span>
+      </div>
+      <div class="invitees">
+        <span class="head">Participants:</span
+        ><span v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
+          {{ invitee }}
+        </span>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="finalists">
+        <span class="head">Finalists:</span>
+
+        <div>
+          <span class="head">Total Votes:</span
+          ><span class="total-votes">
+            {{ this.invite.businessDetails.totalThumbsUp }}/{{ this.friends.length }}</span
+          >
         </div>
-        <div class="right-panel">
-          <div class="finalists">
-            <span class="head">Finalists:</span>
-            <restaurant-card
-              v-for="restaurant in this.invite.businessDetails"
-              :key="restaurant.id"
-              :restaurant="restaurant"
-              class="card"
-            />
-            <span class="head">Total Votes:</span
-            ><span class="total-votes">
-              {{ this.invite.totalThumbsUp }}/{{ this.friends.length }}</span
-            >
-          </div>
-        </div>
-      
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
 import InviteService from "../services/InviteService";
-import RestaurantCard from "./RestaurantCard.vue";
+
 export default {
-  components: { RestaurantCard },
+  components: {},
   name: "invite-detail",
 
   data() {

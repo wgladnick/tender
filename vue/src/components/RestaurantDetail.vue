@@ -19,7 +19,7 @@
           </b-button>
         </p>
         </div>
-                <p> <span class="bold-class">Price: <span class="has-text-success" >{{ restaurant.price }} </span> </span>
+                <span class="bold-class">Price: <span class="has-text-success" >{{ restaurant.price }} </span> </span>
         <span class="detail-cats"
           v-for="category in this.categories"
           v-bind:key="category"
