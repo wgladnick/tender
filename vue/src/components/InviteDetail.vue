@@ -1,12 +1,12 @@
 <template>
-  <main>
-    <div class="left-panel">
+  <main class="tile is-ancestor">
+    <div class="tile is-3 is-vertical is-parent box">
       <div class="loading-gif" v-if="isLoading">
         <img src="../assets/loading.gif" />
       </div>
-      <div>
-          <h1 class="invite-name">{{ this.invite.inviteName }}</h1>
-          <div>
+      <div class="tile is-child box">
+          <h1 class="title">{{ this.invite.inviteName }}</h1>
+          <div class="tile is-child box">
           <span class="head">Voting Deadline:</span
           ><span> {{ this.invite.deadline }}</span>
           </div>
@@ -15,33 +15,33 @@
               label="Voting Open"
               placeholder="Voting Open"
               v-show="!this.invite.deadlinePassed"
-              class="deadline-open"
+              class="button is-success is-rounded "
             />
             <b-button
               label="Voting Closed"
               placeholder="Voting Closed"
               v-show="this.invite.deadlinePassed"
-              class="deadline-close"
+              class="button is-danger is-rounded"
             />
-          
-      </div>
-
-      <div class="reservation-date">
+          <div class="tile is-child box">
         <span class="head">Reservation Date and Time:</span
         ><span> {{ this.invite.reservationDate }}</span>
       </div>
-      <div class="invitees">
+      <div class="tile is-child box">
         <span class="head">Participants:</span
         ><span v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
           {{ invitee }}
         </span>
       </div>
+      </div>
+
+      
     </div>
     
-    <div class="right-panel">
-        <div class="final-head"><span class="head">Finalists</span></div>
-        <div class="finalists">
-<restaurant-invite-detail-card class="invite-card" v-for="restaurant in this.invite.businessDetails" v-bind:restaurant="restaurant" v-bind:key="restaurant.id"/>
+    <div class="tile is-vertical is-parent box">
+        <div class="is-child box"><span class="title">Finalists</span></div>
+        <div class="is-child box">
+<restaurant-invite-detail-card class="is-child box" v-for="restaurant in this.invite.businessDetails" v-bind:restaurant="restaurant" v-bind:key="restaurant.id"/>
         </div>
     </div>
   </main>
@@ -83,13 +83,13 @@ export default {
 </script>
 
 <style scoped>
-main {
+/*main {
     display: flex;
 }
 .finalists {
   display: flex;
   flex-wrap: wrap;
-}
+}*/
 .final-head {
     text-align: center;
     text-decoration: underline;
@@ -113,13 +113,14 @@ h1 {
   font-size: 18pt;
   font-weight: bold;
 }
-.invite-card {
+/*.invite-card {
   width: 33%;
-}
+}*/
 .left-panel {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 30%;
+  background-color: white;
 }
 </style>

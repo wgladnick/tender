@@ -1,33 +1,30 @@
 <template>
- <span class="zoom">
-<!-- Restaurant Card Image -->
+  <span class="zoom">
+    <!-- Restaurant Card Image -->
     <div class="left-panel">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
       /></router-link>
     </div>
-<!-- Restaurant Card Image Ends -->
+    <!-- Restaurant Card Image Ends -->
 
-<!-- Restaurant Card Information -->
+    <!-- Restaurant Card Information -->
     <div class="right-panel">
-      
       <!-- Categories -->
-        <span
-          class="categories-tag"
-          v-for="category in this.categories"
-          v-bind:key="category"
-        >
-          {{ category }}
-        </span>
+      <span
+        class="categories-tag"
+        v-for="category in this.categories"
+        v-bind:key="category"
+      >
+        {{ category }}
+      </span>
 
-
-<!-- Restaurant Name -->
+      <!-- Restaurant Name -->
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><h1 class="title">{{ restaurant.name }}</h1>
       </router-link>
 
-
-<!-- Stars -->
+      <!-- Stars -->
       <div class="star-rating">
         <star-rating
           :rating="restaurant.rating"
@@ -38,16 +35,27 @@
           :star-size="25"
         />
       </div>
-        <p class="price">
-          Price:
-          <span class="has-text-success has-text-weight-bold">{{
-            restaurant.price}}</span>
-        </p>
-      
-     
+      <p class="price">
+        Price:
+        <span class="has-text-success has-text-weight-bold">{{
+          restaurant.price
+        }}</span>
+      </p>
+      <progress
+        class="progress is-success"
+        :value="restaurant.totalThumbsUp"
+        :max="restaurant.invitees"
+      >
+        Yay
+      </progress>
+      <progress
+        class="progress is-danger"
+        :value="restaurant.totalThumbsDown"
+        :max="restaurant.invitees.length"
+      >
+        Nay
+      </progress>
     </div>
-
-  
   </span>
 </template>
 
@@ -104,36 +112,6 @@ export default {
 
 .action-buttons {
   display: flex;
-}
-
-.nah-button .button.is-rounded {
-  background-color: #dc6b67;
-}
-.nah-button .button.is-rounded:hover {
-  background-color: #ad5451;
-}
-
-.yes-button .button.button.is-rounded {
-  background-color: #a5c064;
-}
-.yes-button .button.button.is-rounded:hover {
-  background-color: #9cbd4f;
-}
-
-.add-to-list .button.button.is-rounded:hover {
-  background-color: #9dbd52;
-}
-.add-to-list .button.button.is-rounded {
-  background-color: #81974e;
-}
-.invite-buttons .button.is-rounded {
-  width: 7em;
-}
-
-.transactions > button.is-small {
-  border: none;
-  font-size: em;
-  font-weight: bold;
 }
 .price {
   font-weight: 550;
