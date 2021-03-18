@@ -38,22 +38,12 @@
           :star-size="25"
         />
       </div>
-
-      <!-- Location/Phone Number -->
-      <div class="location-phone">
-        <p v-for="ln in restaurant.location.display_address"
-          v-bind:key="ln.display_address">
-          {{ ln }}
-        </p>
-        
-        <p>{{ restaurant.display_phone }} </p>
-
         <p class="price">
           Price:
           <span class="has-text-success has-text-weight-bold">{{
             restaurant.price}}</span>
         </p>
-      </div>
+      
      
     </div>
 
@@ -62,7 +52,6 @@
 </template>
 
 <script>
-
 import StarRating from "vue-star-rating";
 
 export default {
@@ -78,9 +67,7 @@ export default {
     return {
       transactionTypes: "",
       categories: [],
-      
-     
-    }
+    };
   },
   created() {
     for (let i = 0; i < this.restaurant.transactions.length; i++) {
@@ -95,42 +82,29 @@ export default {
       }
     }
   },
-}
+};
 </script>
 <style scoped>
-
-
 .zoom {
   display: flex;
   flex-direction: row;
   padding: 1em;
   transition: transform 0.5s;
-  
-
-  
 }
 .yelp-image {
   width: 200px;
   height: 300px;
   object-fit: cover;
-  
 }
 
 .left-panel {
-  margin-right:1vw;
+  margin-right: 1vw;
   width: 50%;
 }
 
-
-
 .action-buttons {
- display:flex;
- 
-
-
+  display: flex;
 }
-
-
 
 .nah-button .button.is-rounded {
   background-color: #dc6b67;
@@ -156,8 +130,6 @@ export default {
   width: 7em;
 }
 
-
-
 .transactions > button.is-small {
   border: none;
   font-size: em;
@@ -171,8 +143,6 @@ export default {
   display: inline-block;
   width: 0.2em;
 }
-
-
 
 .categories {
   padding: 10px 0px 0px 0px;

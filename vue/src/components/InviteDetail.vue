@@ -1,17 +1,16 @@
 <template>
   <main>
-    <div class="main">
+    <div class="left-panel">
       <div class="loading-gif" v-if="isLoading">
         <img src="../assets/loading.gif" />
       </div>
-      <div class="left-panel">
-        <div class="invite">
+      <div>
           <h1 class="invite-name">{{ this.invite.inviteName }}</h1>
-        </div>
-        <div class="deadline">
+          <div>
           <span class="head">Voting Deadline:</span
           ><span> {{ this.invite.deadline }}</span>
-          <div class="deadline-passed">
+          </div>
+      
             <b-button
               label="Voting Open"
               placeholder="Voting Open"
@@ -24,8 +23,7 @@
               v-show="this.invite.deadlinePassed"
               class="deadline-close"
             />
-          </div>
-        </div>
+          
       </div>
 
       <div class="reservation-date">
@@ -39,11 +37,12 @@
         </span>
       </div>
     </div>
-    <span class="head">Finalists:</span>
-    <div class="finalists">
-        
+    
+    <div class="right-panel">
+        <div class="final-head"><span class="head">Finalists</span></div>
+        <div class="finalists">
 <restaurant-invite-detail-card class="invite-card" v-for="restaurant in this.invite.businessDetails" v-bind:restaurant="restaurant" v-bind:key="restaurant.id"/>
-        
+        </div>
     </div>
   </main>
 </template>
@@ -84,35 +83,43 @@ export default {
 </script>
 
 <style scoped>
-.finalists {
+main {
     display: flex;
-    flex-wrap: wrap;
-
+}
+.finalists {
+  display: flex;
+  flex-wrap: wrap;
+}
+.final-head {
+    text-align: center;
+    text-decoration: underline;
 }
 .deadline-open {
   background-color: green;
   color: white;
+  width: auto;
 }
 .deadline-close {
   background-color: red;
-}
-.main {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  width: auto;
 }
 
 h1 {
   font-size: 2.7vw;
   text-align: center;
+  text-decoration: underline;
 }
 .head {
   font-size: 18pt;
   font-weight: bold;
 }
 .invite-card {
-    width: 33%
+  width: 33%;
+}
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 30%;
 }
 </style>
