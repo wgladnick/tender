@@ -1,5 +1,5 @@
 <template>
-  <div class="main"> 
+  <div class="main">
     <div class="left">
       <user-profile />
     </div>
@@ -25,24 +25,20 @@ export default {
 
 
 <style scoped>
-
 .main {
   display: flex;
-  height:100%;
+  height: 100%;
   width: 100vw;
-
-  padding:5em;
-  justify-content: center;
-  margin-left:7em;
- 
+  justify-content: space-around;
+  align-items:center;
+  margin-left: 6vw;
 }
 
 .right {
-  width: 60vw
-
+  width: 60vw;
 }
 
 .left {
-   width: 40vw 
+  width: 40vw;
 }
 </style>

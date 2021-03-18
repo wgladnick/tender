@@ -1,12 +1,8 @@
 <template>
-  <div>
+  <div class="card">
 
 
- <br>
- <br>
- <br>
- <br>
- <h1> Yay! Your invitation has been set. Here is your confirmation: </h1><br>
+ <h1> Yay! Your invitation is all set. Here is your confirmation: </h1><br>
  <h2> {{invitation.inviteName}} </h2> <br>
      <h3> Reservation Date: </h3> <p> {{ invitation.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }} </p><br>
      
@@ -84,59 +80,6 @@ div {
     justify-content:center;
     padding:100px;
 }
-img{
-    width:15vw;
-    height:15vw;
-    object-fit:cover;
-}
 
-h1{
-    font-size: 2.7vw;
-    text-align:center;
-}
-
-h2{
-    font-size: 2.3vw;
-    font-weight:600;
-    text-align:center;
-}
-
-h3{
-    font-size: 1.7vw;;
-    font-weight:bold;
-    text-align:center;
-}
-
-p{
-    font-size:1.5vw;
-    text-align:center;
-}
-
-ul p {
-    text-align:center;
-
-
-}
-
-.card{
-    padding-top:20px;
-    margin-left:50px;
-    margin-right:50px;
-    
-}
-.rest{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.rest p {
-    font-size:1.1vw;
-}
-
-.rest li{
-    padding:20px;
-    text-align:center;
-}
 
 </style>

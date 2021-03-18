@@ -1,6 +1,8 @@
 <template>
 <main class="body">
+ 
     <restaurant-search />
+ 
     </main>
 
 </template>
@@ -18,9 +20,5 @@ export default {
 </script>
 
 <style scoped>
-.body{
-height:100vh;
 
-
-}
 </style>

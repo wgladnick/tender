@@ -1,16 +1,22 @@
 <template>
   <div>
+
     <section class="card">
+     
       <h1 class="is-size-3 has-text-weight-semibold">Invitation History</h1>
     </section>
-    <section class="has-text-centered" v-if="this.isLoading">
-      <div>
+   
+      
+
+     
+      <div class="loading-gif" v-if="this.isLoading">
       <p class="is-size-3 has-text-weight-semibold">Loading...</p>
-      </div>
-      <div class="loading-gif">
       <img src="../assets/loading.gif" />
-      </div>      
-    </section>
+      </div> 
+
+  
+
+
     <div v-if="!this.isLoading">
       <scheduled-dinner
         v-for="dinner in dinners"
@@ -19,6 +25,8 @@
         class="card"
       />
     </div>
+
+
   </div>
 </template>
 
@@ -49,26 +57,25 @@ export default {
 <style scoped>
 .loading-gif {
   display: flex;
-  justify-content: center;
+  flex-direction:column;
   height: 80vh;
+  width:fit-content;
 }
 
 .loading-gif img {
   width: 400px;
   height: 400px;
   object-fit: contain;
+  text-align:center;
+  
 }
 
-.result-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+
 .card {
   width: 80%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  padding: 30px;
+  
+  margin-bottom: 10px;
+  padding:15px;
+
 }
 </style>

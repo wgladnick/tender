@@ -1,6 +1,7 @@
  <template>
   
     <div class="input-fields">
+      <span v-if="isError">{{errorMsg}}</span>
 
        <b-field label="What's The Occasion">
             <b-input v-model="dinnerInvite.inviteName"></b-input>
@@ -83,6 +84,7 @@ export default {
       deadlineTime: "",
       location: "",
       radius: "",
+      isError:"",
       restaurantChoices: [],
       dinnerInvite: {
         creatorId: "",
@@ -97,19 +99,30 @@ export default {
 
   methods: {
     createInvite() {
+      if(this.$store.state.invitation.restaurantChoices.length === 0){
+       this.errorMsg = "Don't forget to add your restaurants"
+       this.isError = true;
+     }  else if( this.$store.state.invitation.invitees.length === 0) {
+       this.errorMsg = "Don't forget to add your guests"
+       this.isError = true;
+       }else {
+
       this.dinnerInvite.reservationDate =
-        this.reservationDate + " " + this.reservationTime;
+      this.reservationDate + " " + this.reservationTime;
       this.dinnerInvite.deadline = this.deadlineDate + " " + this.deadlineTime;
       this.dinnerInvite.creatorId = this.$store.state.user.id;
       this.$store.commit("CREATE_INVITATION", this.dinnerInvite);
      
+       this.errorMsg="";
+       this.isError = false;
       InviteService.sendInvite(this.$store.state.invitation).then ((response) => {
         this.createdInvite = response.data;
         this.$store.commit("SET_CREATED_INVITE", this.createdInvite);
         console.log(this.$store.state.createdInvite);
         this.$router.push('/confirmation');
-
+     
       });
+     }
               
   
     },

@@ -107,7 +107,6 @@ export default {
 
 .card {
   width: 70%;
-  margin-top: 25px;
   margin-bottom: 25px;
   padding: 50px;
   justify-content: left;

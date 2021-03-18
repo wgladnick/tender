@@ -24,6 +24,10 @@ components: {
 
 <style>
 
+h1 {
+  font-size:3vw;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -43,7 +47,7 @@ components: {
   html, body {
   background-color:#fdf2f2 !important;
   height: 100%;
-   min-height: 100vh;
+  min-height: 100vh;
   }
 </style>
 

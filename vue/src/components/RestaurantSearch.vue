@@ -57,11 +57,13 @@ Restaurant Search
             <b-input
               v-model="location"
               placeholder="Enter a Zipcode or Location"
+              expanded
+              required
             ></b-input>
           </b-field>
 
           <b-field label="Radius">
-            <b-select placeholder="Enter a radius" v-model="radius">
+            <b-select placeholder="Enter a radius" v-model="radius" expanded>
               <option value="8050">5 miles</option>
               <option value="16100">10 miles</option>
               <option value="24200">15 miles</option>
@@ -69,7 +71,7 @@ Restaurant Search
             </b-select>
           </b-field>
 
-          <b-button type="is-primary" v-on:click="searchByLocation()"
+          <b-button expanded type="is-primary" v-on:click="searchByLocation()"
             >Find Food</b-button
           >
         </form>
@@ -80,12 +82,12 @@ Restaurant Search
         <div>
           <h1>Filter Categories</h1>
           <p>(Choose your cravings)</p>
-          <b-button type="is-primary" v-on:click="searchByLocation()"
+          <b-button type="is-primary" v-on:click="searchByLocation()" expanded
             >Update My Search</b-button
           >
-          >
+
           <label
-            class="container"
+            class="c-container"
             v-for="category in availCategories"
             v-bind:key="category.categoryId"
             >{{ category.displayName }}
@@ -104,46 +106,50 @@ Restaurant Search
     <!--Categories End -->
 
     <!-- Initial Search -->
-      <div class="nonefound" v-if="noneFound === true">
-        Please enter a location.
-      </div>
 
-      <div v-if="isInitialSearch === true">
-        
+    <div class="home-search-container" v-if="isInitialSearch">
+      <div class="home-search" >
         <div class="loading-gif">
           <img src="../assets/loading.gif" />
         </div>
 
-        <div v-if="location === ''">
-          <h1>Let's Find You Some Grub</h1>
-        </div>
+        <h2 class="is-size-3 has-text-weight-semibold has-text-centered">
+          Let's Find You Some Grub
+        </h2>
+        <br />
+        <span v-if="isError">{{ errorMsg }}</span>
 
-        <form v-on:submit.prevent>
-          <b-field label="Location">
-            <b-input
-              v-model="location"
-              placeholder="Enter a Zipcode or Location"
-            ></b-input>
-          </b-field>
+        <b-input
+          required
+          v-model="location"
+          placeholder="Enter a Zipcode or Location"
+        >
+        </b-input>
+        <br />
 
-          <b-field label="Radius">
-            <b-select placeholder="Enter a radius" v-model="radius">
-              <option value="8050">5 miles</option>
-              <option value="16100">10 miles</option>
-              <option value="24200">15 miles</option>
-              <option value="40000">25 miles</option>
-            </b-select>
-          </b-field>
+        <b-select placeholder="Enter a radius" v-model="radius" expanded>
+          <option>Enter a radius</option>
+          <option value="8050">5 miles</option>
+          <option value="16100">10 miles</option>
+          <option value="24200">15 miles</option>
+          <option value="40000">25 miles</option>
+        </b-select>
+        <br />
 
-          <b-button type="is-primary" v-on:click="searchByLocation()"
-            >Find Food</b-button
-          >
-        </form>
+        <b-button
+          submit
+          expanded
+          type="is-primary"
+          v-on:click="searchByLocation()"
+          >Find Food</b-button
+        >
       </div>
+    </div>
     <!-- Inital Search Ends -->
 
     <div
       id="main"
+      v-if="!isInitialSearch"
       v-bind:style="{ 'margin-left': isMenuOpen ? '-225px' : '0px' }"
     >
       <!--Restaurant List Body -->
@@ -212,13 +218,13 @@ export default {
       isInitialSearch: true,
       isShowingResults: false,
       availCategories: [],
-      radius: "8050",
+      radius: "",
       categoriesSelected: [],
       noneFound: false,
       updatedLocation: "",
       restaurantChoices: [],
       errorMsg: "",
-
+      isError: false,
       invitation: {
         location: "",
         radius: "",
@@ -293,130 +299,135 @@ export default {
       this.$router.push(`restaurants/${id}`);
     },
     searchByLocation() {
-      this.restaurants = [];
-      this.isLoading = true;
-      this.$store.commit("SET_SEARCH_LOCATION", this.location);
-      this.$store.commit("SET_SEARCH_RADIUS", this.radius);
-      this.isInitialSearch = false;
+      if (this.location === "") {
+        this.isError = true;
+        this.errorMsg = "Don't forget your location :)";
+      } else {
+        this.restaurants = [];
+        this.isLoading = true;
+        this.$store.commit("SET_SEARCH_LOCATION", this.location);
+        this.$store.commit("SET_SEARCH_RADIUS", this.radius);
+        this.isInitialSearch = false;
 
-      RestaurantService.getRestaurants(
-        this.location,
-        this.radius,
-        this.categoriesSelected.toString()
-      )
-        .then((response) => {
-          this.restaurants = response.data;
-          this.$store.commit("SET_RESTAURANT_LIST", this.restaurants);
+        RestaurantService.getRestaurants(
+          this.location,
+          this.radius,
+          this.categoriesSelected.toString()
+        )
+          .then((response) => {
+            this.restaurants = response.data;
+            this.$store.commit("SET_RESTAURANT_LIST", this.restaurants);
 
-          this.restaurants.sort(function (a, b) {
-            return a.distance - b.distance;
-          });
-          this.restaurants = this.restaurants.filter((restaurant) => {
-            if (this.radius >= restaurant.distance) {
-              return restaurant;
+            this.restaurants.sort(function (a, b) {
+              return a.distance - b.distance;
+            });
+            this.restaurants = this.restaurants.filter((restaurant) => {
+              if (this.radius >= restaurant.distance) {
+                return restaurant;
+              }
+            });
+
+            // this controls loading gif
+            if (this.restaurants.length === 0) {
+              this.noneFound = true;
+              this.isLoading = true;
+            } else {
+              this.updatedLocation = this.location;
+              this.isLoading = false;
+              this.isShowingResults = true;
+            }
+          })
+
+          .catch((error) => {
+            const response = error.response;
+
+            if (response.status === 401 || response.status === 500) {
+              this.noneFound = true;
+              this.errorMsg = "Please enter valid search parameters";
             }
           });
-
-          // this controls loading gif
-          if (this.restaurants.length === 0) {
-            this.noneFound = true;
-            this.isLoading = true;
-          } else {
-            this.updatedLocation = this.location;
-            this.isLoading = false;
-            this.isShowingResults = true;
-          }
-        })
-
-        .catch((error) => {
-          const response = error.response;
-
-          if (response.status === 401 || response.status === 500) {
-            this.noneFound = true;
-            this.errorMsg = "Please enter valid search parameters";
-          }
-        });
-
+      }
       //Display a message if no restaurants are returned
     },
   },
 };
 </script>
 <style scoped>
-.login-search {
-  height: 100%;
+.home-search-container {
+  display: flex;
+  justify-content: center;
+width:100%;
 }
-
-.delete-selection {
-  margin-right: 0.7em;
-}
-.title {
-  margin-top: 1em;
-}
-.headingText {
-  text-align: center;
-  font-weight: 700;
-  font-size: 2em;
-  margin-top: -1em;
-}
-
-.subheading {
-  font-weight: bold;
-  margin-bottom: 2em;
-  padding-right: 1.5em;
-  padding-left: 1.5em;
-  text-align: center;
+.home-search {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .list-item {
   display: flex;
 }
 
-.list-item h1 {
-  font-weight: 600;
-  font-size: 0.8em;
+.list-item {
+  padding-left: 1.5em;
+  font-size: 1.5em;
+  font-weight: 800;
+}
+.body {
+  display: flex;
+  flex-direction: row;
 }
 
-.list-item button {
-  margin-top: -1.3em;
+.left {
+  display: flex;
+  flex-direction: column;
+  padding-left: 3em;
+  margin-top: 5em;
 }
-.open-button {
-  height: 50px;
+
+.middle {
+  margin-top: 2em;
+  display: flex;
+  width: 80vw;
+  flex-direction: column;
+}
+
+/*  Restaurant List */
+
+.loading-gif {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-gif img {
   width: 400px;
-  background-color: #dc6b67;
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-
-  margin-bottom: 2em;
-  font-weight: bold;
-}
-.open-button:hover {
-  background-color: #f7a09d;
-}
-.nav-butt {
-  height: 100px;
-  width: 100px;
-  position: fixed;
-  right: 0;
-  z-index: 3;
+  max-height: 400px;
+  object-fit: contain;
+  align-self: center;
+  margin-bottom: -3em;
 }
 
-.cancel .find-food {
-  width: 90%;
-  margin-left: 1.9em;
-  margin-top: 0em;
-
-  background-color: #1e1e32;
+.restaurant-list .loading-gif {
+  width: 100%;
+  height: 75vh;
 }
 
+.result-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 1em;
+}
+
+/* Restaurant List Ends Here */
+
+/* Side nav starts here  */
 .sidenav {
   height: 88.5vh; /* 100% Full-height */
   width: 0px; /* 0 width - change this with JavaScript */
@@ -460,136 +471,13 @@ export default {
     font-size: 18px;
   }
 }
-
-.isShowingResults {
-  margin-left: 10em;
-  margin-top: -5em;
-}
-.list-item {
-  padding-left: 1.5em;
-  font-size: 1.5em;
-  font-weight: 800;
-}
-.body {
-  display: flex;
-  flex-direction: row;
-}
-
-.left {
-  display: flex;
-  flex-direction: column;
-  padding-left: 3em;
-  border-right: 2px;
-  border-color: black;
-  width: 20vw;
-  margin-top: 5em;
-}
-.middle {
-  margin-top: 2em;
-  display: flex;
-  width: 80vw;
-  flex-direction: column;
-}
-
-section {
-  display: flex;
-}
-
-label {
-  font-weight: bold;
-}
-/* Home search */
-.search-main {
-  width: 30%;
-  align-self: center;
-  margin-top: 3em;
-}
-
-.initial-search {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 80vh;
-  margin-top: 4em;
-}
-/* Home Search Ends Here */
-
-.location-search {
-  display: flex;
-  flex-direction: column;
-}
-
-.search-heading {
-  font-weight: bold;
-  font-size: 1.5em;
-  margin-bottom: 1em;
-}
-
-.loading-text {
-  font-weight: bold;
-  font-size: 1.5em;
-  text-align: center;
-  margin-bottom: -100em;
-}
-
-.radius {
-  margin-top: 1em;
-}
-
-select {
-  width: 100%;
-  height: 40px;
-  border-radius: 3px;
-  font-size: 1em;
-  padding-left: 0.5em;
-  font-weight: 600;
-}
-
-input {
-  width: 100%;
-  height: 40px;
-  border-radius: 3px;
-  padding-left: 0.5em;
-  font-size: 1em;
-  font-weight: 600;
-}
-
-/* Update My Search Button */
-.cat-filter .find-food {
-  margin-bottom: 2em;
-  background-color: #81974e;
-}
-
-.cat-filter .find-food:hover {
-  background-color: #a5c064;
-}
-
-/* Find Food Button */
-.find-food {
-  background-color: #dc6b67;
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-  width: 100%;
-  margin-top: 30px;
-  margin-top: 2em;
-  font-weight: bold;
-}
-
-.find-food:hover {
-  background-color: #f7a09d;
-}
+/* Side nav ends here */
 
 /*  Check boxes start here -----------------------------*/
 
-.container {
+/*  Check boxes start here -----------------------------*/
+
+.c-container {
   display: flex;
   position: relative;
   padding-left: 35px;
@@ -603,7 +491,7 @@ input {
   user-select: none;
 }
 
-.container input {
+.c-container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -624,12 +512,12 @@ input {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.c-container:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.c-container input:checked ~ .checkmark {
   background-color: #dc6b67;
 }
 
@@ -641,12 +529,12 @@ input {
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.c-container input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.c-container .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;
@@ -656,62 +544,5 @@ input {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
-
-.cat-filter {
-  padding-top: 4em;
-  display: inline-block;
-}
-
-.cat-filter p {
-  margin-top: -1.5em;
-  font-weight: 500;
-  margin-bottom: -1em;
-}
-
-/* Checkboxes end here */
-
-/*  Restaurant List */
-
-.loading-gif {
-  display: flex;
-  justify-content: center;
-}
-
-.loading-gif img {
-  width: 400px;
-  max-height: 400px;
-  object-fit: contain;
-  align-self: center;
-  margin-bottom: -3em;
-}
-
-.restaurant-list .loading-gif {
-  width: 100%;
-  height: 75vh;
-}
-.restaurant-list .loading-gif img {
-  padding: 0;
-}
-
-.restaurant-list {
-  display: flex;
-  flex-direction: column;
-  width: 70vw;
-  margin-left: 2em;
-}
-.result-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.card {
-  margin-top: 25px;
-  margin-bottom: 25px;
-  padding: 1em;
-}
-.close-sidenav {
-  margin-left: 24px;
 }
 </style>

@@ -23,7 +23,7 @@
 
 <!-- Restaurant Name -->
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
-        ><h1 class="title">{{ restaurant.name }}</h1>
+        ><h1 class="is-size-3">{{ restaurant.name }}</h1>
       </router-link>
 
 
@@ -41,7 +41,7 @@
 
       <!-- Location/Phone Number -->
       <div class="location-phone">
-        <p v-for="ln in restaurant.location.display_address"
+        <p class="has-text-weight-medium" v-for="ln in restaurant.location.display_address"
           v-bind:key="ln.display_address">
           {{ ln }}
         </p>
@@ -85,8 +85,7 @@
       <span v-if="$route.name !== 'inviteeView'" >
         <span class="call-to-order">
         <a :href="`tel:${restaurant.phone}`">
-
-          <b-button type="is-primary" v-on:click="searchByLocation()">
+          <b-button type="is-primary" >
             <i class="fas fa-phone-alt"></i>
             Call to order</b-button>
         </a>
@@ -97,7 +96,7 @@
          <b-button type="is-primary"
            v-show="!this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">
            <i class="fas fa-plus"></i>
-           Add To Invite List</b-button>
+           Add To Party</b-button>
            </span>
            
     
@@ -225,6 +224,8 @@ export default {
 
 <style scoped>
 
+
+
 h1{
   font-size:2vw;
 }
@@ -232,21 +233,30 @@ h1{
 .zoom {
   display: flex;
   flex-direction: row;
-  width:50vw;
+  width:70%;
+  
   padding: 1em;
   transition: transform 0.5s;
-
-  
 }
+
+.button.is-primary{
+  background-color: #dc6b67;
+  margin-top:1em;
+}
+.button.is-fullwidth{
+   background-color: #dc6b67;
+}
+
 .yelp-image {
   width: 20em;
   height: 20em;
-  object-fit: cover;
+  object-fit:cover;
 }
 
 .left-panel {
   padding: 1vw;
   margin-right:1vw;;
+  width:40%;
 }
 .right-panel {
   padding: 20px 20px 20px 0px;
@@ -290,8 +300,9 @@ h1{
 
 .transactions > button.is-small {
   border: none;
-  font-size: em;
+  font-size: 1em;
   font-weight: bold;
+  margin-top:-.7rem;
 }
 .price {
   font-weight: 550;
