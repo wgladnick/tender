@@ -57,7 +57,7 @@
 
       <!-- Vote Buttons -->
       <!-- Like -->
-      <span class="invite-buttons" v-if="$route.name === 'inviteeView'" v-show="!this.$store.state.currentInvitee.hasVoted">
+      <span class="invite-buttons" v-if="$route.name === 'inviteeView'" v-show="!checkVote">
         <span class="yes-button" v-show="!this.$store.state.currentInvitee.hasVoted">
           <b-button v-on:click="thumbsUp()" type="is-primary" rounded size="is-small" class="m-2" v-show="!hasVoted">
             <i class="far fa-thumbs-up"></i>
@@ -79,6 +79,16 @@
        
        
       </span>
+      <!-- Show how user voted -->
+      <div>
+        <p class="is-size-5" v-show="showVoteStatus">Your vote: 
+      <span v-show="this.vote.thumbs_up">
+        <i class="far fa-thumbs-up has-text-success"></i>
+      </span>
+        <span v-show="this.vote.thumbs_down">
+        <i class="far fa-thumbs-down has-text-danger"></i>
+      </span></p>
+      </div>
 
 
        <!-- Call To Order -->
@@ -168,12 +178,16 @@ export default {
         thumbs_up: false,
         thumbs_down: false,
         inviteId: this.$store.state.currentInvitee.inviteId,
-        uniqueId:this.$store.state.currentInvitee.uniqueId,
+        uniqueId: this.$store.state.currentInvitee.uniqueId,
       }
      
     }
   },
   created() {
+    this.vote.thumbs_up = this.restaurant.inviteeVotes.thumbs_up;
+    this.vote.thumbs_down = this.restaurant.inviteeVotes.thumbs_down;
+
+
     for (let i = 0; i < this.restaurant.transactions.length; i++) {
       this.transactionTypes +=
         this.restaurant.transactions[i].transactions + " ";
@@ -186,18 +200,31 @@ export default {
       }
     }
   },
+computed: {
+    checkVote() {
+      const hasVotedState = this.$store.state.currentInvitee.hasVoted === true;
+      const attending = this.$store.state.currentInvitee.isAttending !== 'Declined';
+      return hasVotedState || !attending;
+    },
+    showVoteStatus() {
+      const voted = this.vote.thumbs_down || this.vote.thumbs_up;
+      const attending = this.$store.state.currentInvitee.isAttending !== 'Declined';
+      return voted && attending;
+
+    }
+  },
 
   methods: { 
     thumbsUp(){
       this.vote.thumbs_up = true;
-      this.vote.thumbs_down= false;
+      this.vote.thumbs_down = false;
       InviteService.voteThumbsUp(this.vote)
       this.hasVoted = true;
     },
 
     thumbsDown(){
-      this.vote.thumbsDown = true;
-      this.vote.thumbsUp = false;
+      this.vote.thumbs_down = true;
+      this.vote.thumbs_up = false;
       InviteService.voteThumbsDown(this.vote);
       this.hasVoted = true;
 
