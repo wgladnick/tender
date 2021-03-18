@@ -1,5 +1,8 @@
 package com.techelevator.services.yelpfusion.models.business;
 
+import com.techelevator.model.invitation.Invitee;
+import com.techelevator.model.invitation.InviteeVotes;
+
 public class Businesses {
 
     private String id;
@@ -18,6 +21,7 @@ public class Businesses {
     private String phone;
     private String display_phone;
     private double distance;
+    private InviteeVotes inviteeVotes;
     private String yelpId;
 
     public Businesses() {
@@ -30,6 +34,7 @@ public class Businesses {
     public void setId(String id) {
         this.id = id;
         setYelpId(id);
+        this.inviteeVotes = new InviteeVotes();
     }
 
     public String getAlias() {
@@ -158,5 +163,13 @@ public class Businesses {
 
     public void setYelpId(String yelpId) {
         this.yelpId = yelpId;
+    }
+
+    public InviteeVotes getInviteeVotes() {
+        return inviteeVotes;
+    }
+
+    public void setInviteeVotes(InviteeVotes inviteeVotes) {
+        this.inviteeVotes = inviteeVotes;
     }
 }

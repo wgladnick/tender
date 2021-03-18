@@ -19,10 +19,12 @@
     "buefy": "^0.9.4",
     "core-js": "^2.6.5",
     "google-fonts-webpack-plugin": "^0.4.4",
+    "stringify": "^5.2.0",
     "vue": "^2.6.12",
     "vue-moment": "^4.1.0",
     "vue-router": "^3.0.3",
     "vue-star-rating": "^1.7.0",
+    "vue-stringify": "^0.1.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

@@ -69,6 +69,7 @@
 
 <script>
 import InviteService from "../services/InviteService";
+
 export default {
   name: "create-dinner",
 
@@ -85,6 +86,7 @@ export default {
       location: "",
       radius: "",
       isError:"",
+      errorMsg:"",
       restaurantChoices: [],
       dinnerInvite: {
         creatorId: "",
@@ -99,23 +101,40 @@ export default {
 
   methods: {
     createInvite() {
+      //Formats reservation date
+      this.dinnerInvite.reservationDate =
+      this.reservationDate + " " + this.reservationTime;
+
+      //Formats deadline date
+      this.dinnerInvite.deadline = this.deadlineDate + " " + this.deadlineTime;
+
+      //validation
       if(this.$store.state.invitation.restaurantChoices.length === 0){
        this.errorMsg = "Don't forget to add your restaurants"
        this.isError = true;
-     }  else if( this.dinnerInvite.invitees.length === 0) {
-       this.errorMsg = "Don't forget to add your guests"
+     } else if( this.dinnerInvite.invitees.length === 0 || Object.keys(this.dinnerInvite.invitees[0]).length === 0 ) {
+       this.errorMsg = "";
+       this.errorMsg = "Don't forget to add your guests";
        this.isError = true;
-       }else {
+       }else if(new Date(this.dinnerInvite.reservationDate) < new Date(this.dinnerInvite.deadline)){
+         this.errorMsg= "";
+         this.errorMsg = "Your voting deadline can't be later than your reservation"
+         this.isError = true;
+       } else {
 
-      this.dinnerInvite.reservationDate =
-      this.reservationDate + " " + this.reservationTime;
-      this.dinnerInvite.deadline = this.deadlineDate + " " + this.deadlineTime;
+      //Clears Eror
+       this.errorMsg="";
+       this.isError = false;
+
+      //sets up Invite
+     
+
       this.dinnerInvite.creatorId = this.$store.state.user.id;
       this.$store.commit("CREATE_INVITATION", this.dinnerInvite);
      
-       this.errorMsg="";
-       this.isError = false;
-      InviteService.sendInvite(this.$store.state.invitation).then ((response) => {
+
+      // Sends invite to API
+        InviteService.sendInvite(this.$store.state.invitation).then ((response) => {
         this.createdInvite = response.data;
         this.$store.commit("SET_CREATED_INVITE", this.createdInvite);
         console.log(this.$store.state.createdInvite);
