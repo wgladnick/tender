@@ -9,10 +9,11 @@
       </div>      
     </section>
     <div class="welcome-message" v-if="!invitee.deadlinePassed && !isLoading">
-      <h2>Hey, {{ invitee.name }}</h2>
-      <p> <strong>  You've been invited out for food! Place your vote on which restaurant to visit </strong><br><br>
-      <p> <span>Voting Deadline: {{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
-      <p> <span>Reservation Date: {{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</span></p>
+      <p class="is-size-2 has-text-weight-semibold">Hey, <span class="is-capitalized">{{ invitee.name }}</span></p>
+      <p class="is-size-3 has-text-weight-semibold">You've been invited out for food! </p>
+      <p class="is-size-3 has-text-weight-semibold">Place your vote on which restaurant to visit </p><br><br>
+      <p> <span class="is-size-3 has-text-weight-semibold">Voting Deadline: </span>{{ invitee.deadline | moment("dddd, MMMM Do YYYY h:mm a") }}</p>
+      <p> <span class="is-size-3 has-text-weight-semibold">Reservation Date: </span>{{ invitee.reservationDate | moment("dddd, MMMM Do YYYY h:mm a") }}</p>
       <div>
       <span v-show="invitee.isAttending === 'Pending'">
         <b-button type="is-primary" rounded size="is-medium" class="m-2"
@@ -29,7 +30,7 @@
         </span>
 
         <span v-show="invitee.isAttending !== 'Pending'">
-          <p>RSVP Status: {{ invitee.isAttending }} </p>
+          <p><span class="is-size-3 has-text-weight-semibold">RSVP Status: </span>{{ invitee.isAttending }} </p>
           <b-button type="is-primary" rounded size="is-medium" class="m-2"
         v-on:click="isAttending('Pending')">
           <i class="fas fa-exchange-alt"></i>
