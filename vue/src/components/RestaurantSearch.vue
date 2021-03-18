@@ -40,7 +40,7 @@ Restaurant Search
       <!-- Side Nave ends here -->
 
       <div class="cancel">
-        <b-button type="is-primary" v-on:click="toggleSideMenu()">
+        <b-button type="is-primary" expanded v-on:click="toggleSideMenu()">
           Cancel</b-button
         >
       </div>
@@ -250,7 +250,7 @@ export default {
 
     this.user = this.$store.state.user;
     this.$store.commit("SET_TOGGLE_STATUS");
-    //this.isMenuOpen = this.$store.state.sideMenuToggle;
+    this.isMenuOpen = this.$store.state.sideMenuToggle;
 
     this.$store.state.invitation.restaurantChoices = [];
   },
@@ -281,7 +281,7 @@ export default {
 
     toggleSideMenu() {
       this.$store.commit("SET_TOGGLE_STATUS");
-      this.isMenuOpen = !this.$store.state.sideMenuToggle;
+      this.isMenuOpen = this.$store.state.sideMenuToggle;
     },
 
     updateList(rest) {
@@ -395,6 +395,9 @@ width:100%;
   width:20%;
 }
 
+.cancel{
+    margin: 1.5em;
+}
 
 /*  Restaurant List */
 
