@@ -39,26 +39,21 @@
         </span>
       </div>
     </div>
-    <div class="right-panel">
-      <div class="finalists">
-        <span class="head">Finalists:</span>
-
-        <div>
-          <span class="head">Total Votes:</span
-          ><span class="total-votes">
-            {{ this.invite.businessDetails.totalThumbsUp }}/{{ this.friends.length }}</span
-          >
-        </div>
-      </div>
+    <span class="head">Finalists:</span>
+    <div class="finalists">
+        
+<restaurant-invite-detail-card class="invite-card" v-for="restaurant in this.invite.businessDetails" v-bind:restaurant="restaurant" v-bind:key="restaurant.id"/>
+        
     </div>
   </main>
 </template>
 
 <script>
 import InviteService from "../services/InviteService";
+import RestaurantInviteDetailCard from "../components/RestaurantInviteDetailCard";
 
 export default {
-  components: {},
+  components: { RestaurantInviteDetailCard },
   name: "invite-detail",
 
   data() {
@@ -89,8 +84,14 @@ export default {
 </script>
 
 <style scoped>
+.finalists {
+    display: flex;
+    flex-wrap: wrap;
+
+}
 .deadline-open {
   background-color: green;
+  color: white;
 }
 .deadline-close {
   background-color: red;
@@ -102,13 +103,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.left-panel {
-  padding: 20px;
-  margin-right: 25px;
-}
-.right-panel {
-  padding-top: 4.5em;
-}
 
 h1 {
   font-size: 2.7vw;
@@ -118,9 +112,7 @@ h1 {
   font-size: 18pt;
   font-weight: bold;
 }
-.card {
-  padding-top: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
+.invite-card {
+    width: 33%
 }
 </style>
