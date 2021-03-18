@@ -9,7 +9,7 @@
       <div class="buttons">
         <b-navbar-item
           tag="router-link"
-          v-if="$route.name !== 'restaurantFinder'"
+          v-if="$route.name !== 'restaurantFinder' && $store.state.token != ''"
           class="navlink"
           v-bind:to="{ name: 'restaurantFinder' }"
           >Home</b-navbar-item
@@ -18,6 +18,7 @@
           tag="router-link"
           class="navlink"
           v-bind:to="{ name: 'profile' }"
+          v-if="$store.state.token != ''"
           >My Invites</b-navbar-item
         >
         <b-navbar-item
@@ -27,6 +28,22 @@
           class="navlink"
         >
           Logout</b-navbar-item
+        >
+         <b-navbar-item
+          tag="router-link"
+          v-bind:to="{ name: 'login' }"
+          v-if="$store.state.token === ''"
+          class="navlink"
+        >
+          Login</b-navbar-item
+        >
+         <b-navbar-item
+          tag="router-link"
+          v-bind:to="{ name: 'register' }"
+          v-if="$store.state.token === ''"
+          class="navlink"
+        >
+          Register</b-navbar-item
         >
       </div>
     </template>
