@@ -1,4 +1,44 @@
 <template>
+<div class="columns">
+  <div class="column">
+    <img class="yelp-image" v-bind:src="restaurant.image_url" />
+  </div>
+  <div class="column">
+  </div>
+  <div class="column">
+     <p>Hours:</p>
+        <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
+          <span  v-for="open in hours.open" v-bind:key="open.day">
+            <span v-if="open.day === 6" :class="{ 'has-text-success': restaurant.day == 6}"
+              >Sunday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 0" :class="{ 'has-text-success': restaurant.day == 0}"
+              >Monday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 1" :class="{ 'has-text-success': restaurant.day == 1}"
+              >Tuesday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 2" :class="{ 'has-text-success': restaurant.day == 2}"
+              >Wednesday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 3" :class="{ 'has-text-success': restaurant.day == 3}"
+              >Thursday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 4" :class="{ 'has-text-success': restaurant.day == 4}"
+              >Friday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+            <span v-if="open.day === 5" :class="{ 'has-text-success': restaurant.day == 5}"
+              >Saturday: {{ open.start }} - {{ open.end }}<br
+            /></span>
+          </span>
+        </p>
+  </div>
+
+
+
+
+
+
   <main>
     <div class="main-div" v-if="!isLoading">
       <div class="left-panel">
