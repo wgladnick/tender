@@ -102,7 +102,7 @@ export default {
       if(this.$store.state.invitation.restaurantChoices.length === 0){
        this.errorMsg = "Don't forget to add your restaurants"
        this.isError = true;
-     }  else if( this.$store.state.invitation.invitees.length === 0) {
+     }  else if( this.dinnerInvite.invitees.length === 0) {
        this.errorMsg = "Don't forget to add your guests"
        this.isError = true;
        }else {
