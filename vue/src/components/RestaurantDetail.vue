@@ -1,32 +1,22 @@
 <template>
-<div>
-<div class="columns">
-  <div class="column">
-    <img class="yelp-image" v-bind:src="restaurant.image_url" />
-  </div>
-  <div class="column">
-<p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
-          <b-button
-            v-bind:type="{
-              'is-danger': !hours.is_open_now,
-              'is-success': hours.is_open_now,
-            }"
-          >
-           
-            <span v-if="!hours.is_open_now">Currently Closed</span>
-            <span v-else>Currently Open</span>
-          </b-button>
-        </p>
-
-  <span class="bold-class">Price: <span class="has-text-success" >{{ restaurant.price }} </span> </span>
-        <span class="detail-cats"
+  <div>
+    <div class="columns">
+      <div class="column">
+        <img class="yelp-image mt-2 ml-2" v-bind:src="restaurant.image_url" />
+      </div>
+      <div class="column">
+        <span
+          class="has-text-weight-medium mb-3"
           v-for="category in this.categories"
           v-bind:key="category"
-          > {{ category }}
+        >
+          {{ category }}
         </span>
         <h1 class="title">{{ restaurant.name }}</h1>
 
-     
+        <span class="has-text-weight-bold"
+          >Price: <span class="has-text-success">{{ restaurant.price }} </span>
+        </span>
         <div class="stars">
           <star-rating
             class="stars"
@@ -36,29 +26,35 @@
             :show-rating="false"
             :star-size="25"
           />
-          <a :href="restaurant.url" target="_blank"> View reviews on <img height="12px" width="12px" src="../assets/yelp.png">Yelp</a>
+          <a
+            class="has-text-weight-semibold"
+            :href="restaurant.url"
+            target="_blank"
+          >
+            View reviews on
+            <img height="12px" width="12px" src="../assets/yelp.png" />Yelp</a
+          >
         </div>
 
+        <div></div>
         <div>
-          
-          
-    
-        </div>
-        <div>
-          <span class="location-number"
+          <span
+            class="has-text-weight-medium"
             v-for="ln in restaurant.location.display_address"
             v-bind:key="ln.display_address"
           >
             {{ ln }}
           </span>
-          <br>
-        </div>
-        
-        <div>
-          <span class="location-number">{{ restaurant.display_phone }} </span>
+          <br />
         </div>
 
-      <div class="transactions has-addons">
+        <div>
+          <span class="has-text-weight-medium"
+            >{{ restaurant.display_phone }}
+          </span>
+        </div>
+
+        <div class="transactions has-addons mt-3 mb-3 mr-3">
           <b-button size="is-small">
             <i
               class="fas fa-check has-text-success"
@@ -93,14 +89,15 @@
             Reservations</b-button
           >
         </div>
- <div class="call-to-action">
-            <a :href="`tel:${restaurant.phone}`">
-              <b-button type="is-primary" rounded size="is-small">
-                <i class="fas fa-phone-alt"></i>
-                Call to order</b-button
-              >
-            </a>
-            <a
+        <div class="call-to-action">
+          <a class="mr-3" :href="`tel:${restaurant.phone}`">
+            <b-button type="is-primary" rounded size="is-small">
+              <i class="fas fa-phone-alt"></i>
+              Call to order</b-button
+            >
+          </a>
+          <a
+            class="m-5"
             :href="`https://www.google.com/maps/dir/${
               this.$store.state.searchDirections
             }/${restaurant.location.display_address
@@ -109,231 +106,73 @@
               .join('+')}/`"
             target="_blank"
           >
-              <b-button rounded size="is-small">
+            <b-button rounded size="is-small">
               <i class="fas fa-route"></i>
-              Get Directions</b-button>
-              </a>
-          </div>
-
-
-
-
-
-
-  </div>
-  <div class="column">
-     <p>Hours:</p>
+              Get Directions</b-button
+            >
+          </a>
+        </div>
+      </div>
+      <div class="column">
+        <p class="has-text-weight-semibold mt-2 mb-1">Hours:</p>
         <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
-          <span  v-for="open in hours.open" v-bind:key="open.day">
-            <span v-if="open.day === 6" :class="{ 'has-text-success': restaurant.day == 6}"
+          <span
+            class="has-text-weight-semibold"
+            v-for="open in hours.open"
+            v-bind:key="open.day"
+          >
+            <span
+              v-if="open.day === 6"
+              :class="{ 'has-text-success': restaurant.day == 6 }"
               >Sunday: {{ open.start }} - {{ open.end }}<br
             /></span>
-            <span v-if="open.day === 0" :class="{ 'has-text-success': restaurant.day == 0}"
+            <span
+              v-if="open.day === 0"
+              :class="{ 'has-text-success': restaurant.day == 0 }"
               >Monday: {{ open.start }} - {{ open.end }}<br
             /></span>
-            <span v-if="open.day === 1" :class="{ 'has-text-success': restaurant.day == 1}"
+            <span
+              v-if="open.day === 1"
+              :class="{ 'has-text-success': restaurant.day == 1 }"
               >Tuesday: {{ open.start }} - {{ open.end }}<br
             /></span>
-            <span v-if="open.day === 2" :class="{ 'has-text-success': restaurant.day == 2}"
+            <span
+              v-if="open.day === 2"
+              :class="{ 'has-text-success': restaurant.day == 2 }"
               >Wednesday: {{ open.start }} - {{ open.end }}<br
             /></span>
-            <span v-if="open.day === 3" :class="{ 'has-text-success': restaurant.day == 3}"
+            <span
+              class="has-text-weight-bold"
+              v-if="open.day === 3"
+              :class="{ 'has-text-success': restaurant.day == 3 }"
               >Thursday: {{ open.start }} - {{ open.end }}<br
             /></span>
-            <span v-if="open.day === 4" :class="{ 'has-text-success': restaurant.day == 4}"
+            <span
+              v-if="open.day === 4"
+              :class="{ 'has-text-success': restaurant.day == 4 }"
               >Friday: {{ open.start }} - {{ open.end }}<br
             /></span>
-            <span v-if="open.day === 5" :class="{ 'has-text-success': restaurant.day == 5}"
+            <span
+              v-if="open.day === 5"
+              :class="{ 'has-text-success': restaurant.day == 5 }"
               >Saturday: {{ open.start }} - {{ open.end }}<br
             /></span>
           </span>
         </p>
-  </div>
-</div>
-
- 
-
-
-
-
-  <main>
-    <div class="main-div" v-if="!isLoading">
-      <div class="left-panel">
-        <img class="yelp-image" v-bind:src="restaurant.image_url" />
-      </div>
-
-
-
-
-
-
-
-
-      <div class="right-panel">
-          <div class="open-sign"> 
-            <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
+        <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
           <b-button
+            class="mt-4"
             v-bind:type="{
               'is-danger': !hours.is_open_now,
               'is-success': hours.is_open_now,
             }"
           >
-           
             <span v-if="!hours.is_open_now">Currently Closed</span>
             <span v-else>Currently Open</span>
           </b-button>
-        </p>
-        </div>
-
-
-
-
-
-
-
-                <span class="bold-class">Price: <span class="has-text-success" >{{ restaurant.price }} </span> </span>
-        <span class="detail-cats"
-          v-for="category in this.categories"
-          v-bind:key="category"
-          > {{ category }}
-        </span>
-        <h1 class="title">{{ restaurant.name }}</h1>
-
-     
-        <div class="stars">
-          <star-rating
-            class="stars"
-            :rating="restaurant.rating"
-            :read-only="true"
-            :increment="0.01"
-            :show-rating="false"
-            :star-size="25"
-          />
-          <a :href="restaurant.url" target="_blank"> View reviews on <img height="12px" width="12px" src="../assets/yelp.png">Yelp</a>
-        </div>
-
-        <div>
-          
-          
-    
-        </div>
-        <div>
-          <span class="location-number"
-            v-for="ln in restaurant.location.display_address"
-            v-bind:key="ln.display_address"
-          >
-            {{ ln }}
-          </span>
-          <br>
-        </div>
-        
-        <div>
-          <span class="location-number">{{ restaurant.display_phone }} </span>
-        </div>
-
-      <div class="transactions">
-          <b-button size="is-small">
-            <i
-              class="fas fa-check has-text-success"
-              v-if="transactionTypes.includes('pickup')"
-            ></i>
-            <i
-              class="fas fa-times has-text-danger"
-              v-if="!transactionTypes.includes('pickup')"
-            ></i>
-            Takeout</b-button
-          >
-          <b-button size="is-small">
-            <i
-              class="fas fa-check has-text-success"
-              v-if="transactionTypes.includes('delivery')"
-            ></i>
-            <i
-              class="fas fa-times has-text-danger"
-              v-if="!transactionTypes.includes('delivery')"
-            ></i>
-            Delivery</b-button
-          >
-          <b-button size="is-small">
-            <i
-              class="fas fa-check has-text-success"
-              v-if="transactionTypes.includes('restaurant_reservation')"
-            ></i>
-            <i
-              class="fas fa-times has-text-danger"
-              v-if="!transactionTypes.includes('restaurant_reservation')"
-            ></i>
-            Reservations</b-button
-          >
-        </div>
- <div class="call-to-action">
-            <a :href="`tel:${restaurant.phone}`">
-              <b-button type="is-primary" rounded size="is-small">
-                <i class="fas fa-phone-alt"></i>
-                Call to order</b-button
-              >
-            </a>
-            <a
-            :href="`https://www.google.com/maps/dir/${
-              this.$store.state.searchDirections
-            }/${restaurant.location.display_address
-              .toString()
-              .split(' ')
-              .join('+')}/`"
-            target="_blank"
-          >
-              <b-button rounded size="is-small">
-              <i class="fas fa-route"></i>
-              Get Directions</b-button>
-              </a>
-          </div>
-        <br />
-      
-        <br />
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <div class="far-right-panel">
-        <p>Hours:</p>
-        <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
-          <span  v-for="open in hours.open" v-bind:key="open.day">
-            <span v-if="open.day === 6" :class="{ 'has-text-success': restaurant.day == 6}"
-              >Sunday: {{ open.start }} - {{ open.end }}<br
-            /></span>
-            <span v-if="open.day === 0" :class="{ 'has-text-success': restaurant.day == 0}"
-              >Monday: {{ open.start }} - {{ open.end }}<br
-            /></span>
-            <span v-if="open.day === 1" :class="{ 'has-text-success': restaurant.day == 1}"
-              >Tuesday: {{ open.start }} - {{ open.end }}<br
-            /></span>
-            <span v-if="open.day === 2" :class="{ 'has-text-success': restaurant.day == 2}"
-              >Wednesday: {{ open.start }} - {{ open.end }}<br
-            /></span>
-            <span v-if="open.day === 3" :class="{ 'has-text-success': restaurant.day == 3}"
-              >Thursday: {{ open.start }} - {{ open.end }}<br
-            /></span>
-            <span v-if="open.day === 4" :class="{ 'has-text-success': restaurant.day == 4}"
-              >Friday: {{ open.start }} - {{ open.end }}<br
-            /></span>
-            <span v-if="open.day === 5" :class="{ 'has-text-success': restaurant.day == 5}"
-              >Saturday: {{ open.start }} - {{ open.end }}<br
-            /></span>
-          </span>
         </p>
       </div>
     </div>
-  </main>
   </div>
 </template>
 
@@ -343,7 +182,7 @@ import StarRating from "vue-star-rating";
 
 export default {
   name: "restaurant-detail",
-  props:["isInitialSearch"],
+  props: ["isInitialSearch"],
   components: {
     StarRating,
   },
@@ -354,11 +193,10 @@ export default {
       directionsAddress: [],
       transactionTypes: "",
       categories: [],
-      category: ''
+      category: "",
     };
   },
   created() {
-
     RestaurantService.getTheRestaurant(this.$route.params.id).then(
       (response) => {
         this.restaurant = response.data;
@@ -372,7 +210,7 @@ export default {
           this.categories.push(this.restaurant.categories[j].title);
           if (j < this.restaurant.categories.length - 1) {
             this.categories[j] += " | ";
-          } 
+          }
         }
       }
     );
@@ -381,6 +219,10 @@ export default {
 </script>
 
 <style scoped>
+.button.is-small {
+  margin-right: 1rem;
+}
+
 /*
 .location-number{
   font-weight:500;
