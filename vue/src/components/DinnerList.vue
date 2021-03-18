@@ -1,33 +1,26 @@
 <template>
-  <div>
+  <article class="tile is-child notification has-background-white">
+    <p class="title">Invite History</p>
+    <div class="content">
+      <!-- Content -->
 
-    <section class="card">
-     
-      <h1 class="is-size-3 has-text-weight-semibold">Invitation History</h1>
-    </section>
-   
-      
+      <div>
+        <div class="loading-gif" v-if="this.isLoading">
+          <p class="is-size-3 has-text-weight-semibold">Loading...</p>
+          <img src="../assets/loading.gif" />
+        </div>
 
-     
-      <div class="loading-gif" v-if="this.isLoading">
-      <p class="is-size-3 has-text-weight-semibold">Loading...</p>
-      <img src="../assets/loading.gif" />
-      </div> 
-
-  
-
-
-    <div v-if="!this.isLoading">
-      <scheduled-dinner
-        v-for="dinner in dinners"
-        v-bind:key="dinner.id"
-        v-bind:dinner="dinner"
-        class="card"
-      />
+        <div v-if="!this.isLoading">
+          <scheduled-dinner
+            v-for="dinner in dinners"
+            v-bind:key="dinner.id"
+            v-bind:dinner="dinner"
+            class="my-3"
+          />
+        </div>
+      </div>
     </div>
-
-
-  </div>
+  </article>
 </template>
 
 <script>
@@ -46,10 +39,12 @@ export default {
     };
   },
   created() {
-    InviteService.getInviteByUserId(this.$store.state.user.id).then((response) => {
-      this.dinners = response.data;
-      this.isLoading = false;
-    });
+    InviteService.getInviteByUserId(this.$store.state.user.id).then(
+      (response) => {
+        this.dinners = response.data;
+        this.isLoading = false;
+      }
+    );
   },
 };
 </script>
@@ -57,25 +52,15 @@ export default {
 <style scoped>
 .loading-gif {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   height: 80vh;
-  width:fit-content;
+  width: fit-content;
 }
 
 .loading-gif img {
   width: 400px;
   height: 400px;
   object-fit: contain;
-  text-align:center;
-  
-}
-
-
-.card {
-  width: 80%;
-  
-  margin-bottom: 10px;
-  padding:15px;
-
+  text-align: center;
 }
 </style>

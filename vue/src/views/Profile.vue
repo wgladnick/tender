@@ -1,12 +1,15 @@
 <template>
-  <div class="main">
-    <div class="left">
+
+  <div class="tile is-ancestor mx-2 my-2">
+    <div class="tile is-parent is-3">
       <user-profile />
     </div>
-    <div class="right">
+
+    <div class="tile is-parent is-variable">
       <dinner-list />
     </div>
   </div>
+
 </template>
 
 <script>
@@ -25,20 +28,4 @@ export default {
 
 
 <style scoped>
-.main {
-  display: flex;
-  height: 100%;
-  width: 100vw;
-  justify-content: space-around;
-  align-items:center;
-  margin-left: 6vw;
-}
-
-.right {
-  width: 60vw;
-}
-
-.left {
-  width: 40vw;
-}
 </style>

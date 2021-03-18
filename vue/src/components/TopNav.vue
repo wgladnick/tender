@@ -29,6 +29,7 @@
         >
           Logout</b-navbar-item
         >
+        <!-- Show for invitee page if user logged out -->
          <b-navbar-item
           tag="router-link"
           v-bind:to="{ name: 'login' }"
