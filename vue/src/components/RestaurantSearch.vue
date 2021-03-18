@@ -128,7 +128,6 @@ Restaurant Search
         <br />
 
         <b-select placeholder="Enter a radius" v-model="radius" expanded>
-          <option>Enter a radius</option>
           <option value="8050">5 miles</option>
           <option value="16100">10 miles</option>
           <option value="24200">15 miles</option>
