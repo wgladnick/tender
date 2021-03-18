@@ -1,13 +1,17 @@
 <template>
   <span class="zoom">
-
+<!-- Restaurant Card Image -->
     <div class="left-panel">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
       /></router-link>
     </div>
+<!-- Restaurant Card Image Ends -->
+
+<!-- Restaurant Card Information -->
     <div class="right-panel">
-      <div class="categories">
+      
+      <!-- Categories -->
         <span
           class="categories-tag"
           v-for="category in this.categories"
@@ -15,10 +19,15 @@
         >
           {{ category }}
         </span>
-      </div>
+
+
+<!-- Restaurant Name -->
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><h1 class="title">{{ restaurant.name }}</h1>
       </router-link>
+
+
+<!-- Stars -->
       <div class="star-rating">
         <star-rating
           :rating="restaurant.rating"
@@ -29,22 +38,20 @@
           :star-size="25"
         />
       </div>
-      <div class="location-phone">
-        <span
-          v-for="ln in restaurant.location.display_address"
-          v-bind:key="ln.display_address"
-        >
-          {{ ln }}
-        </span>
 
-        <br />
-        <span>{{ restaurant.display_phone }} </span>
+      <!-- Location/Phone Number -->
+      <div class="location-phone">
+        <p v-for="ln in restaurant.location.display_address"
+          v-bind:key="ln.display_address">
+          {{ ln }}
+        </p>
+        
+        <p>{{ restaurant.display_phone }} </p>
 
         <p class="price">
           Price:
           <span class="has-text-success has-text-weight-bold">{{
-            restaurant.price
-          }}</span>
+            restaurant.price}}</span>
         </p>
       </div>
 
@@ -75,26 +82,25 @@
 
 
        <!-- Call To Order -->
-      <span v-if="$route.name !== 'inviteeView'" class="action-buttons">
+      <span v-if="$route.name !== 'inviteeView'" >
         <span class="call-to-order">
         <a :href="`tel:${restaurant.phone}`">
-          <b-button type="is-primary" rounded size="is-small">
+
+          <b-button type="is-primary" v-on:click="searchByLocation()">
             <i class="fas fa-phone-alt"></i>
-            Call to order</b-button
-          >
+            Call to order</b-button>
         </a>
         </span>
 
         <!-- Add to List -->
-        <span class ="add-to-list">
-         <b-button type="is-primary" rounded size="is-small"
+      
+         <b-button type="is-primary"
            v-show="!this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">
            <i class="fas fa-plus"></i>
            Add To Invite List</b-button>
            </span>
            
-       
-      </span>
+    
 
       <!-- Delivery/ TakeOut Tags -->
       <div v-if="$route.name !== 'inviteeView'" class="transactions">
@@ -230,17 +236,17 @@ h1{
   padding: 1em;
   transition: transform 0.5s;
 
-  margin: 0 auto;
+  
 }
 .yelp-image {
-  max-width: 18vw;
-  height: 18vw;
+  width: 20em;
+  height: 20em;
   object-fit: cover;
 }
 
 .left-panel {
-  padding: 20px;
-  margin-right: 35px;
+  padding: 1vw;
+  margin-right:1vw;;
 }
 .right-panel {
   padding: 20px 20px 20px 0px;
@@ -253,9 +259,7 @@ h1{
 
 
 }
-.button.is-primary {
-  background-color: #dc6b67;
-}
+
 
 
 .nah-button .button.is-rounded {
@@ -272,9 +276,6 @@ h1{
   background-color: #9cbd4f;
 }
 
-.call-to-order .button.is-rounded:hover {
-  background-color: #f1837f;
-}
 .add-to-list .button.button.is-rounded:hover {
   background-color: #9dbd52;
 }
@@ -284,14 +285,9 @@ h1{
 .invite-buttons .button.is-rounded {
   width: 7em;
 }
-.button.is-rounded {
-  border-radius: 290486px;
-  padding-left: calc(1em + 0.25em);
-  margin-right: 10px;
-  padding-right: calc(1em + 0.25em);
-  font-size: 1em;
-  width: 10vw;
-}
+
+
+
 .transactions > button.is-small {
   border: none;
   font-size: em;
@@ -306,9 +302,7 @@ h1{
   width: 0.2em;
 }
 
-.location-phone {
-  padding-top: 1em;
-}
+
 
 .categories {
   padding: 10px 0px 0px 0px;
