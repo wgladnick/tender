@@ -1,16 +1,18 @@
 <template>
-  <span class="tile is-ancestor">
+  <span>
     <!-- Restaurant Card Image -->
-    <div class="tile is-parent is-horizontal box">
-      <div class="tile is-child">
+    <div class="tile is-child is-vertical box">
+      <div class="content">
+        <div class="media-content pb-6">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
-        ><img :src="restaurant.image_url" class="yelp-image"
-      /></router-link>
+        ><figure class="image is-128x128"><img class="is-rounded" :src="restaurant.image_url"
+      /></figure></router-link>
+        </div>
     </div>
     <!-- Restaurant Card Image Ends -->
 
     <!-- Restaurant Card Information -->
-    <div class="right-panel">
+    <div class="tile is-child">
       <!-- Categories -->
       <span
         class="categories-tag"
@@ -46,13 +48,13 @@
       <progress
         class="progress is-success"
         :value="restaurant.totalThumbsUp"
-        :max="restaurant.invitees"
+        :max="restaurant.totalThumbsUp + restaurant.totalThumbsDown"
       >
       </progress>
       <progress
         class="progress is-danger"
         :value="restaurant.totalThumbsDown"
-        :max="restaurant.invitees"
+        :max="restaurant.totalThumbsUp + restaurant.totalThumbsDown"
       >
       </progress>
     </div>
@@ -94,7 +96,7 @@ export default {
 };
 </script>
 <style scoped>
-.zoom {
+/*.zoom {
   display: flex;
   flex-direction: row;
   padding: 1em;
@@ -105,7 +107,7 @@ export default {
   height: 300px;
   object-fit: cover;
 }
-
+*/
 .left-panel {
   margin-right: 1vw;
   width: 50%;
