@@ -1,45 +1,42 @@
 <template>
-  <main class="body">
-    
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-          </figure>
-        </div>
-        <div class="card-content">
-          <div class="media">
-            
-            <div class="media-content pb-6">
-              <p class="title is-size-3">{{ this.user.firstName }} {{ this.user.lastName }}</p>
-              <p class="subtitle is-6"> @{{ this.user.username }}</p>
-            </div>
-          </div>
-
-          <div >
-
-            <div class="content">
-              <span class="details-header is-size-5"> Location <br /></span>
-              <span>
-              {{ this.user.userDetails.city }}, {{ this.user.userDetails.state }}
-              </span>
-            </div> 
-
-            <div class="content">
-              <span class="details-header is-size-5">Food favs <br /></span>
-              <span>
-                {{ this.user.userDetails.searchCategories }}
-              </span>
-            </div>
-
-            <router-link :to="{ name: 'editProfile' }">
-              <b-button class="btn" type="is-info" size="is-small">Edit My Profile</b-button>
-            </router-link>
-            
-            <br>
-          </div>
+  <main>  
+   <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content pb-6">
+          <p class="title is-size-3">{{ this.user.firstName }} {{ this.user.lastName }}</p>
+          <p class="subtitle is-6"> @{{ this.user.username }}</p>
         </div>
       </div>
+
+      <div>
+        <div class="content">
+          <span class="details-header is-size-5"> Location <br /></span>
+          <span>
+            {{ this.user.userDetails.city }}, {{ this.user.userDetails.state }}
+          </span>
+        </div> 
+
+        <div class="content">
+          <span class="details-header is-size-5">Food favs <br /></span>
+          <span>
+            {{ this.user.userDetails.searchCategories }}
+          </span>
+        </div>
+
+        <router-link :to="{ name: 'editProfile' }">
+          <b-button class="btn" type="is-info" size="is-small">Edit My Profile</b-button>
+        </router-link>
+            
+        <br>
+      </div>
+    </div>
+   </div>
 
 
         <!-- <h1 class="is-size-3 has-text-weight-semibold">
