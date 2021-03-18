@@ -59,11 +59,11 @@
             Create Invite</b-button>
 </span>
             
-      </div>
+    
          
 
            
-          </span>
+        
         </div>
       </div>
     </div>
