@@ -1,7 +1,8 @@
 <template>
-  <span class="zoom">
+  <span class="tile is-ancestor">
     <!-- Restaurant Card Image -->
-    <div class="left-panel">
+    <div class="tile is-parent is-horizontal box">
+      <div class="tile is-child">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
       /></router-link>
@@ -41,20 +42,20 @@
           restaurant.price
         }}</span>
       </p>
+      <p>Voting Progress</p>
       <progress
         class="progress is-success"
         :value="restaurant.totalThumbsUp"
         :max="restaurant.invitees"
       >
-        Yay
       </progress>
       <progress
         class="progress is-danger"
         :value="restaurant.totalThumbsDown"
-        :max="restaurant.invitees.length"
+        :max="restaurant.invitees"
       >
-        Nay
       </progress>
+    </div>
     </div>
   </span>
 </template>

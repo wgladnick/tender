@@ -1,13 +1,13 @@
 <template>
   <main class="tile is-ancestor">
-    <div class="tile is-3 is-vertical is-parent box">
+    <div class="tile is-3  is-parent box">
       <div class="loading-gif" v-if="isLoading">
         <img src="../assets/loading.gif" />
       </div>
-      <div class="tile is-child box">
+      <div class="tile is-child is-vertical">
           <h1 class="title">{{ this.invite.inviteName }}</h1>
-          <div class="tile is-child box">
-          <span class="head">Voting Deadline:</span
+          <div class="tile is-child">
+          <h2 class="title is-size-5">Voting Deadline:</h2
           ><span> {{ this.invite.deadline }}</span>
           </div>
       
@@ -15,7 +15,7 @@
               label="Voting Open"
               placeholder="Voting Open"
               v-show="!this.invite.deadlinePassed"
-              class="button is-success is-rounded "
+              class="button is-success is-rounded"
             />
             <b-button
               label="Voting Closed"
@@ -23,25 +23,25 @@
               v-show="this.invite.deadlinePassed"
               class="button is-danger is-rounded"
             />
-          <div class="tile is-child box">
-        <span class="head">Reservation Date and Time:</span
+          
+        <h2 class="title is-size-5">Reservation Date and Time:</h2
         ><span> {{ this.invite.reservationDate }}</span>
-      </div>
-      <div class="tile is-child box">
-        <span class="head">Participants:</span
+      
+      
+        <h2 class="title is-size-5">Participants:</h2
         ><span v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
           {{ invitee }}
         </span>
-      </div>
+      
       </div>
 
       
     </div>
     
-    <div class="tile is-vertical is-parent box">
+    <div class="tile is-vertical is-parent">
         <div class="is-child box"><span class="title">Finalists</span></div>
         <div class="is-child box">
-<restaurant-invite-detail-card class="is-child box" v-for="restaurant in this.invite.businessDetails" v-bind:restaurant="restaurant" v-bind:key="restaurant.id"/>
+<restaurant-invite-detail-card class="is-child" v-for="restaurant in this.invite.businessDetails" v-bind:restaurant="restaurant" v-bind:key="restaurant.id"/>
         </div>
     </div>
   </main>
