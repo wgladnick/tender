@@ -97,10 +97,13 @@ export default {
       businessDetails: [],
       currentTime: '',
       deadlinePassed: '',
-      minutesGranularity: 15,
-            hoursGranularity: 1,
-            time: '',
-    };
+      undoVote: {
+        inviteId: 1,
+        yelpId: "",
+        uniqueId: "",
+      },
+
+    }
   },
   created() {
     InviteService.getInvitee(this.$route.params.uniqueId).then((response) => {
@@ -114,6 +117,8 @@ export default {
       this.invitee.businessDetails = null;
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
       this.isLoading = false;
+      this.undoVote.uniqueId = this.invitee.uniqueId;
+      this.undoVote.inviteId = this.invitee.inviteId;
 
     });
   },
@@ -123,6 +128,9 @@ export default {
       this.invitee.isAttending = status;
       this.$store.commit("SET_CURRENT_INVITEE", this.invitee);
       InviteService.updateInvitee(this.invitee);
+      if (status === 'Declined') {
+        InviteService.undoAllVotes(this.undoVote);
+      }
     },
     hasVoted(status) {
       this.invitee.hasVoted = status;

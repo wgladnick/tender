@@ -79,7 +79,15 @@
        
        
       </span>
-
+      <div>
+        <p class="is-size-5" v-show="this.vote.thumbs_down || this.vote.thumbs_up">Vote: 
+      <span v-show="this.vote.thumbs_up">
+        <i class="far fa-thumbs-up has-text-success"></i>
+      </span>
+        <span v-show="this.vote.thumbs_down">
+        <i class="far fa-thumbs-down has-text-danger"></i>
+      </span></p>
+      </div>
 
        <!-- Call To Order -->
       <span v-if="$route.name !== 'inviteeView'" >
@@ -176,6 +184,9 @@ export default {
     }
   },
   created() {
+
+    this.vote.thumbs_up = this.restaurant.inviteeVotes.thumbs_up;
+    this.vote.thumbs_down = this.restaurant.inviteeVotes.thumbs_down;
     for (let i = 0; i < this.restaurant.transactions.length; i++) {
       this.transactionTypes +=
         this.restaurant.transactions[i].transactions + " ";
@@ -207,8 +218,8 @@ export default {
     },
 
     thumbsDown(){
-      this.vote.thumbsDown = true;
-      this.vote.thumbsUp = false;
+      this.vote.thumbs_down = true;
+      this.vote.thumbs_up = false;
       InviteService.voteThumbsDown(this.vote);
       this.hasVoted = true;
 
