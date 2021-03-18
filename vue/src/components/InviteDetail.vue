@@ -9,16 +9,18 @@
           <h1 class="invite-name">{{ this.invite.inviteName }}</h1>
         </div>
         <div class="deadline">
-          <span class="deadline-head">Voting Deadline:</span
+          <span class="head">Voting Deadline:</span
           ><span> {{ this.invite.deadline }}</span>
+          <div class="deadline-passed">
+          <b-button label="Voting Open" placeholder="Voting Open" v-show="!this.invite.deadlinePassed" class="deadline-open"
+            />
+          <b-button label="Voting Closed" placeholder="Voting Closed" v-show="this.invite.deadlinePassed" class="deadline-close"
+            />
+          </div>
         </div>
-        <div class="deadline-passed">
-          <b-button v-show="!this.invite.deadlinePassed" class="deadline-open"
-            >Voting Open</b-button
-          >
-          <b-button v-show="this.invite.deadlinePassed" class="deadline-close"
-            >Voting Closed</b-button
-          >
+      </div>
+    
+        
           <div class="reservation-date">
             <span class="head">Reservation Date and Time:</span
             ><span> {{ this.invite.reservationDate }}</span>
