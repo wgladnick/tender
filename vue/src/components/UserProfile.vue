@@ -17,21 +17,18 @@
             {{ this.user.userDetails.city }}, {{ this.user.userDetails.state }}
           </span>
         </div> 
-
          <div class="content">
           <span class="details-header is-size-5">Food favs <br /></span>
           <span>
             {{ this.user.userDetails.searchCategories }}
           </span>
         </div>
-
         <router-link :to="{ name: 'editProfile' }">
           <b-button class="btn" type="is-info" size="is-small">Edit My Profile</b-button>
         </router-link>
       </div>
     </article>
 </template>
-
 <script>
 export default {
   name: "user-profile",
@@ -46,7 +43,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .body {
   display: flex;
@@ -54,18 +50,15 @@ export default {
   justify-content: center;
   align-items: flex-start;
 }
-
 .card {
   width: 70%;
   margin-bottom: 25px;
   padding: 50px;
   justify-content: left;
 }
-
 .details-header {
   font-weight: 500;
 }
-
 .btn {
   background-color: #dc6b67;
   text-align: center;
@@ -75,7 +68,6 @@ export default {
   width: 30%;
   display: inline-block;
 }
-
 .btn:hover {
   background-color: #f7a09d;
 }
