@@ -1,11 +1,13 @@
 <template>
 <section>
   <main class="tile is-ancestor">
-    <div class="tile is-3 is-child">
+    <div class="tile is-parent is-3 is-vertical">
+    
       <div class="loading-gif" v-if="isLoading">
         <img src="../assets/loading.gif" />
       </div>
-      <div class="tile is-child is-vertical">
+      <div class="tile is-child">
+      <div class="tile is-child">
         <h1 class="title box">{{ this.invite.inviteName }}</h1>
         <div class="tile is-child box">
           <h2 class="title is-size-5">Reservation Date and Time:</h2>
@@ -36,17 +38,18 @@
         </div>
       </div>
     </div>
+    </div>
 <b-collapse
-      class="tile is-7 is-vertical"
+      class="tile is-parent is-10"
       animation="slide"
       :open.sync="isOpen"
       aria-id="contentIdForA11y3"
     >
       <template #trigger="props">
         <div
-          class="tile is-child box is-12"
+          class="tile is-child box is-12 is-vertical"
         >
-          <p class="title is-child">Finalists</p>
+          <p class="title is-child has-text-centered">Finalists</p>
           <a class="card-header-icon">
             <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
           </a>
@@ -54,7 +57,7 @@
       </template>
   
     <div class="tile is-vertical is-parent">
-      <div class="is-child box">
+      <div class="is-child">
         <restaurant-invite-detail-card
           class="is-child"
           v-for="restaurant in this.businessDetails"
