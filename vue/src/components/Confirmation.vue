@@ -1,61 +1,78 @@
 <template>
-  <div class="card">
-    <h1>Yay! Your invitation is all set. Here is your confirmation:</h1>
-    <br />
-    <h2>{{ invitation.inviteName }}</h2>
-    <br />
-    <h3>Reservation Date:</h3>
-    <p>
-      {{ invitation.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a") }}
-    </p>
-    <br />
-
-    <h3>Voting Deadline</h3>
-    <p>{{ invitation.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</p>
-    <br /><br />
-    <h3>Friends List</h3>
-    <p>
-      Send each friend on your list their unique voting link to submit their
-      restaurant vote
-    </p>
-    <br />
-    <span v-for="invitee in invitation.invitees" v-bind:key="invitee.uniqueId">
-      <div class="">
-        <p>Invite Link for {{ invitee.name }}</p>
+  <div>
+    <div class="container">
+      <div class="notification is-primary">
+        <h1>Yay! Your invitation is all set. Here is your confirmation:</h1>
+        <h2>{{ invitation.inviteName }}</h2>
       </div>
-      <div class="field is-grouped">
-        <p class="control is-expanded">
-          <input
-            :id="invitee.uniqueId"
-            class="input"
-            type="text"
-            :value="'https://www.tenderinvite.com/invite/' + invitee.uniqueId"
-            readonly
-          />
+    </div>
+    <div class="container">
+      <div class="notification is-primary">
+        <h3>Reservation Date:</h3>
+        <p>
+          {{
+            invitation.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a")
+          }}
         </p>
-        <p class="control">
-          <button
-            class="button"
-            @click.stop.prevent="copyUrl(invitee.uniqueId)"
-          >
-            <span class="icon mr-1"> <i class="far fa-copy"></i> </span>Copy
-          </button>
+        <h3>Voting Deadline</h3>
+        <p>{{ invitation.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="notification is-primary">
+        <h3>Friends List</h3>
+        <p>
+          Send each friend on your list their unique voting link to submit their
+          restaurant vote
         </p>
+        <span
+          v-for="invitee in invitation.invitees"
+          v-bind:key="invitee.uniqueId"
+        >
+          <div class="">
+            <p>Invite Link for {{ invitee.name }}</p>
+          </div>
+          <div class="field is-grouped">
+            <p class="control is-expanded">
+              <input
+                :id="invitee.uniqueId"
+                class="input"
+                type="text"
+                :value="
+                  'https://www.tenderinvite.com/invite/' + invitee.uniqueId
+                "
+                readonly
+              />
+            </p>
+            <p class="control">
+              <button
+                class="button"
+                @click.stop.prevent="copyUrl(invitee.uniqueId)"
+              >
+                <span class="icon mr-1"> <i class="far fa-copy"></i> </span>Copy
+              </button>
+            </p>
+          </div>
+        </span>
       </div>
-
-      <br />
-    </span>
-    <p>Restaurant Choices</p>
-    <div
-      class="columns"
-      v-for="restaurant in invitation.businessDetails"
-      v-bind:key="restaurant.yelpId"
-    >
-      <div class="column">
-        <img :src="restaurant.image_url" />
-      </div>
-      <div class="column">
-        {{ restaurant.name }}
+    </div>
+    <div class="container">
+      <div class="notification is-primary">
+        <p>Restaurant Choices</p>
+        <div
+          class="columns"
+          v-for="restaurant in invitation.businessDetails"
+          v-bind:key="restaurant.yelpId"
+        >
+          <div class="column">
+            <figure class="image is-1by1">
+              <img :src="restaurant.image_url" />
+            </figure>
+          </div>
+          <div class="column">
+            {{ restaurant.name }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -78,7 +95,7 @@ export default {
   methods: {
     copyUrl(uniqueId) {
       const idToCopy = "#" + uniqueId;
-      var copyText = document.querySelector("#" + uniqueId);
+      var copyText = document.querySelector(idToCopy);
       copyText.select();
       document.execCommand("copy");
     },

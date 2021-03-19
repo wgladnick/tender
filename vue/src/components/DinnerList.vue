@@ -1,6 +1,6 @@
 <template>
   <article class="tile is-child notification has-background-white">
-    <p class="title">Invite History</p>
+    <p class="title has-text-centered">Invite History</p>
     <div>
       <!-- Content -->
 

@@ -1,84 +1,51 @@
 <template>
   <section>
-      <b-collapse
+    <b-collapse
       class="card"
       animation="slide"
       :open.sync="isOpen"
       aria-id="contentIdForA11y3"
     >
       <template #trigger="props">
-          <p class="card-header is-size-4 is-vcentered" >{{ dinner.inviteName }}</p>
-          <a>
-            <b-icon :icon="props.open ? 'menu-down' : 'menu-up'"> </b-icon>
-          </a>
-        
+        <div>
+          <div
+            class="card-header"
+            role="button"
+            aria-controls="contentIdForA11y3"
+          >
+            <p class="card-header-title is-size-5 has-text-weight-medium">
+              {{ dinner.inviteName }}
+            </p>
+          </div>
+        </div>
       </template>
 
       <div class="card-content">
-        <div class="content">
-          <div class="columns">
-            <div class="column is-three-quarters">
-              <span class="has-text-weight-semibold">When: </span
-              >{{
-                dinner.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a")
-              }}
-            </div>
-            <div
-              class="column has-text-left-mobile has-text-right-tablet is-one-quarter is-desktop"
-            >
-              <b-button
-                label="Voting Open"
-                placeholder="Voting Open"
-                v-show="!this.dinner.deadlinePassed"
-                class="is-success is-small"
-              />
-              <b-button
-                label="Voting Closed"
-                placeholder="Voting Closed"
-                v-show="this.dinner.deadlinePassed"
-                class="is-danger is-small"
-              />
-            </div>
-
-            <div class="column is-full">
-              <p class="has-text-weight-semibold">
-                Where:
-                <span
-                  class="has-text-weight-normal"
-                  v-for="rst in this.restaurants"
-                  v-bind:key="rst.name"
-                >
-                  {{ rst }}
-                </span>
-              </p>
-            </div>
-
-            <div class="column is-full">
-              <p class="has-text-weight-semibold">
-                Friends:
-                <span
-                  class="has-text-weight-normal"
-                  v-for="invitee in this.friends"
-                  v-bind:key="invitee.uniqueId"
-                >
-                  {{ invitee }}
-                </span>
-              </p>
-            </div>
-
-            <div class="column is-full">
-              <p class="has-text-weight-semibold">
-                Friends:
-                <span
-                  class="has-text-weight-normal"
-                  v-for="invitee in this.friends"
-                  v-bind:key="invitee.uniqueId"
-                >
-                  {{ invitee }}
-                </span>
-              </p>
-            </div>
+        <div>
+          <div>
+            <span class="has-text-weight-semibold">When: </span
+            >{{ dinner.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a") }}
+            <span>
+          
+          
+            <b-button
+              label="Voting Open"
+              placeholder="Voting Open"
+              v-show="!this.dinner.deadlinePassed"
+              class="is-success is-small is-rounded my-0"
+            />
+            <b-button
+              label="Voting Closed"
+              placeholder="Voting Closed"
+              v-show="this.dinner.deadlinePassed"
+              class="is-danger is-small is-rounded my-0"
+            />
+          
+        </span>
           </div>
+        </div>
+        <br />
+        <div>
           <p class="has-text-weight-semibold">
             Where:
             <span
@@ -89,7 +56,9 @@
               {{ rst }}
             </span>
           </p>
-
+        </div>
+        <br />
+        <div>
           <p class="has-text-weight-semibold">
             Friends:
             <span
@@ -100,16 +69,17 @@
               {{ invitee }}
             </span>
           </p>
-
-          <br />
+        </div>
+        <br />
+        <span>
           <router-link
             :to="{ name: 'inviteDetailsPage', params: { id: dinner.inviteId } }"
           >
-            <b-button class="btn" type="is-info" size="is-small"
+            <b-button class="btn is-rounded" type="is-info" size="is-small" 
               >View Details</b-button
             >
           </router-link>
-        </div>
+        </span>
       </div>
     </b-collapse>
   </section>
@@ -262,14 +232,17 @@ export default {
 </script>
 
 <style scoped>
-
-.card-header:hover {
+.card-header-title:hover {
   color: #dc6b67;
 }
 
 .btn {
   background-color: #dc6b67;
-  border-radius: 5px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+  display: inline-block;
 }
 
 .btn:hover {
