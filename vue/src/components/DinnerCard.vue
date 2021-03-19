@@ -1,82 +1,97 @@
  <template>
   <section>
-    <main>
-    <div class="input-fields">
-
-          <div class="box has-text-centered">
-        <h1 class="is-size-3-desktop has-text-weight-semibold">Create My Invite</h1>
-        <p class="is-size-5-desktop">
-          Select your restaurant choices to put to a vote, add some guests and
-          let's have a party!
-        </p><br>
-        </div>
-        
-      <span v-if="isError">{{errorMsg}}</span>
-
-       <b-field label="What's The Occasion">
-            <b-input v-model="dinnerInvite.inviteName"></b-input>
-        </b-field>
-     
-
-      
-       <label for="reservation">Reservation Date</label>
-      <input label=" Reservation Date" type="date" v-model="reservationDate" />
-      <input type="time" v-model="reservationTime" /><br>
-
-      
-        <label for="deadline">Voting Deadline</label>
-      <input id="deadline" type="date" v-model="deadlineDate" />
-      <input class="date" step="900" type="time" v-model="deadlineTime" /><br>
-
-      <div id="email-container">
-        <div>
-                
-          <b-field
-            v-for="(invitee, i) in dinnerInvite.invitees"
-            :key="i"
-            class="invitee-fields"
-            id="invitee"
-            v-model="dinnerInvite.invitees"
-            label="Who's invited?"
-          >
-          
-           <button @click="remove(i)" class="delete" id="delete-invitee" />
-            <b-input
-              id="name"
-              type="text"
-              v-model="invitee.name"
-              placeholder="Enter friend's name:"
-            />
-            <b-input
-              id="email"
-              type="email"
-              v-model="invitee.email"
-              placeholder="Enter friend's email:"
-            />
-           
-          </b-field>
-          <div>
-            <span class="add-guests">
-               <b-button rounded type="is-primary" expanded @click="add()">
-            Add Guests</b-button>
-
-   
-            </span>
+    <main class="tile is-ancestor">
+      <div class="tile is-parent ml-3 mr-3">
+        <div class="box">
+          <div class="tile is-child">
+            <h1 class="title">
+              Create My Invite
+            </h1>
+            <p class="is-size-5">
+              Select your restaurant choices to put to a vote, add some guests
+              and let's have a party!
+            </p>
+            <br />
           </div>
-          <span class="create-invite">
+          <!--Occasion-->
+          <span v-if="isError">{{ errorMsg }}</span>
+          <h2 class="title is-size-5">What's The Occasion?</h2>
+          <b-field>
+            <b-input v-model="dinnerInvite.inviteName"></b-input>
+          </b-field>
 
-                <b-button rounded type="is-primary" expanded v-on:click="createInvite">
-            Create Invite</b-button>
-</span>
-            
-    
-         
-
-           
-        
+          <!--Date Inputs-->
+          <div>
+          <span>
+            <h2 class="title is-size-5">Reservation Date</h2>
+            <input class="mr-3"
+              label=" Reservation Date"
+              type="date"
+              v-model="reservationDate"
+            />
+          </span>
+          <input type="time" v-model="reservationTime" />
+          </div>
+          <br/>
+<div>
+          <h2 class="title is-size-5">Voting Deadline</h2>
+          <input class="mr-3" id="deadline" type="date" v-model="deadlineDate" />
+          <input
+            class="date"
+            step="900"
+            type="time"
+            v-model="deadlineTime"
+          />
+</div>
+          <br />
+          <!--add invitee fields-->
+          <div class="tile is-child">
+            <div>
+              <b-field
+                v-for="(invitee, i) in dinnerInvite.invitees"
+                :key="i"
+                class="invitee-fields"
+                id="invitee"
+                v-model="dinnerInvite.invitees"
+                label="Who's invited?"
+              >
+                <button @click="remove(i)" class="delete" id="delete-invitee" />
+                <b-input
+                  id="name"
+                  type="text"
+                  v-model="invitee.name"
+                  placeholder="Enter friend's name:"
+                />
+                <b-input
+                  id="email"
+                  type="email"
+                  v-model="invitee.email"
+                  placeholder="Enter friend's email:"
+                />
+              </b-field>
+              <!--Buttons-->
+              <div class="tile is-child">
+                <span class="add-guests">
+                  <b-button rounded type="is-primary" expanded @click="add()">
+                    Add Guests</b-button
+                  >
+                </span>
+              </div>
+              <br />
+              <span class="create-invite">
+                <b-button
+                  rounded
+                  type="is-primary"
+                  expanded
+                  v-on:click="createInvite"
+                >
+                  Create Invite</b-button
+                >
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     </main>
   </section>
 </template>
