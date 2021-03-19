@@ -19,7 +19,7 @@
             <br/>
             <div class="tile is-child box">
               <h2 class="title is-size-5">When:</h2>
-              <h3>{{ this.invite.reservationDate }}</h3>
+              <h3 class="title is-size-6">{{ this.invite.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a")}}</h3>
             </div>
             <br />
             <div class="tile is-child box">
@@ -45,7 +45,7 @@
                 />
               </div>
               <br/>
-              <h3>{{ this.invite.deadline }}</h3>
+              <h3 class="title is-size-6">{{ this.invite.deadline | moment("dddd, MMMM Do, YYYY h:mm a")}}</h3>
               
             </div>
             <br />
