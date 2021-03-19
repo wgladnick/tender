@@ -5,8 +5,8 @@
     </div>
     <div>
       <br />
-      <div class="tile is-ancestor box mr-3 ml-3" v-if="!isLoading">
-        <div class="tile is-parent">
+      <div class="tile is-ancestor is-vertical mr-3 ml-3" v-if="!isLoading">
+        <div class="tile is-parent is-vertical">
           
           <div class="tile is-child is-4 mr-3 ml-3 box has-text-centered">
             <div>
