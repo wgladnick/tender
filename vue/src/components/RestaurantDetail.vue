@@ -242,4 +242,7 @@ export default {
 .stars {
   justify-content: center;
 }
+.tile is-ancestor is-vertical mr-3 ml-3 {
+  justify-content: center;
+}
 </style>
