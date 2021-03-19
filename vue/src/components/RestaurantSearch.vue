@@ -14,7 +14,7 @@ Restaurant Search
           Let's Find You Some Grub
         </h1>
         <br />
-        <span v-if="isError">{{ errorMsg }}</span>
+        <span class="error" v-if="isError">{{ errorMsg }}</span><br><br>
 
         <b-input
           required
@@ -372,6 +372,15 @@ export default {
 };
 </script>
 <style scoped>
+
+.error{
+  color:red;
+  font-weight:bold;
+}
+
+.container.is-fluid.is-vcentered{
+  width:50%;
+}
 
 .results-header{
   display:flex;

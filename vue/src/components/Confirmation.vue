@@ -118,9 +118,10 @@ export default {
 }
 
 .choices{
+  margin-left:45px;
   display:flex;
   flex-wrap:wrap;
-  text-align:center;
+ 
 
  
   
