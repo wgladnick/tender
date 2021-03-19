@@ -14,7 +14,7 @@
             <br />
           </div>
           <!--Occasion-->
-          <span v-if="isError">{{ errorMsg }}</span>
+          <span class="error" v-if="isError">{{ errorMsg }}</span>
           <h2 class="title is-size-5">What's The Occasion?</h2>
           <b-field>
             <b-input v-model="dinnerInvite.inviteName"></b-input>
@@ -197,6 +197,11 @@ export default {
 </script>
 
 <style scoped>
+
+.error{
+  color:red;
+  font-weight:bold;
+}
 /*
 .delete{
   margin-top:.5em;
