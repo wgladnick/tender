@@ -1,10 +1,10 @@
 <template>
   <section>
     <div class="loading-gif" v-if="isLoading">
-      <img src="../assets/loading.gif" />
+      <center><img src="../assets/loading.gif" /></center>
     </div>
     <main class="tile is-ancestor" v-if="!isLoading">
-      <div class="tile is-parent is-2 is-vertical">
+      <div class="tile is-parent is-4 is-vertical ml-3">
         <div class="tile is-child">
           <div class="tile is-child">
             <br />
@@ -45,7 +45,7 @@
                 />
               </div>
               <br/>
-              <h3 class="has-text-centered">{{ this.invite.deadline }}</h3>
+              <h3>{{ this.invite.deadline }}</h3>
               
             </div>
             <br />
@@ -53,16 +53,16 @@
           </div>
         </div>
       </div>
-      <div class="tile is-parent">
+      <div class="tile is-parent mr-3">
         <b-collapse
-          class="tile is-child is-10"
+          class="tile is-child"
           animation="slide"
           :open.sync="isOpen"
           aria-id="contentIdForA11y3"
         >
           <template #trigger="props">
             <br />
-            <div class="tile is-child box is-10">
+            <div class="tile is-child box">
               <p id="finalists" class="title is-child has-text-centered">View Finalists</p>
             </div>
           </template>
@@ -70,7 +70,7 @@
           <br />
           <div>
             <restaurant-invite-detail-card
-              class="tile is-child is-vertical is-10"
+              class="tile is-child is-vertical"
               v-for="restaurant in this.businessDetails"
               v-bind:restaurant="restaurant"
               v-bind:key="restaurant.id"
@@ -127,5 +127,14 @@ export default {
 }
 h2 {
   color:#dc6b67;
+}
+.loading-gif {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.loading-gif img {
+  width: 400px;
+  height: 400px;
 }
 </style>

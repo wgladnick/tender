@@ -1,17 +1,32 @@
 <template>
   <div>
     <!-- Restaurant Card Image -->
-    <router-link :to="{ name: 'details', params: { id: restaurant.id } }">
+    
       <div class="box">
         
           <div class="columns">
             <div class="column is-one-quarter">
-              
+              <router-link :to="{ name: 'details', params: { id: restaurant.id } }">
               <figure class="image is-1by1">
                 <img :src="restaurant.image_url" />
               </figure>
+              </router-link>
               <br/>
-              
+              <a
+            class="m-5"
+            :href="`https://www.google.com/maps/dir/${
+              this.$store.state.searchDirections
+            }/${restaurant.location.display_address
+              .toString()
+              .split(' ')
+              .join('+')}/`"
+            target="_blank"
+          >
+            <b-button rounded size="is-small">
+              <i class="fas fa-route"></i>
+              Get Directions</b-button
+            >
+          </a>
             
           
         </div>
@@ -52,6 +67,7 @@
                   restaurant.price
                 }}</span>
               </p>
+              <br/>
               <h3 class="title is-size-6">Voting Progress:</h3>
               <progress
                 class="progress is-success"
@@ -69,7 +85,7 @@
           </div>
         
       
-    </router-link>
+    
     <br />
   </div>
 </template>
