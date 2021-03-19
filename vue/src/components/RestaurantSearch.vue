@@ -77,7 +77,7 @@
           <!-- Dinner Card -->
           <dinner-card />
           <div class="cancel">
-            <b-button type="is-primary" expanded v-on:click="toggleSideMenu()">
+            <b-button type="is-primary" expanded rounded v-on:click="toggleSideMenu()">
               Cancel</b-button
             >
           </div>
@@ -483,9 +483,9 @@ export default {
   margin-left: 40px;
 }
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-/*.column.is-5 {
+.column.is-5.is-justify-content-center {
   transition: width 0.5s;
-}*/
+}
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
