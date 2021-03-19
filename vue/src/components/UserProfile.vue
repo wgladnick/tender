@@ -1,7 +1,7 @@
 <template>
     <article class="tile is-child notification has-background-white">
       <div class="content">
-        <p class="title">User Profile</p>
+        <p class="title has-text-centered">User Profile</p>
         <figure class="image is-4by3">
         <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
       </figure>
@@ -25,7 +25,7 @@
           </span>
         </div>
         <router-link :to="{ name: 'editProfile' }">
-          <b-button class="btn" type="is-info" size="is-small">Edit My Profile</b-button>
+          <b-button class="btn is-rounded" type="is-info" size="is-small">Edit My Profile</b-button>
         </router-link>
       </div>
     </article>
@@ -65,7 +65,6 @@ export default {
   text-align: center;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
   width: 30%;
   display: inline-block;
 }

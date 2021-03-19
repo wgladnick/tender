@@ -8,14 +8,14 @@
     >
       <template #trigger="props">
         <div>
-        <div
-          class="card-header"
-          role="button"
-          aria-controls="contentIdForA11y3"
-        >
-          <p class="card-header-title is-size-5 has-text-weight-medium">
-            {{ dinner.inviteName }}
-          </p>
+          <div
+            class="card-header"
+            role="button"
+            aria-controls="contentIdForA11y3"
+          >
+            <p class="card-header-title is-size-5 has-text-weight-medium">
+              {{ dinner.inviteName }}
+            </p>
           </div>
         </div>
       </template>
@@ -25,6 +25,23 @@
           <div>
             <span class="has-text-weight-semibold">When: </span
             >{{ dinner.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a") }}
+            <span>
+          
+          
+            <b-button
+              label="Voting Open"
+              placeholder="Voting Open"
+              v-show="!this.dinner.deadlinePassed"
+              class="is-success is-small is-rounded my-0"
+            />
+            <b-button
+              label="Voting Closed"
+              placeholder="Voting Closed"
+              v-show="this.dinner.deadlinePassed"
+              class="is-danger is-small is-rounded my-0"
+            />
+          
+        </span>
           </div>
         </div>
         <br />
@@ -54,13 +71,15 @@
           </p>
         </div>
         <br />
-        <router-link
+        <span>
+          <router-link
             :to="{ name: 'inviteDetailsPage', params: { id: dinner.inviteId } }"
           >
-            <b-button class="btn" type="is-info" size="is-small"
+            <b-button class="btn is-rounded" type="is-info" size="is-small" 
               >View Details</b-button
             >
           </router-link>
+        </span>
       </div>
     </b-collapse>
   </section>
@@ -213,7 +232,6 @@ export default {
 </script>
 
 <style scoped>
-
 .card-header-title:hover {
   color: #dc6b67;
 }
@@ -223,7 +241,7 @@ export default {
   text-align: center;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  
   display: inline-block;
 }
 
