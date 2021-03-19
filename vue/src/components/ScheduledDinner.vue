@@ -25,20 +25,20 @@
           <div>
             <span class="has-text-weight-semibold">When: </span
             >{{ dinner.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a") }}
-            <span>
+            <span class="px-6">
           
           
             <b-button
               label="Voting Open"
               placeholder="Voting Open"
               v-show="!this.dinner.deadlinePassed"
-              class="is-success is-small is-rounded my-0"
+              class="is-success is-small is-rounded"
             />
             <b-button
               label="Voting Closed"
               placeholder="Voting Closed"
               v-show="this.dinner.deadlinePassed"
-              class="is-danger is-small is-rounded my-0"
+              class="is-danger is-small is-rounded"
             />
           
         </span>
