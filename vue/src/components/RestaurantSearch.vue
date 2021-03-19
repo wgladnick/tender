@@ -4,16 +4,15 @@ Restaurant Search
 
 <section>
   <!-- Initial Search -->
-   
-    <div class="home-search-container" v-if="isInitialSearch">
-      <div class="home-search" >
+   <div class="container is-fluid is-vcentered ">
+    <div v-if="isInitialSearch">    
         <div class="loading-gif">
           <img src="../assets/loading.gif" />
         </div>
 
-        <h2 class="is-size-3 has-text-weight-semibold has-text-centered">
+        <h1 class="is-size-1-desktop has-text-centered has-text-weight-bold">
           Let's Find You Some Grub
-        </h2>
+        </h1>
         <br />
         <span v-if="isError">{{ errorMsg }}</span>
 
@@ -34,32 +33,37 @@ Restaurant Search
         <br />
 
         <b-button
+        rounded
           submit
           expanded
           type="is-primary"
           v-on:click="searchByLocation()"
           >Find Food</b-button
         >
-      </div>
+      
+    </div>
     </div>
     <!-- Inital Search Ends -->
 
 
-  <main class="columns">
+  <main class="columns is-desktop">
 
   <!-- Side Nav -->
     <div
-      id="mySidenav"
-      class="sidenav"
-      v-bind:style="{ width: isMenuOpen ? '500px' : '0px' }">
+      id="sidenav"
+      
+      v-bind:style="{ width: isMenuOpen ? '28%' : '0%' }">
 
       <span>
-        <h1>Create My Invite</h1>
-        <p>
+          
+          <div class="container is-fluid has-text-centered">
+        <h1 class="is-size-3-desktop has-text-weight-semibold">Create My Invite</h1>
+        <p class="is-size-5-desktop">
           Select your restaurant choices to put to a vote, add some guests and
           let's have a party!
-        </p>
-
+        </p><br><br>
+        </div>
+        
         <!-- Sidenav Restaurant List -->
         <ul>
           <li
@@ -79,22 +83,25 @@ Restaurant Search
 
         <!-- Dinner Card -->
         <dinner-card />
+         <div class="cancel">
+        <b-button type="is-primary" expanded v-on:click="toggleSideMenu()">
+          Cancel</b-button>
+               </div>
+           
       </span>
      
-      <div class="cancel">
-        <b-button type="is-primary" expanded v-on:click="toggleSideMenu()">
-          Cancel</b-button
-        >
-      </div>
+     
+ 
     </div>
  <!-- Side Nav ends here -->
 
     <!-- Left Panel -->
-    <div class="column is-one-quarter" v-if="isShowingResults === true">
-      <div class="container is-fluid">
-        <h1>Where are we partying?</h1>
+    <div class="column is-3 is-mobile" v-if="isShowingResults === true">
+      <div class="container is-fluid is-mobile">
+        <h1 class="is-size-3-desktop has-text-weight-semibold ">Where are we partying?</h1>
         <form v-on:submit.prevent>
-          <b-field label="Location">
+            <br>
+          <b-field >
             <b-input
               v-model="location"
               placeholder="Enter a Zipcode or Location"
@@ -103,7 +110,7 @@ Restaurant Search
             ></b-input>
           </b-field>
 
-          <b-field label="Radius">
+        <b-field>
             <b-select placeholder="Enter a radius" v-model="radius" expanded>
               <option value="8050">5 miles</option>
               <option value="16100">10 miles</option>
@@ -111,27 +118,29 @@ Restaurant Search
               <option value="40000">25 miles</option>
             </b-select>
           </b-field>
+          <br>
 
-          <b-button expanded type="is-primary" v-on:click="searchByLocation()"
-            >Find Food</b-button
-          >
+          <b-button rounded expanded type="is-primary" v-on:click="searchByLocation()"
+            >Find Food</b-button>
+            <br>
+            <br>
         </form>
      
 
       <!-- Categories -->
       <div>
         <div>
-          <h1>Filter Categories</h1>
-          <p>(Choose your cravings)</p>
-          <b-button type="is-primary" v-on:click="searchByLocation()" expanded
-            >Update My Search</b-button
-          >
+          <h3 class="is-size-4-desktop has-text-weight-semibold">Filter Categories</h3>
+          <p class="has-text-weight-semibold">(Choose your cravings)</p><br>
+          <b-button rounded type="is-primary" v-on:click="searchByLocation()" expanded
+            >Update My Search</b-button>
+            <br>
 
           <label
             class="c-container"
             v-for="category in availCategories"
             v-bind:key="category.categoryId"
-            >{{ category.displayName }}
+            ><h2 class="is-size-5-desktop has-text-weight-semibold">{{ category.displayName }}</h2>
             <input
               type="checkbox"
               checked="checked"
@@ -150,8 +159,8 @@ Restaurant Search
   
     
       <!--Restaurant List Body -->
-      <div class="column is-four-fifths" v-bind:style="{ 'margin-left': isMenuOpen ? '-225px' : '0px' }">
-          <div class="container is-fluid">
+      <div class="column is-5" v-bind:style="{ 'width': isMenuOpen ? '65%' : '100%' }">
+          
       
       <!-- Loading Gif -->
           <div
@@ -163,19 +172,21 @@ Restaurant Search
     <!-- Loading Gif Ends -->
 
 
-          <div  v-if="hasResults" >
-            <h1>
+            <div v-if="isShowingResults">
+            <h1 class="is-size-1">
               Here are the restaurants we found near {{ updatedLocation }}
             </h1>
             <div>
               <b-button
+              rounded
                 type="is-primary"
                 v-show="!this.isMenuOpen"
                 v-on:click="toggleSideMenu()"
                 >Invite Some Friends Out For Food</b-button
               >
             </div >
-           
+            </div>
+     
             <restaurant-card
               v-for="restaurant in restaurants"
               v-bind:key="restaurant.id"
@@ -188,9 +199,9 @@ Restaurant Search
             <!-- Restaurant List Body Ends -->
 
       
-     </div>  
  
-    </div>
+ 
+  
   </main>
   </section>
 
@@ -363,20 +374,12 @@ export default {
 </script>
 <style scoped>
 
-.body {
-  display: flex;
-  flex-direction: row;
-} 
-
-.home-search-container {
-  display: flex;
-  justify-content: center;
-width:100%;
+.button.is-primary.is-rounded{
+      background-color:#dc6b67;
 }
-.home-search {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+
+.button.is-primary.is-fullwidth{
+    background-color:#dc6b67;
 }
 
 .list-item {
@@ -422,19 +425,15 @@ width:100%;
   height: 75vh;
 }
 
-  display: flex;
-  flex-direction: column;
 
 
 
-.results{
-width:20%;
-}
+
 
 /* Restaurant List Ends Here */
 
 /* Side nav starts here  */
-.sidenav {
+#sidenav {
   height: 88.5vh; /* 100% Full-height */
   width: 0px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
@@ -448,7 +447,7 @@ width:20%;
 }
 
 /* The navigation menu links */
-.sidenav a {
+#sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -458,28 +457,34 @@ width:20%;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
+#sidenav a:hover {
   color: #f1f1f1;
 }
 
+.columns{
+    margin-top:50px;
+    margin-left:40px;
+}
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-.column.is-four-fifths {
-    
+.column.is-5{
+  
  
     
-  transition: margin-left 0.5s;
+  transition: width 0.5s;
 
  
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  .sidenav {
+  #sidenav {
     padding-top: 15px;
   }
-  .sidenav a {
+  #sidenav a {
     font-size: 18px;
   }
+
+  
 }
 /* Side nav ends here */
 

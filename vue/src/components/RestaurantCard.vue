@@ -1,14 +1,14 @@
 <template>
-  <span class="zoom">
+  <span class="columns is-desktop is-mobile" >
 <!-- Restaurant Card Image -->
-    <div class="left-panel">
+    <div class="column is-3 has-text-centered" >
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><img :src="restaurant.image_url" class="yelp-image"
       /></router-link>
     </div>
 <!-- Restaurant Card Image Ends -->
 <!-- Restaurant Card Information -->
-    <div class="right-panel">
+    <div class="column is-7">
       <!-- Categories -->
         <span
           class="categories-tag"
@@ -19,7 +19,7 @@
         </span>
 <!-- Restaurant Name -->
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
-        ><h1 class="is-size-3">{{ restaurant.name }}</h1>
+        ><h1 class="is-size-4 ">{{ restaurant.name }}</h1>
       </router-link>
 <!-- Stars -->
       <div class="star-rating">
@@ -79,14 +79,14 @@
       <span v-if="$route.name !== 'inviteeView'" >
         <span class="call-to-order">
         <a :href="`tel:${restaurant.phone}`">
-          <b-button type="is-primary" >
+          <b-button type="is-primary" rounded>
             <i class="fas fa-phone-alt"></i>
             Call to order</b-button>
         </a>
-        </span>
+        </span >
         <!-- Add to List -->
-         <b-button type="is-primary"
-           v-show="!this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">
+         <b-button rounded type="is-primary"
+           v-show="this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">
            <i class="fas fa-plus"></i>
            Add To Party</b-button>
            </span>
@@ -209,36 +209,29 @@ computed: {
 };
 </script>
 <style scoped>
-h1{
-  font-size:2vw;
-}
-.zoom {
-  display: flex;
-  flex-direction: row;
-  width:70%;
-  padding: 1em;
-  transition: transform 0.5s;
+
+.columns.is-desktop{
+  margin-bottom:50px;
+  padding:20px 0px 10px 20px;
+  width:65%;
+  transition: transform .2s;
+ 
 }
 .button.is-primary{
   background-color: #dc6b67;
   margin-top:1em;
+  margin-right:2em;
 }
 .button.is-fullwidth{
    background-color: #dc6b67;
 }
 .yelp-image {
-  width: 20em;
-  height: 20em;
-  object-fit:cover;
+width:300px;
+height:300px;
+object-fit: cover;
 }
-.left-panel {
-  padding: 1vw;
-  margin-right:1vw;;
-  width:40%;
-}
-.right-panel {
-  padding: 20px 20px 20px 0px;
-}
+
+
 .action-buttons {
  display:flex;
  margin-top:2em;
@@ -288,10 +281,13 @@ h1{
   margin-top: 25px;
   margin-left: -0.5em;
 }
-.zoom:hover {
+
+
+.columns.is-desktop.is-mobile:hover {
   -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari 3-8 */
   transform: scale(1.1);
+
 }
 .title:hover {
   color: #dc6b67;

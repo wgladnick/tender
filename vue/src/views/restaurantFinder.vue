@@ -1,9 +1,9 @@
 <template>
-<main class="body">
+
  
     <restaurant-search />
  
-    </main>
+
 
 </template>
 

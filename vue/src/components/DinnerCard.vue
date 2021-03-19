@@ -47,7 +47,7 @@
           </b-field>
           <div>
             <span class="add-guests">
-               <b-button type="is-primary" expanded @click="add()">
+               <b-button rounded type="is-primary" expanded @click="add()">
             Add Guests</b-button>
 
    
@@ -55,7 +55,7 @@
           </div>
           <span class="create-invite">
 
-                <b-button type="is-primary" expanded v-on:click="createInvite">
+                <b-button rounded type="is-primary" expanded v-on:click="createInvite">
             Create Invite</b-button>
 </span>
             
@@ -178,6 +178,7 @@ export default {
   margin-right:1em;
   
 }
+
 
 
 
