@@ -374,29 +374,11 @@ export default {
 };
 </script>
 <style scoped>
-<<<<<<< HEAD
 .results-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-=======
-
-.error{
-  color:red;
-  font-weight:bold;
-}
-
-.container.is-fluid.is-vcentered{
-  width:50%;
-}
-
-.results-header{
-  display:flex;
-  flex-direction:column;
-  margin-left:140px;
-
->>>>>>> 3e29516530d125915d51ca5395fcf0e7a5ccd16d
 }
 
 .delete {
