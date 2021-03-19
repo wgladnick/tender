@@ -1,7 +1,7 @@
 <template>
   <section>
     <!-- Initial Search -->
-    <div class="container is-fluid is-vcentered">
+    <div id="home" class="container is-fluid is-vcentered">
       <div v-if="isInitialSearch">
         <div class="loading-gif">
           <img src="../assets/loading.gif" />
@@ -374,6 +374,10 @@ export default {
 };
 </script>
 <style scoped>
+
+#home {
+  width:50%;
+}
 .results-header {
   display: flex;
   flex-direction: column;

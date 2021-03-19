@@ -196,7 +196,9 @@ h1 {
   font-size: 1.5em;
 }
 .main-section {
-  background-color: #fdf2f2;
+  background-image: url("../assets/tenderBackground.jpg");
+  background-size:contain;
+ 
   display: flex;
   align-items: center;
   width: 100vw;
