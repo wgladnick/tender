@@ -88,9 +88,11 @@ export default {
   },
   created() {
     this.invitation = this.$store.state.createdInvite;
+    // DELETE the api call below.
     InviteService.getInviteById(1).then((response) => {
       this.invitation = response.data;
     });
+    // DELETE ABOVE
   },
   methods: {
     copyUrl(uniqueId) {
