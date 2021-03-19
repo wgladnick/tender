@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container mb-4">
       <div class="is-primary">
-        <h1>Yay! Your invitation is all set. Here is your confirmation:</h1>
-        <h2>{{ invitation.inviteName }}</h2>
+        <h1 class="title has-text-weight-semibold">Yay! Your invitation is all set. Here is your confirmation:</h1>
+        <h2 class="is-size-2 has-text-weight-semibold">{{ invitation.inviteName }}</h2>
       </div>
     </div>
-    <div class="container">
+    <div class="container mb-4">
       <div class="">
-        <h3>Reservation Date:</h3>
-        <p>
+        <p class="is-size-5 has-text-weight-semibold">Reservation Date: 
+        <span class="is-size-5 has-text-weight-medium">
           {{
             invitation.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a")
           }}
-        </p>
-        <h3>Voting Deadline</h3>
-        <p>{{ invitation.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</p>
+        </span></p>
+        <p class="is-size-5 has-text-weight-semibold">Voting Deadline: 
+        <span class="is-size-5 has-text-weight-medium">{{ invitation.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</span></p>
       </div>
     </div>
-    <div class="container">
+    <div class="container mb-4">
       <div class="">
-        <h3>Friends List</h3>
+        <h3 class="is-size-4 has-text-weight-semibold">Friends List</h3>
         <p>
           Send each friend on your list their unique voting link to submit their
           restaurant vote
@@ -30,7 +30,7 @@
           v-bind:key="invitee.uniqueId"
         >
           <div class="">
-            <p>Invite Link for {{ invitee.name }}</p>
+            <p class="is-size-5 has-text-weight-semibold">Invite Link for {{ invitee.name }}</p>
           </div>
           <div class="field is-grouped">
             <p class="control is-expanded">
@@ -65,7 +65,7 @@
           v-bind:key="restaurant.yelpId"
         >
           <div class="column">
-            <figure class="image is-1by1">
+            <figure class="image is-square">
               <img :src="restaurant.image_url" />
             </figure>
           </div>
