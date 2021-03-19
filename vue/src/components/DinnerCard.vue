@@ -56,7 +56,7 @@
                 label="Who's invited?"
               >
                 <button @click="remove(i)" class="delete" id="delete-invitee" />
-                <b-input
+                <b-input class="mr-1"
                   id="name"
                   type="text"
                   v-model="invitee.name"
