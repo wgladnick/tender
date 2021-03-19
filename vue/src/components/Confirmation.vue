@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import InviteService from "../services/InviteService.js";
+
 export default {
   data() {
     return {

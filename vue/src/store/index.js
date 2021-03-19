@@ -74,7 +74,11 @@ export default new Vuex.Store({
     },
 
     SET_TOGGLE_STATUS(state) {
-      state.sideMenuToggle = !state.sideMenuToggle
+      state.sideMenuToggle = !state.sideMenuToggle;
+    },
+
+    SET_TOGGLE_FALSE(state) {
+      state.sideMenuToggle = false;
     },
 
     //removes token and user from local storage, sets token and user to blank, 

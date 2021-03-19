@@ -264,7 +264,7 @@ export default {
     }
 
     this.user = this.$store.state.user;
-    this.$store.commit("SET_TOGGLE_STATUS");
+    this.$store.commit("SET_TOGGLE_FALSE");
     this.isMenuOpen = this.$store.state.sideMenuToggle;
 
     this.$store.state.invitation.restaurantChoices = [];

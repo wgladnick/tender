@@ -190,11 +190,11 @@ span.checkmark {
   width: 50%;
   margin: auto;
 }
+
 button {
   background-color: #dc6b67;
   border: none;
   color: white;
-  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
