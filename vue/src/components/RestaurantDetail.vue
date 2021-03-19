@@ -5,8 +5,8 @@
     </div>
     <div>
       <br />
-      <div class="tile is-ancestor is-vertical mr-3 ml-3" v-if="!isLoading">
-        <div class="tile is-parent is-vertical">
+      <div class="tile is-ancestor mr-3 ml-3" v-if="!isLoading">
+        <div class="tile is-parent box">
           
           <div class="tile is-child is-4 mr-3 ml-3 box has-text-centered">
             <div>
@@ -242,7 +242,5 @@ export default {
 .stars {
   justify-content: center;
 }
-.tile is-ancestor is-vertical mr-3 ml-3 {
-  justify-content: center;
-}
+
 </style>
