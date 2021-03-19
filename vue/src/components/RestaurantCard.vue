@@ -1,10 +1,10 @@
 <template>
-  <span class="columns is-desktop is-mobile" >
+  <span class="columns" >
 <!-- Restaurant Card Image -->
-    <div class="column is-3 has-text-centered" >
+    <div class="column is-3 has-text-centered">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
-        ><img :src="restaurant.image_url" class="yelp-image"
-      /></router-link>
+        ><figure class="image is-square"><img :src="restaurant.image_url" 
+      /></figure></router-link>
     </div>
 <!-- Restaurant Card Image Ends -->
 <!-- Restaurant Card Information -->
@@ -19,7 +19,7 @@
         </span>
 <!-- Restaurant Name -->
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
-        ><h1 class="is-size-4 ">{{ restaurant.name }}</h1>
+        ><h1 class="is-size-3">{{ restaurant.name }}</h1>
       </router-link>
 <!-- Stars -->
       <div class="star-rating">
@@ -210,9 +210,9 @@ computed: {
 </script>
 <style scoped>
 
-.columns.is-desktop{
+.columns{
   margin-bottom:50px;
-  padding:20px 0px 10px 20px;
+  padding:25px 0px  10px 20px;
   width:65%;
   transition: transform .2s;
  
@@ -220,7 +220,6 @@ computed: {
 .button.is-primary{
   background-color: #dc6b67;
   margin-top:1em;
-  margin-right:2em;
 }
 .button.is-fullwidth{
    background-color: #dc6b67;
@@ -283,7 +282,7 @@ object-fit: cover;
 }
 
 
-.columns.is-desktop.is-mobile:hover {
+.columns:hover {
   -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari 3-8 */
   transform: scale(1.1);

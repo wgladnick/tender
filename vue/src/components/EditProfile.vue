@@ -1,14 +1,20 @@
 <template>
-  <main class="main-section">
-    <div id="edit-profile-container">
-      <div id="leftside" class="card">
-        <form class="form-edit-profile">
+<section class="tile is-ancestor">
+
+   
+    <div id="tile is-parent">
+       
+      <div class="tile is-child box is-7">
+
+   
           <h1 class="h3 mb-3 font-weight normal">Edit Profile</h1>
+
           <div class="alert" role="alert" v-if="editProfileErrors">
             {{ editProfileErrorMsg }}
           </div>
+          
           <b-field label="First Name">
-            <b-input v-model="user.firstName" required></b-input>
+            <b-input expanded v-model="user.firstName" required></b-input>
           </b-field>
           <b-field label="Last Name">
             <b-input v-model="user.lastName" required></b-input>
@@ -33,32 +39,18 @@
           <b-field label="Zip Code">
             <b-input v-model="user.userDetails.zip"></b-input>
           </b-field>
-        </form>
+      
       </div>
-      <div id="rightside" class="card">
+
+</div>
+<div class="tile is-parent is-vertical">
+
+      <div class="tile is-child box">
         <br /><br />
         <h1 class="h3 mb-3 font-weight normal">Edit Favorite Categories</h1>
-        <div class="column">
-          
-         <label
-            class="c-container"
-            v-for="category in this.foodCategories"
-            v-bind:key="category.categoryId"
-            >{{ category.displayName }}
-            <input
-              type="checkbox"
-              checked="checked"
-              v-bind:id="category.categoryId"
-              v-bind:value="category.categoryId"
-              v-model.number="userCategories"
-            />
-            <span class="checkmark"></span>
-          </label>
-          </div>
 
-        <!--   
         <div
-          class="column"
+          
           v-for="category in this.foodCategories"
           v-bind:key="category.categoryId"
         >
@@ -70,19 +62,17 @@
         </b-field>
         </div>
 
-         -->
-        
-       <!-- <section>
-          <img
-            src="../assets/TenderFlameWText.png"
-            alt="secondaryLogo"
-            class="center"
-          />
-        </section> -->
-      </div>
-    </div>
+
+        </div>
+
+
+         <div class="tile is-child">
     <button type="submit" v-on:click.prevent="editProfile">Save Changes</button>
-  </main>
+  </div>
+</div>
+     
+
+  </section>
 </template>
 <script>
 import RestaurantService from "../services/RestaurantService.js";
@@ -118,37 +108,7 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
-  text-align: center;
-  font-weight: 700;
-  font-size: 1.5em;
-}
-.main-section {
-  background-color: #fdf2f2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-}
-#edit-profile-container {
-  align-self: center;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-}
-.form-edit-profile {
-  margin: 20px;
-  padding: 10px;
-}
-.column {
-  float: left;
-  justify-content: space-evenly;
-  align-content: space-around;
-  
-}
+/*
 .container input {
   display: flex;
   padding: 2px;
@@ -209,85 +169,5 @@ button {
   cursor: pointer;
   border-radius: 5px;
   width: 50%;
-}
-
-/* Checkbox */
-.column {
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: left;
-}
-
-.c-container {
-  padding-right:30px;
-  display: flex;
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: bold;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.c-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox ------------------- */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  border-style: solid;
-  border-width: 0.1em;
-  border-color: #1e1e32;
-}
-
-/* On mouse-over, add a grey background color */
-.c-container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.c-container input:checked ~ .checkmark {
-  background-color: #dc6b67;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.c-container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.c-container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-/*Checkbox Ends*/
-
+} */
 </style>

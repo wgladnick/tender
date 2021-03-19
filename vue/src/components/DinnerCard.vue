@@ -1,6 +1,15 @@
  <template>
   
     <div class="input-fields">
+
+          <div class="box has-text-centered">
+        <h1 class="is-size-3-desktop has-text-weight-semibold">Create My Invite</h1>
+        <p class="is-size-5-desktop">
+          Select your restaurant choices to put to a vote, add some guests and
+          let's have a party!
+        </p><br>
+        </div>
+        
       <span v-if="isError">{{errorMsg}}</span>
 
        <b-field label="What's The Occasion">

@@ -46,24 +46,17 @@ Restaurant Search
     <!-- Inital Search Ends -->
 
 
-  <main class="columns is-desktop">
+  <main class="columns">
 
   <!-- Side Nav -->
     <div
       id="sidenav"
-      
+      class ="container"
       v-bind:style="{ width: isMenuOpen ? '28%' : '0%' }">
 
       <span>
           
-          <div class="container is-fluid has-text-centered">
-        <h1 class="is-size-3-desktop has-text-weight-semibold">Create My Invite</h1>
-        <p class="is-size-5-desktop">
-          Select your restaurant choices to put to a vote, add some guests and
-          let's have a party!
-        </p><br><br>
-        </div>
-        
+      
         <!-- Sidenav Restaurant List -->
         <ul>
           <li
@@ -191,7 +184,7 @@ Restaurant Search
               v-for="restaurant in restaurants"
               v-bind:key="restaurant.id"
               v-bind:restaurant="restaurant"
-              class="card"
+              class="box"
               @update-list="updateList"
             />
         
