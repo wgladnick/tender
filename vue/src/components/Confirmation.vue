@@ -1,30 +1,30 @@
 <template>
-  <div>
-    <div class="container mb-4">
+  <div class="main">
+    <div class="container mb-4 box">
       <div class="is-primary">
-        <h1 class="title has-text-weight-semibold">Yay! Your invitation is all set. Here is your confirmation:</h1>
-        <h2 class="is-size-2 has-text-weight-semibold">{{ invitation.inviteName }}</h2>
+        <h1 class="title has-text-weight-semibold has-text-centered">Yay! Your invitation is all set. Here is your confirmation:</h1>
+        <h2 class="is-size-2 has-text-weight has-text-centered">{{ invitation.inviteName }}</h2>
       </div>
     </div>
-    <div class="container mb-4">
-      <div class="">
-        <p class="is-size-5 has-text-weight-semibold">Reservation Date: 
+    <div class="container mb-4 box">
+      <div >
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered">Reservation Date: 
         <span class="is-size-5 has-text-weight-medium">
           {{
             invitation.reservationDate | moment("dddd, MMMM Do, YYYY h:mm a")
           }}
-        </span></p>
-        <p class="is-size-5 has-text-weight-semibold">Voting Deadline: 
-        <span class="is-size-5 has-text-weight-medium">{{ invitation.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</span></p>
+        </span></h3>
+        <h3 class="is-size-5 has-text-weight-bold has-text-centered" >Voting Deadline: 
+        <span class="is-size-5 has-text-weight-medium">{{ invitation.deadline | moment("dddd, MMMM Do, YYYY h:mm a") }}</span></h3>
       </div>
     </div>
-    <div class="container mb-4">
+    <div class="container mb-4 box">
       <div class="">
-        <h3 class="is-size-4 has-text-weight-semibold">Friends List</h3>
+        <h3 class="is-size-4 has-text-weight-bold">Friends List</h3>
         <p>
           Send each friend on your list their unique voting link to submit their
           restaurant vote
-        </p>
+        </p><br>
         <span
           v-for="invitee in invitation.invitees"
           v-bind:key="invitee.uniqueId"
@@ -53,25 +53,28 @@
               </button>
             </p>
           </div>
+          <br>
         </span>
       </div>
     </div>
-    <div class="container">
-      <div class="">
-        <p>Restaurant Choices</p>
-        <div
-          class="columns"
+    <div class="container box">
+<br>
+        <p class="is-size-2 has-text-weight-bold has-text-centered">Restaurant Choices</p><br>
+        <div class="choices">
+        <div class="has-text-centered"
           v-for="restaurant in invitation.businessDetails"
           v-bind:key="restaurant.yelpId"
         >
-          <div class="column">
-            <figure class="image is-square">
-              <img :src="restaurant.image_url" />
-            </figure>
-          </div>
-          <div class="column">
-            {{ restaurant.name }}
-          </div>
+         
+           <p class="is-size-5">{{ restaurant.name }}</p>
+         
+      
+          
+              <img :src="restaurant.image_url"  class="image"/>
+            
+         
+        
+      
         </div>
       </div>
     </div>
@@ -106,4 +109,33 @@ export default {
 </script>
 
 <style scoped>
+
+.image{
+  width:250px;
+  height:250px;
+  object-fit:cover;
+  margin-right:50px;
+}
+
+.choices{
+  margin-left:45px;
+  display:flex;
+  flex-wrap:wrap;
+ 
+
+ 
+  
+
+}
+.main{
+  margin-top:50px;
+}
+
+h2, span{
+  color:#1e1e32;
+}
+h3{
+color:#8faf44;
+}
+
 </style>

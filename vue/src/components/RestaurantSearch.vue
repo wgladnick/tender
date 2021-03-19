@@ -11,7 +11,7 @@
           Let's Find You Some Grub
         </h1>
         <br />
-        <span v-if="isError">{{ errorMsg }}</span>
+        <span class="error" v-if="isError">{{ errorMsg }}</span><br><br>
 
         <b-input
           required
@@ -374,11 +374,29 @@ export default {
 };
 </script>
 <style scoped>
+<<<<<<< HEAD
 .results-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
+=======
+
+.error{
+  color:red;
+  font-weight:bold;
+}
+
+.container.is-fluid.is-vcentered{
+  width:50%;
+}
+
+.results-header{
+  display:flex;
+  flex-direction:column;
+  margin-left:140px;
+
+>>>>>>> 3e29516530d125915d51ca5395fcf0e7a5ccd16d
 }
 
 .delete {
