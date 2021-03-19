@@ -49,7 +49,7 @@
         <br /><br />
         <h1 class="h3 mb-3 font-weight normal">Edit Favorite Categories</h1>
 
-        <div
+        <div class="container"
           
           v-for="category in this.foodCategories"
           v-bind:key="category.categoryId"
@@ -108,7 +108,7 @@ export default {
 };
 </script>
 <style scoped>
-/*
+
 .container input {
   display: flex;
   padding: 2px;
@@ -169,5 +169,5 @@ button {
   cursor: pointer;
   border-radius: 5px;
   width: 50%;
-} */
+} 
 </style>
