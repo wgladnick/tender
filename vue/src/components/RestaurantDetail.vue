@@ -1,8 +1,10 @@
 <template>
-  <div>
+<div>
+  <br/>
+  <div class="box mr-3 ml-3">
     <div class="columns">
-      <div class="column">
-        <img class="yelp-image mt-2 ml-2" v-bind:src="restaurant.image_url" />
+      <div class="column is-one-quarter">
+        <figure class="image is-1by1"><img class="mt-2 ml-2" v-bind:src="restaurant.image_url" /></figure>
       </div>
       <div class="column">
         <span
@@ -174,6 +176,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>

@@ -9,7 +9,7 @@
           <div class="tile is-child">
             <br />
             <h1 class="title box has-text-centered">
-              {{ this.invite.inviteName }}
+              "{{ this.invite.inviteName }}"
             </h1>
             <div class="tile is-child box">
               <h2 v-show="!this.invite.deadlinePassed" class="title is-size-5">Leading Restaurant:</h2>
@@ -63,7 +63,8 @@
           <template #trigger="props">
             <br />
             <div class="tile is-child box">
-              <p id="finalists" class="title is-child has-text-centered">View Finalists</p>
+              <p v-if="!isOpen" id="finalists" class="title is-child has-text-centered">View Finalists</p>
+              <p v-if="isOpen" id="finalists" class="title is-child has-text-centered">Hide Finalists</p>
             </div>
           </template>
 
