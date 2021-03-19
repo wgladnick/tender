@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="container">
-      <div class="notification is-primary">
+      <div class="is-primary">
         <h1>Yay! Your invitation is all set. Here is your confirmation:</h1>
         <h2>{{ invitation.inviteName }}</h2>
       </div>
     </div>
     <div class="container">
-      <div class="notification is-primary">
+      <div class="">
         <h3>Reservation Date:</h3>
         <p>
           {{
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="notification is-primary">
+      <div class="">
         <h3>Friends List</h3>
         <p>
           Send each friend on your list their unique voting link to submit their
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="notification is-primary">
+      <div class="">
         <p>Restaurant Choices</p>
         <div
           class="columns"
@@ -88,7 +88,7 @@ export default {
   },
   created() {
     this.invitation = this.$store.state.createdInvite;
-    InviteService.getInviteById(3).then((response) => {
+    InviteService.getInviteById(1).then((response) => {
       this.invitation = response.data;
     });
   },
