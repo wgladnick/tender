@@ -1,14 +1,14 @@
 <template>
   <span class="columns" >
 <!-- Restaurant Card Image -->
-    <div class="column is-3 has-text-centered">
+    <div class="column is-one-quarter">
       <router-link :to="{ name: 'details', params: { id: restaurant.id } }"
         ><figure class="image is-square"><img :src="restaurant.image_url" 
       /></figure></router-link>
     </div>
 <!-- Restaurant Card Image Ends -->
 <!-- Restaurant Card Information -->
-    <div class="column is-7">
+    <div class="column">
       <!-- Categories -->
         <span
           class="categories-tag"
@@ -85,7 +85,7 @@
         </a>
         </span >
         <!-- Add to List -->
-         <b-button rounded type="is-primary"
+         <b-button class="add-to-party" rounded  type="is-primary"
            v-show="this.$store.state.sideMenuToggle" v-on:click="addToList(restaurant)">
            <i class="fas fa-plus"></i>
            Add To Party</b-button>
@@ -220,15 +220,12 @@ computed: {
 .button.is-primary{
   background-color: #dc6b67;
   margin-top:1em;
+  margin-right:1.7em;
 }
 .button.is-fullwidth{
    background-color: #dc6b67;
 }
-.yelp-image {
-width:300px;
-height:300px;
-object-fit: cover;
-}
+
 
 
 .action-buttons {
@@ -250,7 +247,7 @@ object-fit: cover;
 .add-to-list .button.button.is-rounded:hover {
   background-color: #9dbd52;
 }
-.add-to-list .button.button.is-rounded {
+.add-to-party {
   background-color: #81974e;
 }
 .invite-buttons .button.is-rounded {

@@ -59,6 +59,7 @@ Restaurant Search
       
         <!-- Sidenav Restaurant List -->
         <ul>
+          <h1 class="is-size-3 has-text-weight-bold has-text-centered ">Restaurant Choices</h1>
           <li
             class="list-item"
             v-for="rest in restaurantChoices"
@@ -70,7 +71,7 @@ Restaurant Search
               class="delete"
               id="delete-invitee"
             />
-            <h1>{{ rest.name }}</h1>
+            <h1 class="is-size-4 has-text-weight-semibold">{{ rest.name }}</h1>
           </li>
         </ul>
 
@@ -166,19 +167,23 @@ Restaurant Search
 
 
             <div v-if="isShowingResults">
+              
+              
+              <div class="results-header">
             <h1 class="is-size-1">
-              Here are the restaurants we found near {{ updatedLocation }}
+              Here are the restaurants we found near <span class="location-color">{{ updatedLocation }}</span>
             </h1>
-            <div>
+          
               <b-button
+              class="invite-button"
               rounded
                 type="is-primary"
                 v-show="!this.isMenuOpen"
                 v-on:click="toggleSideMenu()"
                 >Invite Some Friends Out For Food</b-button
               >
-            </div >
-            </div>
+        </div>
+           
      
             <restaurant-card
               v-for="restaurant in restaurants"
@@ -187,8 +192,9 @@ Restaurant Search
               class="box"
               @update-list="updateList"
             />
-        
-</div>
+        </div>
+ </div>
+
             <!-- Restaurant List Body Ends -->
 
       
@@ -367,8 +373,33 @@ export default {
 </script>
 <style scoped>
 
+.results-header{
+  display:flex;
+  flex-direction:column;
+  margin-left:140px;
+
+}
+
+.delete{
+  margin-top:10px;
+  background-color:#1e1e32;
+  margin-right:15px;
+}
+.location-color{
+  color:#dc6b67;
+  font-weight:bold;
+}
+
+.invite-button{
+  text-align:center;
+  width:20em;
+  margin-left:330px;
+
+}
+
 .button.is-primary.is-rounded{
       background-color:#dc6b67;
+      
 }
 
 .button.is-primary.is-fullwidth{
