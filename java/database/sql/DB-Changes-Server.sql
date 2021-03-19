@@ -23,8 +23,6 @@ CREATE TABLE users (
 
 INSERT INTO users (username,password_hash,role,first_name,last_name,email) VALUES ('demouser','$2a$10$P6i2Ul0m9aFesrzCor06EO3YiKUrnY7vNJPfy47gndLGXqW8Xnhte','ROLE_USER','Demo','User','user@user.com');
 
-SELECT * FROM users;
-
 CREATE TABLE IF NOT EXISTS user_details (
     user_id INTEGER PRIMARY KEY,
     address VARCHAR,
@@ -98,8 +96,6 @@ CREATE TABLE IF NOT EXISTS invitee_vote (
     thumbs_down BOOLEAN DEFAULT false
 );
 
-SELECT * from users
-
 GRANT ALL
 ON ALL TABLES IN SCHEMA public
 TO final_capstone_owner;
@@ -115,3 +111,5 @@ TO final_capstone_appuser;
 GRANT USAGE, SELECT
 ON ALL SEQUENCES IN SCHEMA public
 TO final_capstone_appuser;
+
+SELECT * FROM users;

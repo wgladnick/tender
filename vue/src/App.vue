@@ -23,20 +23,12 @@ components: {
 
 
 <style>
+@import './assets/styles.css';
 
 h1 {
   font-size:3vw;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  background-color:white;
-}
-#nav {
-  padding-right: 200px;
-}
 .logo {
   padding-left: 50px;
 }

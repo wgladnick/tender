@@ -68,7 +68,7 @@
 
   </main>
   <div class="container">
-      <b-button rounded type="submit" v-on:click.prevent="editProfile">Save Changes</b-button>
+      <b-button class="is-rounded button is-primary" rounded type="submit" v-on:click.prevent="editProfile">Save Changes</b-button>
       </div>
   </div>
 </template>
@@ -190,20 +190,8 @@ span.checkmark {
   width: 50%;
   margin: auto;
 }
-
 button {
-  background-color: #dc6b67;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-  width: 50%;
 }
 
 /* Checkbox */

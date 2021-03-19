@@ -198,6 +198,8 @@ export default {
 
 <style scoped>
 
+
+
 .error{
   color:red;
   font-weight:bold;

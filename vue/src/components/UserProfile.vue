@@ -25,7 +25,7 @@
           </span>
         </div>
         <router-link :to="{ name: 'editProfile' }">
-          <b-button class="btn is-rounded" type="is-info" size="is-small">Edit My Profile</b-button>
+          <button class="is-primary button is-rounded" type="is-info" size="is-small">Edit My Profile</button>
         </router-link>
       </div>
     </article>
@@ -45,6 +45,9 @@ export default {
 };
 </script>
 <style scoped>
+button {
+  display:  inline-block;
+}
 .body {
   display: flex;
   flex-direction: column;
@@ -60,15 +63,5 @@ export default {
 .details-header {
   font-weight: 500;
 }
-.btn {
-  background-color: #dc6b67;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 30%;
-  display: inline-block;
-}
-.btn:hover {
-  background-color: #f7a09d;
-}
+
 </style>

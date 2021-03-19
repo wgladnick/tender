@@ -1,0 +1,15 @@
+.is-primary {
+    background-color:  #dc6b67 !important;
+    text-decoration: none;
+  }
+  .is-primary:hover {
+    background-color:  #db524d !important;
+  }
+
+  .is-danger {
+      background-color: #e02d26 !important;
+  }
+
+  h1 {
+    color: #dc6b67;
+  }

@@ -5,10 +5,10 @@
     </div>
     <div>
       <br />
-      <div class="tile is-ancestor mr-3 ml-3" v-if="!isLoading">
-        <div class="tile is-parent is-vertical">
+      <div class="tile is-ancestor mx-3 " v-if="!isLoading">
+        <div class="tile is-parent is-4">
           
-          <div class="tile is-child is-4 mr-3 ml-3 box has-text-centered">
+          <div class="tile is-child box has-text-centered">
             <div>
             <span
               class="has-text-weight-medium mb-3"
@@ -18,14 +18,14 @@
               {{ category }}
             </span>
             <h1 class="title">{{ restaurant.name }}</h1>
-            <br/>
-          </div>
-            <figure class="image is-square">
-              <img v-bind:src="restaurant.image_url" />
-            </figure>
           </div>
 
-          <div class="tile is-child is-justify-content-center is-4 mr-3 ml-3 box has-text-centered">
+              <img class="mt-1" v-bind:src="restaurant.image_url" />
+            
+          </div>
+        </div>
+        <div class="tile is-parent is-4">
+          <div class="tile is-child is-justify-content-center box has-text-centered">
             <span class="has-text-weight-bold"
               >Price:
               <span class="has-text-success">{{ restaurant.price }} </span>
@@ -130,8 +130,9 @@
               </a>
             </div>
           </div>
-        
-        <div class="tile is-child is-4 mr-3 ml-3 box has-text-centered">
+        </div>
+        <div class="tile is-parent is-4">
+        <div class="tile is-child box has-text-centered">
           <p class="has-text-weight-bold mt-2 mb-1">Hours:</p>
           <p v-for="hours in restaurant.hours" v-bind:key="hours.hours_type">
             <span
@@ -242,5 +243,7 @@ export default {
 .stars {
   justify-content: center;
 }
-
+img {
+  max-height: 200px;
+}
 </style>

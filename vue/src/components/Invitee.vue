@@ -107,18 +107,15 @@
             >
           </span>
         </div>
-
-        <div class="column">
-          <restaurant-card
+      </div>
+      </div>
+    </div>
+    <center v-if="!invitee.deadlinePassed && !isLoading"><restaurant-card
             v-for="restaurant in this.businessDetails"
             :key="restaurant.id"
             :restaurant="restaurant"
             class="card"
-          />
-        </div>
-      </div>
-      </div>
-    </div>
+          /></center>
 
     <div v-if="errorMsg">Invite not Found!!!!!!!!!</div>
     <div v-if="invitee.deadlinePassed">

@@ -75,8 +75,8 @@
           <router-link
             :to="{ name: 'inviteDetailsPage', params: { id: dinner.inviteId } }"
           >
-            <b-button class="btn is-rounded" type="is-info" size="is-small" 
-              >View Details</b-button
+            <button class="button is-rounded is-primary" type="is-info" size="is-small" 
+              >View Details</button
             >
           </router-link>
         </span>
@@ -236,16 +236,8 @@ export default {
   color: #dc6b67;
 }
 
-.btn {
-  background-color: #dc6b67;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  
-  display: inline-block;
+button {
+  display:  inline-block;
 }
 
-.btn:hover {
-  background-color: #f7a09d;
-}
 </style>
