@@ -1,78 +1,82 @@
 <template>
   <section>
     <div class="loading-gif" v-if="isLoading">
-          <img src="../assets/loading.gif" />
-        </div>
+      <img src="../assets/loading.gif" />
+    </div>
     <main class="tile is-ancestor" v-if="!isLoading">
       <div class="tile is-parent is-2 is-vertical">
-        
         <div class="tile is-child">
           <div class="tile is-child">
-            <br/>
-            <h1 class="title box has-text-centered">{{ this.invite.inviteName }}</h1>
+            <br />
+            <h1 class="title box has-text-centered">
+              {{ this.invite.inviteName }}
+            </h1>
             <div class="tile is-child box">
-              <h2 class="title is-size-5">Reservation Date and Time:</h2>
-              <span> {{ this.invite.reservationDate }}</span>
+              <h2 v-show="!this.invite.deadlinePassed" class="title is-size-5">Leading Restaurant:</h2>
+              <h2 v-show="this.invite.deadlinePassed" class="title is-size-5">Winning Restaurant:</h2>
+              <h3 class="title is-size-6">{{businessDetails[0].name}}</h3>
             </div>
             <br/>
             <div class="tile is-child box">
-              <h2 class="title is-size-5 has-text-centered">Participants:</h2>
-              <span
-                v-for="invitee in this.friends"
-                v-bind:key="invitee.uniqueId"
-              >
+              <h2 class="title is-size-5">When:</h2>
+              <h3>{{ this.invite.reservationDate }}</h3>
+            </div>
+            <br />
+            <div class="tile is-child box">
+              <h2 class="title is-size-5">Participants:</h2>
+              <h3 v-for="invitee in this.friends" v-bind:key="invitee.uniqueId">
                 {{ invitee }}
-              </span>
+              </h3>
             </div>
-            <br/>
+            <br />
             <div class="tile is-child box">
               <h2 class="title is-size-5">Voting Deadline:</h2>
-              <span> {{ this.invite.deadline }}</span>
-<div class="tile is-child">
-              <b-button
-                v-show="!this.invite.deadlinePassed"
-                class="button is-success is-rounded tile is-child has-text-justified has-text-centered"
-              >Voting Open</b-button>
-              <b-button
-                label="Voting Closed"
-                placeholder="Voting Closed"
-                v-show="this.invite.deadlinePassed"
-                class="button is-danger is-rounded tile is-child"
-              />
-</div>
+              <div class="tile is-child">
+                <b-button
+                  v-show="!this.invite.deadlinePassed"
+                  class="button is-center is-success is-rounded tile is-child has-text-justified has-text-centered"
+                  >Voting Open</b-button
+                >
+                <b-button
+                  label="Voting Closed"
+                  placeholder="Voting Closed"
+                  v-show="this.invite.deadlinePassed"
+                  class="button is-center is-danger is-rounded tile is-child has-text-justified has-text-centered"
+                />
+              </div>
+              <br/>
+              <h3 class="has-text-centered">{{ this.invite.deadline }}</h3>
+              
             </div>
-            <br/>
-            <div class="tile is-child box">
-              <h2 class="title is-size-5">Winning Restaurant</h2>
-            </div>
+            <br />
+            
           </div>
         </div>
       </div>
       <div class="tile is-parent">
-      <b-collapse
-        class="tile is-child is-10"
-        animation="slide"
-        :open.sync="isOpen"
-        aria-id="contentIdForA11y3"
-      >
-        <template #trigger="props">
-          <br/>
-          <div class="tile is-child box is-12">
-            <p class="title is-child has-text-centered">Finalists</p>
-            
-          </div>
-        </template>
+        <b-collapse
+          class="tile is-child is-10"
+          animation="slide"
+          :open.sync="isOpen"
+          aria-id="contentIdForA11y3"
+        >
+          <template #trigger="props">
+            <br />
+            <div class="tile is-child box is-10">
+              <p id="finalists" class="title is-child has-text-centered">View Finalists</p>
+            </div>
+          </template>
 
-        <br/>
+          <br />
           <div>
             <restaurant-invite-detail-card
-              class="tile is-child"
+              class="tile is-child is-vertical is-10"
               v-for="restaurant in this.businessDetails"
               v-bind:restaurant="restaurant"
               v-bind:key="restaurant.id"
             />
-        </div>
-      </b-collapse>
+          </div>
+        </b-collapse>
       </div>
     </main>
   </section>
@@ -118,22 +122,10 @@ export default {
 </script>
 
 <style scoped>
-/*main {
-    display: flex;
+#finalists {
+  color: #dc6b67;
 }
-.finalists {
-  display: flex;
-  flex-wrap: wrap;
-}*/
-.final-head {
-  text-align: center;
-  text-decoration: underline;
+h2 {
+  color:#dc6b67;
 }
-.head {
-  font-size: 18pt;
-  font-weight: bold;
-}
-/*.invite-card {
-  width: 33%;
-}*/
 </style>

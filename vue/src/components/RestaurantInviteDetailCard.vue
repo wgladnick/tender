@@ -7,20 +7,11 @@
           <div class="columns">
             <div class="column is-one-quarter">
               
-              <figure class="image is-3x2">
+              <figure class="image is-1by1">
                 <img :src="restaurant.image_url" />
               </figure>
-              <h3>Voting Progress:</h3>
-              <progress
-                class="progress is-success"
-                :value="restaurant.totalThumbsUp"
-                :max="restaurant.totalThumbsUp + restaurant.totalThumbsDown"
-              ></progress>
-              <progress
-                class="progress is-danger"
-                :value="restaurant.totalThumbsDown"
-                :max="restaurant.totalThumbsUp + restaurant.totalThumbsDown"
-              ></progress>
+              <br/>
+              
             
           
         </div>
@@ -61,6 +52,17 @@
                   restaurant.price
                 }}</span>
               </p>
+              <h3 class="title is-size-6">Voting Progress:</h3>
+              <progress
+                class="progress is-success"
+                :value="restaurant.totalThumbsUp"
+                :max="restaurant.totalThumbsUp + restaurant.totalThumbsDown"
+              ></progress>
+              <progress
+                class="progress is-danger"
+                :value="restaurant.totalThumbsDown"
+                :max="restaurant.totalThumbsUp + restaurant.totalThumbsDown"
+              ></progress>
               
               </div>
             </div>
@@ -106,20 +108,6 @@ export default {
 };
 </script>
 <style scoped>
-/*.zoom {
-  display: flex;
-  flex-direction: row;
-  padding: 1em;
-  transition: transform 0.5s;
-}
-.yelp-image {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-}
-*/
-
-
 
 .price {
   font-weight: 550;
