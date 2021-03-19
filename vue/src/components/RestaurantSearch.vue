@@ -1,11 +1,8 @@
-Restaurant Search
-
 <template>
-
-<section>
-  <!-- Initial Search -->
-   <div class="container is-fluid is-vcentered ">
-    <div v-if="isInitialSearch">    
+  <section>
+    <!-- Initial Search -->
+    <div class="container is-fluid is-vcentered">
+      <div v-if="isInitialSearch">
         <div class="loading-gif">
           <img src="../assets/loading.gif" />
         </div>
@@ -33,175 +30,181 @@ Restaurant Search
         <br />
 
         <b-button
-        rounded
+          rounded
           submit
           expanded
           type="is-primary"
           v-on:click="searchByLocation()"
           >Find Food</b-button
         >
-      
-    </div>
+      </div>
     </div>
     <!-- Inital Search Ends -->
 
+    <main class="columns">
+      <!-- Side Nav -->
+      <div
+        id="sidenav"
+        class="container"
+        v-bind:style="{ width: isMenuOpen ? '28%' : '0%' }"
+      >
+        <span>
+          <!-- Sidenav Restaurant List -->
+          <ul>
+            <h1
+              v-show="restaurantChoices.length > 0"
+              class="title has-text-centered"
+            >
+              Restaurant Choices
+            </h1>
+            <li
+              class="list-item"
+              v-for="rest in restaurantChoices"
+              v-bind:key="rest.id"
+            >
+              <!-- Delete Restaurant From List -->
+              <button
+                @click="updateList(rest)"
+                class="delete"
+                id="delete-invitee"
+              />
+              <h1 class="is-size-4 has-text-weight-semibold">
+                {{ rest.name }}
+              </h1>
+            </li>
+          </ul>
 
-  <main class="columns">
+          <!-- Dinner Card -->
+          <dinner-card />
+          <div class="cancel">
+            <b-button type="is-primary" expanded v-on:click="toggleSideMenu()">
+              Cancel</b-button
+            >
+          </div>
+        </span>
+      </div>
+      <!-- Side Nav ends here -->
 
-  <!-- Side Nav -->
-    <div
-      id="sidenav"
-      class ="container"
-      v-bind:style="{ width: isMenuOpen ? '28%' : '0%' }">
+      <!-- Left Panel -->
+      <div class="column is-3 is-mobile" v-if="isShowingResults === true">
+        <div class="container is-fluid is-mobile">
+          <h1 class="is-size-3-desktop has-text-weight-semibold">
+            Where are we partying?
+          </h1>
+          <form v-on:submit.prevent>
+            <br />
+            <b-field>
+              <b-input
+                v-model="location"
+                placeholder="Enter a Zipcode or Location"
+                expanded
+                required
+              ></b-input>
+            </b-field>
 
-      <span>
-          
-      
-        <!-- Sidenav Restaurant List -->
-        <ul>
-          <h1 class="is-size-3 has-text-weight-bold has-text-centered ">Restaurant Choices</h1>
-          <li
-            class="list-item"
-            v-for="rest in restaurantChoices"
-            v-bind:key="rest.id"
-          >
-            <!-- Delete Restaurant From List -->
-            <button
-              @click="updateList(rest)"
-              class="delete"
-              id="delete-invitee"
-            />
-            <h1 class="is-size-4 has-text-weight-semibold">{{ rest.name }}</h1>
-          </li>
-        </ul>
+            <b-field>
+              <b-select placeholder="Enter a radius" v-model="radius" expanded>
+                <option value="8050">5 miles</option>
+                <option value="16100">10 miles</option>
+                <option value="24200">15 miles</option>
+                <option value="40000">25 miles</option>
+              </b-select>
+            </b-field>
+            <br />
 
-        <!-- Dinner Card -->
-        <dinner-card />
-         <div class="cancel">
-        <b-button type="is-primary" expanded v-on:click="toggleSideMenu()">
-          Cancel</b-button>
-               </div>
-           
-      </span>
-     
-     
- 
-    </div>
- <!-- Side Nav ends here -->
-
-    <!-- Left Panel -->
-    <div class="column is-3 is-mobile" v-if="isShowingResults === true">
-      <div class="container is-fluid is-mobile">
-        <h1 class="is-size-3-desktop has-text-weight-semibold ">Where are we partying?</h1>
-        <form v-on:submit.prevent>
-            <br>
-          <b-field >
-            <b-input
-              v-model="location"
-              placeholder="Enter a Zipcode or Location"
+            <b-button
+              rounded
               expanded
-              required
-            ></b-input>
-          </b-field>
+              type="is-primary"
+              v-on:click="searchByLocation()"
+              >Find Food</b-button
+            >
+            <br />
+            <br />
+          </form>
 
-        <b-field>
-            <b-select placeholder="Enter a radius" v-model="radius" expanded>
-              <option value="8050">5 miles</option>
-              <option value="16100">10 miles</option>
-              <option value="24200">15 miles</option>
-              <option value="40000">25 miles</option>
-            </b-select>
-          </b-field>
-          <br>
+          <!-- Categories -->
+          <div>
+            <div>
+              <h3 class="is-size-4-desktop has-text-weight-semibold">
+                Filter Categories
+              </h3>
+              <p class="has-text-weight-semibold">(Choose your cravings)</p>
+              <br />
+              <b-button
+                rounded
+                type="is-primary"
+                v-on:click="searchByLocation()"
+                expanded
+                >Update My Search</b-button
+              >
+              <br />
 
-          <b-button rounded expanded type="is-primary" v-on:click="searchByLocation()"
-            >Find Food</b-button>
-            <br>
-            <br>
-        </form>
-     
-
-      <!-- Categories -->
-      <div>
-        <div>
-          <h3 class="is-size-4-desktop has-text-weight-semibold">Filter Categories</h3>
-          <p class="has-text-weight-semibold">(Choose your cravings)</p><br>
-          <b-button rounded type="is-primary" v-on:click="searchByLocation()" expanded
-            >Update My Search</b-button>
-            <br>
-
-          <label
-            class="c-container"
-            v-for="category in availCategories"
-            v-bind:key="category.categoryId"
-            ><h2 class="is-size-5-desktop has-text-weight-semibold">{{ category.displayName }}</h2>
-            <input
-              type="checkbox"
-              checked="checked"
-              v-bind:id="category.categoryId"
-              v-bind:value="category.categoryId"
-              v-model.number="categoriesSelected"
-            />
-            <span class="checkmark"></span>
-          </label>
+              <label
+                class="c-container"
+                v-for="category in availCategories"
+                v-bind:key="category.categoryId"
+                ><h2 class="is-size-5-desktop has-text-weight-semibold">
+                  {{ category.displayName }}
+                </h2>
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  v-bind:id="category.categoryId"
+                  v-bind:value="category.categoryId"
+                  v-model.number="categoriesSelected"
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
- </div>
-    <!-- Side Search Panel Ends -->
+      <!-- Side Search Panel Ends -->
 
-  
-    
       <!--Restaurant List Body -->
-      <div class="column is-5" v-bind:style="{ 'width': isMenuOpen ? '65%' : '100%' }">
-          
-      
-      <!-- Loading Gif -->
-          <div
-            v-bind:class="{ isShowingResults: !isShowingResults }"
-            class="loading-gif"
-            v-if="isLoading">
-            <img src="../assets/loading.gif" />
+      <div
+        class="column is-5 is-justify-content-center"
+        v-bind:style="{ width: isMenuOpen ? '65%' : '100%' }"
+      >
+        <!-- Loading Gif -->
+        <div
+          v-bind:class="{ isShowingResults: !isShowingResults }"
+          class="loading-gif"
+          v-if="isLoading"
+        >
+          <img src="../assets/loading.gif" />
+        </div>
+        <!-- Loading Gif Ends -->
+
+        <div v-if="isShowingResults">
+          <div class="column ">
+          <h1 class="title">
+            Here are the restaurants we found near
+            <span class="location-color">{{ updatedLocation }}</span>
+          </h1>
+
+          <b-button
+            class="button"
+            rounded
+            type="is-primary"
+            v-show="!this.isMenuOpen"
+            v-on:click="toggleSideMenu()"
+            >Invite Some Friends Out For Food</b-button
+          >
           </div>
-    <!-- Loading Gif Ends -->
-
-
-            <div v-if="isShowingResults">
-              
-              
-              <div class="results-header">
-            <h1 class="is-size-1">
-              Here are the restaurants we found near <span class="location-color">{{ updatedLocation }}</span>
-            </h1>
-          
-              <b-button
-              class="invite-button"
-              rounded
-                type="is-primary"
-                v-show="!this.isMenuOpen"
-                v-on:click="toggleSideMenu()"
-                >Invite Some Friends Out For Food</b-button
-              >
+          <restaurant-card
+            v-for="restaurant in restaurants"
+            v-bind:key="restaurant.id"
+            v-bind:restaurant="restaurant"
+            class="box"
+            @update-list="updateList"
+          />
         </div>
-           
-     
-            <restaurant-card
-              v-for="restaurant in restaurants"
-              v-bind:key="restaurant.id"
-              v-bind:restaurant="restaurant"
-              class="box"
-              @update-list="updateList"
-            />
-        </div>
- </div>
+      </div>
 
-            <!-- Restaurant List Body Ends -->
-
-      
- 
- 
-  
-  </main>
+      <!-- Restaurant List Body Ends -->
+    </main>
   </section>
 
   <!-- This passes the restaurant[] and isLoading as a prop to restaurant list -->
@@ -245,10 +248,9 @@ export default {
     };
   },
   created() {
-     //loads available categories and sets preferred categories
+    //loads available categories and sets preferred categories
     this.getCategories();
     this.categoriesSelected = this.$store.state.user.userDetails.activeCategoryId;
-
 
     //loads $store information
     if (this.$store.state.restaurants.length !== 0) {
@@ -372,38 +374,35 @@ export default {
 };
 </script>
 <style scoped>
-
-.results-header{
-  display:flex;
-  flex-direction:column;
-  margin-left:140px;
-
+.results-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
-.delete{
-  margin-top:10px;
-  background-color:#1e1e32;
-  margin-right:15px;
+.delete {
+  margin-top: 10px;
+  background-color: #1e1e32;
+  margin-right: 15px;
 }
-.location-color{
-  color:#dc6b67;
-  font-weight:bold;
-}
-
-.invite-button{
-  text-align:center;
-  width:20em;
-  margin-left:330px;
-
+.location-color {
+  color: #dc6b67;
+  font-weight: bold;
 }
 
-.button.is-primary.is-rounded{
-      background-color:#dc6b67;
-      
+/*.invite-button {
+  text-align: center;
+  width: 20em;
+  margin-left: 330px;
+}*/
+
+.button.is-primary.is-rounded {
+  background-color: #dc6b67;
 }
 
-.button.is-primary.is-fullwidth{
-    background-color:#dc6b67;
+.button.is-primary.is-fullwidth {
+  background-color: #dc6b67;
 }
 
 .list-item {
@@ -416,17 +415,16 @@ export default {
   font-weight: 800;
 }
 
-
-.left {
+/*.left {
   display: flex;
   flex-direction: column;
   padding-left: 3em;
   margin-top: 5em;
-  width:20%;
-}
+  width: 20%;
+}*/
 
-.cancel{
-    margin: 1.5em;
+.cancel {
+  margin: 1.5em;
 }
 
 /*  Restaurant List */
@@ -448,11 +446,6 @@ export default {
   width: 100%;
   height: 75vh;
 }
-
-
-
-
-
 
 /* Restaurant List Ends Here */
 
@@ -485,19 +478,14 @@ export default {
   color: #f1f1f1;
 }
 
-.columns{
-    margin-top:50px;
-    margin-left:40px;
+.columns {
+  margin-top: 50px;
+  margin-left: 40px;
 }
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-.column.is-5{
-  
- 
-    
+/*.column.is-5 {
   transition: width 0.5s;
-
- 
-}
+}*/
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
@@ -507,14 +495,10 @@ export default {
   #sidenav a {
     font-size: 18px;
   }
-
-  
 }
 /* Side nav ends here */
 
 /*  Check boxes start here -----------------------------*/
-
-
 
 .c-container {
   display: flex;
