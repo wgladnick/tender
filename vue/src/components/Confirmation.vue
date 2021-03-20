@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="container mb-4 box">
-      <div class="is-primary">
+      <div class="">
         <h1 class="title has-text-weight-semibold has-text-centered">Yay! Your invitation is all set. Here is your confirmation:</h1>
         <h2 class="is-size-2 has-text-weight has-text-centered">{{ invitation.inviteName }}</h2>
       </div>

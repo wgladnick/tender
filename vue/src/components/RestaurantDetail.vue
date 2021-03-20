@@ -161,7 +161,6 @@
                 >Wednesday: {{ open.start }} - {{ open.end }}<br
               /></span>
               <span
-                class="has-text-weight-bold"
                 v-if="open.day === 3"
                 :class="{ 'has-text-success': restaurant.day == 3 }"
                 >Thursday: {{ open.start }} - {{ open.end }}<br

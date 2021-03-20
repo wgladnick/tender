@@ -22,7 +22,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class YelpFusion {
     private static final String ACCESS_TOKEN =
-            "BSlG5RWR1DJPC4Zf4vabLNFi0YS5-qS2iXkrxpCSY-i02RQWrXuc9CBJtvkeW_EbgUPJ_8oNLscX_yvmu67cQ2HNLxxR6CwFGFoTiUlPsIsDEz-GRtHV88D7dBFBYHYx";
+            "5GLziPx_YEmqBXKO0oeTq6xwA5CGou8avjaWRj3s1fEmcj5caEWmgXtxlMIgCd0rcAh7c8y1VJU-1-Hn8XY940tBpyXds4swIlu3NM-1EAJZz_iSQk31DI9QxOpUYHYx";
 
     private RestTemplate restTemplate = new RestTemplate();
     private JdbcTemplate jdbcTemplate;

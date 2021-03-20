@@ -197,7 +197,7 @@ h1 {
 }
 .main-section {
   background-image: url("../assets/tenderBackground.jpg");
-  background-size:contain;
+  background-size:cover;
  
   display: flex;
   align-items: center;
